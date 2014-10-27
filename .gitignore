@@ -1,0 +1,17 @@
+# C
+*.swp
+*.o
+*.a
+*.so
+*.zip
+# latex
+*.aux
+*.bbl
+*.blg
+*.dvi
+*.log
+*.toc
+# python
+*.pyc
+fastFM/ffm.c
+fastFM.egg-info/
