@@ -15,7 +15,7 @@ cdef extern from "suitesparse/cs.h":
 
     double cs_di_norm(const cs_di *X) # max colsum
 
-cdef extern from "./../fastFM-core/src/C/fast_fm.h":
+cdef extern from "./../fastFM-core/src/fast_fm.h":
     ctypedef struct ffm_vector:
         int size
         double *data
