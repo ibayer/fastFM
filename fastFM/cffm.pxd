@@ -16,18 +16,6 @@ cdef extern from "suitesparse/cs.h":
     double cs_di_norm(const cs_di *X) # max colsum
 
 cdef extern from "./../fastFM-core/src/fast_fm.h":
-    ctypedef struct ffm_vector:
-        int size
-        double *data
-        int owner
-    double ffm_mean_squared_error(ffm_vector *a, ffm_vector *b)
-
-    ctypedef struct ffm_matrix: # row order array
-        int size0 # number of rows
-        int size1 # number of cols
-        double *data # pointer to data array
-        int owner
-    double ffm_matrix_get(ffm_matrix * X, int i, int j)
 
     ctypedef struct ffm_param:
         int n_iter

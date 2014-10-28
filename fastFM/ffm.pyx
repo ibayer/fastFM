@@ -1,7 +1,7 @@
 # sample.pyx
 # Import the low-level C declarations
 cimport cffm
-from  cffm cimport cs_di, ffm_vector, ffm_matrix, ffm_param
+from  cffm cimport cs_di, ffm_param
 # Import some functionality from Python and the C stdlib
 from cpython.pycapsule cimport *
 
@@ -36,41 +36,6 @@ def CsMatrix(X not None):
     p.x = &data[0]
     p.nz = -1 # to indicate CSC format
     return PyCapsule_New(<void *>p,"CsMatrix",<PyCapsule_Destructor>del_CsMatrix)
-
-# Destructor for cleaning up FFMVector objects
-cdef del_FFMVector(object obj):
-    pt = <cffm.ffm_vector *> PyCapsule_GetPointer(obj,"FFMVector")
-    free(<void *> pt)
-
-# Create a FFMVector object and return as a capsule
-def FFMVector(double[:] y):
-    cdef cffm.ffm_vector *p
-    p = <cffm.ffm_vector *> malloc(sizeof(cffm.ffm_vector))
-    if p == NULL:
-        raise MemoryError("No memory to make a FFMVector")
-    p.size = len(y)
-    p.data = <double *> &y[0]
-    p.owner = 0
-    return PyCapsule_New(<void *>p,"FFMVector",<PyCapsule_Destructor>del_FFMVector)
-
-# Destructor for cleaning up FFMMatrix objects
-cdef del_FFMMatrix(object obj):
-    pt = <cffm.ffm_matrix *> PyCapsule_GetPointer(obj,"FFMMatrix")
-    free(<void *> pt)
-
-# Create a FFMMatrix object and return as a capsule
-def FFMMatrix(np.ndarray[np.float64_t, ndim = 2] a):
-    cdef cffm.ffm_matrix *p
-    p = <cffm.ffm_matrix *> malloc(sizeof(cffm.ffm_matrix))
-    if p == NULL:
-        raise MemoryError("No memory to make a FFMMatrix")
-    assert a.flags['C_CONTIGUOUS']
-    p.size0 = a.shape[0]
-    p.size1 = a.shape[1]
-    p.data = <double *> a.data
-    p.owner = 0
-    return PyCapsule_New(<void *>p,"FFMMatrix",<PyCapsule_Destructor>del_FFMMatrix)
-
 
 # Destructor for cleaning up FFMParam objects
 cdef del_FFMParam(object obj):
@@ -187,19 +152,7 @@ def ffm_mcmc_fit_predict(fm, X_train, X_test, double[:] y):
             &init_lambda_V, &init_alpha, &init_mu_w, &init_mu_V, pt_param)
     return (w_0, w, V), y_pred
 
-def ffm_mean_squared_error(a, b):
-    ffm_a = FFMVector(a)
-    ffm_b = FFMVector(b)
-    pt_a = <cffm.ffm_vector *> PyCapsule_GetPointer(ffm_a,"FFMVector")
-    pt_b = <cffm.ffm_vector *> PyCapsule_GetPointer(ffm_b,"FFMVector")
-    return cffm.ffm_mean_squared_error(pt_a, pt_b)
-
 def cs_norm(X):
     X = CsMatrix(X)
     pt = <cffm.cs_di *> PyCapsule_GetPointer(X,"CsMatrix")
     return cffm.cs_di_norm(pt)
-
-def ffm_matrix_get(X, i, j):
-    X = FFMMatrix(X)
-    pt = <cffm.ffm_matrix *> PyCapsule_GetPointer(X,"FFMMatrix")
-    return cffm.ffm_matrix_get(pt, i, j)
