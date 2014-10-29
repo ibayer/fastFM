@@ -44,9 +44,9 @@ cdef del_FFMParam(object obj):
 
 # Create a FFMParam object and return as a capsule
 def FFMParam(fm):
-    map_flags = {'classification': 1,
-            'regression': 2,
-            'ranking': 3,
+    map_flags = {'classification': 10,
+            'regression': 20,
+            'ranking': 30,
             'als': 1,
             'mcmc': 2,
             'sgd': 3}

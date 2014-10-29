@@ -1,5 +1,5 @@
 all:
-	$(MAKE) -C fastFM-core/src/ lib
+	$(MAKE) -C fastFM-core/ lib
 	python setup.py build_ext --inplace
 
 .PHONY : clean
