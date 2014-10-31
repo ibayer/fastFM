@@ -29,7 +29,7 @@ cdef extern from "./../fastFM-core/include/ffm.h":
 
     void ffm_predict(double *w_0, double * w, double * V, cs_di *X, double *y_pred, int k)
 
-    void ffm_fit(double *w_0, double *w, double *V,
+    void ffm_als_fit(double *w_0, double *w, double *V,
         cs_di *X, double *y,
         double lambda_w, double lambda_V, ffm_param *param)
 
@@ -37,3 +37,11 @@ cdef extern from "./../fastFM-core/include/ffm.h":
         cs_di *X_train, cs_di *X_test, double *y_train, double *y_pred,
         double *lambda_w, double *lambda_V,
         double *alpha, double *mu_w, double *mu_V, ffm_param *param)
+
+    void ffm_sgd_fit(double *w_0, double *w, double *V,
+        cs_di *X, double *y,
+        double lambda_w, double lambda_V, ffm_param *param)
+
+    void ffm_sgd_bpr_fit(double *w_0, double *w, double *V,
+        cs_di *X, double *y,
+        double lambda_w, double lambda_V, ffm_param *param)

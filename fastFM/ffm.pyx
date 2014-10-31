@@ -75,14 +75,10 @@ def ffm_predict(double w_0, double[:] w,
     cffm.ffm_predict(&w_0, &w[0], <double *> V.data, pt_X, &y[0], k)
     return y
 
-def ffm_fit(fm, X, double[:] y):
-    if fm.solver in ['als', 'mcmc']:
-        assert X.shape[0] == len(y) # test shapes
-        n_features = X.shape[1]
-    elif fm.solver == 'sgd':
-        assert X.shape[1] == len(y) # test shapes
-        n_features = X.shape[0]
-    else: raise Exception("solve unknown")
+def ffm_als_fit(fm, X, double[:] y):
+    assert fm.solver == 'als'
+    assert X.shape[0] == len(y) # test shapes
+    n_features = X.shape[1]
     X_ = CsMatrix(X)
     pt_X = <cffm.cs_di *> PyCapsule_GetPointer(X_,"CsMatrix")
     param = FFMParam(fm)
@@ -94,12 +90,32 @@ def ffm_fit(fm, X, double[:] y):
     cdef np.ndarray[np.float64_t, ndim=2, mode='c'] V =\
          np.zeros((fm.rank_pair, n_features), dtype=np.float64)
 
-    cffm.ffm_fit(&w_0, <double *> w.data, <double *> V.data, pt_X, &y[0],
+    cffm.ffm_als_fit(&w_0, <double *> w.data, <double *> V.data, pt_X, &y[0],
             fm.lambda_w, fm.lambda_V, pt_param)
     return w_0, w, V
 
 
-def ffm_fit_ranking(fm, X, np.ndarray[np.float64_t, ndim=2, mode='c'] y):
+def ffm_sgd_fit(fm, X, double[:] y):
+    assert fm.solver == 'sgd'
+    assert X.shape[1] == len(y) # test shapes
+    n_features = X.shape[0]
+    X_ = CsMatrix(X)
+    pt_X = <cffm.cs_di *> PyCapsule_GetPointer(X_,"CsMatrix")
+    param = FFMParam(fm)
+    pt_param = <cffm.ffm_param *> PyCapsule_GetPointer(param,"FFMParam")
+    #allocate the coefs
+    cdef double w_0 = 0
+    cdef np.ndarray[np.float64_t, ndim=1, mode='c'] w =\
+         np.zeros(n_features, dtype=np.float64)
+    cdef np.ndarray[np.float64_t, ndim=2, mode='c'] V =\
+         np.zeros((fm.rank_pair, n_features), dtype=np.float64)
+
+    cffm.ffm_sgd_fit(&w_0, <double *> w.data, <double *> V.data, pt_X, &y[0],
+            fm.lambda_w, fm.lambda_V, pt_param)
+    return w_0, w, V
+
+
+def ffm_fit_sgd_bpr(fm, X, np.ndarray[np.float64_t, ndim=2, mode='c'] y):
     n_features = X.shape[0]
     X_ = CsMatrix(X)
     pt_X = <cffm.cs_di *> PyCapsule_GetPointer(X_,"CsMatrix")
@@ -114,7 +130,7 @@ def ffm_fit_ranking(fm, X, np.ndarray[np.float64_t, ndim=2, mode='c'] y):
     cdef np.ndarray[np.float64_t, ndim=2, mode='c'] V =\
          np.zeros((fm.rank_pair, n_features), dtype=np.float64)
 
-    cffm.ffm_fit(&w_0, <double *> w.data, <double *> V.data, pt_X,
+    cffm.ffm_sgd_bpr_fit(&w_0, <double *> w.data, <double *> V.data, pt_X,
             <double *>  y.data, fm.lambda_w, fm.lambda_V, pt_param)
     return w_0, w, V
 

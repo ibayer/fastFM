@@ -89,7 +89,7 @@ class FactorizationMachine:
             self._fit(X_train, y_train)
         elif (self.task=='ranking'):
             assert y_train.max() <= X_train.shape[1]
-            self.w0_, self.w_, self.V_ = ffm.ffm_fit_ranking(self,
+            self.w0_, self.w_, self.V_ = ffm.ffm_fit_sgd_bpr(self,
                                                     X_train, y_train)
         else:
             raise Exception("task unknown")
@@ -99,10 +99,12 @@ class FactorizationMachine:
             assert len(set(y_train)) == 2
             assert y_train.min() == -1
             assert y_train.max() == 1
-        if (self.solver in ['als', 'sgd']):
             assert sp.isspmatrix_csc(X_train)
-            self.w0_, self.w_, self.V_ = ffm.ffm_fit(self, X_train, y_train)
-        elif (self.solver=='mcmc'):
+        if self.solver == 'als':
+            self.w0_, self.w_, self.V_ = ffm.ffm_als_fit(self, X_train, y_train)
+        elif self.solver=='sgd':
+            self.w0_, self.w_, self.V_ = ffm.ffm_sgd_fit(self, X_train, y_train)
+        elif self.solver=='mcmc':
             raise Exception("mcmc can only be used with fit_predict")
         else:
             raise Exception("solver not implemented")
