@@ -148,9 +148,6 @@ def ffm_mcmc_fit_predict(fm, X_train, X_test, double[:] y):
     cdef:
         double init_lambda_w = 1
         double init_lambda_V = 1
-        double init_alpha  = 1
-        double init_mu_w = 0
-        double init_mu_V = 0
 
     #allocate the coefs
     cdef double w_0 = 0
@@ -165,7 +162,7 @@ def ffm_mcmc_fit_predict(fm, X_train, X_test, double[:] y):
 
     cffm.ffm_mcmc_fit_predict(&w_0, <double *> w.data, <double *> V.data,
             pt_X_train, pt_X_test, &y[0], <double *> y_pred.data,  &init_lambda_w,
-            &init_lambda_V, &init_alpha, &init_mu_w, &init_mu_V, pt_param)
+            &init_lambda_V, pt_param)
     return (w_0, w, V), y_pred
 
 def cs_norm(X):
