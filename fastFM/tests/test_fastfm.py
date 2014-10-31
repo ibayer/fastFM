@@ -85,7 +85,8 @@ def test_fm_mcmc_regression():
     w0, w, V, y, X = get_test_problem()
 
     fm = FactorizationMachine(task='regression', solver='mcmc',
-            max_iter=1000, rank_pair=2, init_stdev=0.1)
+            max_iter=1000, rank_pair=2, init_stdev=0.1,
+            lambda_w=1, lambda_V=1)
 
     y_pred = fm.fit_predict(X, y, X)
     assert metrics.r2_score(y_pred, y) > 0.99

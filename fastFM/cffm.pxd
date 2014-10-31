@@ -21,26 +21,23 @@ cdef extern from "./../fastFM-core/include/ffm.h":
         int n_iter
         int k
         double init_sigma
+        double lambda_w
+        double lambda_V
         int TASK
-        int SOLVER
         double stepsize
         int rng_seed
-        int n_comparison
 
     void ffm_predict(double *w_0, double * w, double * V, cs_di *X, double *y_pred, int k)
 
     void ffm_als_fit(double *w_0, double *w, double *V,
-        cs_di *X, double *y,
-        double lambda_w, double lambda_V, ffm_param *param)
+        cs_di *X, double *y, ffm_param *param)
 
     void ffm_mcmc_fit_predict(double *w_0, double *w, double *V,
         cs_di *X_train, cs_di *X_test, double *y_train, double *y_pred,
-        double *lambda_w, double *lambda_V, ffm_param *param)
+        ffm_param *param)
 
     void ffm_sgd_fit(double *w_0, double *w, double *V,
-        cs_di *X, double *y,
-        double lambda_w, double lambda_V, ffm_param *param)
+        cs_di *X, double *y, ffm_param *param)
 
     void ffm_sgd_bpr_fit(double *w_0, double *w, double *V,
-        cs_di *X, double *y,
-        double lambda_w, double lambda_V, ffm_param *param)
+        cs_di *X, double *pairs, int n_pairs, ffm_param *param)
