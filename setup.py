@@ -9,8 +9,10 @@ ext_modules = [
         libraries=['m', 'fastfm', 'cxsparse',# 'cblas',
             'gsl', 'gslcblas', #gsl-config --cflags --libs
             'glib-2.0'],
-        library_dirs=['fastFM/', 'fastFM-core/bin/', '/usr/lib/','/usr/lib/atlas-base/'],
-        include_dirs=['fastFM/','fastFM-core/include/', '/usr/include/', '/usr/include/suitesparse/',
+        library_dirs=['fastFM/', 'fastFM-core/bin/', 'fastFM-core/external/CXSparse/Lib/',
+            '/usr/lib/','/usr/lib/atlas-base/'],
+        include_dirs=['fastFM/','fastFM-core/include/', 'fastFM-core/external/CXSparse/Include/',
+            '/usr/include/',
         '/usr/include/glib-2.0/', '/usr/lib/x86_64-linux-gnu/glib-2.0/include',
         numpy.get_include()])]
 # pkg-config --cflags glib-2.0

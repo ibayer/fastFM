@@ -3,7 +3,7 @@
 # Declarations of "external" C functions and structures
 # distutils: include_dirs = /usr/include/suitesparse
 
-cdef extern from "suitesparse/cs.h":
+cdef extern from "../fastFM-core/externals/CXSparse/Include/cs.h":
     ctypedef struct cs_di:  # matrix in compressed-column or triplet form */
         int nzmax      # maximum number of entries */
         int m          # number of rows */
@@ -15,7 +15,7 @@ cdef extern from "suitesparse/cs.h":
 
     double cs_di_norm(const cs_di *X) # max colsum
 
-cdef extern from "./../fastFM-core/include/ffm.h":
+cdef extern from "../fastFM-core/include/ffm.h":
 
     ctypedef struct ffm_param:
         int n_iter
