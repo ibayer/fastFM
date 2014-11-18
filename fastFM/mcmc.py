@@ -52,6 +52,7 @@ class FMClassification(FactorizationMachine):
         X_train : scipy.sparse.csc_matrix, (n_samples, n_features)
 
         y_train : array, shape (n_samples)
+                the targets have to be encodes as {-1, 1}.
 
         X_test : scipy.sparse.csc_matrix, (n_test_samples, n_features)
 

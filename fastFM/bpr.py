@@ -6,6 +6,7 @@ import ffm
 
 class FMRecommender(FactorizationMachine):
 
+
     def __init__(self, max_iter=100, init_var=0.1, rank=8, random_state=123,
             l2_reg_w=0, l2_reg_V=0, step_size=0.1):
         super(FMRecommender, self).__init__(max_iter=max_iter,
@@ -23,8 +24,10 @@ class FMRecommender(FactorizationMachine):
         ----------
         X : scipy.sparse.csc_matrix, (n_samples, n_features)
 
-        y : float | ndarray, shape = (n_samples, 2)
-
+        y : float | ndarray, shape = (n_compares, 2)
+                Each row `i` defines a pair of samples such that
+                the first returns a high value then the second
+                FM(X[i,0]) > FM(X[i, 1]).
         """
         assert_all_finite(X_train)
         assert_all_finite(pairs)

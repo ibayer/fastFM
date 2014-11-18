@@ -33,7 +33,6 @@ class FactorizationMachine(BaseEstimator):
 
         T : array, shape (n_samples)
             The labels are returned for classification.
-
         """
         assert_all_finite(X_test)
         assert sp.isspmatrix_csc(X_test)
@@ -45,6 +44,18 @@ class BaseFMClassifier(FactorizationMachine, ClassifierMixin):
 
 
     def predict(self, X_test):
+        """ Return predictions
+
+        Parameters
+        ----------
+        X : scipy.sparse.csc_matrix, (n_samples, n_features)
+
+        Returns
+        ------
+
+        T : array, shape (n_samples)
+            The labels are returned for classification.
+        """
         pred = super(BaseFMClassifier, self).predict(X_test)
         pred = norm.cdf(pred)
         # convert probs to labels
@@ -66,7 +77,6 @@ class BaseFMClassifier(FactorizationMachine, ClassifierMixin):
 
         T : array, shape (n_samples)
             Class Probabilities
-
         """
-        pred = super().predict(self, X_test)
+        pred = super(BaseFMClassifier, self).predict(X_test)
         return norm.cdf(pred)

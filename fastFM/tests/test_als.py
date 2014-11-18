@@ -48,3 +48,27 @@ def test_fm_classification():
     assert metrics.accuracy_score(y, y_pred) > 0.95
     # check different size
     fm.fit(X[:2,], y[:2])
+
+
+def test_fm_classification_predict_proba():
+    w0, w, V, y, X = get_test_problem(task='classification')
+
+    fm = als.FMClassification(max_iter=1000,
+            init_var=0.1, l2_reg_w=0, l2_reg_V=0, rank=2)
+    fm.fit(X, y)
+    y_pred = fm.predict_proba(X)
+    print y_pred
+
+    from sklearn import metrics
+    y = y + 2
+    fpr, tpr, thresholds = metrics.roc_curve(y, y_pred)
+
+    assert metrics.auc(fpr, tpr) > 0.95
+
+    assert metrics.accuracy_score(y, y_pred) > 0.95
+    # check different size
+    fm.fit(X[:2,], y[:2])
+
+
+if __name__ == '__main__':
+    test_fm_classification_predict_proba()

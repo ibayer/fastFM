@@ -52,7 +52,7 @@ class FMClassification(BaseFMClassifier):
         X : scipy.sparse.csc_matrix, (n_samples, n_features)
 
         y : float | ndarray, shape = (n_samples, )
-
+                the targets have to be encodes as {-1, 1}.
         """
         _validate_class_labels(y_train)
         assert_all_finite(X_train)
