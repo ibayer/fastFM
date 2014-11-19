@@ -6,7 +6,43 @@ import ffm
 
 class FMRegression(FactorizationMachine, RegressorMixin):
 
+    """ Factorization Machine Regression trained with a als (coordinate descent)
+    solver.
 
+    Parameters
+    ----------
+    max_iter : int, optional
+        The number of samples for the MCMC sampler, number or iterations over the
+        training set for ALS and number of steps for SGD.
+
+    init_var: float, optional
+        Sets the variance for the initialization of the parameter
+
+    random_state: int, optional
+        The seed of the pseudo random number generator that
+        initializes the parameters and mcmc chain.
+
+    rank: int
+        The rank of the factorization used for the second order interactions.
+
+    l2_reg_w : float
+        L2 penalty weight for pairwise coefficients.
+
+    l2_reg_V : float
+        L2 penalty weight for linear coefficients.
+
+    Attributes
+    ---------
+
+    w0_ : float
+        bias term
+
+    w_ : float | array, shape = (n_features)
+        Coefficients for linear combination.
+
+    V_ : float | array, shape = (rank_pair, n_features)
+        Coefficients of second order factor matrix.
+    """
     def __init__(self, max_iter=100, init_var=0.1, rank=8, random_state=123,
             l2_reg_w=0, l2_reg_V=0):
         super(FMRegression, self).__init__(max_iter=max_iter,
@@ -35,7 +71,43 @@ class FMRegression(FactorizationMachine, RegressorMixin):
 
 class FMClassification(BaseFMClassifier):
 
+    """ Factorization Machine Classification trained with a als (coordinate descent)
+    solver.
 
+    Parameters
+    ----------
+    max_iter : int, optional
+        The number of samples for the MCMC sampler, number or iterations over the
+        training set for ALS and number of steps for SGD.
+
+    init_var: float, optional
+        Sets the variance for the initialization of the parameter
+
+    random_state: int, optional
+        The seed of the pseudo random number generator that
+        initializes the parameters and mcmc chain.
+
+    rank: int
+        The rank of the factorization used for the second order interactions.
+
+    l2_reg_w : float
+        L2 penalty weight for pairwise coefficients.
+
+    l2_reg_V : float
+        L2 penalty weight for linear coefficients.
+
+    Attributes
+    ---------
+
+    w0_ : float
+        bias term
+
+    w_ : float | array, shape = (n_features)
+        Coefficients for linear combination.
+
+    V_ : float | array, shape = (rank_pair, n_features)
+        Coefficients of second order factor matrix.
+    """
     def __init__(self, max_iter=100, init_var=0.1, rank=8, random_state=123,
             l2_reg_w=0, l2_reg_V=0):
         super(FMClassification, self).__init__(max_iter=max_iter,
