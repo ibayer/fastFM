@@ -76,7 +76,7 @@ class BaseFMClassifier(FactorizationMachine, ClassifierMixin):
         ------
 
         T : array, shape (n_samples)
-            Class Probabilities
+            Class Probability for the positive class.
         """
         pred = super(BaseFMClassifier, self).predict(X_test)
         return norm.cdf(pred)

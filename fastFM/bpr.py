@@ -35,3 +35,4 @@ class FMRecommender(FactorizationMachine):
         assert pairs.min() >= 0
         self.w0_, self.w_, self.V_ = ffm.ffm_fit_sgd_bpr(self,
                                                 X_train, pairs)
+        return self

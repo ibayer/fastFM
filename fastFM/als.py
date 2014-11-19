@@ -30,6 +30,7 @@ class FMRegression(FactorizationMachine, RegressorMixin):
         assert_all_finite(y_train)
 
         self.w0_, self.w_, self.V_ = ffm.ffm_als_fit(self, X_train, y_train)
+        return self
 
 
 class FMClassification(BaseFMClassifier):
@@ -59,3 +60,4 @@ class FMClassification(BaseFMClassifier):
         assert_all_finite(y_train)
 
         self.w0_, self.w_, self.V_ = ffm.ffm_als_fit(self, X_train, y_train)
+        return self

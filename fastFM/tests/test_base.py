@@ -2,7 +2,6 @@ import numpy as np
 import scipy.sparse as sp
 from sklearn import metrics
 from fastFM import als
-from numpy.testing import assert_almost_equal
 
 
 def get_test_problem(task='regression'):
@@ -23,32 +22,17 @@ def get_test_problem(task='regression'):
     return w0, w, V, y, X
 
 
-def test_fm_regression():
-    w0, w, V, y, X = get_test_problem()
-
-    fm = als.FMRegression(max_iter=1000, l2_reg_w=0, l2_reg_V=0, rank=2)
-    fm.fit(X, y)
-    y_pred = fm.predict(X)
-    assert_almost_equal(y_pred, y, 3)
-    # check different size
-    fm = als.FMRegression(max_iter=1000, l2_reg_w=0, l2_reg_V=0, rank=5)
-    X_big = sp.hstack([X,X]).tocsc()
-    fm.fit(X_big, y)
-    y_pred = fm.predict(X_big[:2,])
-
-
-def test_fm_classification():
+def test_fm_classification_predict_proba():
     w0, w, V, y, X = get_test_problem(task='classification')
 
     fm = als.FMClassification(max_iter=1000,
             init_var=0.1, l2_reg_w=0, l2_reg_V=0, rank=2)
     fm.fit(X, y)
     y_pred = fm.predict(X)
-    print y_pred
-    assert metrics.accuracy_score(y, y_pred) > 0.95
-    # check different size
-    fm.fit(X[:2,], y[:2])
+    y_pred = fm.predict_proba(X)
 
+    y[y == -1] = 0
+    assert metrics.accuracy_score(y, y_pred) > 0.95
 
 if __name__ == '__main__':
-    test_fm_classification()
+    test_fm_classification_predict_proba()
