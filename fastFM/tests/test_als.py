@@ -26,12 +26,12 @@ def get_test_problem(task='regression'):
 def test_fm_regression():
     w0, w, V, y, X = get_test_problem()
 
-    fm = als.FMRegression(max_iter=1000, l2_reg_w=0, l2_reg_V=0, rank=2)
+    fm = als.FMRegression(n_iter=1000, l2_reg_w=0, l2_reg_V=0, rank=2)
     fm.fit(X, y)
     y_pred = fm.predict(X)
     assert_almost_equal(y_pred, y, 3)
     # check different size
-    fm = als.FMRegression(max_iter=1000, l2_reg_w=0, l2_reg_V=0, rank=5)
+    fm = als.FMRegression(n_iter=1000, l2_reg_w=0, l2_reg_V=0, rank=5)
     X_big = sp.hstack([X,X]).tocsc()
     fm.fit(X_big, y)
     y_pred = fm.predict(X_big[:2,])
@@ -40,8 +40,8 @@ def test_fm_regression():
 def test_fm_classification():
     w0, w, V, y, X = get_test_problem(task='classification')
 
-    fm = als.FMClassification(max_iter=1000,
-            init_var=0.1, l2_reg_w=0, l2_reg_V=0, rank=2)
+    fm = als.FMClassification(n_iter=1000,
+            init_stdev=0.1, l2_reg_w=0, l2_reg_V=0, rank=2)
     fm.fit(X, y)
     y_pred = fm.predict(X)
     print y_pred

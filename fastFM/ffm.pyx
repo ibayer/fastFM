@@ -51,10 +51,10 @@ def FFMParam(fm):
     p = <cffm.ffm_param *> malloc(sizeof(cffm.ffm_param))
     if p == NULL:
         raise MemoryError("No memory to make a FFMParam")
-    p.n_iter = fm.max_iter
+    p.n_iter = fm.n_iter
     p.k = fm.rank
     p.stepsize = fm.step_size
-    p.init_sigma = fm.init_var
+    p.init_sigma = fm.init_stdev
     p.TASK = map_flags[fm.task]
     p.rng_seed = fm.random_state
     p.lambda_w = fm.l2_reg_w

@@ -25,7 +25,7 @@ def get_test_problem(task='regression'):
 def test_fm_regression():
     w0, w, V, y, X = get_test_problem()
 
-    fm = mcmc.FMRegression(max_iter=1000, rank=2, init_var=0.1)
+    fm = mcmc.FMRegression(n_iter=1000, rank=2, init_stdev=0.1)
 
     y_pred = fm.fit_predict(X, y, X)
     assert metrics.r2_score(y_pred, y) > 0.99
@@ -37,7 +37,7 @@ def test_fm_classification():
     y_labels = np.ones_like(y)
     y_labels[y < np.mean(y)] = -1
 
-    fm = mcmc.FMClassification(max_iter=1000, init_var=0.1, rank=2)
+    fm = mcmc.FMClassification(n_iter=1000, init_stdev=0.1, rank=2)
     y_pred = fm.fit_predict(X, y_labels, X)
 
     fpr, tpr, thresholds = metrics.roc_curve(y_labels, y_pred)

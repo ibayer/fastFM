@@ -77,8 +77,8 @@ def test_multiclass_encoding():
 
     X_ext, compars = multiclass_to_ranking(X, y_one_hot)
 
-    fm = FMRecommender(max_iter=2000,
-            init_var=0.01, l2_reg_w=.5, l2_reg_V=.5, rank=2,
+    fm = FMRecommender(n_iter=2000,
+            init_stdev=0.01, l2_reg_w=.5, l2_reg_V=.5, rank=2,
             step_size=.002, random_state=11)
     X_train = X_ext.T.tocsc()
     #assert False

@@ -10,12 +10,12 @@ class FMRecommender(FactorizationMachine):
 
     Parameters
     ----------
-    max_iter : int, optional
+    n_iter : int, optional
         The number of samples for the MCMC sampler, number or iterations over the
         training set for ALS and number of steps for SGD.
 
-    init_var: float, optional
-        Sets the variance for the initialization of the parameter
+    init_stdev: float, optional
+        Sets the stdev for the initialization of the parameter
 
     random_state: int, optional
         The seed of the pseudo random number generator that
@@ -30,9 +30,12 @@ class FMRecommender(FactorizationMachine):
     l2_reg_V : float
         L2 penalty weight for linear coefficients.
 
+    l2_reg : float
+        L2 penalty weight for all coefficients (default=0).
+
     step_size : float
         Stepsize for the SGD solver, the solver uses a fixed step size and
-        might require a tunning of the number of iterations `max_iter`.
+        might require a tunning of the number of iterations `n_iter`.
 
     Attributes
     ---------
@@ -47,10 +50,13 @@ class FMRecommender(FactorizationMachine):
         Coefficients of second order factor matrix.
     """
 
-    def __init__(self, max_iter=100, init_var=0.1, rank=8, random_state=123,
-            l2_reg_w=0, l2_reg_V=0, step_size=0.1):
-        super(FMRecommender, self).__init__(max_iter=max_iter,
-            init_var=init_var, rank=rank, random_state=random_state)
+    def __init__(self, n_iter=100, init_stdev=0.1, rank=8, random_state=123,
+            l2_reg_w=0, l2_reg_V=0, l2_reg=0, step_size=0.1):
+        super(FMRecommender, self).__init__(n_iter=n_iter,
+            init_stdev=init_stdev, rank=rank, random_state=random_state)
+        if (l2_reg != 0):
+            self.l2_reg_V = l2_reg
+            self.l2_reg_w = l2_reg
         self.l2_reg_w = l2_reg_w
         self.l2_reg_V = l2_reg_V
         self.step_size = step_size

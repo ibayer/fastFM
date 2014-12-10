@@ -18,12 +18,12 @@ class FactorizationMachine(BaseEstimator):
 
     Parameters
     ----------
-    max_iter : int, optional
+    n_iter : int, optional
         The number of samples for the MCMC sampler, number or iterations over the
         training set for ALS and number of steps for SGD.
 
-    init_var: float, optional
-        Sets the variance for the initialization of the parameter
+    init_stdev: float, optional
+        Sets the stdev for the initialization of the parameter
 
     random_state: int, optional
         The seed of the pseudo random number generator that
@@ -46,10 +46,10 @@ class FactorizationMachine(BaseEstimator):
     V_ : float | array, shape = (rank_pair, n_features)
         Coefficients of second order factor matrix.
     """
-    def __init__(self, max_iter=100, init_var=0.1, rank=8, random_state=123):
-        self.max_iter = max_iter
+    def __init__(self, n_iter=100, init_stdev=0.1, rank=8, random_state=123):
+        self.n_iter = n_iter
         self.random_state = random_state
-        self.init_var = init_var
+        self.init_stdev = init_stdev
         self.rank = rank
         self.l2_reg_w = 0
         self.l2_reg_V = 0
