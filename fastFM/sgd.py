@@ -58,8 +58,9 @@ class FMRegression(FactorizationMachine, RegressorMixin):
         if (l2_reg != 0):
             self.l2_reg_V = l2_reg
             self.l2_reg_w = l2_reg
-        self.l2_reg_w = l2_reg_w
-        self.l2_reg_V = l2_reg_V
+        else:
+            self.l2_reg_w = l2_reg_w
+            self.l2_reg_V = l2_reg_V
         self.step_size = step_size
         self.task = "regression"
 
@@ -135,8 +136,9 @@ class FMClassification(BaseFMClassifier):
         if (l2_reg != 0):
             self.l2_reg_V = l2_reg
             self.l2_reg_w = l2_reg
-        self.l2_reg_w = l2_reg_w
-        self.l2_reg_V = l2_reg_V
+        else:
+            self.l2_reg_w = l2_reg_w
+            self.l2_reg_V = l2_reg_V
         self.step_size = step_size
         self.task = "classification"
 
