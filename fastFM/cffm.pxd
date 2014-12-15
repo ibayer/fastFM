@@ -27,6 +27,10 @@ cdef extern from "../fastFM-core/include/ffm.h":
         double stepsize
         int rng_seed
 
+        int ignore_w_0
+        int ignore_w
+        int keep_coef
+
     void ffm_predict(double *w_0, double * w, double * V, cs_di *X, double *y_pred, int k)
 
     void ffm_als_fit(double *w_0, double *w, double *V,

@@ -51,6 +51,9 @@ class FactorizationMachine(BaseEstimator):
         self.random_state = random_state
         self.init_stdev = init_stdev
         self.rank = rank
+        self.warm_start = False
+        self.ignore_w_0 = False
+        self.ignore_w = False
         self.l2_reg_w = 0
         self.l2_reg_V = 0
         self.step_size = 0

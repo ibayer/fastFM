@@ -51,4 +51,8 @@ def test_fm_classification():
 
 
 if __name__ == '__main__':
-    test_fm_classification()
+    #test_fm_classification()
+    w0, w, V, y, X = get_test_problem()
+
+    fm = als.FMRegression(n_iter=1000, l2_reg_w=0, l2_reg_V=0, rank=2)
+    fm.fit(X, y)
