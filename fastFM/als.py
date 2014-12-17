@@ -1,6 +1,7 @@
 from sklearn.base import RegressorMixin
 from sklearn.utils import assert_all_finite
-from base import FactorizationMachine, BaseFMClassifier, _validate_class_labels
+from base import FactorizationMachine, BaseFMClassifier,\
+        _validate_class_labels, _check_coefs
 import ffm
 
 
@@ -59,7 +60,7 @@ class FMRegression(FactorizationMachine, RegressorMixin):
         self.task = "regression"
 
 
-    def fit(self, X_train, y_train):
+    def fit(self, X_train, y_train, warm_start=False):
         """ Fit model with specified loss.
 
         Parameters
@@ -68,11 +69,19 @@ class FMRegression(FactorizationMachine, RegressorMixin):
 
         y : float | ndarray, shape = (n_samples, )
 
+        warm_start : default = False
+                Flag to indicate if iterations should continue from the
+                current coefficients.
+
         """
         assert_all_finite(X_train)
         assert_all_finite(y_train)
-
+        if warm_start:
+            _check_coefs(self, X_train)
+            self.warm_start = warm_start
         self.w0_, self.w_, self.V_ = ffm.ffm_als_fit(self, X_train, y_train)
+        # reset to default setting
+        self.warm_start = False
         return self
 
 

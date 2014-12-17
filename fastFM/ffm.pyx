@@ -84,12 +84,19 @@ def ffm_als_fit(fm, X, double[:] y):
     pt_X = <cffm.cs_di *> PyCapsule_GetPointer(X_,"CsMatrix")
     param = FFMParam(fm)
     pt_param = <cffm.ffm_param *> PyCapsule_GetPointer(param,"FFMParam")
-    #allocate the coefs
-    cdef double w_0 = 0
-    cdef np.ndarray[np.float64_t, ndim=1, mode='c'] w =\
-         np.zeros(n_features, dtype=np.float64)
-    cdef np.ndarray[np.float64_t, ndim=2, mode='c'] V =\
-         np.zeros((fm.rank, n_features), dtype=np.float64)
+    cdef double w_0
+    cdef np.ndarray[np.float64_t, ndim=1, mode='c'] w
+    cdef np.ndarray[np.float64_t, ndim=2, mode='c'] V
+
+    if fm.warm_start:
+        w_0 = 0 if fm.ignore_w_0 else fm.w0_
+        w = np.zeros(n_features, dtype=np.float64) if fm.ignore_w else fm.w_
+        V = np.zeros((fm.rank, n_features), dtype=np.float64)\
+                if fm.rank == 0 else fm.V_
+    else:
+        w_0 = 0
+        w = np.zeros(n_features, dtype=np.float64)
+        V = np.zeros((fm.rank, n_features), dtype=np.float64)
 
     cffm.ffm_als_fit(&w_0, <double *> w.data, <double *> V.data, pt_X, &y[0],
             pt_param)
@@ -136,6 +143,7 @@ def ffm_fit_sgd_bpr(fm, X, np.ndarray[np.float64_t, ndim=2, mode='c'] pairs):
 def ffm_mcmc_fit_predict(fm, X_train, X_test, double[:] y):
     assert X_train.shape[0] == len(y)
     assert X_train.shape[1] == X_test.shape[1]
+    n_features = X_train.shape[1]
     param = FFMParam(fm)
     pt_param = <cffm.ffm_param *> PyCapsule_GetPointer(param,"FFMParam")
     X_train_ = CsMatrix(X_train)
@@ -143,12 +151,19 @@ def ffm_mcmc_fit_predict(fm, X_train, X_test, double[:] y):
     X_test_ = CsMatrix(X_test)
     pt_X_test = <cffm.cs_di *> PyCapsule_GetPointer(X_test_,"CsMatrix")
 
-    #allocate the coefs
-    cdef double w_0 = 0
-    cdef np.ndarray[np.float64_t, ndim=1, mode='c'] w =\
-         np.zeros(X_train.shape[1], dtype=np.float64)
-    cdef np.ndarray[np.float64_t, ndim=2, mode='c'] V =\
-         np.zeros((fm.rank, X_train.shape[1]), dtype=np.float64)
+    cdef double w_0
+    cdef np.ndarray[np.float64_t, ndim=1, mode='c'] w
+    cdef np.ndarray[np.float64_t, ndim=2, mode='c'] V
+
+    if fm.warm_start:
+        w_0 = 0 if fm.ignore_w_0 else fm.w0_
+        w = np.zeros(n_features, dtype=np.float64) if fm.ignore_w else fm.w_
+        V = np.zeros((fm.rank, n_features), dtype=np.float64)\
+                if fm.rank == 0 else fm.V_
+    else:
+        w_0 = 0
+        w = np.zeros(n_features, dtype=np.float64)
+        V = np.zeros((fm.rank, n_features), dtype=np.float64)
 
     # allocate the results vector
     cdef np.ndarray[np.float64_t, ndim=1, mode='c'] y_pred =\
@@ -157,6 +172,7 @@ def ffm_mcmc_fit_predict(fm, X_train, X_test, double[:] y):
     cffm.ffm_mcmc_fit_predict(&w_0, <double *> w.data, <double *> V.data,
             pt_X_train, pt_X_test, &y[0], <double *> y_pred.data, pt_param)
     return (w_0, w, V), y_pred
+
 
 def cs_norm(X):
     X = CsMatrix(X)

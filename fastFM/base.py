@@ -10,6 +10,16 @@ def _validate_class_labels(y):
         assert y.min() == -1
         assert y.max() == 1
 
+
+def _check_coefs(fm, X):
+    if not fm.ignore_w_0:
+        assert fm.w0_ is not None
+    if not fm.ignore_w:
+        assert fm.w_ is not None
+        assert fm.w_.shape[0] == X.shape[1]
+    if not fm.rank == 0:
+        assert fm.V_.shape[1] == X.shape[1]
+
 class FactorizationMachine(BaseEstimator):
 
     """ Factorization Machine trained MCMC (Gibbs) sampling.
@@ -57,6 +67,7 @@ class FactorizationMachine(BaseEstimator):
         self.l2_reg_w = 0
         self.l2_reg_V = 0
         self.step_size = 0
+
 
     def predict(self, X_test):
         """ Return predictions

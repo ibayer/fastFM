@@ -2,6 +2,9 @@ import numpy as np
 import scipy.sparse as sp
 from sklearn import metrics
 from fastFM import mcmc
+from fastFM.datasets import make_user_item_regression
+from sklearn.metrics import mean_squared_error
+from sklearn.utils.testing import assert_almost_equal
 
 
 def get_test_problem(task='regression'):
@@ -44,3 +47,26 @@ def test_fm_classification():
     auc = metrics.auc(fpr, tpr)
     assert auc > 0.95
     y_pred = fm.predict(X[:2,])
+
+
+def test_mcmc_warm_start():
+    X, y, coef = make_user_item_regression(label_stdev=0)
+    from sklearn.cross_validation import train_test_split
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size=0.33, random_state=43)
+    X_train = sp.csc_matrix(X_train)
+    X_test = sp.csc_matrix(X_test)
+
+    fm = mcmc.FMRegression(n_iter=100, rank=2)
+    y_pred = fm.fit_predict(X_train, y_train, X_test)
+    error_10_iter = mean_squared_error(y_pred, y_test)
+
+    fm = mcmc.FMRegression(n_iter=50, rank=2)
+    y_pred = fm.fit_predict(X_train, y_train, X_test)
+    error_5_iter = mean_squared_error(y_pred, y_test)
+
+    y_pred = fm.fit_predict(X_train, y_train, X_test, warm_start=True)
+    error_5_iter_plus_5 = mean_squared_error(y_pred, y_test)
+    print error_5_iter, error_5_iter_plus_5, error_10_iter
+
+    assert_almost_equal(error_10_iter, error_5_iter_plus_5, decimal=2)

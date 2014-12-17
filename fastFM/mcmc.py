@@ -1,7 +1,8 @@
 from sklearn.utils import assert_all_finite
 import scipy.sparse as sp
-from base import FactorizationMachine, _validate_class_labels
+from base import FactorizationMachine, _validate_class_labels, _check_coefs
 import ffm
+import numpy as np
 
 
 def _validate_mcmc_fit_input(X_train, y_train, X_test):
@@ -16,7 +17,7 @@ def _validate_mcmc_fit_input(X_train, y_train, X_test):
 class FMRegression(FactorizationMachine):
 
 
-    def fit_predict(self, X_train, y_train, X_test):
+    def fit_predict(self, X_train, y_train, X_test, warm_start=False):
         """Return average of posterior estimates of the test samples.
 
         Parameters
@@ -27,6 +28,10 @@ class FMRegression(FactorizationMachine):
 
         X_test : scipy.sparse.csc_matrix, (n_test_samples, n_features)
 
+        warm_start : default = False
+                Flag to indicate if the sampling should continue from the
+                current coefficients and MAP estimate.
+
         Returns
         ------
 
@@ -34,9 +39,26 @@ class FMRegression(FactorizationMachine):
         """
         self.task = "regression"
         _validate_mcmc_fit_input(X_train, y_train, X_test)
+        if warm_start:
+            _check_coefs(self, X_train)
+            self.warm_start = warm_start
         coef, y_pred = ffm.ffm_mcmc_fit_predict(self, X_train,
                 X_test, y_train)
         self.w0_, self.w_, self.V_ = coef
+
+
+        # weighed average of privous and current predictions
+        # for MAP estimate
+        if hasattr(self, 'iter_count'):
+           previous_iter = self.iter_count
+           self.iter_count = self.iter_count + self.n_iter
+           y_pred = (previous_iter * self.prediction_ +
+                    y_pred * self.n_iter) / float(self.iter_count)
+        else:
+           self.iter_count = self.n_iter
+        self.prediction_ = y_pred
+
+        self.warm_start = False
         return y_pred
 
 
