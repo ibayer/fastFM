@@ -31,6 +31,9 @@ cdef extern from "../fastFM-core/include/ffm.h":
         int ignore_w
         int keep_coef
 
+        int n_hyper_param
+        double *hyper_param
+
     void ffm_predict(double *w_0, double * w, double * V, cs_di *X, double *y_pred, int k)
 
     void ffm_als_fit(double *w_0, double *w, double *V,

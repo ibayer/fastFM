@@ -68,5 +68,9 @@ def test_mcmc_warm_start():
     y_pred = fm.fit_predict(X_train, y_train, X_test, warm_start=True)
     error_5_iter_plus_5 = mean_squared_error(y_pred, y_test)
     print error_5_iter, error_5_iter_plus_5, error_10_iter
-
+    print fm.hyper_param_
     assert_almost_equal(error_10_iter, error_5_iter_plus_5, decimal=2)
+
+
+if __name__ == "__main__":
+    test_mcmc_warm_start()

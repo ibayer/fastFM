@@ -169,8 +169,15 @@ def ffm_mcmc_fit_predict(fm, X_train, X_test, double[:] y):
     cdef np.ndarray[np.float64_t, ndim=1, mode='c'] y_pred =\
          np.zeros(X_test.shape[0], dtype=np.float64)
 
+    # allocate vector for hyperparameter
+    cdef np.ndarray[np.float64_t, ndim=1, mode='c'] hyper_param =\
+            np.zeros(5, dtype=np.float64)
+    pt_param.n_hyper_param = 5
+    pt_param.hyper_param = <double *> hyper_param.data
+
     cffm.ffm_mcmc_fit_predict(&w_0, <double *> w.data, <double *> V.data,
             pt_X_train, pt_X_test, &y[0], <double *> y_pred.data, pt_param)
+    fm.hyper_param_ = hyper_param
     return (w_0, w, V), y_pred
 
 
