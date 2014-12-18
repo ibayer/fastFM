@@ -105,21 +105,33 @@ def test_als_warm_start():
 
 if __name__ == '__main__':
     #test_fm_classification()
-    X, y, coef = make_user_item_regression(label_stdev=0)
+    X, y, coef = make_user_item_regression(label_stdev=.4)
     from sklearn.cross_validation import train_test_split
     X_train, X_test, y_train, y_test = train_test_split(
         X, y, test_size=0.33, random_state=42)
     X_train = sp.csc_matrix(X_train)
     X_test = sp.csc_matrix(X_test)
-    n_iter = 20
+    n_iter = 50
+    results = np.zeros((n_iter, 2), dtype=np.float64)
+
 
     fm = als.FMRegression(n_iter=1, l2_reg_w=0, l2_reg_V=0, rank=2)
-    # initalize coefs
+# initalize coefs
     fm.fit(X_train, y_train)
 
-    print "rmse: train, test"
+    rmse_train = []
+    rmse_test = []
     for i in range(n_iter):
         fm.fit(X_train, y_train, warm_start=True)
         y_pred = fm.predict(X_test)
-        print mean_squared_error(fm.predict(X_train), y_train),\
-            mean_squared_error(fm.predict(X_test), y_test)
+        rmse_train.append(mean_squared_error(fm.predict(X_train), y_train))
+        rmse_test.append(mean_squared_error(fm.predict(X_test), y_test))
+
+    from matplotlib import pyplot as plt
+
+    x = np.arange(n_iter)
+    with plt.style.context('fivethirtyeight'):
+        plt.plot(x, rmse_train, label='train')
+        plt.plot(x, rmse_test, label='test')
+    plt.legend()
+    plt.show()

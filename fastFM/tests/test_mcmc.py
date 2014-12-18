@@ -73,4 +73,46 @@ def test_mcmc_warm_start():
 
 
 if __name__ == "__main__":
-    test_mcmc_warm_start()
+    #test_mcmc_warm_start()
+
+    X, y, coef = make_user_item_regression(label_stdev=.4)
+    from sklearn.cross_validation import train_test_split
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size=0.33, random_state=42)
+    X_train = sp.csc_matrix(X_train)
+    X_test = sp.csc_matrix(X_test)
+    n_iter = 50
+    results = np.zeros((n_iter, 2), dtype=np.float64)
+
+    fm = mcmc.FMRegression(n_iter=1, rank=2)
+    # initalize coefs
+    fm.fit_predict(X_train, y_train, X_test)
+
+    rmse_test = []
+    hyper_param = np.zeros((n_iter, 5), dtype=np.float64)
+    for i in range(n_iter):
+        y_pred = fm.fit_predict(X_train, y_train, X_test, warm_start=True)
+        rmse_test.append(mean_squared_error(fm.predict(X_test), y_test))
+        hyper_param[i, :] = fm.hyper_param_
+
+    from matplotlib import pyplot as plt
+    fig, axes = plt.subplots(nrows=4, sharex=True, figsize=(15, 10))
+
+    x = np.arange(n_iter)
+
+    #with plt.style.context('ggplot'):
+    axes[0].plot(x, rmse_test, label='rmse test')
+    axes[0].legend()
+
+    axes[1].plot(x, hyper_param[:,0], label='alpha')
+    axes[1].legend()
+
+    axes[2].plot(x, hyper_param[:,1], label='lambda_w')
+    axes[2].plot(x, hyper_param[:,2], label='lambda_V')
+    axes[2].legend()
+
+    axes[3].plot(x, hyper_param[:,3], label='mu_w')
+    axes[3].plot(x, hyper_param[:,4], label='mu_V')
+    axes[3].legend()
+
+    plt.show()
