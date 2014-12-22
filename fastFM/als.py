@@ -1,7 +1,7 @@
 from sklearn.base import RegressorMixin
 from sklearn.utils import assert_all_finite
 from base import FactorizationMachine, BaseFMClassifier,\
-        _validate_class_labels, _check_coefs
+        _validate_class_labels, _check_warm_start
 import ffm
 
 
@@ -77,7 +77,7 @@ class FMRegression(FactorizationMachine, RegressorMixin):
         assert_all_finite(X_train)
         assert_all_finite(y_train)
         if warm_start:
-            _check_coefs(self, X_train)
+            _check_warm_start(self, X_train)
             self.warm_start = warm_start
         self.w0_, self.w_, self.V_ = ffm.ffm_als_fit(self, X_train, y_train)
         # reset to default setting

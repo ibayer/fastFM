@@ -11,14 +11,15 @@ def _validate_class_labels(y):
         assert y.max() == 1
 
 
-def _check_coefs(fm, X):
+def _check_warm_start(fm, X):
+    n_features = X.shape[1]
     if not fm.ignore_w_0:
         assert fm.w0_ is not None
     if not fm.ignore_w:
         assert fm.w_ is not None
-        assert fm.w_.shape[0] == X.shape[1]
+        assert fm.w_.shape[0] == n_features
     if not fm.rank == 0:
-        assert fm.V_.shape[1] == X.shape[1]
+        assert fm.V_.shape[1] == n_features
 
 class FactorizationMachine(BaseEstimator):
 
@@ -61,6 +62,7 @@ class FactorizationMachine(BaseEstimator):
         self.random_state = random_state
         self.init_stdev = init_stdev
         self.rank = rank
+        self.iter_count = 0
         self.warm_start = False
         self.ignore_w_0 = False
         self.ignore_w = False

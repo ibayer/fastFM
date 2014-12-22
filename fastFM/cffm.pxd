@@ -27,6 +27,7 @@ cdef extern from "../fastFM-core/include/ffm.h":
         double stepsize
         int rng_seed
 
+        int iter_count
         int ignore_w_0
         int ignore_w
         int keep_coef

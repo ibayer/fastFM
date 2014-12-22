@@ -59,6 +59,7 @@ def FFMParam(fm):
     p.rng_seed = fm.random_state
     p.lambda_w = fm.l2_reg_w
     p.lambda_V = fm.l2_reg_V
+    p.iter_count = fm.iter_count
 
     p.ignore_w_0 = 1 if fm.ignore_w_0 else 0
     p.ignore_w = 1 if fm.ignore_w else 0
@@ -154,6 +155,9 @@ def ffm_mcmc_fit_predict(fm, X_train, X_test, double[:] y):
     cdef double w_0
     cdef np.ndarray[np.float64_t, ndim=1, mode='c'] w
     cdef np.ndarray[np.float64_t, ndim=2, mode='c'] V
+    # allocate the results vector
+    cdef np.ndarray[np.float64_t, ndim=1, mode='c'] y_pred =\
+         np.zeros(X_test.shape[0], dtype=np.float64)
 
     if fm.warm_start:
         w_0 = 0 if fm.ignore_w_0 else fm.w0_
@@ -165,9 +169,12 @@ def ffm_mcmc_fit_predict(fm, X_train, X_test, double[:] y):
         w = np.zeros(n_features, dtype=np.float64)
         V = np.zeros((fm.rank, n_features), dtype=np.float64)
 
-    # allocate the results vector
-    cdef np.ndarray[np.float64_t, ndim=1, mode='c'] y_pred =\
-         np.zeros(X_test.shape[0], dtype=np.float64)
+    if fm.iter_count > 0:
+        y_pred = fm.prediction_
+    else:
+        y_pred = np.zeros(X_test.shape[0], dtype=np.float64)
+
+ 
 
     # allocate vector for hyperparameter
     cdef np.ndarray[np.float64_t, ndim=1, mode='c'] hyper_param =\

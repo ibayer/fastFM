@@ -33,7 +33,7 @@ def get_small_data():
     return X, y
 
 
-def test_fm_regression_only_w0():
+def _test_fm_regression_only_w0():
     X, y = get_small_data()
 
     fm = als.FMRegression(n_iter=0, l2_reg_w=0, l2_reg_V=0, rank=0)
@@ -104,7 +104,10 @@ def test_als_warm_start():
 
 
 if __name__ == '__main__':
+    test_fm_regression_only_w0()
+
     #test_fm_classification()
+    """
     X, y, coef = make_user_item_regression(label_stdev=.4)
     from sklearn.cross_validation import train_test_split
     X_train, X_test, y_train, y_test = train_test_split(
@@ -113,6 +116,19 @@ if __name__ == '__main__':
     X_test = sp.csc_matrix(X_test)
     n_iter = 50
     results = np.zeros((n_iter, 2), dtype=np.float64)
+
+    offset = '../../fastFM-notes/benchmarks/'
+    train_path = offset + "data/ml-100k/u1.base.libfm"
+    test_path = offset + "data/ml-100k/u1.test.libfm"
+    test_path = train_path
+
+    from sklearn.datasets import load_svmlight_file
+    X_train, y_train = load_svmlight_file(train_path)
+    X_test,  y_test= load_svmlight_file(test_path)
+    X_train = sp.csc_matrix(X_train)
+    X_test = sp.csc_matrix(X_test)
+    # add padding for features not in test
+    X_test = sp.hstack([X_test, sp.csc_matrix((X_test.shape[0], X_train.shape[1] - X_test.shape[1]))])
 
 
     fm = als.FMRegression(n_iter=1, l2_reg_w=0, l2_reg_V=0, rank=2)
@@ -135,3 +151,4 @@ if __name__ == '__main__':
         plt.plot(x, rmse_test, label='test')
     plt.legend()
     plt.show()
+    """
