@@ -49,19 +49,19 @@ def test_fm_classification():
     y_pred = fm.predict(X[:2,])
 
 
-def _test_mcmc_warm_start():
+def test_mcmc_warm_start():
     X, y, coef = make_user_item_regression(label_stdev=0)
     from sklearn.cross_validation import train_test_split
     X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=0.33, random_state=43)
+        X, y, test_size=0.33, random_state=44)
     X_train = sp.csc_matrix(X_train)
     X_test = sp.csc_matrix(X_test)
 
-    fm = mcmc.FMRegression(n_iter=10, rank=2)
+    fm = mcmc.FMRegression(n_iter=100, rank=2)
     y_pred = fm.fit_predict(X_train, y_train, X_test)
     error_10_iter = mean_squared_error(y_pred, y_test)
 
-    fm = mcmc.FMRegression(n_iter=5, rank=2)
+    fm = mcmc.FMRegression(n_iter=50, rank=2)
     y_pred = fm.fit_predict(X_train, y_train, X_test)
     error_5_iter = mean_squared_error(y_pred, y_test)
 
@@ -73,7 +73,7 @@ def _test_mcmc_warm_start():
 
 
 if __name__ == "__main__":
-    #test_mcmc_warm_start()
+    test_mcmc_warm_start()
 
     X, y, coef = make_user_item_regression(label_stdev=.4)
     from sklearn.cross_validation import train_test_split

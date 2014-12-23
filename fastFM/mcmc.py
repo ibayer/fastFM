@@ -45,15 +45,18 @@ class FMRegression(FactorizationMachine):
         if self.iter_count > 0:
             _check_warm_start(self, X_train)
             assert self.prediction_.shape[0] == X_test.shape[0]
+            assert self.hyper_param_.shape
             self.warm_start = True
 
         coef, y_pred = ffm.ffm_mcmc_fit_predict(self, X_train,
                 X_test, y_train)
         self.w0_, self.w_, self.V_ = coef
-
-        self.iter_count = self.iter_count + self.n_iter
         self.prediction_ = y_pred
         self.warm_start = False
+        if self.iter_count != 0:
+            self.iter_count = self.iter_count + n_more_iter
+        else:
+            self.iter_count = self.n_iter
 
         return y_pred
 

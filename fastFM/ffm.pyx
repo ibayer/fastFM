@@ -174,12 +174,16 @@ def ffm_mcmc_fit_predict(fm, X_train, X_test, double[:] y):
     else:
         y_pred = np.zeros(X_test.shape[0], dtype=np.float64)
 
- 
-
     # allocate vector for hyperparameter
-    cdef np.ndarray[np.float64_t, ndim=1, mode='c'] hyper_param =\
-            np.zeros(5, dtype=np.float64)
-    pt_param.n_hyper_param = 5
+    w_groups = 1
+    n_hyper_param = 1 + 2 * w_groups + 2 * fm.rank
+    cdef np.ndarray[np.float64_t, ndim=1, mode='c'] hyper_param
+
+    if fm.warm_start:
+        hyper_param = fm.hyper_param_
+    else:
+        hyper_param = np.zeros(n_hyper_param, dtype=np.float64)
+    pt_param.n_hyper_param = n_hyper_param
     pt_param.hyper_param = <double *> hyper_param.data
 
     cffm.ffm_mcmc_fit_predict(&w_0, <double *> w.data, <double *> V.data,
