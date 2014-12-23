@@ -63,7 +63,7 @@ def FFMParam(fm):
 
     p.ignore_w_0 = 1 if fm.ignore_w_0 else 0
     p.ignore_w = 1 if fm.ignore_w else 0
-    p.keep_coef = 1 if fm.warm_start else 0
+    p.warm_start = 1 if fm.warm_start else 0
     return PyCapsule_New(<void *>p,"FFMParam",<PyCapsule_Destructor>del_FFMParam)
 
 def ffm_predict(double w_0, double[:] w,

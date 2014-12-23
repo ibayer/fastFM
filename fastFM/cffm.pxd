@@ -30,7 +30,7 @@ cdef extern from "../fastFM-core/include/ffm.h":
         int iter_count
         int ignore_w_0
         int ignore_w
-        int keep_coef
+        int warm_start
 
         int n_hyper_param
         double *hyper_param
