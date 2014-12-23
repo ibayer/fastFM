@@ -57,8 +57,8 @@ def FFMParam(fm):
     p.init_sigma = fm.init_stdev
     p.TASK = map_flags[fm.task]
     p.rng_seed = fm.random_state
-    p.lambda_w = fm.l2_reg_w
-    p.lambda_V = fm.l2_reg_V
+    p.init_lambda_w = fm.l2_reg_w
+    p.init_lambda_V = fm.l2_reg_V
     p.iter_count = fm.iter_count
 
     p.ignore_w_0 = 1 if fm.ignore_w_0 else 0

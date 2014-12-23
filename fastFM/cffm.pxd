@@ -21,8 +21,8 @@ cdef extern from "../fastFM-core/include/ffm.h":
         int n_iter
         int k
         double init_sigma
-        double lambda_w
-        double lambda_V
+        double init_lambda_w
+        double init_lambda_V
         int TASK
         double stepsize
         int rng_seed
