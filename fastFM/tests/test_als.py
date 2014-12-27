@@ -5,6 +5,7 @@ from fastFM import als
 from numpy.testing import assert_almost_equal
 from fastFM.datasets import make_user_item_regression
 from sklearn.metrics import mean_squared_error
+from sklearn.utils.testing import assert_almost_equal
 
 
 def get_test_problem(task='regression'):
@@ -91,10 +92,12 @@ def test_als_warm_start():
 
     fm = als.FMRegression(n_iter=5, l2_reg_w=0, l2_reg_V=0, rank=2)
     fm.fit(X_train, y_train)
+    print fm.iter_count
     y_pred = fm.predict(X_test)
     error_5_iter = mean_squared_error(y_pred, y_test)
 
-    fm.fit(sp.csc_matrix(X_train), y_train, warm_start=True)
+    fm.fit(sp.csc_matrix(X_train), y_train, n_more_iter=5)
+    print fm.iter_count
     y_pred = fm.predict(X_test)
     error_5_iter_plus_5 = mean_squared_error(y_pred, y_test)
 
@@ -103,6 +106,49 @@ def test_als_warm_start():
     assert error_10_iter == error_5_iter_plus_5
 
 
+def test_warm_start_path():
+
+    X, y, coef = make_user_item_regression(label_stdev=.4)
+    from sklearn.cross_validation import train_test_split
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size=0.33, random_state=42)
+    X_train = sp.csc_matrix(X_train)
+    X_test = sp.csc_matrix(X_test)
+    n_iter = 10
+
+    rank = 4
+    seed = 333
+    step_size = 1
+    l2_reg_w = 0
+    l2_reg_V = 0
+
+    fm = als.FMRegression(n_iter=0, l2_reg_w=l2_reg_w,
+            l2_reg_V=l2_reg_V, rank=rank, random_state=seed)
+    # initalize coefs
+    fm.fit(X_train, y_train)
+
+    rmse_train = []
+    rmse_test = []
+    for i in range(1, n_iter):
+        fm.fit(X_train, y_train, n_more_iter=step_size)
+        rmse_train.append(np.sqrt(mean_squared_error(fm.predict(X_train), y_train)))
+        rmse_test.append(np.sqrt(mean_squared_error(fm.predict(X_test), y_test)))
+
+    print '------- restart ----------'
+    values = np.arange(1, n_iter)
+    rmse_test_re = []
+    rmse_train_re = []
+    for i in values:
+        fm = als.FMRegression(n_iter=i, l2_reg_w=l2_reg_w,
+                l2_reg_V=l2_reg_V, rank=rank, random_state=seed)
+        fm.fit(X_train, y_train)
+        rmse_test_re.append(np.sqrt(mean_squared_error(fm.predict(X_test), y_test)))
+        rmse_train_re.append(np.sqrt(mean_squared_error(fm.predict(X_train), y_train)))
+
+    assert_almost_equal(rmse_train, rmse_train_re)
+    assert_almost_equal(rmse_test, rmse_test_re)
+
+
 if __name__ == '__main__':
     #test_fm_regression_only_w0()
-    test_fm_classification()
+    test_als_warm_start()
