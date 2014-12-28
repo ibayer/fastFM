@@ -28,9 +28,8 @@ class FMRegression(FactorizationMachine):
 
         X_test : scipy.sparse.csc_matrix, (n_test_samples, n_features)
 
-        warm_start : default = False
-                Flag to indicate if the sampling should continue from the
-                current coefficients and MAP estimate.
+        n_more_iter : int
+                Number of iterations to continue from the current Coefficients.
 
         Returns
         ------
@@ -42,7 +41,7 @@ class FMRegression(FactorizationMachine):
 
         self.n_iter = self.n_iter + n_more_iter
 
-        if self.iter_count > 0:
+        if n_more_iter > 0:
             _check_warm_start(self, X_train)
             assert self.prediction_.shape[0] == X_test.shape[0]
             assert self.hyper_param_.shape
@@ -53,6 +52,7 @@ class FMRegression(FactorizationMachine):
         self.w0_, self.w_, self.V_ = coef
         self.prediction_ = y_pred
         self.warm_start = False
+
         if self.iter_count != 0:
             self.iter_count = self.iter_count + n_more_iter
         else:

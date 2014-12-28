@@ -169,7 +169,7 @@ def ffm_mcmc_fit_predict(fm, X_train, X_test, double[:] y):
         w = np.zeros(n_features, dtype=np.float64)
         V = np.zeros((fm.rank, n_features), dtype=np.float64)
 
-    if fm.iter_count > 0:
+    if fm.warm_start:
         y_pred = fm.prediction_
     else:
         y_pred = np.zeros(X_test.shape[0], dtype=np.float64)
