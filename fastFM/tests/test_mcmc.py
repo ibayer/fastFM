@@ -49,6 +49,21 @@ def test_fm_classification():
     y_pred = fm.predict(X[:2,])
 
 
+def test_linear_fm_classification():
+    w0, w, V, y, X = get_test_problem()
+    # transform to labels easier problem then default one
+    y_labels = np.ones_like(y)
+    y_labels[y < np.mean(y)] = -1
+
+    fm = mcmc.FMClassification(n_iter=1000, init_stdev=0.1, rank=0)
+    y_pred = fm.fit_predict(X, y_labels, X)
+
+    fpr, tpr, thresholds = metrics.roc_curve(y_labels, y_pred)
+    auc = metrics.auc(fpr, tpr)
+    assert auc > 0.95
+    y_pred = fm.predict(X[:2,])
+
+
 def test_mcmc_warm_start():
     X, y, coef = make_user_item_regression(label_stdev=0)
     from sklearn.cross_validation import train_test_split
@@ -73,4 +88,4 @@ def test_mcmc_warm_start():
 
 
 if __name__ == "__main__":
-    test_mcmc_warm_start()
+    test_linear_fm_classification()
