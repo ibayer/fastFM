@@ -1,5 +1,9 @@
-use ``git submodule update --init --recursive`` in submodule folder
-if any files are missing
+GIT CLONE INSTRUCTION
+=====================
+This repository relays on sub-repositories just using ``git clone ..``
+doesn't fetch them.
+You need to run ``git submodule update --init --recursive`` **from within** the
+``fastFM-core/`` folder in order to clone them as well.
 
 
 DEPENDENCIES
