@@ -12,7 +12,7 @@ DEPENDENCIES
 Install fastFM (python)
 =======================
 inplace for development:
-pip install -e python/
+pip install -e fastFM/
 
 
 how to run tests
