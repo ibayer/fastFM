@@ -23,4 +23,4 @@ pick your favorite test runner
 ``cd /fastFM/tests/; py.test``
 or 
 
-´´cd /fastFM/tests/; nosetests´´
+``cd /fastFM/tests/; nosetests``
