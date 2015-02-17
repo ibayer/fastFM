@@ -1,4 +1,4 @@
-use ``git submodule update --init --recursive`` insubmodule folder
+use ``git submodule update --init --recursive`` in submodule folder
 if any files are missing
 
 
