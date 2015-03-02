@@ -30,6 +30,9 @@ C libraries
 
 Install fastFM (python)
 =======================
+first build the C libraries:
+``(cd fastFM/; make)``
+
 inplace for development:
 ``pip install -e fastFM/``
 
