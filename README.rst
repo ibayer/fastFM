@@ -1,5 +1,7 @@
 GIT CLONE INSTRUCTION
 =====================
+git clone --recursive git@github.com:ibayer/fastFM.git
+
 This repository relays on sub-repositories just using ``git clone ..``
 doesn't fetch them.
 You need to run ``git submodule update --init --recursive`` **from within** the
