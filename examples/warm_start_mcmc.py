@@ -72,29 +72,31 @@ if __name__ == "__main__":
         hyper_param_re[nr, :] = fm.hyper_param_
 
     from matplotlib import pyplot as plt
-    fig, axes = plt.subplots(nrows=4, sharex=True, figsize=(15, 10))
+    fig, axes = plt.subplots(nrows=2, ncols=2, sharex=True, figsize=(15, 10))
 
     x = values * step_size
+    burn_in = 5
+    x = x[burn_in:]
 
     #with plt.style.context('ggplot'):
-    axes[0].plot(x, rmse_test, label='test rmse', color="r")
-    axes[0].plot(values, rmse_test_re, ls="--", color="r")
-    axes[0].legend()
+    axes[0, 0].plot(x, rmse_test[burn_in:], label='test rmse', color="r")
+    axes[0, 0].plot(values[burn_in:], rmse_test_re[burn_in:], ls="--", color="r")
+    axes[0, 0].legend()
 
-    axes[1].plot(x, hyper_param[:,0], label='alpha', color="b")
-    axes[1].plot(values, hyper_param_re[:,0], ls="--", color="b")
-    axes[1].legend()
+    axes[0, 1].plot(x, hyper_param[burn_in:,0], label='alpha', color="b")
+    axes[0, 1].plot(values[burn_in:], hyper_param_re[burn_in:,0], ls="--", color="b")
+    axes[0, 1].legend()
 
-    axes[2].plot(x, hyper_param[:,1], label='lambda_w', color="g")
+    axes[1, 0].plot(x, hyper_param[burn_in:,1], label='lambda_w', color="g")
     #axes[2].plot(x, hyper_param[:,2], label='lambda_V', color="r")
-    axes[2].plot(values, hyper_param_re[:,1], ls="--", color="g")
+    axes[1, 0].plot(values[burn_in:], hyper_param_re[burn_in:,1], ls="--", color="g")
     #axes[2].plot(values, hyper_param_re[:,2], label='lambda_V', ls="--", color="r")
-    axes[2].legend()
+    axes[1, 0].legend()
 
-    axes[3].plot(x, hyper_param[:,3], label='mu_w', color="g")
+    axes[1, 1].plot(x, hyper_param[burn_in:,3], label='mu_w', color="g")
     #axes[3].plot(x, hyper_param[:,4], label='mu_V', color="r")
-    axes[3].plot(values, hyper_param_re[:,3], ls="--", color="g")
+    axes[1, 1].plot(values[burn_in:], hyper_param_re[burn_in:,3], ls="--", color="g")
     #axes[3].plot(values, hyper_param_re[:,4], label='mu_V', ls="--", color="r")
-    axes[3].legend()
+    axes[1, 1].legend()
 
     plt.show()
