@@ -44,6 +44,36 @@ def _validate_mcmc_fit_input(X_train, y_train, X_test):
 
 
 class FMRegression(FactorizationMachine):
+    """ Factorization Machine Regression with a MCMC solver.
+
+    Parameters
+    ----------
+    n_iter : int, optional
+        The number of samples for the MCMC sampler, number or iterations over the
+        training set for ALS and number of steps for SGD.
+
+    init_stdev: float, optional
+        Sets the stdev  for the initialization of the parameter
+
+    random_state: int, optional
+        The seed of the pseudo random number generator that
+        initializes the parameters and mcmc chain.
+
+    rank: int
+        The rank of the factorization used for the second order interactions.
+
+    Attributes
+    ---------
+
+    w0_ : float
+        bias term
+
+    w_ : float | array, shape = (n_features)
+        Coefficients for linear combination.
+
+    V_ : float | array, shape = (rank_pair, n_features)
+        Coefficients of second order factor matrix.
+    """
 
 
     def fit_predict(self, X_train, y_train, X_test, n_more_iter=0):
@@ -93,6 +123,36 @@ class FMRegression(FactorizationMachine):
 
 
 class FMClassification(FactorizationMachine):
+    """ Factorization Machine Classification with a MCMC solver.
+
+    Parameters
+    ----------
+    n_iter : int, optional
+        The number of samples for the MCMC sampler, number or iterations over the
+        training set for ALS and number of steps for SGD.
+
+    init_stdev: float, optional
+        Sets the stdev  for the initialization of the parameter
+
+    random_state: int, optional
+        The seed of the pseudo random number generator that
+        initializes the parameters and mcmc chain.
+
+    rank: int
+        The rank of the factorization used for the second order interactions.
+
+    Attributes
+    ---------
+
+    w0_ : float
+        bias term
+
+    w_ : float | array, shape = (n_features)
+        Coefficients for linear combination.
+
+    V_ : float | array, shape = (rank_pair, n_features)
+        Coefficients of second order factor matrix.
+    """
 
 
     def fit_predict(self, X_train, y_train, X_test):
