@@ -32,7 +32,7 @@ def test_fm_classification_predict_proba():
     y_pred = fm.predict_proba(X)
 
     y[y == -1] = 0
-    assert metrics.accuracy_score(y, y_pred) > 0.95
+    assert metrics.roc_auc_score(y, y_pred) > 0.95
 
 if __name__ == '__main__':
     test_fm_classification_predict_proba()
