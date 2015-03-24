@@ -4,6 +4,7 @@ from base import FactorizationMachine, _validate_class_labels, _check_warm_start
 import ffm
 import numpy as np
 from sklearn.metrics import mean_squared_error
+import warnings
 
 
 def find_init_stdev(fm, X_train, y_train, X_vali=None, y_vali=None,
@@ -38,7 +39,12 @@ def _validate_mcmc_fit_input(X_train, y_train, X_test):
         assert_all_finite(X_train)
         assert_all_finite(X_test)
         assert_all_finite(y_train)
-        assert sp.isspmatrix_csc(X_test)
+        if not sp.isspmatrix_csc(X_test):
+            X_test = X_test.tocsc()
+            warnings.warn('convert X_test to csc')
+        if not sp.isspmatrix_csc(X_train):
+            X_train = X_train.tocsc()
+            warnings.warn('convert X_train to csc')
         assert X_train.shape[1] == X_test.shape[1]
         assert X_train.shape[0] == len(y_train)
 
