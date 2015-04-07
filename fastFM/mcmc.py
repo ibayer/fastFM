@@ -1,10 +1,8 @@
-from sklearn.utils import assert_all_finite
-import scipy.sparse as sp
+from sklearn.utils import assert_all_finite, check_consistent_length, check_array
 from base import FactorizationMachine, _validate_class_labels, _check_warm_start
 import ffm
 import numpy as np
 from sklearn.metrics import mean_squared_error
-import warnings
 
 
 def find_init_stdev(fm, X_train, y_train, X_vali=None, y_vali=None,
@@ -36,17 +34,17 @@ def find_init_stdev(fm, X_train, y_train, X_vali=None, y_vali=None,
 
 
 def _validate_mcmc_fit_input(X_train, y_train, X_test):
-        assert_all_finite(X_train)
-        assert_all_finite(X_test)
+
+        check_consistent_length(X_train, y_train)
         assert_all_finite(y_train)
-        if not sp.isspmatrix_csc(X_test):
-            X_test = X_test.tocsc()
-            warnings.warn('convert X_test to csc')
-        if not sp.isspmatrix_csc(X_train):
-            X_train = X_train.tocsc()
-            warnings.warn('convert X_train to csc')
+        y_train = y_train.astype(np.float64)
+
         assert X_train.shape[1] == X_test.shape[1]
-        assert X_train.shape[0] == len(y_train)
+        X_train = check_array(X_train, accept_sparse="csc", dtype=np.float64,
+                order="F")
+        X_test = check_array(X_test, accept_sparse="csc", dtype=np.float64,
+                order="F")
+        return X_train, y_train, X_test
 
 
 class FMRegression(FactorizationMachine):
@@ -67,6 +65,7 @@ class FMRegression(FactorizationMachine):
 
     rank: int
         The rank of the factorization used for the second order interactions.
+
 
     Attributes
     ---------
@@ -102,7 +101,8 @@ class FMRegression(FactorizationMachine):
         T : array, shape (n_test_samples)
         """
         self.task = "regression"
-        _validate_mcmc_fit_input(X_train, y_train, X_test)
+        X_train, y_train, X_test = _validate_mcmc_fit_input(X_train, y_train,
+                                                                    X_test)
 
         self.n_iter = self.n_iter + n_more_iter
 
@@ -180,8 +180,9 @@ class FMClassification(FactorizationMachine):
         T : array, shape (n_test_samples)
         """
         self.task = "classification"
-        _validate_mcmc_fit_input(X_train, y_train, X_test)
-        _validate_class_labels(y_train)
+        X_train, y_train, X_test = _validate_mcmc_fit_input(X_train, y_train,
+                                                                    X_test)
+        y_train = _validate_class_labels(y_train)
 
         coef, y_pred = ffm.ffm_mcmc_fit_predict(self, X_train,
                 X_test, y_train)

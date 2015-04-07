@@ -1,7 +1,8 @@
+from sklearn.utils import assert_all_finite, check_consistent_length, check_array
 from sklearn.base import RegressorMixin
-from sklearn.utils import assert_all_finite
 from base import FactorizationMachine, BaseFMClassifier,\
         _validate_class_labels, _check_warm_start
+import numpy as np
 import ffm
 
 
@@ -74,8 +75,10 @@ class FMRegression(FactorizationMachine, RegressorMixin):
 
         """
 
-        assert_all_finite(X_train)
+        check_consistent_length(X_train, y_train)
         assert_all_finite(y_train)
+        X_train = check_array(X_train, accept_sparse="csc", dtype=np.float64,
+                order="F")
         self.n_iter = self.n_iter + n_more_iter
 
         if n_more_iter > 0:
@@ -159,9 +162,10 @@ class FMClassification(BaseFMClassifier):
         y : float | ndarray, shape = (n_samples, )
                 the targets have to be encodes as {-1, 1}.
         """
-        _validate_class_labels(y_train)
-        assert_all_finite(X_train)
-        assert_all_finite(y_train)
+        check_consistent_length(X_train, y_train)
+        X_train = check_array(X_train, accept_sparse="csc", dtype=np.float64,
+                order="F")
+        y_train = _validate_class_labels(y_train)
 
         self.w0_, self.w_, self.V_ = ffm.ffm_als_fit(self, X_train, y_train)
         return self

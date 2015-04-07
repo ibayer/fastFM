@@ -154,7 +154,7 @@ class FMClassification(BaseFMClassifier):
 
                 the targets have to be encodes as {-1, 1}.
         """
-        _validate_class_labels(y_train)
+        y_train = _validate_class_labels(y_train)
         assert_all_finite(X_train)
         assert_all_finite(y_train)
 

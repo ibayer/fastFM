@@ -59,7 +59,7 @@ def test_fm_regression():
     assert_almost_equal(y_pred, y, 3)
     # check different size
     fm = als.FMRegression(n_iter=1000, l2_reg_w=0, l2_reg_V=0, rank=5)
-    X_big = sp.hstack([X,X]).tocsc()
+    X_big = sp.hstack([X,X])
     fm.fit(X_big, y)
     y_pred = fm.predict(X_big[:2,])
 
