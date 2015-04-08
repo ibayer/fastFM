@@ -9,7 +9,7 @@ def _validate_class_labels(y):
         assert len(set(y)) == 2
         assert y.min() == -1
         assert y.max() == 1
-        return y.astype(np.float64)
+        return check_array(y, ensure_2d=False, dtype=np.float64)
 
 
 def _check_warm_start(fm, X):
@@ -110,16 +110,14 @@ class BaseFMClassifier(FactorizationMachine, ClassifierMixin):
         Returns
         ------
 
-        T : array, shape (n_samples)
-            The labels are returned for classification.
+        y : array, shape (n_samples)
+            Class labels
         """
-        pred = super(BaseFMClassifier, self).predict(X_test)
-        pred = norm.cdf(pred)
+        y_proba = norm.cdf(super(BaseFMClassifier, self).predict(X_test))
         # convert probs to labels
-        pred[pred < 0.5] = -1
-        pred[pred >= 0.5] = 1
-        print "predict"
-        return pred
+        y_pred = np.zeros_like(y_proba, dtype=np.float64) + self.classes_[0]
+        y_pred[y_proba > .5] = self.classes_[1]
+        return y_pred
 
 
     def predict_proba(self, X_test):
@@ -132,8 +130,8 @@ class BaseFMClassifier(FactorizationMachine, ClassifierMixin):
         Returns
         ------
 
-        T : array, shape (n_samples)
-            Class Probability for the positive class.
+        y : array, shape (n_samples)
+            Class Probability for the class with smaller label.
         """
         pred = super(BaseFMClassifier, self).predict(X_test)
         return norm.cdf(pred)

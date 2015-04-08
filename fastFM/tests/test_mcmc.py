@@ -4,7 +4,7 @@ from sklearn import metrics
 from fastFM import mcmc
 from fastFM.datasets import make_user_item_regression
 from sklearn.metrics import mean_squared_error
-from sklearn.utils.testing import assert_almost_equal
+from sklearn.utils.testing import assert_almost_equal, assert_array_equal
 
 
 def get_test_problem(task='regression'):
@@ -41,7 +41,7 @@ def test_fm_classification():
     y_labels[y < np.mean(y)] = -1
 
     fm = mcmc.FMClassification(n_iter=1000, init_stdev=0.1, rank=2)
-    y_pred = fm.fit_predict(X, y_labels, X)
+    y_pred = fm.fit_predict_proba(X, y_labels, X)
 
     fpr, tpr, thresholds = metrics.roc_curve(y_labels, y_pred)
     auc = metrics.auc(fpr, tpr)
@@ -56,12 +56,26 @@ def test_linear_fm_classification():
     y_labels[y < np.mean(y)] = -1
 
     fm = mcmc.FMClassification(n_iter=1000, init_stdev=0.1, rank=0)
-    y_pred = fm.fit_predict(X, y_labels, X)
+    y_pred = fm.fit_predict_proba(X, y_labels, X)
 
     fpr, tpr, thresholds = metrics.roc_curve(y_labels, y_pred)
     auc = metrics.auc(fpr, tpr)
     assert auc > 0.95
     y_pred = fm.predict(X[:2,])
+
+
+def test_fm_classification_proba():
+    w0, w, V, y, X = get_test_problem()
+    # transform to labels easier problem then default one
+    y_labels = np.ones_like(y)
+    y_labels[y < np.mean(y)] = -1
+
+    fm = mcmc.FMClassification(n_iter=1000, init_stdev=0.1, rank=2)
+    y_pred_proba = fm.fit_predict_proba(X, y_labels, X)
+    y_pred = fm.fit_predict(X, y_labels, X)
+    y_pred_proba[y_pred_proba < .5] = -1
+    y_pred_proba[y_pred_proba != -1] = 1
+    assert_array_equal(y_pred, y_pred_proba)
 
 
 def test_mcmc_warm_start():

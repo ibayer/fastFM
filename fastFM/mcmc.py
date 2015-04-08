@@ -37,7 +37,7 @@ def _validate_mcmc_fit_input(X_train, y_train, X_test):
 
         check_consistent_length(X_train, y_train)
         assert_all_finite(y_train)
-        y_train = y_train.astype(np.float64)
+        y_train = check_array(y_train, ensure_2d=False, dtype=np.float64)
 
         assert X_train.shape[1] == X_test.shape[1]
         X_train = check_array(X_train, accept_sparse="csc", dtype=np.float64,
@@ -177,9 +177,52 @@ class FMClassification(FactorizationMachine):
         Returns
         ------
 
-        T : array, shape (n_test_samples)
+        y_pred : array, shape (n_test_samples)
+                Returns predicted class labels.
+
+        """
+        y_proba = self.fit_predict_proba(X_train, y_train, X_test)
+        y_pred = np.zeros_like(y_proba, dtype=np.float64) + self.classes_[0]
+        y_pred[y_proba > .5] = self.classes_[1]
+        return y_pred
+
+
+
+    def fit_predict_proba(self, X_train, y_train, X_test):
+        """Return average class probabilities of posterior estimates of the test samples.
+        Use only with MCMC!
+
+        Parameters
+        ----------
+        X_train : scipy.sparse.csc_matrix, (n_samples, n_features)
+
+        y_train : array, shape (n_samples)
+                the targets have to be encodes as {-1, 1}.
+
+        X_test : scipy.sparse.csc_matrix, (n_test_samples, n_features)
+
+        Returns
+        ------
+
+        y_pred : array, shape (n_test_samples)
+            Returns probability estimates for the class with lowest class label.
+
         """
         self.task = "classification"
+
+        self.classes_ = np.unique(y_train)
+
+        # fastFM-core expects labels to be in {-1,1}
+        y_train = y_train.copy()
+        i_class1 = (y_train == self.classes_[0])
+        y_train[i_class1] = -1
+        y_train[-i_class1] = 1
+
+        if len(self.classes_) != 2:
+            raise ValueError("This solver only supports binary classification"
+                             "but the data contains"
+                             " class: %r" % self.classes_[0])
+
         X_train, y_train, X_test = _validate_mcmc_fit_input(X_train, y_train,
                                                                     X_test)
         y_train = _validate_class_labels(y_train)

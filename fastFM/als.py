@@ -76,7 +76,8 @@ class FMRegression(FactorizationMachine, RegressorMixin):
         """
 
         check_consistent_length(X_train, y_train)
-        assert_all_finite(y_train)
+        y_train = check_array(y_train, ensure_2d=False, dtype=np.float64)
+
         X_train = check_array(X_train, accept_sparse="csc", dtype=np.float64,
                 order="F")
         self.n_iter = self.n_iter + n_more_iter
@@ -166,6 +167,14 @@ class FMClassification(BaseFMClassifier):
         X_train = check_array(X_train, accept_sparse="csc", dtype=np.float64,
                 order="F")
         y_train = _validate_class_labels(y_train)
+
+        self.classes_ = np.unique(y_train)
+
+        # fastFM-core expects labels to be in {-1,1}
+        y_train = y_train.copy()
+        i_class1 = (y_train == self.classes_[0])
+        y_train[i_class1] = -1
+        y_train[-i_class1] = 1
 
         self.w0_, self.w_, self.V_ = ffm.ffm_als_fit(self, X_train, y_train)
         return self

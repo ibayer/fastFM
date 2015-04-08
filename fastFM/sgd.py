@@ -77,7 +77,7 @@ class FMRegression(FactorizationMachine, RegressorMixin):
         """
 
         check_consistent_length(X, y)
-        y = y.astype(np.float64)
+        y = check_array(y, ensure_2d=False, dtype=np.float64)
         X = X.T
         X = check_array(X, accept_sparse="csc", dtype=np.float64)
 
@@ -157,6 +157,18 @@ class FMClassification(BaseFMClassifier):
                 the targets have to be encodes as {-1, 1}.
         """
         y = _validate_class_labels(y)
+        self.classes_ = np.unique(y)
+
+        # fastFM-core expects labels to be in {-1,1}
+        y_train = y.copy()
+        i_class1 = (y_train == self.classes_[0])
+        y_train[i_class1] = -1
+        y_train[-i_class1] = 1
+
+        if len(self.classes_) != 2:
+            raise ValueError("This solver only supports binary classification"
+                             "but the data contains"
+                             " class: %r" % self.classes_[0])
 
         check_consistent_length(X, y)
         y = y.astype(np.float64)
