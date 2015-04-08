@@ -169,6 +169,10 @@ class FMClassification(BaseFMClassifier):
         y_train = _validate_class_labels(y_train)
 
         self.classes_ = np.unique(y_train)
+        if len(self.classes_) != 2:
+            raise ValueError("This solver only supports binary classification"
+                             " but the data contains"
+                             " class: %r" % self.classes_)
 
         # fastFM-core expects labels to be in {-1,1}
         y_train = y_train.copy()

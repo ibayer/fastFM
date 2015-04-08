@@ -211,6 +211,10 @@ class FMClassification(FactorizationMachine):
         self.task = "classification"
 
         self.classes_ = np.unique(y_train)
+        if len(self.classes_) != 2:
+            raise ValueError("This solver only supports binary classification"
+                             " but the data contains"
+                             " class: %r" % self.classes_)
 
         # fastFM-core expects labels to be in {-1,1}
         y_train = y_train.copy()
@@ -218,10 +222,6 @@ class FMClassification(FactorizationMachine):
         y_train[i_class1] = -1
         y_train[-i_class1] = 1
 
-        if len(self.classes_) != 2:
-            raise ValueError("This solver only supports binary classification"
-                             "but the data contains"
-                             " class: %r" % self.classes_[0])
 
         X_train, y_train, X_test = _validate_mcmc_fit_input(X_train, y_train,
                                                                     X_test)
