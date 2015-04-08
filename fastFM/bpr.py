@@ -1,5 +1,6 @@
-from sklearn.utils import assert_all_finite
+from sklearn.utils import assert_all_finite, check_array
 from base import FactorizationMachine
+import numpy as np
 import ffm
 
 
@@ -11,8 +12,7 @@ class FMRecommender(FactorizationMachine):
     Parameters
     ----------
     n_iter : int, optional
-        The number of samples for the MCMC sampler, number or iterations over the
-        training set for ALS and number of steps for SGD.
+        The number of interations of individual samples .
 
     init_stdev: float, optional
         Sets the stdev for the initialization of the parameter
@@ -64,7 +64,7 @@ class FMRecommender(FactorizationMachine):
         self.task = "ranking"
 
 
-    def fit(self, X_train, pairs):
+    def fit(self, X, pairs):
         """ Fit model with specified loss.
 
         Parameters
@@ -76,10 +76,12 @@ class FMRecommender(FactorizationMachine):
                 the first returns a high value then the second
                 FM(X[i,0]) > FM(X[i, 1]).
         """
-        assert_all_finite(X_train)
+        X = X.T
+        X = check_array(X, accept_sparse="csc", dtype=np.float64)
         assert_all_finite(pairs)
-        assert pairs.max() <= X_train.shape[1]
+
+        pairs = pairs.astype(np.float64)
+        assert pairs.max() <= X.shape[1]
         assert pairs.min() >= 0
-        self.w0_, self.w_, self.V_ = ffm.ffm_fit_sgd_bpr(self,
-                                                X_train, pairs)
+        self.w0_, self.w_, self.V_ = ffm.ffm_fit_sgd_bpr(self, X, pairs)
         return self

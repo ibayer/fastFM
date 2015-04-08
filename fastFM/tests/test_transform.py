@@ -80,7 +80,7 @@ def test_multiclass_encoding():
     fm = FMRecommender(n_iter=2000,
             init_stdev=0.01, l2_reg_w=.5, l2_reg_V=.5, rank=2,
             step_size=.002, random_state=11)
-    X_train = X_ext.T.tocsc()
+    X_train = X_ext.tocsc()
     #assert False
     fm.fit(X_train, compars)
     #y_pred = fm.predict(X_test)

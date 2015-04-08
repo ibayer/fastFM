@@ -25,7 +25,7 @@ def get_test_problem(task='regression'):
 def test_fm_sgd_regression():
     w0, w, V, y, X = get_test_problem()
     X_test = X.copy()
-    X_train = sp.csc_matrix(X.T)
+    X_train = sp.csc_matrix(X)
 
     fm = sgd.FMRegression(n_iter=10000,
             init_stdev=0.01, l2_reg_w=0.5, l2_reg_V=50.5, rank=2,
@@ -39,7 +39,7 @@ def test_fm_sgd_regression():
 def test_fm_sgd_classification():
     w0, w, V, y, X = get_test_problem(task='classification')
     X_test = X.copy()
-    X_train = sp.csc_matrix(X.T)
+    X_train = sp.csc_matrix(X)
 
     fm = sgd.FMClassification(n_iter=1000,
             init_stdev=0.1, l2_reg_w=0, l2_reg_V=0, rank=2, step_size=0.1)
@@ -47,3 +47,8 @@ def test_fm_sgd_classification():
     y_pred = fm.predict(X_test)
     print y_pred
     assert metrics.accuracy_score(y, y_pred) > 0.95
+
+
+if __name__== '__main__':
+
+    test_fm_sgd_regression()

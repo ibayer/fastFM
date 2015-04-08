@@ -1,6 +1,7 @@
 from sklearn.base import RegressorMixin
-from sklearn.utils import assert_all_finite
+from sklearn.utils import check_array, check_consistent_length
 from base import FactorizationMachine, BaseFMClassifier, _validate_class_labels
+import numpy as np
 import ffm
 
 
@@ -12,8 +13,7 @@ class FMRegression(FactorizationMachine, RegressorMixin):
     Parameters
     ----------
     n_iter : int, optional
-        The number of samples for the MCMC sampler, number or iterations over the
-        training set for ALS and number of steps for SGD.
+        The number of interations of individual samples .
 
     init_stdev: float, optional
         Sets the stdev for the initialization of the parameter
@@ -65,7 +65,7 @@ class FMRegression(FactorizationMachine, RegressorMixin):
         self.task = "regression"
 
 
-    def fit(self, X_train, y_train):
+    def fit(self, X, y):
         """ Fit model with specified loss.
 
         Parameters
@@ -75,10 +75,13 @@ class FMRegression(FactorizationMachine, RegressorMixin):
         y : float | ndarray, shape = (n_samples, )
 
         """
-        assert_all_finite(X_train)
-        assert_all_finite(y_train)
 
-        self.w0_, self.w_, self.V_ = ffm.ffm_sgd_fit(self, X_train, y_train)
+        check_consistent_length(X, y)
+        y = y.astype(np.float64)
+        X = X.T
+        X = check_array(X, accept_sparse="csc", dtype=np.float64)
+
+        self.w0_, self.w_, self.V_ = ffm.ffm_sgd_fit(self, X, y)
         return self
 
 
@@ -90,8 +93,7 @@ class FMClassification(BaseFMClassifier):
     Parameters
     ----------
     n_iter : int, optional
-        The number of samples for the MCMC sampler, number or iterations over the
-        training set for ALS and number of steps for SGD.
+        The number of interations of individual samples .
 
     init_std: float, optional
         Sets the stdev for the initialization of the parameter
@@ -143,7 +145,7 @@ class FMClassification(BaseFMClassifier):
         self.task = "classification"
 
 
-    def fit(self, X_train, y_train):
+    def fit(self, X, y):
         """ Fit model with specified loss.
 
         Parameters
@@ -154,9 +156,12 @@ class FMClassification(BaseFMClassifier):
 
                 the targets have to be encodes as {-1, 1}.
         """
-        y_train = _validate_class_labels(y_train)
-        assert_all_finite(X_train)
-        assert_all_finite(y_train)
+        y = _validate_class_labels(y)
 
-        self.w0_, self.w_, self.V_ = ffm.ffm_sgd_fit(self, X_train, y_train)
+        check_consistent_length(X, y)
+        y = y.astype(np.float64)
+        X = X.T
+        X = check_array(X, accept_sparse="csc", dtype=np.float64)
+
+        self.w0_, self.w_, self.V_ = ffm.ffm_sgd_fit(self, X, y)
         return self

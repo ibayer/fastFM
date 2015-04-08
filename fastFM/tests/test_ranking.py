@@ -24,7 +24,7 @@ def get_test_problem(task='regression'):
 def test_fm_sgr_ranking():
     w0, w, V, y, X = get_test_problem()
     X_test = X.copy()
-    X_train = sp.csc_matrix(X.T)
+    X_train = X.copy()
 
     import itertools
     pairs = [p for p in itertools.combinations(range(len(y)), 2)]
