@@ -6,9 +6,9 @@ from sklearn.metrics import mean_squared_error, r2_score
 
 
 def make_user_item_regression(random_state=123, n_user=20, n_item=20,
-        label_stdev=0.4, rank=2, bias=True, first_order=True,
-        stdev_w0=.2, stdev_w=0.3, stdev_V=0.4,
-        mean_w0=2, mean_w=5, mean_V=10):
+                              label_stdev=0.4, rank=2, bias=True,
+                              first_order=True, stdev_w0=.2, stdev_w=0.3,
+                              stdev_V=0.4, mean_w0=2, mean_w=5, mean_V=10):
 
     n_features = n_user + n_item
     n_samples = n_user * n_item
@@ -37,14 +37,16 @@ def make_user_item_regression(random_state=123, n_user=20, n_item=20,
 
 
 if __name__ == '__main__':
-    X, y, coef = make_user_item_regression(n_user=5, n_item=5, rank=2, label_stdev=2)
+    X, y, coef = make_user_item_regression(n_user=5, n_item=5, rank=2,
+                                           label_stdev=2)
     from sklearn.cross_validation import train_test_split
     X_train, X_test, y_train, y_test = train_test_split(
         X, y, test_size=0.33, random_state=42)
 
     from mcmc import FMRegression
     fm = FMRegression(rank=2)
-    y_pred = fm.fit_predict(sp.csc_matrix(X_train), y_train, sp.csc_matrix(X_test))
+    y_pred = fm.fit_predict(sp.csc_matrix(X_train), y_train,
+                            sp.csc_matrix(X_test))
 
     print 'rmse', mean_squared_error(y_pred, y_test)
     print 'r2_score', r2_score(y_pred, y_test)

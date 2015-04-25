@@ -1,4 +1,3 @@
-import numpy as np
 
 
 def kendall_tau(a, b):
@@ -18,4 +17,5 @@ def kendall_tau(a, b):
                 n_disconcordant = n_disconcordant + 1
             if a[i] < a[j] and b[i] > b[j]:
                 n_disconcordant = n_disconcordant + 1
-    return (n_concordant - n_disconcordant) / (.5 * n_samples * (n_samples -1))
+    return (n_concordant - n_disconcordant) / (.5 * n_samples *
+                                               (n_samples - 1))

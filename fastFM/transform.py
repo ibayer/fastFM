@@ -1,14 +1,14 @@
 import scipy.sparse as sp
 import numpy as np
 
+
 def multiclass_to_ranking(X, y):
     n_classes = y.shape[1]
     n_samples = X.shape[0]
-    n_features = X.shape[1]
 
     # create extended X matrix
     X_features = X.copy()
-    for i in range(n_classes -1):
+    for i in range(n_classes - 1):
         X_features = sp.vstack([X_features, X])
 
     X_labels = None
@@ -30,7 +30,7 @@ def multiclass_to_ranking(X, y):
         for i in row.indices:
             for c in range(n_classes):
                 if c not in row.indices:
-                    offset = i_row * n_classes 
+                    offset = i_row * n_classes
                     compars.append([offset + i, offset + c])
 
     compars = np.vstack(compars)
@@ -63,8 +63,9 @@ def one_hot_encode_df(df, target_col='target', vectorizer=None):
      one-hot encoded scipy sparse matrix
     """
 
-    if not target_col in df.columns:
-        raise Exception('target column "' + target_col + '" is not in DataFrame')
+    if target_col not in df.columns:
+        raise Exception('target column "' + target_col +
+                        '" is not in DataFrame')
 
     from sklearn.feature_extraction import DictVectorizer
     y = df[target_col].values

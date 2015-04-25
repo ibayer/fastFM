@@ -5,7 +5,6 @@ import numpy as np
 import ffm
 
 
-
 class FMRecommender(FactorizationMachine):
 
     """ Factorization Machine Recommender with pairwise (BPR) loss solver.
@@ -52,9 +51,10 @@ class FMRecommender(FactorizationMachine):
     """
 
     def __init__(self, n_iter=100, init_stdev=0.1, rank=8, random_state=123,
-            l2_reg_w=0, l2_reg_V=0, l2_reg=0, step_size=0.1):
-        super(FMRecommender, self).__init__(n_iter=n_iter,
-            init_stdev=init_stdev, rank=rank, random_state=random_state)
+                 l2_reg_w=0, l2_reg_V=0, l2_reg=0, step_size=0.1):
+        super(FMRecommender, self).\
+            __init__(n_iter=n_iter, init_stdev=init_stdev, rank=rank,
+                     random_state=random_state)
         if (l2_reg != 0):
             self.l2_reg_V = l2_reg
             self.l2_reg_w = l2_reg
@@ -63,7 +63,6 @@ class FMRecommender(FactorizationMachine):
             self.l2_reg_V = l2_reg_V
         self.step_size = step_size
         self.task = "ranking"
-
 
     def fit(self, X, pairs):
         """ Fit model with specified loss.

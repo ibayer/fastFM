@@ -1,12 +1,14 @@
-from sklearn.utils import assert_all_finite, check_consistent_length, check_array
-from base import FactorizationMachine, _validate_class_labels, _check_warm_start
+from sklearn.utils import assert_all_finite, check_consistent_length,\
+    check_array
+from base import FactorizationMachine, _validate_class_labels,\
+    _check_warm_start
 import ffm
 import numpy as np
 from sklearn.metrics import mean_squared_error
 
 
 def find_init_stdev(fm, X_train, y_train, X_vali=None, y_vali=None,
-        stdev_range=None, ):
+                    stdev_range=None, ):
     if not stdev_range:
         stdev_range = [0.1, 0.1, 0.2, 0.5, 1.0]
 
@@ -16,7 +18,8 @@ def find_init_stdev(fm, X_train, y_train, X_vali=None, y_vali=None,
     # just using a dummy here
     if X_vali is None:
         X_test = X_train[:2, :]
-    else: X_test = X_vali
+    else:
+        X_test = X_vali
 
     best_init_stdev = 0
     best_mse = np.finfo(np.float64).max
@@ -26,7 +29,8 @@ def find_init_stdev(fm, X_train, y_train, X_vali=None, y_vali=None,
         if X_vali is None:
             y_pred = fm.predict(X_train)
             mse = mean_squared_error(y_pred, y_train)
-        else: mse = mean_squared_error(y_pred_vali, y_vali)
+        else:
+            mse = mean_squared_error(y_pred_vali, y_vali)
         if mse < best_mse:
             best_mse = mse
             best_init_stdev = init_stdev
@@ -41,9 +45,9 @@ def _validate_mcmc_fit_input(X_train, y_train, X_test):
 
         assert X_train.shape[1] == X_test.shape[1]
         X_train = check_array(X_train, accept_sparse="csc", dtype=np.float64,
-                order="F")
+                              order="F")
         X_test = check_array(X_test, accept_sparse="csc", dtype=np.float64,
-                order="F")
+                             order="F")
         return X_train, y_train, X_test
 
 
@@ -53,8 +57,8 @@ class FMRegression(FactorizationMachine):
     Parameters
     ----------
     n_iter : int, optional
-        The number of samples for the MCMC sampler, number or iterations over the
-        training set for ALS and number of steps for SGD.
+        The number of samples for the MCMC sampler, number or iterations over
+        the training set for ALS and number of steps for SGD.
 
     init_stdev: float, optional
         Sets the stdev  for the initialization of the parameter
@@ -79,7 +83,6 @@ class FMRegression(FactorizationMachine):
     V_ : float | array, shape = (rank_pair, n_features)
         Coefficients of second order factor matrix.
     """
-
 
     def fit_predict(self, X_train, y_train, X_test, n_more_iter=0):
         """Return average of posterior estimates of the test samples.
@@ -102,7 +105,7 @@ class FMRegression(FactorizationMachine):
         """
         self.task = "regression"
         X_train, y_train, X_test = _validate_mcmc_fit_input(X_train, y_train,
-                                                                    X_test)
+                                                            X_test)
 
         self.n_iter = self.n_iter + n_more_iter
 
@@ -115,7 +118,7 @@ class FMRegression(FactorizationMachine):
             self.iter_count = 0
 
         coef, y_pred = ffm.ffm_mcmc_fit_predict(self, X_train,
-                X_test, y_train)
+                                                X_test, y_train)
         self.w0_, self.w_, self.V_ = coef
         self.prediction_ = y_pred
         self.warm_start = False
@@ -134,8 +137,8 @@ class FMClassification(FactorizationMachine):
     Parameters
     ----------
     n_iter : int, optional
-        The number of samples for the MCMC sampler, number or iterations over the
-        training set for ALS and number of steps for SGD.
+        The number of samples for the MCMC sampler, number or iterations over
+        the training set for ALS and number of steps for SGD.
 
     init_stdev: float, optional
         Sets the stdev  for the initialization of the parameter
@@ -160,9 +163,9 @@ class FMClassification(FactorizationMachine):
         Coefficients of second order factor matrix.
     """
 
-
     def fit_predict(self, X_train, y_train, X_test):
-        """Return average class probabilities of posterior estimates of the test samples.
+        """Return average class probabilities of posterior estimates of the
+        test samples.
         Use only with MCMC!
 
         Parameters
@@ -186,10 +189,9 @@ class FMClassification(FactorizationMachine):
         y_pred[y_proba > .5] = self.classes_[1]
         return y_pred
 
-
-
     def fit_predict_proba(self, X_train, y_train, X_test):
-        """Return average class probabilities of posterior estimates of the test samples.
+        """Return average class probabilities of posterior estimates of the
+        test samples.
         Use only with MCMC!
 
         Parameters
@@ -205,7 +207,8 @@ class FMClassification(FactorizationMachine):
         ------
 
         y_pred : array, shape (n_test_samples)
-            Returns probability estimates for the class with lowest class label.
+            Returns probability estimates for the class with lowest
+            classification label.
 
         """
         self.task = "classification"
@@ -222,12 +225,11 @@ class FMClassification(FactorizationMachine):
         y_train[i_class1] = -1
         y_train[-i_class1] = 1
 
-
         X_train, y_train, X_test = _validate_mcmc_fit_input(X_train, y_train,
-                                                                    X_test)
+                                                            X_test)
         y_train = _validate_class_labels(y_train)
 
         coef, y_pred = ffm.ffm_mcmc_fit_predict(self, X_train,
-                X_test, y_train)
+                                                X_test, y_train)
         self.w0_, self.w_, self.V_ = coef
         return y_pred

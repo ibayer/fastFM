@@ -5,6 +5,7 @@ from scipy.stats import norm
 from sklearn.utils import check_array
 from sklearn.base import BaseEstimator, ClassifierMixin
 
+
 def _validate_class_labels(y):
         assert len(set(y)) == 2
         assert y.min() == -1
@@ -22,6 +23,7 @@ def _check_warm_start(fm, X):
     if not fm.rank == 0:
         assert fm.V_.shape[1] == n_features
 
+
 class FactorizationMachine(BaseEstimator):
 
     """ Factorization Machine trained MCMC (Gibbs) sampling.
@@ -31,8 +33,8 @@ class FactorizationMachine(BaseEstimator):
     Parameters
     ----------
     n_iter : int, optional
-        The number of samples for the MCMC sampler, number or iterations over the
-        training set for ALS and number of steps for SGD.
+        The number of samples for the MCMC sampler, number or iterations over
+        the training set for ALS and number of steps for SGD.
 
     init_stdev: float, optional
         Sets the stdev for the initialization of the parameter
@@ -62,7 +64,7 @@ class FactorizationMachine(BaseEstimator):
         Coefficients of second order factor matrix.
     """
     def __init__(self, n_iter=100, init_stdev=0.1, rank=8, random_state=123,
-            copy_X=True):
+                 copy_X=True):
         self.n_iter = n_iter
         self.random_state = random_state
         self.init_stdev = init_stdev
@@ -75,7 +77,6 @@ class FactorizationMachine(BaseEstimator):
         self.l2_reg_V = 0
         self.step_size = 0
         self.copy_X = copy_X
-
 
     def predict(self, X_test):
         """ Return predictions
@@ -91,14 +92,13 @@ class FactorizationMachine(BaseEstimator):
             The labels are returned for classification.
         """
         X_test = check_array(X_test, accept_sparse="csc", dtype=np.float64,
-                order="F")
+                             order="F")
         assert sp.isspmatrix_csc(X_test)
         assert X_test.shape[1] == len(self.w_)
         return ffm.ffm_predict(self.w0_, self.w_, self.V_, X_test)
 
 
 class BaseFMClassifier(FactorizationMachine, ClassifierMixin):
-
 
     def predict(self, X_test):
         """ Return predictions
@@ -118,7 +118,6 @@ class BaseFMClassifier(FactorizationMachine, ClassifierMixin):
         y_pred = np.zeros_like(y_proba, dtype=np.float64) + self.classes_[0]
         y_pred[y_proba > .5] = self.classes_[1]
         return y_pred
-
 
     def predict_proba(self, X_test):
         """ Return probabilities

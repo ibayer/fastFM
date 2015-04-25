@@ -1,7 +1,7 @@
-from sklearn.utils import assert_all_finite, check_consistent_length, check_array
+from sklearn.utils import check_consistent_length, check_array
 from sklearn.base import RegressorMixin
 from base import FactorizationMachine, BaseFMClassifier,\
-        _validate_class_labels, _check_warm_start
+    _validate_class_labels, _check_warm_start
 import numpy as np
 import ffm
 
@@ -14,8 +14,8 @@ class FMRegression(FactorizationMachine, RegressorMixin):
     Parameters
     ----------
     n_iter : int, optional
-        The number of samples for the MCMC sampler, number or iterations over the
-        training set for ALS and number of steps for SGD.
+        The number of samples for the MCMC sampler, number or iterations over
+        the training set for ALS and number of steps for SGD.
 
     init_stdev: float, optional
         Sets the stdev for the initialization of the parameter
@@ -49,9 +49,10 @@ class FMRegression(FactorizationMachine, RegressorMixin):
         Coefficients of second order factor matrix.
     """
     def __init__(self, n_iter=100, init_stdev=0.1, rank=8, random_state=123,
-            l2_reg_w=0, l2_reg_V=0, l2_reg=0):
+                 l2_reg_w=0, l2_reg_V=0, l2_reg=0):
         super(FMRegression, self).__init__(n_iter=n_iter,
-            init_stdev=init_stdev, rank=rank, random_state=random_state)
+                                           init_stdev=init_stdev, rank=rank,
+                                           random_state=random_state)
         if (l2_reg != 0):
             self.l2_reg_V = l2_reg
             self.l2_reg_w = l2_reg
@@ -59,7 +60,6 @@ class FMRegression(FactorizationMachine, RegressorMixin):
             self.l2_reg_w = l2_reg_w
             self.l2_reg_V = l2_reg_V
         self.task = "regression"
-
 
     def fit(self, X_train, y_train, n_more_iter=0):
         """ Fit model with specified loss.
@@ -79,7 +79,7 @@ class FMRegression(FactorizationMachine, RegressorMixin):
         y_train = check_array(y_train, ensure_2d=False, dtype=np.float64)
 
         X_train = check_array(X_train, accept_sparse="csc", dtype=np.float64,
-                order="F")
+                              order="F")
         self.n_iter = self.n_iter + n_more_iter
 
         if n_more_iter > 0:
@@ -100,14 +100,15 @@ class FMRegression(FactorizationMachine, RegressorMixin):
 
 class FMClassification(BaseFMClassifier):
 
-    """ Factorization Machine Classification trained with a als (coordinate descent)
+    """ Factorization Machine Classification trained with a ALS
+    (coordinate descent)
     solver.
 
     Parameters
     ----------
     n_iter : int, optional
-        The number of samples for the MCMC sampler, number or iterations over the
-        training set for ALS and number of steps for SGD.
+        The number of samples for the MCMC sampler, number or iterations over
+        the training set for ALS and number of steps for SGD.
 
     init_stdev: float, optional
         Sets the stdev  for the initialization of the parameter
@@ -141,9 +142,11 @@ class FMClassification(BaseFMClassifier):
         Coefficients of second order factor matrix.
     """
     def __init__(self, n_iter=100, init_stdev=0.1, rank=8, random_state=123,
-            l2_reg_w=0, l2_reg_V=0, l2_reg=0):
+                 l2_reg_w=0, l2_reg_V=0, l2_reg=0):
         super(FMClassification, self).__init__(n_iter=n_iter,
-            init_stdev=init_stdev, rank=rank, random_state=random_state)
+                                               init_stdev=init_stdev,
+                                               rank=rank,
+                                               random_state=random_state)
         if (l2_reg != 0):
             self.l2_reg_V = l2_reg
             self.l2_reg_w = l2_reg
@@ -151,7 +154,6 @@ class FMClassification(BaseFMClassifier):
             self.l2_reg_w = l2_reg_w
             self.l2_reg_V = l2_reg_V
         self.task = "classification"
-
 
     def fit(self, X_train, y_train):
         """ Fit model with specified loss.
@@ -165,7 +167,7 @@ class FMClassification(BaseFMClassifier):
         """
         check_consistent_length(X_train, y_train)
         X_train = check_array(X_train, accept_sparse="csc", dtype=np.float64,
-                order="F")
+                              order="F")
         y_train = _validate_class_labels(y_train)
 
         self.classes_ = np.unique(y_train)
