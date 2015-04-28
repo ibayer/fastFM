@@ -72,7 +72,7 @@ if __name__ == "__main__":
         hyper_param_re[nr, :] = fm.hyper_param_
 
     from matplotlib import pyplot as plt
-    fig, axes = plt.subplots(nrows=2, ncols=2, sharex=True, figsize=(15, 10))
+    fig, axes = plt.subplots(nrows=2, ncols=2, sharex=True, figsize=(15, 8))
 
     x = values * step_size
     burn_in = 5
@@ -100,3 +100,4 @@ if __name__ == "__main__":
     axes[1, 1].legend()
 
     plt.show()
+    #plt.savefig("../../fastFM-notes/jmlr/figs/mcmc_trace.pdf", bbox_inches='tight')
