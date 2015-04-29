@@ -29,6 +29,9 @@ C libraries
 * glib-2.0
 * gsl 1.15-1
 
+This worked on ubuntu 14.04:
+``sudo apt-get install libglib2.0-dev libatlas-base-dev python-dev``
+
 
 Install fastFM (python)
 =======================
