@@ -1,6 +1,9 @@
 A short paper describing the library is now available on 
 arXiv http://arxiv.org/abs/1505.00641
 
+This repository contains the python interface. Please have a look at https://github.com/ibayer/fastFM-core
+if you are interessed in the command line interface or the solver source code (implemented in C).
+
 GIT CLONE INSTRUCTION
 =====================
 This repository relays on sub-repositories just using ``git clone ..``
