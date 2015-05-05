@@ -1,3 +1,6 @@
+A short paper describing the library is now available on 
+arXiv http://arxiv.org/abs/1505.00641
+
 GIT CLONE INSTRUCTION
 =====================
 This repository relays on sub-repositories just using ``git clone ..``
