@@ -48,8 +48,8 @@ inplace for development:
 ``pip install -e fastFM/``
 
 
-how to run tests / read examples
---------------------------------
+how to run tests
+----------------
 
 pick your favorite test runner
 
