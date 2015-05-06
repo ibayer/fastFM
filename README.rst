@@ -61,4 +61,4 @@ or
 Examples
 --------
 Please have a look add the files in ``/fastFM/fastFM/tests/`` for examples
-on how to use FM for different tasks.
+on how to use FMs for different tasks.
