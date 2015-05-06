@@ -31,7 +31,7 @@ install with ``pip install -r /fastFM/requirements.txt``
 
 C libraries
 -----------
-* CXSparse (included in submodule)
+* CXSparse (included as submodule)
 * glib-2.0
 * gsl 1.15-1
 
