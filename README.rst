@@ -60,5 +60,5 @@ or
 
 Examples
 --------
-Please have a look add the files in `/fastFM/fastFM/tests/` for examples
+Please have a look add the files in ``/fastFM/fastFM/tests/`` for examples
 on how to use FM for different tasks.
