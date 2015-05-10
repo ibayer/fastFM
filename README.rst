@@ -9,7 +9,7 @@ GIT CLONE INSTRUCTION
 This repository relays on sub-repositories just using ``git clone ..``
 **doesn't fetch** them.
 
-``git clone --recursive ..``
+``git clone --recursive https://github.com/ibayer/fastFM.git``
 
 Or do the two-step dance if you wish.
 You need to run ``git submodule update --init --recursive`` **from within** the
