@@ -1,0 +1,16 @@
+\BOOKMARK [0][-]{chapter.1}{Tutorials}{}% 1
+\BOOKMARK [1][-]{section.1.1}{Regression with ALS Solver}{chapter.1}% 2
+\BOOKMARK [1][-]{section.1.2}{Logit Classification with SGD Solver}{chapter.1}% 3
+\BOOKMARK [1][-]{section.1.3}{Bayesian Probit Classification with MCMC Solver}{chapter.1}% 4
+\BOOKMARK [0][-]{chapter.2}{Guide}{}% 5
+\BOOKMARK [1][-]{section.2.1}{How to choose the right Solver.}{chapter.2}% 6
+\BOOKMARK [1][-]{section.2.2}{Learning Curves}{chapter.2}% 7
+\BOOKMARK [1][-]{section.2.3}{Visualizing MCMC Traces}{chapter.2}% 8
+\BOOKMARK [0][-]{chapter.3}{The fastFM API reference}{}% 9
+\BOOKMARK [1][-]{section.3.1}{The MCMC module}{chapter.3}% 10
+\BOOKMARK [1][-]{section.3.2}{The ALS module}{chapter.3}% 11
+\BOOKMARK [1][-]{section.3.3}{The SGD module}{chapter.3}% 12
+\BOOKMARK [1][-]{section.3.4}{The Ranking module}{chapter.3}% 13
+\BOOKMARK [0][-]{chapter*.25}{Bibliography}{}% 14
+\BOOKMARK [0][-]{section*.28}{Python Module Index}{}% 15
+\BOOKMARK [0][-]{section*.29}{Index}{}% 16

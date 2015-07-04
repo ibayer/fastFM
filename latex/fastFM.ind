@@ -1,0 +1,37 @@
+\begin{theindex}
+\def\bigletter#1{{\Large\sffamily#1}\nopagebreak\vspace{1mm}}
+
+  \bigletter F
+  \item fastFM.als (module), \hyperpage{8}
+  \item fastFM.bpr (module), \hyperpage{11}
+  \item fastFM.mcmc (module), \hyperpage{7}
+  \item fastFM.sgd (module), \hyperpage{10}
+  \item fit() (fastFM.als.FMClassification method), \hyperpage{9}
+  \item fit() (fastFM.als.FMRegression method), \hyperpage{10}
+  \item fit() (fastFM.bpr.FMRecommender method), \hyperpage{12}
+  \item fit() (fastFM.sgd.FMClassification method), \hyperpage{10}
+  \item fit() (fastFM.sgd.FMRegression method), \hyperpage{11}
+  \item fit\_predict() (fastFM.mcmc.FMClassification method), \hyperpage{7}
+  \item fit\_predict() (fastFM.mcmc.FMRegression method), \hyperpage{8}
+  \item fit\_predict\_proba() (fastFM.mcmc.FMClassification method), \hyperpage{7}
+  \item FMClassification (class in fastFM.als), \hyperpage{8}
+  \item FMClassification (class in fastFM.mcmc), \hyperpage{7}
+  \item FMClassification (class in fastFM.sgd), \hyperpage{10}
+  \item FMRecommender (class in fastFM.bpr), \hyperpage{11}
+  \item FMRegression (class in fastFM.als), \hyperpage{9}
+  \item FMRegression (class in fastFM.mcmc), \hyperpage{8}
+  \item FMRegression (class in fastFM.sgd), \hyperpage{10}
+
+  \indexspace
+  \bigletter V
+  \item V\_ (fastFM.mcmc.FMClassification attribute), \hyperpage{7}
+  \item V\_ (fastFM.mcmc.FMRegression attribute), \hyperpage{8}
+
+  \indexspace
+  \bigletter W
+  \item w0\_ (fastFM.mcmc.FMClassification attribute), \hyperpage{7}
+  \item w0\_ (fastFM.mcmc.FMRegression attribute), \hyperpage{8}
+  \item w\_ (fastFM.mcmc.FMClassification attribute), \hyperpage{7}
+  \item w\_ (fastFM.mcmc.FMRegression attribute), \hyperpage{8}
+
+\end{theindex}

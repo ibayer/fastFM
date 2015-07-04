@@ -1,0 +1,25 @@
+\indexentry{fastFM.mcmc (module)|hyperpage}{7}
+\indexentry{FMClassification (class in fastFM.mcmc)|hyperpage}{7}
+\indexentry{w0\_ (fastFM.mcmc.FMClassification attribute)|hyperpage}{7}
+\indexentry{w\_ (fastFM.mcmc.FMClassification attribute)|hyperpage}{7}
+\indexentry{V\_ (fastFM.mcmc.FMClassification attribute)|hyperpage}{7}
+\indexentry{fit\_predict() (fastFM.mcmc.FMClassification method)|hyperpage}{7}
+\indexentry{fit\_predict\_proba() (fastFM.mcmc.FMClassification method)|hyperpage}{7}
+\indexentry{FMRegression (class in fastFM.mcmc)|hyperpage}{8}
+\indexentry{w0\_ (fastFM.mcmc.FMRegression attribute)|hyperpage}{8}
+\indexentry{w\_ (fastFM.mcmc.FMRegression attribute)|hyperpage}{8}
+\indexentry{V\_ (fastFM.mcmc.FMRegression attribute)|hyperpage}{8}
+\indexentry{fit\_predict() (fastFM.mcmc.FMRegression method)|hyperpage}{8}
+\indexentry{fastFM.als (module)|hyperpage}{8}
+\indexentry{FMClassification (class in fastFM.als)|hyperpage}{8}
+\indexentry{fit() (fastFM.als.FMClassification method)|hyperpage}{9}
+\indexentry{FMRegression (class in fastFM.als)|hyperpage}{9}
+\indexentry{fit() (fastFM.als.FMRegression method)|hyperpage}{10}
+\indexentry{fastFM.sgd (module)|hyperpage}{10}
+\indexentry{FMClassification (class in fastFM.sgd)|hyperpage}{10}
+\indexentry{fit() (fastFM.sgd.FMClassification method)|hyperpage}{10}
+\indexentry{FMRegression (class in fastFM.sgd)|hyperpage}{10}
+\indexentry{fit() (fastFM.sgd.FMRegression method)|hyperpage}{11}
+\indexentry{fastFM.bpr (module)|hyperpage}{11}
+\indexentry{FMRecommender (class in fastFM.bpr)|hyperpage}{11}
+\indexentry{fit() (fastFM.bpr.FMRecommender method)|hyperpage}{12}
