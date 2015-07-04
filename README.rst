@@ -47,6 +47,13 @@ first build the C libraries:
 inplace for development:
 ``pip install -e fastFM/``
 
+Install on Windows / OSX
+========================
+It should be possible to compile the library on Windows and OSX.
+I'm developing on linux but have received multiple requests from people who
+want to run this library on other platforms.
+Please let me know about issues you ran into or how you manged to compile on
+other platfroms (or just open a PR) so that we include this information here.
 
 how to run tests
 ----------------
