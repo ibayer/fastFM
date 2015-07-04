@@ -72,8 +72,7 @@ class FMRegression(FactorizationMachine):
 
 
     Attributes
-    ---------
-
+    ----------
     w0_ : float
         bias term
 
@@ -99,8 +98,7 @@ class FMRegression(FactorizationMachine):
                 Number of iterations to continue from the current Coefficients.
 
         Returns
-        ------
-
+        -------
         T : array, shape (n_test_samples)
         """
         self.task = "regression"
@@ -151,8 +149,7 @@ class FMClassification(FactorizationMachine):
         The rank of the factorization used for the second order interactions.
 
     Attributes
-    ---------
-
+    ----------
     w0_ : float
         bias term
 
@@ -178,8 +175,7 @@ class FMClassification(FactorizationMachine):
         X_test : scipy.sparse.csc_matrix, (n_test_samples, n_features)
 
         Returns
-        ------
-
+        -------
         y_pred : array, shape (n_test_samples)
                 Returns predicted class labels.
 
@@ -204,8 +200,7 @@ class FMClassification(FactorizationMachine):
         X_test : scipy.sparse.csc_matrix, (n_test_samples, n_features)
 
         Returns
-        ------
-
+        -------
         y_pred : array, shape (n_test_samples)
             Returns probability estimates for the class with lowest
             classification label.
