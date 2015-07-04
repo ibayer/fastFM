@@ -1,0 +1,11 @@
+update doc:
+ghp-import doc/_build/ -p
+
+for new releases:
+
+- update version & relese in `conf.py`
+- make sure doc is still correct `make doctests`
+
+run test server
+cd fastFM/doc/
+python -m SimpleHTTPServer
