@@ -1,3 +1,8 @@
+update doc:
+ghp-import doc/_build/html/ -p -n
+
+-n          Include a .nojekyll file in the branch.
+
 for new releases:
 
 - update version & relese in `conf.py`
