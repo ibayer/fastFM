@@ -113,10 +113,9 @@ are usually not as good as averaged predictions returned by `fit_predict`.
     fm = mcmc.FMClassification(n_iter=1000, rank=2, init_stdev=0.1)
 
 Our last example shows how to use the MCMC module for binary classification.
-e .
 Probit regression uses the Cumulative Distribution Function (CDF) of the standard normal Distribution
 as link function. Mainly because the CDF leads to an easier Gibbs solver then the
-the sigmoid function used in the SGD classifier implementation. The results
+sigmoid function used in the SGD classifier implementation. The results
 are in practice usually very similar.
 
 .. testcode::

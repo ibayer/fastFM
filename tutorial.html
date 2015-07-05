@@ -137,10 +137,9 @@ are usually not as good as averaged predictions returned by <cite>fit_predict</c
 </pre></div>
 </div>
 <p>Our last example shows how to use the MCMC module for binary classification.
-e .
 Probit regression uses the Cumulative Distribution Function (CDF) of the standard normal Distribution
 as link function. Mainly because the CDF leads to an easier Gibbs solver then the
-the sigmoid function used in the SGD classifier implementation. The results
+sigmoid function used in the SGD classifier implementation. The results
 are in practice usually very similar.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">y_pred</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">)</span>
 <span class="n">y_pred_proba</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">fit_predict_proba</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">)</span>
