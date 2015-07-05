@@ -2,10 +2,10 @@ Tutorials
 =========
 
 The following sections show how to use different features of the fastFM
-library. This is mostly an demonstration on of the library and no background
+library. This is mostly a demonstration on of the library and no background
 on the Factorization Machine (FM) model is given.
 I recommend to read [TIST2012]. This paper contains many examples on how FM's
-can emulate and extend many matrix factorization model through feature engineering.
+can emulate and extend matrix factorization models through feature engineering.
 
 
 Regression with ALS Solver
@@ -23,9 +23,9 @@ refere to [SIGIR2011] for background information on the implemented ALS solver.
     X, y, _ = make_user_item_regression(label_stdev=.4)
     X_train, X_test, y_train, y_test = train_test_split(X, y)
 
-The number of iterations `n_iter`, the standard derivation `init_stdev` used to
-initialize the model parameter and the number of hidden variables `rank` per feature have
-are parameter that have to be specified for every solver and task. The ALS
+The number of iterations `n_iter`, the standard deviation `init_stdev` used to
+initialize the model parameter and the number of hidden variables `rank` per feature.
+This are the parameters that have to be specified for every solver and task. The ALS
 solver requires in addition the regularization values for the first `l2_reg_w`
 and second order `l2_reg_V` interactions.
 
@@ -74,7 +74,7 @@ the SGD specific `step_size` parameter.
     y_pred = fm.predict(X_test)
 
 
-All classifier implementations can return not only return the most likely labels
+All classifier implementations can not only return the most likely labels
 but also class probabilities via the `predict_proba`.
 
 .. testcode::
@@ -94,16 +94,16 @@ as input.
 Bayesian Probit Classification with MCMC Solver
 -----------------------------------------------
 
-The MCMC module need less hyper parameter then any other solver.
-This solver is able integrate out the regularization parameter and frees us
+The MCMC module needs fewer hyper parameter that any other solver.
+This solver is able to integrate out the regularization parameter and frees us
 from selecting them manually. Please see [Freuden2011] for the detail on the implemented
 Gibbs sampler.
 The major drawback of the MCMC solver is that it forces us to calculate predictions
 during fitting time using the `fit_predict` function.
 It's however possible to select a subset of parameter draws to speed up prediction [RecSys2013].
 It's also possible to just call `predict` on a trained MCMC model but this returns predictions
-that a solely based on the last parameters draw.
-This predictions can be used for diagnostic purposes but
+that are solely based on the last parameters draw.
+These predictions can be used for diagnostic purposes but
 are usually not as good as averaged predictions returned by `fit_predict`.
 
 
@@ -113,7 +113,9 @@ are usually not as good as averaged predictions returned by `fit_predict`.
     fm = mcmc.FMClassification(n_iter=1000, rank=2, init_stdev=0.1)
 
 Our last example shows how to use the MCMC module for binary classification.
-The probit distribution leads to an easier Gibbs solver then the
+e .
+Probit regression uses the Cumulative Distribution Function (CDF) of the standard normal Distribution
+as link function. Mainly because the CDF leads to an easier Gibbs solver then the
 the sigmoid function used in the SGD classifier implementation. The results
 are in practice usually very similar.
 

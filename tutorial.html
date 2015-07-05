@@ -50,10 +50,10 @@
   <div class="section" id="tutorials">
 <h1>Tutorials<a class="headerlink" href="#tutorials" title="Permalink to this headline">¶</a></h1>
 <p>The following sections show how to use different features of the fastFM
-library. This is mostly an demonstration on of the library and no background
+library. This is mostly a demonstration on of the library and no background
 on the Factorization Machine (FM) model is given.
 I recommend to read [TIST2012]. This paper contains many examples on how FM&#8217;s
-can emulate and extend many matrix factorization model through feature engineering.</p>
+can emulate and extend matrix factorization models through feature engineering.</p>
 <div class="section" id="regression-with-als-solver">
 <h2>Regression with ALS Solver<a class="headerlink" href="#regression-with-als-solver" title="Permalink to this headline">¶</a></h2>
 <p>We first set up a small toy dataset for a regression problem. Please
@@ -66,9 +66,9 @@ refere to [SIGIR2011] for background information on the implemented ALS solver.<
 <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>The number of iterations <cite>n_iter</cite>, the standard derivation <cite>init_stdev</cite> used to
-initialize the model parameter and the number of hidden variables <cite>rank</cite> per feature have
-are parameter that have to be specified for every solver and task. The ALS
+<p>The number of iterations <cite>n_iter</cite>, the standard deviation <cite>init_stdev</cite> used to
+initialize the model parameter and the number of hidden variables <cite>rank</cite> per feature.
+This are the parameters that have to be specified for every solver and task. The ALS
 solver requires in addition the regularization values for the first <cite>l2_reg_w</cite>
 and second order <cite>l2_reg_V</cite> interactions.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">fastFM</span> <span class="kn">import</span> <span class="n">als</span>
@@ -106,7 +106,7 @@ the SGD specific <cite>step_size</cite> parameter.</p>
 <span class="n">y_pred</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>All classifier implementations can return not only return the most likely labels
+<p>All classifier implementations can not only return the most likely labels
 but also class probabilities via the <cite>predict_proba</cite>.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">y_pred_proba</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
 </pre></div>
@@ -121,23 +121,25 @@ as input.</p>
 </div>
 <div class="section" id="bayesian-probit-classification-with-mcmc-solver">
 <h2>Bayesian Probit Classification with MCMC Solver<a class="headerlink" href="#bayesian-probit-classification-with-mcmc-solver" title="Permalink to this headline">¶</a></h2>
-<p>The MCMC module need less hyper parameter then any other solver.
-This solver is able integrate out the regularization parameter and frees us
+<p>The MCMC module needs fewer hyper parameter that any other solver.
+This solver is able to integrate out the regularization parameter and frees us
 from selecting them manually. Please see [Freuden2011] for the detail on the implemented
 Gibbs sampler.
 The major drawback of the MCMC solver is that it forces us to calculate predictions
 during fitting time using the <cite>fit_predict</cite> function.
 It&#8217;s however possible to select a subset of parameter draws to speed up prediction [RecSys2013].
 It&#8217;s also possible to just call <cite>predict</cite> on a trained MCMC model but this returns predictions
-that a solely based on the last parameters draw.
-This predictions can be used for diagnostic purposes but
+that are solely based on the last parameters draw.
+These predictions can be used for diagnostic purposes but
 are usually not as good as averaged predictions returned by <cite>fit_predict</cite>.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">fastFM</span> <span class="kn">import</span> <span class="n">mcmc</span>
 <span class="n">fm</span> <span class="o">=</span> <span class="n">mcmc</span><span class="o">.</span><span class="n">FMClassification</span><span class="p">(</span><span class="n">n_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">rank</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">init_stdev</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Our last example shows how to use the MCMC module for binary classification.
-The probit distribution leads to an easier Gibbs solver then the
+e .
+Probit regression uses the Cumulative Distribution Function (CDF) of the standard normal Distribution
+as link function. Mainly because the CDF leads to an easier Gibbs solver then the
 the sigmoid function used in the SGD classifier implementation. The results
 are in practice usually very similar.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">y_pred</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">)</span>

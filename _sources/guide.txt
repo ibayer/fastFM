@@ -45,7 +45,7 @@ enable us to use techniques such as early stopping to avoid over fitting. We can
 `warm_start` every fastFM model which allows us to calculate custom statistics during
 the model fitting process efficiently. The following example uses `RMSE` and
 `R^2` to demonstrate how we can monitor model performance on train and test set
-efficiently, please not that we can replace them with any metric we want.
+efficiently. Please note that we can replace them with any metric we want.
 
 .. plot::
    :include-source:
@@ -102,7 +102,7 @@ efficiently, please not that we can replace them with any metric we want.
 Visualizing MCMC Traces
 -----------------------
 
-Our MCMC implementation samples model and hyper parameter add every iteration
+Our MCMC implementation samples model and hyper parameter at every iteration
 and calculates a running mean of the predictions. MCMC traces are an important tool
 for evaluating convergence and mixing behavior MCMC chains. The following example
 demonstrates how to calculate statistics for predictions, hyper parameter and
