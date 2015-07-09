@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>fastFM.sgd &mdash; fastFM 0.1.0 documentation</title>
+    <title>fastFM.sgd &mdash; fastFM 0.1.1 documentation</title>
     
     <link rel="stylesheet" href="../../_static/haiku.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.1.0',
+        VERSION:     '0.1.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,12 +24,12 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="fastFM 0.1.0 documentation" href="../../index.html" />
+    <link rel="top" title="fastFM 0.1.1 documentation" href="../../index.html" />
     <link rel="up" title="Module code" href="../index.html" /> 
   </head>
   <body role="document">
       <div class="header" role="banner"><h1 class="heading"><a href="../../index.html">
-          <span>fastFM 0.1.0 documentation</span></a></h1>
+          <span>fastFM 0.1.1 documentation</span></a></h1>
         <h2 class="heading"><span>fastFM.sgd</span></h2>
       </div>
       <div class="topnav" role="navigation" aria-label="top navigation">
@@ -43,6 +43,9 @@
         
         
   <h1>Source code for fastFM.sgd</h1><div class="highlight"><pre>
+<span class="c"># Author: Immanuel Bayer</span>
+<span class="c"># License: BSD 3 clause</span>
+
 <span class="kn">from</span> <span class="nn">sklearn.base</span> <span class="kn">import</span> <span class="n">RegressorMixin</span>
 <span class="kn">from</span> <span class="nn">sklearn.utils</span> <span class="kn">import</span> <span class="n">check_array</span><span class="p">,</span> <span class="n">check_consistent_length</span>
 <span class="kn">from</span> <span class="nn">base</span> <span class="kn">import</span> <span class="n">FactorizationMachine</span><span class="p">,</span> <span class="n">BaseFMClassifier</span><span class="p">,</span> <span class="n">_validate_class_labels</span>
