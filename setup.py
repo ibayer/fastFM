@@ -22,7 +22,7 @@ setup(
     cmdclass = {'build_ext': build_ext},
     ext_modules = ext_modules,
     packages=['fastFM'],
-    version='0.1.0',
+    version='0.1.1',
     author='Immanuel Bayer',
     author_email='immanuel.bayer@uni-konstanz.de'
 )
