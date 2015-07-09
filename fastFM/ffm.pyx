@@ -1,5 +1,6 @@
-# sample.pyx
-# Import the low-level C declarations
+# Author: Immanuel Bayer
+# License: BSD 3 clause
+
 cimport cffm
 from  cffm cimport cs_di, ffm_param
 # Import some functionality from Python and the C stdlib

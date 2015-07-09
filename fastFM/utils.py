@@ -1,3 +1,5 @@
+# Author: Immanuel Bayer
+# License: BSD 3 clause
 
 
 def kendall_tau(a, b):

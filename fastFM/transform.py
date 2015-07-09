@@ -1,3 +1,6 @@
+# Author: Immanuel Bayer
+# License: BSD 3 clause
+
 import scipy.sparse as sp
 import numpy as np
 

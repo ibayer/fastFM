@@ -1,3 +1,6 @@
+# Author: Immanuel Bayer
+# License: BSD 3 clause
+
 from fastFM.datasets import make_user_item_regression
 from sklearn.metrics import mean_squared_error
 import scipy.sparse as sp

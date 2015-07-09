@@ -1,3 +1,6 @@
+# Author: Immanuel Bayer
+# License: BSD 3 clause
+
 import scipy.sparse as sp
 import numpy as np
 from numpy.testing import assert_array_equal

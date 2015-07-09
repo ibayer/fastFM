@@ -1,3 +1,6 @@
+# Author: Immanuel Bayer
+# License: BSD 3 clause
+
 from sklearn.utils import assert_all_finite, check_array
 from sklearn.utils.testing import assert_array_equal
 from base import FactorizationMachine

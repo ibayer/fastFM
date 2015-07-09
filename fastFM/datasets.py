@@ -1,3 +1,6 @@
+# Author: Immanuel Bayer
+# License: BSD 3 clause
+
 import numpy as np
 from ffm import ffm_predict
 import scipy.sparse as sp

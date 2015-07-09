@@ -1,3 +1,6 @@
+# Author: Immanuel Bayer
+# License: BSD 3 clause
+
 from sklearn.utils import check_consistent_length, check_array
 from sklearn.base import RegressorMixin
 from base import FactorizationMachine, BaseFMClassifier,\

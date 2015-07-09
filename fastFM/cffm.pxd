@@ -1,7 +1,5 @@
-#cfastfm.pxd
-#
-# Declarations of "external" C functions and structures
-# distutils: include_dirs = /usr/include/suitesparse
+# Author: Immanuel Bayer
+# License: BSD 3 clause
 
 cdef extern from "../fastFM-core/externals/CXSparse/Include/cs.h":
     ctypedef struct cs_di:  # matrix in compressed-column or triplet form */

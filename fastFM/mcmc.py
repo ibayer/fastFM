@@ -1,3 +1,6 @@
+# Author: Immanuel Bayer
+# License: BSD 3 clause
+
 from sklearn.utils import assert_all_finite, check_consistent_length,\
     check_array
 from base import FactorizationMachine, _validate_class_labels,\

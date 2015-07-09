@@ -1,3 +1,6 @@
+# Author: Immanuel Bayer
+# License: BSD 3 clause
+
 import numpy as np
 import scipy.sparse as sp
 from sklearn.metrics import mean_squared_error, r2_score
