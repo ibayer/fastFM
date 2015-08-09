@@ -40,10 +40,13 @@ This worked on ubuntu 14.04:
 
 Install fastFM (python)
 =======================
-first build the C libraries:
+**First build the C libraries:**
 ``(cd fastFM/; make)``
 
-inplace for development:
+**For development install the lib inplace:**
+
+(Run the following command from the same directory as ``git clone`` before.)
+
 ``pip install -e fastFM/``
 
 Install on Windows / OSX
