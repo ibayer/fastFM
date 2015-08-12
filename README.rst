@@ -49,9 +49,14 @@ Install fastFM (python)
 
 ``pip install -e fastFM/``
 
-Install on Windows / OSX
-========================
-It should be possible to compile the library on Windows and OSX.
+Install on OSX
+===============
+Recommended way to manage dependencies is `Homebrew package manager
+<https://brew.sh>`_. If you have brew installed, dependencies can be installed by running command ``brew install glib gsl argp-standalone``. (Contributed by altimin)
+
+Install on Windows
+==================
+It should be possible to compile the library on Windows.
 I'm developing on linux but have received multiple requests from people who
 want to run this library on other platforms.
 Please let me know about issues you ran into or how you manged to compile on
