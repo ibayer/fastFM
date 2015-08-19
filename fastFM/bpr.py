@@ -1,11 +1,11 @@
 # Author: Immanuel Bayer
 # License: BSD 3 clause
 
-from sklearn.utils import assert_all_finite, check_array
-from sklearn.utils.testing import assert_array_equal
-from base import FactorizationMachine
 import numpy as np
+
 import ffm
+from utils import check_array, assert_all_finite
+from base import FactorizationMachine
 
 
 class FMRecommender(FactorizationMachine):
@@ -85,7 +85,7 @@ class FMRecommender(FactorizationMachine):
 
         pairs = pairs.astype(np.float64)
         # check that pairs contain no real values
-        assert_array_equal(pairs, pairs.astype(np.int32))
+        np.testing.assert_array_equal(pairs, pairs.astype(np.int32))
         assert pairs.max() <= X.shape[1]
         assert pairs.min() >= 0
         self.w0_, self.w_, self.V_ = ffm.ffm_fit_sgd_bpr(self, X, pairs)

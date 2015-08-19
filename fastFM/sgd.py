@@ -1,11 +1,12 @@
 # Author: Immanuel Bayer
 # License: BSD 3 clause
 
-from sklearn.base import RegressorMixin
-from sklearn.utils import check_array, check_consistent_length
-from base import FactorizationMachine, BaseFMClassifier, _validate_class_labels
 import numpy as np
+from sklearn.base import RegressorMixin
+
 import ffm
+from utils import check_array, check_consistent_length
+from base import FactorizationMachine, BaseFMClassifier, _validate_class_labels
 
 
 class FMRegression(FactorizationMachine, RegressorMixin):
