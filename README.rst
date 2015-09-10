@@ -37,6 +37,11 @@ C libraries
 This worked on ubuntu 14.04:
 ``sudo apt-get install libglib2.0-dev libatlas-base-dev python-dev``
 
+On Mac you can get glib and gsl using Macport:
+
+* ``sudo port install glib2``
+* ``sudo port install gsl``
+
 
 Install fastFM (python)
 =======================
