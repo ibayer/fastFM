@@ -53,6 +53,13 @@ def _test_fm_regression_only_w0():
     assert_almost_equal(fm.w0_, 4466.6666666666661, 6)
 
 
+def test_fm_linear_regression():
+    X, y = get_small_data()
+
+    fm = als.FMRegression(n_iter=1, l2_reg_w=1, l2_reg_V=1, rank=0)
+    fm.fit(X, y)
+
+
 def test_fm_regression():
     w0, w, V, y, X = get_test_problem()
 
@@ -154,4 +161,4 @@ def test_warm_start_path():
 
 if __name__ == '__main__':
     #test_fm_regression_only_w0()
-    test_als_warm_start()
+    test_fm_linear_regression()
