@@ -1,0 +1,20 @@
+language: python
+
+os:
+    - linux
+    - osx
+
+sudo: required
+dist: trusty
+
+before_install:
+    - git submodule update --init --recursive
+    - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew install glib argp-standalone; fi
+    - if [ "$TRAVIS_OS_NAME" = "linux" ]; then sudo apt-get update -qq; sudo apt-get install -y libglib2.0-dev libatlas-base-dev libgsl0-dev; fi
+
+install:
+    - make
+    - pip install .
+    - pip install -r requirements.txt
+
+script: nosetests
