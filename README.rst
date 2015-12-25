@@ -51,7 +51,7 @@ Install fastFM (python)
 Install on OSX
 ===============
 Recommended way to manage dependencies is `Homebrew package manager
-<https://brew.sh>`_. If you have brew installed, dependencies can be installed by running command ``brew install glib``. (Contributed by altimin)
+<https://brew.sh>`_. If you have brew installed, dependencies can be installed by running command ``brew install glib argp-standalone``. (Contributed by altimin)
 
 Install on Windows
 ==================

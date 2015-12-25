@@ -11,7 +11,7 @@ dist: trusty
 
 before_install:
     - git submodule update --init --recursive
-    - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew install glib; fi
+    - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew install glib argp-standalone; fi
     - if [ "$TRAVIS_OS_NAME" = "linux" ]; then sudo apt-get update -qq;  fi
       # needed to install scipy
     - if [ "$TRAVIS_OS_NAME" = "linux" ]; then sudo apt-get install -y libblas-dev liblapack-dev gfortran; fi
