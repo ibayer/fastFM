@@ -1,7 +1,9 @@
-language: python
+language: c
 
 os:
-    - linux
+    #    travis issue with with conflicting python versions
+    #    error: ImportError: No module named Cython.Distutils
+    #    - linux
     - osx
 
 sudo: required
@@ -10,11 +12,18 @@ dist: trusty
 before_install:
     - git submodule update --init --recursive
     - if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew install glib argp-standalone; fi
-    - if [ "$TRAVIS_OS_NAME" = "linux" ]; then sudo apt-get update -qq; sudo apt-get install -y libglib2.0-dev libatlas-base-dev libgsl0-dev; fi
+    - if [ "$TRAVIS_OS_NAME" = "linux" ]; then sudo apt-get update -qq;  fi
+      # needed to install scipy
+    - if [ "$TRAVIS_OS_NAME" = "linux" ]; then sudo apt-get install -y libblas-dev liblapack-dev gfortran; fi
+      # fastFM-core dependencies
+    - if [ "$TRAVIS_OS_NAME" = "linux" ]; then sudo apt-get install -y python-dev libglib2.0-dev libatlas-base-dev libgsl0-dev; fi
 
 install:
-    - pip install -r requirements.txt
+    - sudo -H pip install cython nose
+    - sudo -H pip install -r requirements.txt
     - make
-    - pip install .
+    - sudo pip install .
 
-script: nosetests
+script:
+    # travis issue for osx, some libraries are build for x86_64 and others for i386.
+    - if [ "$TRAVIS_OS_NAME" = "linux" ]; then nosetests; fi
