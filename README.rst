@@ -1,3 +1,6 @@
+.. image:: https://travis-ci.org/ibayer/fastFM.svg?branch=master
+    :target: https://travis-ci.org/ibayer/fastFM
+
 A short paper describing the library is now available on 
 arXiv http://arxiv.org/abs/1505.00641
 
