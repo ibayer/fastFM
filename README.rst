@@ -6,14 +6,13 @@ if you are interessed in the command line interface or the solver source code (i
 
 GIT CLONE INSTRUCTION
 =====================
-This repository relays on sub-repositories just using ``git clone ..``
-**doesn't fetch** them.
+This repository requires sub-repositories and just using ``git clone ..``
+**doesn't fetch** them. Use
+``git clone --recursive ..``
+instead.
 
-use: ``git clone --recursive https://github.com/ibayer/fastFM.git``
-
-Or do the two-step dance if you wish.
-You need to run ``git submodule update --init --recursive`` **from within** the
-``fastFM-core/`` folder in order to clone them as well.
+Otherwise you have to run ``git submodule update --init --recursive`` **from within** the
+``fastFM-core/`` folder in order to get the sub-repositories.
 
 
 DEPENDENCIES
@@ -35,7 +34,7 @@ C libraries
 * glib-2.0
 
 This worked on ubuntu 14.04:
-``sudo apt-get install libglib2.0-dev libatlas-base-dev python-dev``
+``sudo apt-get install libatlas-base-dev python-dev``
 
 
 Install fastFM (python)
@@ -51,8 +50,7 @@ Install fastFM (python)
 
 Install on OSX
 ===============
-Recommended way to manage dependencies is `Homebrew package manager
-<https://brew.sh>`_. If you have brew installed, dependencies can be installed by running command ``brew install glib gsl argp-standalone``. (Contributed by altimin)
+All dependencies are included by default.
 
 Install on Windows
 ==================
