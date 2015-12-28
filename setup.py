@@ -6,7 +6,7 @@ import numpy
 ext_modules = [
     Extension('ffm',
         ['fastFM/ffm.pyx'],
-        libraries=['m', 'fastfm', 'cxsparse', 'cblas'],
+        libraries=['m', 'fastfm', 'cxsparse', 'cblas', 'glib-2.0'],
         library_dirs=['fastFM/', 'fastFM-core/bin/', 'fastFM-core/externals/CXSparse/Lib/',
             '/usr/lib/','/usr/lib/atlas-base/'],
         include_dirs=['fastFM/','fastFM-core/include/', 'fastFM-core/externals/CXSparse/Include/',
