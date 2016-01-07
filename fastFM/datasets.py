@@ -17,7 +17,7 @@ def make_user_item_regression(random_state=123, n_user=20, n_item=20,
     n_samples = n_user * n_item
     # create design matrix
     user_cols = np.repeat(range(n_user), n_item)
-    item_cols = np.array(range(n_item) * n_user) + n_user
+    item_cols = np.array(list(range(n_item)) * n_user) + n_user
     cols = np.hstack((user_cols, item_cols))
     rows = np.hstack((np.arange(n_item*n_user), np.arange(n_item*n_user)))
 
