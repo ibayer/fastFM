@@ -81,7 +81,7 @@ def test_fm_classification():
             init_stdev=0.1, l2_reg_w=0, l2_reg_V=0, rank=2)
     fm.fit(X, y)
     y_pred = fm.predict(X)
-    print y_pred
+    print(y_pred)
     assert metrics.accuracy_score(y, y_pred) > 0.95
     # check different size
     fm.fit(X[:2,], y[:2])
@@ -102,16 +102,16 @@ def test_als_warm_start():
 
     fm = als.FMRegression(n_iter=5, l2_reg_w=0, l2_reg_V=0, rank=2)
     fm.fit(X_train, y_train)
-    print fm.iter_count
+    print(fm.iter_count)
     y_pred = fm.predict(X_test)
     error_5_iter = mean_squared_error(y_pred, y_test)
 
     fm.fit(sp.csc_matrix(X_train), y_train, n_more_iter=5)
-    print fm.iter_count
+    print(fm.iter_count)
     y_pred = fm.predict(X_test)
     error_5_iter_plus_5 = mean_squared_error(y_pred, y_test)
 
-    print error_5_iter, error_5_iter_plus_5, error_10_iter
+    print(error_5_iter, error_5_iter_plus_5, error_10_iter)
 
     assert error_10_iter == error_5_iter_plus_5
 
@@ -144,7 +144,7 @@ def test_warm_start_path():
         rmse_train.append(np.sqrt(mean_squared_error(fm.predict(X_train), y_train)))
         rmse_test.append(np.sqrt(mean_squared_error(fm.predict(X_test), y_test)))
 
-    print '------- restart ----------'
+    print('------- restart ----------')
     values = np.arange(1, n_iter)
     rmse_test_re = []
     rmse_train_re = []

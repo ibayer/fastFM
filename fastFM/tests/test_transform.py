@@ -52,9 +52,9 @@ def test_multiclass_to_ranking():
     assert X_ext.tocsr()[:, :n_classes].sum() == n_samples * n_classes
     #assert_array_equal(X_ext.tocsc()[:, n_classes:].sum(axis=0),
 
-    print X_ext.todense()
-    print y.todense()
-    print compars
+    print(X_ext.todense())
+    print(y.todense())
+    print(compars)
 
 
 def test_multiclass_encoding():
@@ -93,7 +93,7 @@ def test_ranking_comparisions():
     df = DataFrame({'group':['a', 'a', 'b', 'd', 'a', 'b'],
                     'score':[3, 3, 10, 4, 2, 55]
         })
-    print df
+    print(df)
     compars = ranking_comparisions(df, 'group', 'score')
 
     true_comparisions = [(5, 2),
@@ -102,7 +102,7 @@ def test_ranking_comparisions():
                          (1, 4)]
     assert len(true_comparisions) == len(compars)
     for pair in compars:
-        print pair
+        print(pair)
         assert pair in true_comparisions
 
 

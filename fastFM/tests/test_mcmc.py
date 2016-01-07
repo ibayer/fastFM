@@ -99,8 +99,8 @@ def test_mcmc_warm_start():
 
     y_pred = fm.fit_predict(X_train, y_train, X_test, n_more_iter=50)
     error_5_iter_plus_5 = mean_squared_error(y_pred, y_test)
-    print error_5_iter, error_5_iter_plus_5, error_10_iter
-    print fm.hyper_param_
+    print(error_5_iter, error_5_iter_plus_5, error_10_iter)
+    print(fm.hyper_param_)
     assert_almost_equal(error_10_iter, error_5_iter_plus_5, decimal=2)
 
 
@@ -117,7 +117,7 @@ def test_find_init_stdev():
             stdev_range=[0.2, 0.5, 1.0])
     best_init_stdev_bad, _ = mcmc.find_init_stdev(fm, X_train, y_train,
         stdev_range=[5.])
-    print '--' * 30
+    print('--' * 30)
     best_init_stdev_vali, mse_vali = mcmc.find_init_stdev(fm, X_train, y_train, X_test,
             y_test, stdev_range=[0.2, 0.5, 1.0])
     assert best_init_stdev < best_init_stdev_bad

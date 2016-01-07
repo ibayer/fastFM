@@ -51,9 +51,9 @@ if __name__ == '__main__':
     y_pred = fm.fit_predict(sp.csc_matrix(X_train), y_train,
                             sp.csc_matrix(X_test))
 
-    print 'rmse', mean_squared_error(y_pred, y_test)
-    print 'r2_score', r2_score(y_pred, y_test)
+    print('rmse', mean_squared_error(y_pred, y_test))
+    print('r2_score', r2_score(y_pred, y_test))
     np.random.shuffle(y_pred)
-    print '----  shuffled pred ---------'
-    print 'rmse', mean_squared_error(y_pred, y_test)
-    print 'r2_score', r2_score(y_pred, y_test)
+    print('----  shuffled pred ---------')
+    print('rmse', mean_squared_error(y_pred, y_test))
+    print('r2_score', r2_score(y_pred, y_test))
