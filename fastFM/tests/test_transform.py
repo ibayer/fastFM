@@ -100,7 +100,7 @@ def test_ranking_comparisions():
 
                          (0, 4),
                          (1, 4)]
-    assert len(true_comparisions) == len(compars)
+    assert len(true_comparisions) == len(list(compars))
     for pair in compars:
         print(pair)
         assert pair in true_comparisions
