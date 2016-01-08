@@ -5,7 +5,7 @@ python:
 
 os:
     - linux
-    #- osx
+    - osx
 
 dist: trusty
 
