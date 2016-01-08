@@ -35,7 +35,7 @@ before_install:
 install:
     - git submodule update --init --recursive
     - make
-    - pip install --user .
+    - pip install .
 
 script:
     # travis issue for osx, some libraries are build for x86_64 and others for i386.
