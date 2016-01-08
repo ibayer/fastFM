@@ -46,5 +46,4 @@ install:
     - pip install .
 
 script:
-    # travis issue for osx, some libraries are build for x86_64 and others for i386.
-    - if [ "$TRAVIS_OS_NAME" = "linux" ]; then nosetests; fi
+    - nosetests
