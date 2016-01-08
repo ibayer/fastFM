@@ -3,7 +3,7 @@
 
 from sklearn.utils import assert_all_finite, check_array
 from sklearn.utils.testing import assert_array_equal
-from base import FactorizationMachine
+from .base import FactorizationMachine
 import numpy as np
 import ffm
 

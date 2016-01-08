@@ -48,7 +48,7 @@ def test_fm_sgd_classification():
             init_stdev=0.1, l2_reg_w=0, l2_reg_V=0, rank=2, step_size=0.1)
     fm.fit(X_train, y)
     y_pred = fm.predict(X_test)
-    print y_pred
+    print(y_pred)
     assert metrics.accuracy_score(y, y_pred) > 0.95
 
 

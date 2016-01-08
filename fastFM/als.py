@@ -3,7 +3,7 @@
 
 from sklearn.utils import check_consistent_length, check_array
 from sklearn.base import RegressorMixin
-from base import FactorizationMachine, BaseFMClassifier,\
+from .base import FactorizationMachine, BaseFMClassifier,\
     _validate_class_labels, _check_warm_start
 import numpy as np
 import ffm
