@@ -1,5 +1,28 @@
-.. image:: https://travis-ci.org/ibayer/fastFM.svg?branch=master
+.. image:: https://travis-ci.org/ibayer/fastFM.svg
     :target: https://travis-ci.org/ibayer/fastFM
+    
+    
+.. image:: https://img.shields.io/badge/platform-OSX|Linux-lightgrey.svg
+    :target: https://travis-ci.org/ibayer/fastFM
+    
+.. image:: https://img.shields.io/pypi/l/Django.svg   
+    :target: https://travis-ci.org/ibayer/fastFM
+    
+fastFM: A Library for Factorization Machines
+============================================
+
+This repository allows you to use the Factorization Machine model through the well known scikit-learn API.
+All performence critical code as been written in C and wrapped with Cython so that no memory copys are needed. fastFM can be used for regression, classification and ranking problems. Detailed usage instructions can be found in the `online documentation  <http://ibayer.github.io/fastFM>`_ or on `arXiv <http://arxiv.org/abs/1505.00641>`_.
+
+Usage
+-----
+.. code-block:: python
+
+    from fastFM import als
+    fm = als.FMRegression(n_iter=1000, init_stdev=0.1, rank=2, l2_reg_w=0.1, l2_reg_V=0.5)
+    fm.fit(X_train, y_train)
+    y_pred = fm.predict(X_test)
+
 
 A short paper describing the library is now available on 
 arXiv http://arxiv.org/abs/1505.00641
@@ -28,6 +51,9 @@ python libraries
 * scipy
 * pandas
 * cython
+
+Install
+-------
 
 install with ``pip install -r /fastFM/requirements.txt``
 
