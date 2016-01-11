@@ -1,80 +1,93 @@
-.. image:: https://travis-ci.org/ibayer/fastFM.svg?branch=master
+If you use this project please give credit by citing:
+
+    Immanuel Bayer (2014): fastFM: A Library for Factorization Machines http://arxiv.org/abs/1505.00641
+
+.. image:: https://travis-ci.org/ibayer/fastFM.svg
     :target: https://travis-ci.org/ibayer/fastFM
 
-A short paper describing the library is now available on 
-arXiv http://arxiv.org/abs/1505.00641
 
-This repository contains the python interface. Please have a look at https://github.com/ibayer/fastFM-core
-if you are interested in the command line interface or the solver source code (implemented in C).
+.. image:: https://img.shields.io/badge/platform-OSX|Linux-lightgrey.svg
+    :target: https://travis-ci.org/ibayer/fastFM
 
-GIT CLONE INSTRUCTION
-=====================
-This repository requires sub-repositories and just using ``git clone ..``
-**doesn't fetch** them. Use
-``git clone --recursive ..``
-instead.
+.. image:: https://img.shields.io/pypi/l/Django.svg   
+    :target: https://travis-ci.org/ibayer/fastFM
 
-Otherwise you have to run ``git submodule update --init --recursive`` **from within** the
-``fastFM-core/`` folder in order to get the sub-repositories.
+fastFM: A Library for Factorization Machines
+============================================
 
+This repository allows you to use the Factorization Machine model through the well known **scikit-learn API**.
+All performence critical code as been written in C and wrapped with Cython. fastFM provides
+stochastic gradient descent (SGD) and coordinate descent (CD) optimization routines as well as Markov Chain Monte Carlo (MCMC) for Bayesian inference.
+The solvers can be used for regression, classification and ranking problems. Detailed usage instructions can be found in the `online documentation  <http://ibayer.github.io/fastFM>`_ and on `arXiv <http://arxiv.org/abs/1505.00641>`_.
 
-DEPENDENCIES
-============
+Usage
+-----
+.. code-block:: python
 
-python libraries
-----------------
-* scikit-learn
-* numpy
-* scipy
-* pandas
-* cython
-
-install with ``pip install -r /fastFM/requirements.txt``
-
-C libraries
------------
-* CXSparse (included as submodule)
-* glib-2.0
-
-This worked on ubuntu 14.04:
-``sudo apt-get install libglib2.0-dev python-dev libatlas-base-dev``
+    from fastFM import als
+    fm = als.FMRegression(n_iter=1000, init_stdev=0.1, rank=2, l2_reg_w=0.1, l2_reg_V=0.5)
+    fm.fit(X_train, y_train)
+    y_pred = fm.predict(X_test)
 
 
-Install fastFM (python)
-=======================
-**First build the C libraries:**
-``(cd fastFM/; make)``
+Tutorials and other information are available `here <http://arxiv.org/abs/1505.00641>`_.
+The C code is available as `subrepository <https://github.com/ibayer/fastFM-core>`_ and provides
+a stand alone command line interface. If you have still **questions** after reading the documentation please open a issue at github.
 
-**For development install the lib inplace:**
+Installation
+------------
 
-(Run the following command from the same directory as ``git clone`` before.)
+.. code-block::
 
-``pip install -e fastFM/``
+    # Install cblas and the python dev header (Linux only).
+    $ sudo apt-get install python-dev libatlas-base-dev
 
-Install on OSX
-===============
-Recommended way to manage dependencies is `Homebrew package manager
-<https://brew.sh>`_. If you have brew installed, dependencies can be installed by running command ``brew install glib argp-standalone``. (Contributed by altimin)
+    # Install all Python dependencies.
+    $ pip install -r /fastFM/requirements.txt
 
-Install on Windows
-==================
-It should be possible to compile the library on Windows.
-I'm developing on linux but have received multiple requests from people who
-want to run this library on other platforms.
-Please let me know about issues you ran into or how you manged to compile on
-other platfroms (or just open a PR) so that we include this information here.
+    # Enter the root directory
+    $ cd fastFM
 
-how to run tests
-----------------
+    # Make sure the submodule are cloned if you didn't use ``git clone --recursive ..``
+    $ git submodule update --init --recursive
 
-pick your favorite test runner
+    # Compile the C extension.
+    $ make
 
-``cd /fastFM/fastFM/tests/; py.test``
-or 
+    # Install fastFM
+    pip install .
 
-``cd /fastFM/fastFM/tests/; nosetests``
 
-Examples
---------
-Please have a look add the files in ``/fastFM/fastFM/tests/`` for examples
-on how to use FMs for different tasks.
+Tests
+-----
+
+The Python tests can be run with:
+``nosetests fastFM/fastFM/tests``
+
+Please refere to the fastFM-core README for instruction on how to run the C tests at ``fastFM/fastFM-core/src/tests``.
+
+Contribution
+------------
+
+* Star this repository: keeps contributors motivated
+* Open a issue: report bugs or suggest improvements
+* Fix errors in the documentation: small changes matter
+* Contribute code
+
+Contributions are very wellcome! Since this project lives on github we reommend
+to open a pull request (PR) for code contributions as early as possible. This is the
+fastest way to get feedback and allows travis to run checks on your changes.
+
+Most information you need to setup your environment can be learned by adapting the great instructions on https://github.com/scikit-learn/scikit-learn/blob/master/CONTRIBUTING.md .
+
+
+**Contributors**
+
+* chezou
+* bdaskalov
+* altimin
+* takuti
+* ibayer
+
+License: BSD
+------------
