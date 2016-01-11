@@ -31,7 +31,7 @@ Usage
 
 
 Tutorials and other information are available `here <http://arxiv.org/abs/1505.00641>`_.
-The C code is available as `sub-repository <https://github.com/ibayer/fastFM-core>`_ and provides
+The C code is available as `subrepository <https://github.com/ibayer/fastFM-core>`_ and provides
 a stand alone command line interface.
 
 Installation
