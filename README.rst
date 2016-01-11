@@ -48,7 +48,7 @@ Installation
     # Enter the root directory
     $ cd fastFM
 
-    # Make sure the submodule are cloned if you didn't use ``git clone --recursive ..``.
+    # Make sure the submodule are cloned if you didn't use ``git clone --recursive ..``
     $ git submodule update --init --recursive
 
     # Compile the C extension.
