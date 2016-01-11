@@ -1,6 +1,6 @@
 If you use this project please give credit by citing:
 
-    Immanuel Bayer (2014): `fastFM: A Library for Factorization Machines <http://arxiv.org/abs/1505.00641>`
+    Immanuel Bayer (2014): fastFM: A Library for Factorization Machines http://arxiv.org/abs/1505.00641
 
 .. image:: https://travis-ci.org/ibayer/fastFM.svg
     :target: https://travis-ci.org/ibayer/fastFM
@@ -18,7 +18,7 @@ fastFM: A Library for Factorization Machines
 This repository allows you to use the Factorization Machine model through the well known scikit-learn API.
 All performence critical code as been written in C and wrapped with Cython. fastFM provides
 stochastic gradient descent (SGD) and coordinate descent (CD) optimization routines as well as Markov Chain Monte Carlo (MCMC) for Bayesian inference.
-This solvers can be used for regression, classification and ranking problems. Detailed usage instructions can be found in the `online documentation  <http://ibayer.github.io/fastFM>`_ or on `arXiv <http://arxiv.org/abs/1505.00641>`_.
+The solvers can be used for regression, classification and ranking problems. Detailed usage instructions can be found in the `online documentation  <http://ibayer.github.io/fastFM>`_ and on `arXiv <http://arxiv.org/abs/1505.00641>`_.
 
 Usage
 -----
@@ -31,15 +31,15 @@ Usage
 
 
 Tutorials and other information are available `here <http://arxiv.org/abs/1505.00641>`_.
-The C code is available in a `serperate repository https://github.com/ibayer/fastFM-core>`_ and provides
+The C code is available in a `sub-repository <https://github.com/ibayer/fastFM-core>`_ and provides
 a stand alone command line interface.
 
 Installation
 ------------
 
-```
+.. code-block::
 
-    # Linux only: Install cblas and the python dev header
+    # Install cblas and the python dev header (Linux only).
     $ sudo apt-get install python-dev libatlas-base-dev
 
     # Install all Python dependencies.
@@ -58,15 +58,13 @@ Installation
     pip install .
 
 
-```
-
 Tests
 -----
 
 The Python tests can be run with:
-`` nosetests fastFM/fastFM/tests``
+``nosetests fastFM/fastFM/tests``
 
-Please refere to the fastFM-core README for instruction on how to run the C tests at `fastFM/fastFM-core/src/tests`.
+Please refere to the fastFM-core README for instruction on how to run the C tests at ``fastFM/fastFM-core/src/tests``.
 
 Contribution
 ------------
