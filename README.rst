@@ -74,11 +74,11 @@ Contribution
 * Fix errors in the documentation: small changes matter
 * Contribute code
 
-Contributions are very wellcome! Since this project lives on github we reommend
+**Contributions are very wellcome!** Since this project lives on github we reommend
 to open a pull request (PR) for code contributions as early as possible. This is the
 fastest way to get feedback and allows travis to run checks on your changes.
 
-Most information you need to setup your environment can be learned by adapting the great instructions on https://github.com/scikit-learn/scikit-learn/blob/master/CONTRIBUTING.md . Please ensure that your contribution conforms to the `PEP8 <http://www.python.org/dev/peps/pep-0008/>`_ Coding Style and includes unit tests where appropriate. More valuable guidelines that apply to fastFM can be found at http://scikit-learn.org/stable/developers/contributing.html#coding-guidelines .
+Most information you need to setup your **development environment** can be learned by adapting the great instructions on https://github.com/scikit-learn/scikit-learn/blob/master/CONTRIBUTING.md . Please ensure that your contribution conforms to the `PEP8 <http://www.python.org/dev/peps/pep-0008/>`_ Coding Style and includes unit tests where appropriate. More valuable guidelines that apply to fastFM can be found at http://scikit-learn.org/stable/developers/contributing.html#coding-guidelines .
 
 
 **Contributors**
