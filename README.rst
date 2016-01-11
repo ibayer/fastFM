@@ -12,7 +12,7 @@ fastFM: A Library for Factorization Machines
 ============================================
 
 This repository allows you to use the Factorization Machine model through the well known scikit-learn API.
-All performence critical code as been written in C and wrapped with Cython so that no memory copys are needed. fastFM can be used for regression, classification and ranking problems. Detailed usage instructions can be found in the `online documentation  <http://ibayer.github.io/fastFM>`_ or on `arXiv <http://arxiv.org/abs/1505.00641>`_.
+All performence critical code as been written in C and wrapped with Cython. fastFM can be used for regression, classification and ranking problems. Detailed usage instructions can be found in the `online documentation  <http://ibayer.github.io/fastFM>`_ or on `arXiv <http://arxiv.org/abs/1505.00641>`_.
 
 Usage
 -----
