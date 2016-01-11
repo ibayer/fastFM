@@ -69,15 +69,25 @@ Please refere to the fastFM-core README for instruction on how to run the C test
 Contribution
 ------------
 
-* sklearn style guide
+* Star this repository
 * Report issues
-* Star
-* open PR
-* find open issues
+* Contribute code
+* Fix errors in the documentation (small changes matter)
+
+Contributions are very wellcome! Since this project lives on github we reommend
+to open a pull request (PR) for code contributions as early as possible. This is the
+fastest way to get feedback and allows travis to run checks on your changes.
+
+Most information you need to setup your environment to contribute to fastFM can be learned by adapting the instructions on https://github.com/scikit-learn/scikit-learn/blob/master/CONTRIBUTING.md .
+
 
 **Contributors**
-*
-*
+
+* chezou
+* bdaskalov
+* altimin
+* takuti
+* ibayer
 
 License: BSD
 ------------
