@@ -2,11 +2,12 @@
 # License: BSD 3 clause
 
 import numpy as np
-import ffm
 import scipy.sparse as sp
 from scipy.stats import norm
-from sklearn.utils import check_array
 from sklearn.base import BaseEstimator, ClassifierMixin
+
+from utils import check_array
+import ffm
 
 
 def _validate_class_labels(y):

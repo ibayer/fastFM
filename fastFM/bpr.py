@@ -1,11 +1,11 @@
 # Author: Immanuel Bayer
 # License: BSD 3 clause
 
-from sklearn.utils import assert_all_finite, check_array
-from sklearn.utils.testing import assert_array_equal
-from .base import FactorizationMachine
-import numpy as np
 import ffm
+import numpy as np
+from base import FactorizationMachine
+from sklearn.utils.testing import assert_array_equal
+from utils import check_array, assert_all_finite
 
 
 class FMRecommender(FactorizationMachine):
@@ -28,10 +28,10 @@ class FMRecommender(FactorizationMachine):
         The rank of the factorization used for the second order interactions.
 
     l2_reg_w : float
-        L2 penalty weight for linear coefficients.
+        L2 penalty weight for pairwise coefficients.
 
     l2_reg_V : float
-        L2 penalty weight for pairwise coefficients.
+        L2 penalty weight for linear coefficients.
 
     l2_reg : float
         L2 penalty weight for all coefficients (default=0).

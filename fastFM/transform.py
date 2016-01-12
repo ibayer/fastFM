@@ -1,7 +1,7 @@
 # Author: Immanuel Bayer
 # License: BSD 3 clause
 
-import scipy.sparse as sp
+import scipy.sparse as sparse
 import numpy as np
 
 
@@ -12,18 +12,18 @@ def multiclass_to_ranking(X, y):
     # create extended X matrix
     X_features = X.copy()
     for i in range(n_classes - 1):
-        X_features = sp.vstack([X_features, X])
+        X_features = sparse.vstack([X_features, X])
 
     X_labels = None
     for i in range(n_classes):
-        X_tmp = sp.csc_matrix((n_samples, n_classes))
+        X_tmp = sparse.csc_matrix((n_samples, n_classes))
         X_tmp[:, i] = 1
         if X_labels is not None:
-            X_labels = sp.vstack([X_labels, X_tmp])
+            X_labels = sparse.vstack([X_labels, X_tmp])
         else:
             X_labels = X_tmp
 
-    X_ext = sp.hstack([X_labels, X_features])
+    X_ext = sparse.hstack([X_labels, X_features])
 
     # create all combinations
     compars = []
