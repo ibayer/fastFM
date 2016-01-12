@@ -34,6 +34,17 @@ Tutorials and other information are available `here <http://arxiv.org/abs/1505.0
 The C code is available as `subrepository <https://github.com/ibayer/fastFM-core>`_ and provides
 a stand alone command line interface. If you have still **questions** after reading the documentation please open a issue at github.
 
++----------------+------------------+-----------------------------+
+| Task           | Solver           | Loss                        |
++================+==================+=============================+
+| Regression     | als, mcmc, sgd   | Square Loss                 |
++----------------+------------------+-----------------------------+
+| Classification | als, mcmc, sgd   | Probit(Map), Probit, Sigmoid|
++----------------+------------------+-----------------------------+
+| Ranking        | sgd              | BPR                         |
++----------------+------------------+-----------------------------+
+*Supported solvers and tasks*
+
 Installation
 ------------
 
