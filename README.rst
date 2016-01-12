@@ -94,9 +94,10 @@ Most information you need to setup your **development environment** can be learn
 
 **Contributors**
 
-* chezou
-* bdaskalov
 * altimin
+* bdaskalov
+* chezou
+* macks22
 * takuti
 * ibayer
 
