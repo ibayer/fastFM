@@ -6,8 +6,9 @@ import ffm
 import numpy as np
 from sklearn.metrics import mean_squared_error
 from sklearn.utils import assert_all_finite
-from validation import assert_all_finite, check_consistent_length, check_array
-from base import (FactorizationMachine, _validate_class_labels,
+from .validation import (assert_all_finite, check_consistent_length,
+                         check_array)
+from .base import (FactorizationMachine, _validate_class_labels,
                   _check_warm_start)
 
 

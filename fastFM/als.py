@@ -4,8 +4,8 @@
 import ffm
 import numpy as np
 from sklearn.base import RegressorMixin
-from validation import check_consistent_length, check_array
-from base import (FactorizationMachine, BaseFMClassifier,
+from .validation import check_consistent_length, check_array
+from .base import (FactorizationMachine, BaseFMClassifier,
                   _validate_class_labels, _check_warm_start)
 
 

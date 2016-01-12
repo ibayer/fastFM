@@ -5,7 +5,7 @@ import numpy as np
 import scipy.sparse as sp
 from sklearn.metrics import mean_squared_error, r2_score
 
-from validation import check_random_state
+from .validation import check_random_state
 from ffm import ffm_predict
 
 

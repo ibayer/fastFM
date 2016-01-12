@@ -5,8 +5,9 @@
 import ffm
 import numpy as np
 from sklearn.base import RegressorMixin
-from validation import check_array, check_consistent_length
-from base import FactorizationMachine, BaseFMClassifier, _validate_class_labels
+from .validation import check_array, check_consistent_length
+from .base import (FactorizationMachine, BaseFMClassifier,
+                   _validate_class_labels)
 
 
 class FMRegression(FactorizationMachine, RegressorMixin):
