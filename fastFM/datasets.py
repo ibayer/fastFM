@@ -2,10 +2,11 @@
 # License: BSD 3 clause
 
 import numpy as np
-from ffm import ffm_predict
 import scipy.sparse as sp
-from sklearn.utils import check_random_state
 from sklearn.metrics import mean_squared_error, r2_score
+
+from .validation import check_random_state
+from ffm import ffm_predict
 
 
 def make_user_item_regression(random_state=123, n_user=20, n_item=20,

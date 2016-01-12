@@ -1,11 +1,13 @@
 # Author: Immanuel Bayer
 # License: BSD 3 clause
 
-from sklearn.base import RegressorMixin
-from sklearn.utils import check_array, check_consistent_length
-from .base import FactorizationMachine, BaseFMClassifier, _validate_class_labels
-import numpy as np
+
 import ffm
+import numpy as np
+from sklearn.base import RegressorMixin
+from .validation import check_array, check_consistent_length
+from .base import (FactorizationMachine, BaseFMClassifier,
+                   _validate_class_labels)
 
 
 class FMRegression(FactorizationMachine, RegressorMixin):
@@ -29,10 +31,10 @@ class FMRegression(FactorizationMachine, RegressorMixin):
         The rank of the factorization used for the second order interactions.
 
     l2_reg_w : float
-        L2 penalty weight for linear coefficients.
+        L2 penalty weight for pairwise coefficients.
 
     l2_reg_V : float
-        L2 penalty weight for pairwise coefficients.
+        L2 penalty weight for linear coefficients.
 
     l2_reg : float
         L2 penalty weight for all coefficients (default=0).
@@ -109,10 +111,10 @@ class FMClassification(BaseFMClassifier):
         The rank of the factorization used for the second order interactions.
 
     l2_reg_w : float
-        L2 penalty weight for linear coefficients.
+        L2 penalty weight for pairwise coefficients.
 
     l2_reg_V : float
-        L2 penalty weight for pairwise coefficients.
+        L2 penalty weight for linear coefficients.
 
     l2_reg : float
         L2 penalty weight for all coefficients (default=0).

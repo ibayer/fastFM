@@ -1,13 +1,15 @@
 # Author: Immanuel Bayer
 # License: BSD 3 clause
 
-from sklearn.utils import assert_all_finite, check_consistent_length,\
-    check_array
-from .base import FactorizationMachine, _validate_class_labels,\
-    _check_warm_start
+
 import ffm
 import numpy as np
 from sklearn.metrics import mean_squared_error
+from sklearn.utils import assert_all_finite
+from .validation import (assert_all_finite, check_consistent_length,
+                         check_array)
+from .base import (FactorizationMachine, _validate_class_labels,
+                  _check_warm_start)
 
 
 def find_init_stdev(fm, X_train, y_train, X_vali=None, y_vali=None,
