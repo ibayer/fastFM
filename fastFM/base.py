@@ -77,8 +77,8 @@ class FactorizationMachine(BaseEstimator):
         self.warm_start = False
         self.ignore_w_0 = False
         self.ignore_w = False
-        self.l2_reg_w = 0
-        self.l2_reg_V = 0
+        self.l2_reg_w = 0.1
+        self.l2_reg_V = 0.1
         self.step_size = 0
         self.copy_X = copy_X
 

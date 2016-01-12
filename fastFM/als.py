@@ -52,7 +52,7 @@ class FMRegression(FactorizationMachine, RegressorMixin):
         Coefficients of second order factor matrix.
     """
     def __init__(self, n_iter=100, init_stdev=0.1, rank=8, random_state=123,
-                 l2_reg_w=0, l2_reg_V=0, l2_reg=0):
+                 l2_reg_w=0.1, l2_reg_V=0.1, l2_reg=0):
         super(FMRegression, self).__init__(n_iter=n_iter,
                                            init_stdev=init_stdev, rank=rank,
                                            random_state=random_state)
@@ -145,7 +145,7 @@ class FMClassification(BaseFMClassifier):
         Coefficients of second order factor matrix.
     """
     def __init__(self, n_iter=100, init_stdev=0.1, rank=8, random_state=123,
-                 l2_reg_w=0, l2_reg_V=0, l2_reg=0):
+                 l2_reg_w=0.1, l2_reg_V=0.1, l2_reg=0):
         super(FMClassification, self).__init__(n_iter=n_iter,
                                                init_stdev=init_stdev,
                                                rank=rank,
