@@ -39,29 +39,29 @@ Installation
 
 .. code-block::
 
-    # Install cblas and the python dev header (Linux only).
+    # Install cblas and python-dev header (Linux only).
     $ sudo apt-get install python-dev libatlas-base-dev
 
-    # Install all Python dependencies.
+    # Install Python dependencies (Cython>=0.22, numpy, pandas, scipy, scikit-learn>=0.16.0)
     $ pip install -r /fastFM/requirements.txt
+    
+    # Clone the repro including submodules (or clone + `git submodule update --init --recursive`)
+    $ git clone --recursive https://github.com/ibayer/fastFM.git
 
     # Enter the root directory
     $ cd fastFM
-
-    # Make sure the submodule are cloned if you didn't use ``git clone --recursive ..``
-    $ git submodule update --init --recursive
 
     # Compile the C extension.
     $ make
 
     # Install fastFM
-    pip install .
+    $ pip install .
 
 
 Tests
 -----
 
-The Python tests can be run with:
+The Python tests (``pip install nose``) can be run with:
 ``nosetests fastFM/fastFM/tests``
 
 Please refere to the fastFM-core README for instruction on how to run the C tests at ``fastFM/fastFM-core/src/tests``.
