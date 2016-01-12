@@ -5,7 +5,7 @@ import ffm
 import numpy as np
 from base import FactorizationMachine
 from sklearn.utils.testing import assert_array_equal
-from utils import check_array, assert_all_finite
+from validation import check_array, assert_all_finite
 
 
 class FMRecommender(FactorizationMachine):

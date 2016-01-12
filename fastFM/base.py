@@ -6,7 +6,7 @@ import scipy.sparse as sp
 from scipy.stats import norm
 from sklearn.base import BaseEstimator, ClassifierMixin
 
-from utils import check_array
+from validation import check_array
 import ffm
 
 
