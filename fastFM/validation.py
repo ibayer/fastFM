@@ -16,6 +16,21 @@ import warnings
 
 import numpy as np
 import scipy.sparse as sparse
+from functools import wraps
+
+
+def _check_matrix_is_sparse(func):
+    """
+    Check that input is a scipy sparse matrix and raise warning otherwise.
+    """
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        if 'accept_sparse' in kwargs and not sparse.isspmatrix(args[0]):
+            raise TypeError('A dense matrix was passed in, but sparse'
+                            'data is required.')
+        result = func(*args, **kwargs)
+        return result
+    return wrapper
 
 
 def _ensure_sparse_format(spmatrix, accept_sparse, dtype, order, copy,
@@ -87,6 +102,7 @@ def assert_all_finite(X):
                          " or a value too large for %r." % X.dtype)
 
 
+@_check_matrix_is_sparse
 def check_array(array, accept_sparse=None, dtype="numeric", order=None,
                 copy=False, force_all_finite=True, ensure_2d=True,
                 allow_nd=False, ensure_min_samples=1, ensure_min_features=1):

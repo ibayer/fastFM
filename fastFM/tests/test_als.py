@@ -53,6 +53,13 @@ def _test_fm_regression_only_w0():
     assert_almost_equal(fm.w0_, 4466.6666666666661, 6)
 
 
+def _test_raise_when_input_is_dense():
+    fm = als.FMRegression(n_iter=0, l2_reg_w=0, l2_reg_V=0, rank=0)
+    X = np.arange(3, 4, dtype=np.float64)
+    y = np.arange(3, dtype=np.float64)
+    fm.fit(X, y, warm_start=True)
+
+
 def test_fm_linear_regression():
     X, y = get_small_data()
 
