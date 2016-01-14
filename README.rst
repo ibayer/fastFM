@@ -1,6 +1,6 @@
 If you use this project please give credit by citing:
 
-    Immanuel Bayer (2014): fastFM: A Library for Factorization Machines http://arxiv.org/abs/1505.00641
+    Immanuel Bayer (2015): fastFM: A Library for Factorization Machines http://arxiv.org/abs/1505.00641
 
 .. image:: https://travis-ci.org/ibayer/fastFM.svg
     :target: https://travis-ci.org/ibayer/fastFM
