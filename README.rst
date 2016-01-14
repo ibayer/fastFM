@@ -53,7 +53,7 @@ Installation
     # Install cblas and python-dev header (Linux only).
     $ sudo apt-get install python-dev libatlas-base-dev
 
-    # Install Python dependencies (Cython>=0.22, numpy, pandas, scipy, scikit-learn>=0.16.0)
+    # Install Python dependencies (Cython>=0.22, numpy, pandas, scipy, scikit-learn)
     $ pip install -r /fastFM/requirements.txt
     
     # Clone the repro including submodules (or clone + `git submodule update --init --recursive`)
