@@ -2,18 +2,20 @@ If you use this project please give credit by citing:
 
     Immanuel Bayer (2015): fastFM: A Library for Factorization Machines http://arxiv.org/abs/1505.00641
 
-.. image:: https://travis-ci.org/ibayer/fastFM.svg
-    :target: https://travis-ci.org/ibayer/fastFM
 
-
-.. image:: https://img.shields.io/badge/platform-OSX|Linux-lightgrey.svg
-    :target: https://travis-ci.org/ibayer/fastFM
-
-.. image:: https://img.shields.io/pypi/l/Django.svg   
-    :target: https://travis-ci.org/ibayer/fastFM
 
 fastFM: A Library for Factorization Machines
 ============================================
+
+.. image:: https://travis-ci.org/ibayer/fastFM.svg?branch=master
+   :target: https://travis-ci.org/ibayer/fastFM
+   
+   
+.. image:: https://img.shields.io/badge/platform-OSX|Linux-lightgrey.svg
+  :target: https://travis-ci.org/ibayer/fastFM
+  
+.. image:: https://img.shields.io/pypi/l/Django.svg   
+   :target: https://travis-ci.org/ibayer/fastFM
 
 This repository allows you to use Factorization Machines in **Python** (2.7 & 3.5) with the well known **scikit-learn API**.
 All performence critical code as been written in C and wrapped with Cython. fastFM provides
