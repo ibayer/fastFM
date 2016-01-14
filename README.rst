@@ -48,7 +48,7 @@ a stand alone command line interface. If you have still **questions** after read
 Installation
 ------------
 
-.. code-block::
+.. code-block:: bash
 
     # Install cblas and python-dev header (Linux only).
     $ sudo apt-get install python-dev libatlas-base-dev
