@@ -1,0 +1,7 @@
+include README.rst
+include fastFM/ffm.c
+recursive-include fastFM-core/include *
+include fastFM-core/bin/libfastfm.a
+include fastFM-core/externals/CXSparse/Lib/libcxsparse.a
+recursive-include fastFM-core/externals/CXSparse/Include *
+recursive-include fastFM-core/externals/CXSparse/SuiteSparse_config *
