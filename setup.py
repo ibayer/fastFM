@@ -20,13 +20,10 @@ setup(
 
     packages=['fastFM'],
 
-    version='0.1.1',
+    version='0.2.0',
     url='http://ibayer.github.io/fastFM',
     author='Immanuel Bayer',
     author_email='immanuel.bayer@uni-konstanz.de',
-
-
-    ### boilerplate stuff
 
     # Choose your license
     license='BSD',
@@ -37,14 +34,15 @@ setup(
         #   3 - Alpha
         #   4 - Beta
         #   5 - Production/Stable
-        'Development Status :: 3 - Alpha',
+        'Development Status :: 4 - Beta',
 
         # Indicate who your project is intended for
         'Intended Audience :: Developers',
-        'Topic :: Software Development :: Build Tools',
+        'Intended Audience :: Science/Research',
+        'Topic :: Scientific/Engineering',
 
-        # Pick your license as you wish (should match "license" above)
-        'License :: OSI Approved :: MIT License',
+        'License :: OSI Approved :: BSD License',
+        'Operating System :: Unix',
 
         # Specify the Python versions you support here. In particular, ensure
         # that you indicate whether you support Python 2, Python 3 or both.
@@ -57,13 +55,6 @@ setup(
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
     ],
-
-    # What does your project relate to?
-    keywords='sample setuptools development',
-
-    # Alternatively, if you want to distribute just a my_module.py, uncomment
-    # this:
-    #   py_modules=["my_module"],
 
     # List run-time dependencies here.  These will be installed by pip when
     # your project is installed. For an analysis of "install_requires" vs pip's
