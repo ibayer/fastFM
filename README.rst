@@ -55,14 +55,14 @@ Installation
     # Install cblas and python-dev header (Linux only).
     $ sudo apt-get install python-dev libatlas-base-dev
 
-    # Install Python dependencies (Cython>=0.22, numpy, pandas, scipy, scikit-learn)
-    $ pip install -r /fastFM/requirements.txt
-    
     # Clone the repro including submodules (or clone + `git submodule update --init --recursive`)
     $ git clone --recursive https://github.com/ibayer/fastFM.git
 
     # Enter the root directory
     $ cd fastFM
+
+    # Install Python dependencies (Cython>=0.22, numpy, pandas, scipy, scikit-learn)
+    $ pip install -r ./requirements.txt
 
     # Compile the C extension.
     $ make
