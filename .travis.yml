@@ -39,7 +39,8 @@ before_install:
 install:
     - git submodule update --init --recursive
     - make
-    - pip install .
+    - python setup.py bdist_wheel
+    - pip install dist/*.whl
 
 script:
     - nosetests
