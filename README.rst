@@ -17,7 +17,7 @@ fastFM: A Library for Factorization Machines
 .. image:: https://img.shields.io/pypi/l/Django.svg   
    :target: https://travis-ci.org/ibayer/fastFM
 
-This repository allows you to use Factorization Machines in **Python** (2.7 & 3.5) with the well known **scikit-learn API**.
+This repository allows you to use Factorization Machines in **Python** (2.7 & 3.x) with the well known **scikit-learn API**.
 All performence critical code as been written in C and wrapped with Cython. fastFM provides
 stochastic gradient descent (SGD) and coordinate descent (CD) optimization routines as well as Markov Chain Monte Carlo (MCMC) for Bayesian inference.
 The solvers can be used for regression, classification and ranking problems. Detailed usage instructions can be found in the `online documentation  <http://ibayer.github.io/fastFM>`_ and on `arXiv <http://arxiv.org/abs/1505.00641>`_.
@@ -49,6 +49,10 @@ a stand alone command line interface. If you have still **questions** after read
 
 Installation
 ------------
+
+``pip install fastFM``
+
+**source install**
 
 .. code-block:: bash
 
