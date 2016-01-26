@@ -50,8 +50,6 @@ a stand alone command line interface. If you have still **questions** after read
 Installation
 ------------
 
-``pip install fastFM``
-
 **source install**
 
 .. code-block:: bash
