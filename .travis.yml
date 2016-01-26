@@ -2,6 +2,7 @@ language: c
 
 env:
     - TRAVIS_PYTHON_VERSION="2.7"
+    - TRAVIS_PYTHON_VERSION="3.4"
     - TRAVIS_PYTHON_VERSION="3.5"
 
 os:
@@ -44,3 +45,16 @@ install:
 
 script:
     - nosetests
+
+before_deploy:
+    - export RELEASE_PKG_FILE=$(ls dist/*.whl)
+    - echo "deploying $RELEASE_PKG_FILE to GitHub releases"
+
+deploy:
+  provider: releases
+  api_key:
+    secure: GYCLaOi6btMJ/ieq4z3GrGqUFEmN71B79C0B2/pK7qQZ7b1tabzjDyqThprLGVISKXt2wPzI+cumX3bs9mlD68vuOIWqO5NfLoKacNiYoLgbQouBeFoazk4VDyLyClBUG0WquvTu3BuAz4ocMxZykh+NRY+e6lNEuOlY4/z43tRdWMhj0TvRMzaJEy9P1pXIQUq2U09HZ43iAZbfY4yetndDM9x6b1vqomNei1h3ZC4PoF+WCD4I7cJ9zHMFh8ucf2Hs1236fj7j5HNeMEwTWZThRKWhaxmZBYA5DFqL83OfGnJHUcQjl/9Cp33Ky2OcO2BcB20sCDgZQqf1P/CutapyUtfo4C12ug2Z2orSHVEV8U6joVFOABBC+dnaw2tNmMu6AAoQBvujGYCAZMFb+fhSVMtWL2AHLqrelmqgQTLSsUzVhL8zl5RABvZPEKy4GEsm4TRc2d4iy3r/nWVdsZ7WF8Som/TrJy9+26SpUqpsbsdseFWPkwsDhcF0J7zmAzsXHMYGbjLGCZ9BXfKwR2E79KfMRFFzvG403qGrWD3vCNeCTiSUX/1qBcz3q9mK9BXekzsnBMfeT3ldUHUHVI2UqQCahdFDQwmPvtVJgINo28YsQCDCxFR5kR3NEB/Qx1YZmFdZ/P0fagO2oseAmTKj95JGC0SqT0/Zhvlta/E=
+  file: "${RELEASE_PKG_FILE}"
+  skip_cleanup: true
+  on:
+    tags: true
