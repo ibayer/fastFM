@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>The fastFM API reference &mdash; fastFM 0.1.1 documentation</title>
+    <title>The fastFM API reference &mdash; fastFM 0.2.1 documentation</title>
     
     <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.1.1',
+        VERSION:     '0.2.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,12 +24,12 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="fastFM 0.1.1 documentation" href="index.html" />
+    <link rel="top" title="fastFM 0.2.1 documentation" href="index.html" />
     <link rel="prev" title="Guide" href="guide.html" /> 
   </head>
   <body role="document">
       <div class="header" role="banner"><h1 class="heading"><a href="index.html">
-          <span>fastFM 0.1.1 documentation</span></a></h1>
+          <span>fastFM 0.2.1 documentation</span></a></h1>
         <h2 class="heading"><span>The fastFM API reference</span></h2>
       </div>
       <div class="topnav" role="navigation" aria-label="top navigation">
@@ -222,7 +222,7 @@ initializes the parameters and mcmc chain.</li>
 <span id="the-als-module"></span><h2>The ALS module<a class="headerlink" href="#module-fastFM.als" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="fastFM.als.FMClassification">
-<em class="property">class </em><code class="descclassname">fastFM.als.</code><code class="descname">FMClassification</code><span class="sig-paren">(</span><em>n_iter=100</em>, <em>init_stdev=0.1</em>, <em>rank=8</em>, <em>random_state=123</em>, <em>l2_reg_w=0</em>, <em>l2_reg_V=0</em>, <em>l2_reg=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fastFM/als.html#FMClassification"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fastFM.als.FMClassification" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">fastFM.als.</code><code class="descname">FMClassification</code><span class="sig-paren">(</span><em>n_iter=100</em>, <em>init_stdev=0.1</em>, <em>rank=8</em>, <em>random_state=123</em>, <em>l2_reg_w=0.1</em>, <em>l2_reg_V=0.1</em>, <em>l2_reg=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fastFM/als.html#FMClassification"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fastFM.als.FMClassification" title="Permalink to this definition">¶</a></dt>
 <dd><p>Factorization Machine Classification trained with a ALS
 (coordinate descent)
 solver.</p>
@@ -272,7 +272,7 @@ initializes the parameters and mcmc chain.</li>
 
 <dl class="class">
 <dt id="fastFM.als.FMRegression">
-<em class="property">class </em><code class="descclassname">fastFM.als.</code><code class="descname">FMRegression</code><span class="sig-paren">(</span><em>n_iter=100</em>, <em>init_stdev=0.1</em>, <em>rank=8</em>, <em>random_state=123</em>, <em>l2_reg_w=0</em>, <em>l2_reg_V=0</em>, <em>l2_reg=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fastFM/als.html#FMRegression"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fastFM.als.FMRegression" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">fastFM.als.</code><code class="descname">FMRegression</code><span class="sig-paren">(</span><em>n_iter=100</em>, <em>init_stdev=0.1</em>, <em>rank=8</em>, <em>random_state=123</em>, <em>l2_reg_w=0.1</em>, <em>l2_reg_V=0.1</em>, <em>l2_reg=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fastFM/als.html#FMRegression"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fastFM.als.FMRegression" title="Permalink to this definition">¶</a></dt>
 <dd><p>Factorization Machine Regression trained with a als (coordinate descent)
 solver.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -375,7 +375,7 @@ might require a tunning of the number of iterations <cite>n_iter</cite>.</li>
 
 <dl class="class">
 <dt id="fastFM.sgd.FMRegression">
-<em class="property">class </em><code class="descclassname">fastFM.sgd.</code><code class="descname">FMRegression</code><span class="sig-paren">(</span><em>n_iter=100</em>, <em>init_stdev=0.1</em>, <em>rank=8</em>, <em>random_state=123</em>, <em>l2_reg_w=0</em>, <em>l2_reg_V=0</em>, <em>l2_reg=0</em>, <em>step_size=0.1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fastFM/sgd.html#FMRegression"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fastFM.sgd.FMRegression" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">fastFM.sgd.</code><code class="descname">FMRegression</code><span class="sig-paren">(</span><em>n_iter=100</em>, <em>init_stdev=0.1</em>, <em>rank=8</em>, <em>random_state=123</em>, <em>l2_reg_w=0.1</em>, <em>l2_reg_V=0.1</em>, <em>l2_reg=0</em>, <em>step_size=0.1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fastFM/sgd.html#FMRegression"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fastFM.sgd.FMRegression" title="Permalink to this definition">¶</a></dt>
 <dd><p>Factorization Machine Regression trained with a stochastic gradient
 descent solver.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -428,7 +428,7 @@ might require a tunning of the number of iterations <cite>n_iter</cite>.</li>
 <span id="the-ranking-module"></span><h2>The Ranking module<a class="headerlink" href="#module-fastFM.bpr" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="fastFM.bpr.FMRecommender">
-<em class="property">class </em><code class="descclassname">fastFM.bpr.</code><code class="descname">FMRecommender</code><span class="sig-paren">(</span><em>n_iter=100</em>, <em>init_stdev=0.1</em>, <em>rank=8</em>, <em>random_state=123</em>, <em>l2_reg_w=0</em>, <em>l2_reg_V=0</em>, <em>l2_reg=0</em>, <em>step_size=0.1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fastFM/bpr.html#FMRecommender"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fastFM.bpr.FMRecommender" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">fastFM.bpr.</code><code class="descname">FMRecommender</code><span class="sig-paren">(</span><em>n_iter=100</em>, <em>init_stdev=0.1</em>, <em>rank=8</em>, <em>random_state=123</em>, <em>l2_reg_w=0.1</em>, <em>l2_reg_V=0.1</em>, <em>l2_reg=0</em>, <em>step_size=0.1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fastFM/bpr.html#FMRecommender"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fastFM.bpr.FMRecommender" title="Permalink to this definition">¶</a></dt>
 <dd><p>Factorization Machine Recommender with pairwise (BPR) loss solver.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -493,7 +493,7 @@ FM(X[i,0]) &gt; FM(X[i, 1]).</li>
       </div>
 
     <div class="footer" role="contentinfo">
-        &copy; Copyright 2015, Immanuel Bayer.
+        &copy; Copyright 2016, Immanuel Bayer.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
     </div>
   </body>

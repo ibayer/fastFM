@@ -65,7 +65,7 @@ efficiently. Please note that we can replace them with any metric we want.
     l2_reg_w = 0
     l2_reg_V = 0
 
-    fm = als.FMRegression(n_iter=0, l2_reg_w=0, l2_reg_V=0, rank=4)
+    fm = als.FMRegression(n_iter=0, l2_reg_w=0.1, l2_reg_V=0.1, rank=4)
     # Allocates and initalizes the model parameter.
     fm.fit(X_train, y_train)
 
