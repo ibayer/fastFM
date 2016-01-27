@@ -50,7 +50,13 @@ a stand alone command line interface. If you have still **questions** after read
 Installation
 ------------
 
+**binary install (64bit only)**
+
+``pip install fastFM``
+
 **source install**
+
+*Please make sure, that Python and OS bit version agree, e.g. 32bit Python on 64bit OS won't work.*
 
 .. code-block:: bash
 
