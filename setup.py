@@ -20,7 +20,7 @@ setup(
 
     packages=['fastFM'],
 
-    version='0.2.3',
+    version='0.2.4',
     url='http://ibayer.github.io/fastFM',
     author='Immanuel Bayer',
     author_email='immanuel.bayer@uni-konstanz.de',
