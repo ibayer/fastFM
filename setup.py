@@ -4,19 +4,18 @@ from Cython.Distutils import build_ext
 import numpy
 
 ext_modules = [
-    Extension('ffm',
-        ['fastFM/ffm.pyx'],
-        libraries=['m', 'fastfm', 'cxsparse', 'cblas'],
-        library_dirs=['fastFM/', 'fastFM-core/bin/', 'fastFM-core/externals/CXSparse/Lib/',
-            '/usr/lib/','/usr/lib/atlas-base/'],
-        include_dirs=['fastFM/','fastFM-core/include/', 'fastFM-core/externals/CXSparse/Include/',
-            '/usr/include/',
-        numpy.get_include()])]
+    Extension('ffm', ['fastFM/ffm.pyx'],
+              libraries=['m', 'fastfm', 'cxsparse', 'blas'],
+              library_dirs=['fastFM/', 'fastFM-core/bin/',
+                            'fastFM-core/externals/CXSparse/Lib/'],
+              include_dirs=['fastFM/', 'fastFM-core/include/',
+                            'fastFM-core/externals/CXSparse/Include/',
+              numpy.get_include()])]
 
 setup(
-    name = 'fastFM',
-    cmdclass = {'build_ext': build_ext},
-    ext_modules = ext_modules,
+    name='fastFM',
+    cmdclass={'build_ext': build_ext},
+    ext_modules=ext_modules,
 
     packages=['fastFM'],
 

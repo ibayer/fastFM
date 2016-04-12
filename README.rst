@@ -61,7 +61,8 @@ Installation
 .. code-block:: bash
 
     # Install cblas and python-dev header (Linux only).
-    $ sudo apt-get install python-dev libatlas-base-dev
+    # - cblas can be installed with libatlas-base-dev or libopenblas-dev (Ubuntu)
+    $ sudo apt-get install python-dev libopenblas-dev
 
     # Clone the repro including submodules (or clone + `git submodule update --init --recursive`)
     $ git clone --recursive https://github.com/ibayer/fastFM.git
