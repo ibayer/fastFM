@@ -89,6 +89,58 @@ initializes the parameters and mcmc chain.</li>
 <p>Coefficients of second order factor matrix.</p>
 </dd></dl>
 
+<dl class="attribute">
+<dt id="fastFM.mcmc.FMClassification.__delattr__">
+<code class="descname">__delattr__</code><a class="headerlink" href="#fastFM.mcmc.FMClassification.__delattr__" title="Permalink to this definition">¶</a></dt>
+<dd><p>x.__delattr__(&#8216;name&#8217;) &lt;==&gt; del x.name</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fastFM.mcmc.FMClassification.__format__">
+<code class="descname">__format__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.mcmc.FMClassification.__format__" title="Permalink to this definition">¶</a></dt>
+<dd><p>default object formatter</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fastFM.mcmc.FMClassification.__getattribute__">
+<code class="descname">__getattribute__</code><a class="headerlink" href="#fastFM.mcmc.FMClassification.__getattribute__" title="Permalink to this definition">¶</a></dt>
+<dd><p>x.__getattribute__(&#8216;name&#8217;) &lt;==&gt; x.name</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fastFM.mcmc.FMClassification.__hash__">
+<code class="descname">__hash__</code><a class="headerlink" href="#fastFM.mcmc.FMClassification.__hash__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="fastFM.mcmc.FMClassification.__reduce__">
+<code class="descname">__reduce__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.mcmc.FMClassification.__reduce__" title="Permalink to this definition">¶</a></dt>
+<dd><p>helper for pickle</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fastFM.mcmc.FMClassification.__reduce_ex__">
+<code class="descname">__reduce_ex__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.mcmc.FMClassification.__reduce_ex__" title="Permalink to this definition">¶</a></dt>
+<dd><p>helper for pickle</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fastFM.mcmc.FMClassification.__setattr__">
+<code class="descname">__setattr__</code><a class="headerlink" href="#fastFM.mcmc.FMClassification.__setattr__" title="Permalink to this definition">¶</a></dt>
+<dd><p>x.__setattr__(&#8216;name&#8217;, value) &lt;==&gt; x.name = value</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fastFM.mcmc.FMClassification.__sizeof__">
+<code class="descname">__sizeof__</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; int<a class="headerlink" href="#fastFM.mcmc.FMClassification.__sizeof__" title="Permalink to this definition">¶</a></dt>
+<dd><p>size of object in memory, in bytes</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fastFM.mcmc.FMClassification.__str__">
+<code class="descname">__str__</code><a class="headerlink" href="#fastFM.mcmc.FMClassification.__str__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="method">
 <dt id="fastFM.mcmc.FMClassification.fit_predict">
 <code class="descname">fit_predict</code><span class="sig-paren">(</span><em>X_train</em>, <em>y_train</em>, <em>X_test</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fastFM/mcmc.html#FMClassification.fit_predict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fastFM.mcmc.FMClassification.fit_predict" title="Permalink to this definition">¶</a></dt>
@@ -146,6 +198,66 @@ classification label.</p>
 </table>
 </dd></dl>
 
+<dl class="method">
+<dt id="fastFM.mcmc.FMClassification.get_params">
+<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.mcmc.FMClassification.get_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get parameters for this estimator.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>deep</strong> (<em>boolean, optional</em>) &#8211; If True, will return the parameters for this estimator and
+contained subobjects that are estimators.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>params</strong> &#8211;
+Parameter names mapped to their values.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">mapping of string to any</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="fastFM.mcmc.FMClassification.predict">
+<code class="descname">predict</code><span class="sig-paren">(</span><em>X_test</em><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.mcmc.FMClassification.predict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return predictions</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>X</strong> (<em>scipy.sparse.csc_matrix, (n_samples, n_features)</em>) &#8211; </li>
+<li><strong>Returns</strong> &#8211; </li>
+<li><strong>------</strong> &#8211; </li>
+<li><strong>T</strong> (<em>array, shape (n_samples)</em>) &#8211; The labels are returned for classification.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="fastFM.mcmc.FMClassification.set_params">
+<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.mcmc.FMClassification.set_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the parameters of this estimator.</p>
+<p>The method works on simple estimators as well as on nested objects
+(such as pipelines). The former have parameters of the form
+<code class="docutils literal"><span class="pre">&lt;component&gt;__&lt;parameter&gt;</span></code> so that it&#8217;s possible to update each
+component of a nested object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">self</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="class">
@@ -189,6 +301,58 @@ initializes the parameters and mcmc chain.</li>
 <p>Coefficients of second order factor matrix.</p>
 </dd></dl>
 
+<dl class="attribute">
+<dt id="fastFM.mcmc.FMRegression.__delattr__">
+<code class="descname">__delattr__</code><a class="headerlink" href="#fastFM.mcmc.FMRegression.__delattr__" title="Permalink to this definition">¶</a></dt>
+<dd><p>x.__delattr__(&#8216;name&#8217;) &lt;==&gt; del x.name</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fastFM.mcmc.FMRegression.__format__">
+<code class="descname">__format__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.mcmc.FMRegression.__format__" title="Permalink to this definition">¶</a></dt>
+<dd><p>default object formatter</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fastFM.mcmc.FMRegression.__getattribute__">
+<code class="descname">__getattribute__</code><a class="headerlink" href="#fastFM.mcmc.FMRegression.__getattribute__" title="Permalink to this definition">¶</a></dt>
+<dd><p>x.__getattribute__(&#8216;name&#8217;) &lt;==&gt; x.name</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fastFM.mcmc.FMRegression.__hash__">
+<code class="descname">__hash__</code><a class="headerlink" href="#fastFM.mcmc.FMRegression.__hash__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="fastFM.mcmc.FMRegression.__reduce__">
+<code class="descname">__reduce__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.mcmc.FMRegression.__reduce__" title="Permalink to this definition">¶</a></dt>
+<dd><p>helper for pickle</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fastFM.mcmc.FMRegression.__reduce_ex__">
+<code class="descname">__reduce_ex__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.mcmc.FMRegression.__reduce_ex__" title="Permalink to this definition">¶</a></dt>
+<dd><p>helper for pickle</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fastFM.mcmc.FMRegression.__setattr__">
+<code class="descname">__setattr__</code><a class="headerlink" href="#fastFM.mcmc.FMRegression.__setattr__" title="Permalink to this definition">¶</a></dt>
+<dd><p>x.__setattr__(&#8216;name&#8217;, value) &lt;==&gt; x.name = value</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fastFM.mcmc.FMRegression.__sizeof__">
+<code class="descname">__sizeof__</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; int<a class="headerlink" href="#fastFM.mcmc.FMRegression.__sizeof__" title="Permalink to this definition">¶</a></dt>
+<dd><p>size of object in memory, in bytes</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fastFM.mcmc.FMRegression.__str__">
+<code class="descname">__str__</code><a class="headerlink" href="#fastFM.mcmc.FMRegression.__str__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="method">
 <dt id="fastFM.mcmc.FMRegression.fit_predict">
 <code class="descname">fit_predict</code><span class="sig-paren">(</span><em>X_train</em>, <em>y_train</em>, <em>X_test</em>, <em>n_more_iter=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fastFM/mcmc.html#FMRegression.fit_predict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fastFM.mcmc.FMRegression.fit_predict" title="Permalink to this definition">¶</a></dt>
@@ -215,6 +379,66 @@ initializes the parameters and mcmc chain.</li>
 </table>
 </dd></dl>
 
+<dl class="method">
+<dt id="fastFM.mcmc.FMRegression.get_params">
+<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.mcmc.FMRegression.get_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get parameters for this estimator.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>deep</strong> (<em>boolean, optional</em>) &#8211; If True, will return the parameters for this estimator and
+contained subobjects that are estimators.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>params</strong> &#8211;
+Parameter names mapped to their values.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">mapping of string to any</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="fastFM.mcmc.FMRegression.predict">
+<code class="descname">predict</code><span class="sig-paren">(</span><em>X_test</em><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.mcmc.FMRegression.predict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return predictions</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>X</strong> (<em>scipy.sparse.csc_matrix, (n_samples, n_features)</em>) &#8211; </li>
+<li><strong>Returns</strong> &#8211; </li>
+<li><strong>------</strong> &#8211; </li>
+<li><strong>T</strong> (<em>array, shape (n_samples)</em>) &#8211; The labels are returned for classification.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="fastFM.mcmc.FMRegression.set_params">
+<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.mcmc.FMRegression.set_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the parameters of this estimator.</p>
+<p>The method works on simple estimators as well as on nested objects
+(such as pipelines). The former have parameters of the form
+<code class="docutils literal"><span class="pre">&lt;component&gt;__&lt;parameter&gt;</span></code> so that it&#8217;s possible to update each
+component of a nested object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">self</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 </dd></dl>
 
 </div>
@@ -222,7 +446,7 @@ initializes the parameters and mcmc chain.</li>
 <span id="the-als-module"></span><h2>The ALS module<a class="headerlink" href="#module-fastFM.als" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="fastFM.als.FMClassification">
-<em class="property">class </em><code class="descclassname">fastFM.als.</code><code class="descname">FMClassification</code><span class="sig-paren">(</span><em>n_iter=100</em>, <em>init_stdev=0.1</em>, <em>rank=8</em>, <em>random_state=123</em>, <em>l2_reg_w=0.1</em>, <em>l2_reg_V=0.1</em>, <em>l2_reg=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fastFM/als.html#FMClassification"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fastFM.als.FMClassification" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">fastFM.als.</code><code class="descname">FMClassification</code><span class="sig-paren">(</span><em>n_iter=100</em>, <em>init_stdev=0.1</em>, <em>rank=8</em>, <em>random_state=123</em>, <em>l2_reg_w=0.1</em>, <em>l2_reg_V=0.1</em>, <em>l2_reg=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fastFM/als.html#FMClassification"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fastFM.als.FMClassification" title="Permalink to this definition">¶</a></dt>
 <dd><p>Factorization Machine Classification trained with a ALS
 (coordinate descent)
 solver.</p>
@@ -250,6 +474,58 @@ initializes the parameters and mcmc chain.</li>
 </tr>
 </tbody>
 </table>
+<dl class="attribute">
+<dt id="fastFM.als.FMClassification.__delattr__">
+<code class="descname">__delattr__</code><a class="headerlink" href="#fastFM.als.FMClassification.__delattr__" title="Permalink to this definition">¶</a></dt>
+<dd><p>x.__delattr__(&#8216;name&#8217;) &lt;==&gt; del x.name</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fastFM.als.FMClassification.__format__">
+<code class="descname">__format__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.als.FMClassification.__format__" title="Permalink to this definition">¶</a></dt>
+<dd><p>default object formatter</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fastFM.als.FMClassification.__getattribute__">
+<code class="descname">__getattribute__</code><a class="headerlink" href="#fastFM.als.FMClassification.__getattribute__" title="Permalink to this definition">¶</a></dt>
+<dd><p>x.__getattribute__(&#8216;name&#8217;) &lt;==&gt; x.name</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fastFM.als.FMClassification.__hash__">
+<code class="descname">__hash__</code><a class="headerlink" href="#fastFM.als.FMClassification.__hash__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="fastFM.als.FMClassification.__reduce__">
+<code class="descname">__reduce__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.als.FMClassification.__reduce__" title="Permalink to this definition">¶</a></dt>
+<dd><p>helper for pickle</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fastFM.als.FMClassification.__reduce_ex__">
+<code class="descname">__reduce_ex__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.als.FMClassification.__reduce_ex__" title="Permalink to this definition">¶</a></dt>
+<dd><p>helper for pickle</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fastFM.als.FMClassification.__setattr__">
+<code class="descname">__setattr__</code><a class="headerlink" href="#fastFM.als.FMClassification.__setattr__" title="Permalink to this definition">¶</a></dt>
+<dd><p>x.__setattr__(&#8216;name&#8217;, value) &lt;==&gt; x.name = value</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fastFM.als.FMClassification.__sizeof__">
+<code class="descname">__sizeof__</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; int<a class="headerlink" href="#fastFM.als.FMClassification.__sizeof__" title="Permalink to this definition">¶</a></dt>
+<dd><p>size of object in memory, in bytes</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fastFM.als.FMClassification.__str__">
+<code class="descname">__str__</code><a class="headerlink" href="#fastFM.als.FMClassification.__str__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="method">
 <dt id="fastFM.als.FMClassification.fit">
 <code class="descname">fit</code><span class="sig-paren">(</span><em>X_train</em>, <em>y_train</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fastFM/als.html#FMClassification.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fastFM.als.FMClassification.fit" title="Permalink to this definition">¶</a></dt>
@@ -263,6 +539,115 @@ initializes the parameters and mcmc chain.</li>
 <li><strong>y</strong> (<em>float | ndarray, shape = (n_samples, )</em>) &#8211; the targets have to be encodes as {-1, 1}.</li>
 </ul>
 </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="fastFM.als.FMClassification.get_params">
+<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.als.FMClassification.get_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get parameters for this estimator.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>deep</strong> (<em>boolean, optional</em>) &#8211; If True, will return the parameters for this estimator and
+contained subobjects that are estimators.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>params</strong> &#8211;
+Parameter names mapped to their values.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">mapping of string to any</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="fastFM.als.FMClassification.predict">
+<code class="descname">predict</code><span class="sig-paren">(</span><em>X_test</em><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.als.FMClassification.predict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return predictions</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>X</strong> (<em>scipy.sparse.csc_matrix, (n_samples, n_features)</em>) &#8211; </li>
+<li><strong>Returns</strong> &#8211; </li>
+<li><strong>------</strong> &#8211; </li>
+<li><strong>y</strong> (<em>array, shape (n_samples)</em>) &#8211; Class labels</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="fastFM.als.FMClassification.predict_proba">
+<code class="descname">predict_proba</code><span class="sig-paren">(</span><em>X_test</em><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.als.FMClassification.predict_proba" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return probabilities</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>X</strong> (<em>scipy.sparse.csc_matrix, (n_samples, n_features)</em>) &#8211; </li>
+<li><strong>Returns</strong> &#8211; </li>
+<li><strong>------</strong> &#8211; </li>
+<li><strong>y</strong> (<em>array, shape (n_samples)</em>) &#8211; Class Probability for the class with smaller label.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="fastFM.als.FMClassification.score">
+<code class="descname">score</code><span class="sig-paren">(</span><em>X</em>, <em>y</em>, <em>sample_weight=None</em><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.als.FMClassification.score" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the mean accuracy on the given test data and labels.</p>
+<p>In multi-label classification, this is the subset accuracy
+which is a harsh metric since you require for each sample that
+each label set be correctly predicted.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>X</strong> (<em>array-like, shape = (n_samples, n_features)</em>) &#8211; Test samples.</li>
+<li><strong>y</strong> (<em>array-like, shape = (n_samples) or (n_samples, n_outputs)</em>) &#8211; True labels for X.</li>
+<li><strong>sample_weight</strong> (<em>array-like, shape = [n_samples], optional</em>) &#8211; Sample weights.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>score</strong> &#8211;
+Mean accuracy of self.predict(X) wrt. y.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="fastFM.als.FMClassification.set_params">
+<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.als.FMClassification.set_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the parameters of this estimator.</p>
+<p>The method works on simple estimators as well as on nested objects
+(such as pipelines). The former have parameters of the form
+<code class="docutils literal"><span class="pre">&lt;component&gt;__&lt;parameter&gt;</span></code> so that it&#8217;s possible to update each
+component of a nested object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">self</td>
 </tr>
 </tbody>
 </table>
@@ -299,6 +684,58 @@ initializes the parameters and mcmc chain.</li>
 </tr>
 </tbody>
 </table>
+<dl class="attribute">
+<dt id="fastFM.als.FMRegression.__delattr__">
+<code class="descname">__delattr__</code><a class="headerlink" href="#fastFM.als.FMRegression.__delattr__" title="Permalink to this definition">¶</a></dt>
+<dd><p>x.__delattr__(&#8216;name&#8217;) &lt;==&gt; del x.name</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fastFM.als.FMRegression.__format__">
+<code class="descname">__format__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.als.FMRegression.__format__" title="Permalink to this definition">¶</a></dt>
+<dd><p>default object formatter</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fastFM.als.FMRegression.__getattribute__">
+<code class="descname">__getattribute__</code><a class="headerlink" href="#fastFM.als.FMRegression.__getattribute__" title="Permalink to this definition">¶</a></dt>
+<dd><p>x.__getattribute__(&#8216;name&#8217;) &lt;==&gt; x.name</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fastFM.als.FMRegression.__hash__">
+<code class="descname">__hash__</code><a class="headerlink" href="#fastFM.als.FMRegression.__hash__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="fastFM.als.FMRegression.__reduce__">
+<code class="descname">__reduce__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.als.FMRegression.__reduce__" title="Permalink to this definition">¶</a></dt>
+<dd><p>helper for pickle</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fastFM.als.FMRegression.__reduce_ex__">
+<code class="descname">__reduce_ex__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.als.FMRegression.__reduce_ex__" title="Permalink to this definition">¶</a></dt>
+<dd><p>helper for pickle</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fastFM.als.FMRegression.__setattr__">
+<code class="descname">__setattr__</code><a class="headerlink" href="#fastFM.als.FMRegression.__setattr__" title="Permalink to this definition">¶</a></dt>
+<dd><p>x.__setattr__(&#8216;name&#8217;, value) &lt;==&gt; x.name = value</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fastFM.als.FMRegression.__sizeof__">
+<code class="descname">__sizeof__</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; int<a class="headerlink" href="#fastFM.als.FMRegression.__sizeof__" title="Permalink to this definition">¶</a></dt>
+<dd><p>size of object in memory, in bytes</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fastFM.als.FMRegression.__str__">
+<code class="descname">__str__</code><a class="headerlink" href="#fastFM.als.FMRegression.__str__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="method">
 <dt id="fastFM.als.FMRegression.fit">
 <code class="descname">fit</code><span class="sig-paren">(</span><em>X_train</em>, <em>y_train</em>, <em>n_more_iter=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fastFM/als.html#FMRegression.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fastFM.als.FMRegression.fit" title="Permalink to this definition">¶</a></dt>
@@ -318,6 +755,99 @@ initializes the parameters and mcmc chain.</li>
 </table>
 </dd></dl>
 
+<dl class="method">
+<dt id="fastFM.als.FMRegression.get_params">
+<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.als.FMRegression.get_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get parameters for this estimator.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>deep</strong> (<em>boolean, optional</em>) &#8211; If True, will return the parameters for this estimator and
+contained subobjects that are estimators.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>params</strong> &#8211;
+Parameter names mapped to their values.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">mapping of string to any</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="fastFM.als.FMRegression.predict">
+<code class="descname">predict</code><span class="sig-paren">(</span><em>X_test</em><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.als.FMRegression.predict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return predictions</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>X</strong> (<em>scipy.sparse.csc_matrix, (n_samples, n_features)</em>) &#8211; </li>
+<li><strong>Returns</strong> &#8211; </li>
+<li><strong>------</strong> &#8211; </li>
+<li><strong>T</strong> (<em>array, shape (n_samples)</em>) &#8211; The labels are returned for classification.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="fastFM.als.FMRegression.score">
+<code class="descname">score</code><span class="sig-paren">(</span><em>X</em>, <em>y</em>, <em>sample_weight=None</em><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.als.FMRegression.score" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the coefficient of determination R^2 of the prediction.</p>
+<p>The coefficient R^2 is defined as (1 - u/v), where u is the regression
+sum of squares ((y_true - y_pred) ** 2).sum() and v is the residual
+sum of squares ((y_true - y_true.mean()) ** 2).sum().
+Best possible score is 1.0 and it can be negative (because the
+model can be arbitrarily worse). A constant model that always
+predicts the expected value of y, disregarding the input features,
+would get a R^2 score of 0.0.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>X</strong> (<em>array-like, shape = (n_samples, n_features)</em>) &#8211; Test samples.</li>
+<li><strong>y</strong> (<em>array-like, shape = (n_samples) or (n_samples, n_outputs)</em>) &#8211; True values for X.</li>
+<li><strong>sample_weight</strong> (<em>array-like, shape = [n_samples], optional</em>) &#8211; Sample weights.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>score</strong> &#8211;
+R^2 of self.predict(X) wrt. y.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="fastFM.als.FMRegression.set_params">
+<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.als.FMRegression.set_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the parameters of this estimator.</p>
+<p>The method works on simple estimators as well as on nested objects
+(such as pipelines). The former have parameters of the form
+<code class="docutils literal"><span class="pre">&lt;component&gt;__&lt;parameter&gt;</span></code> so that it&#8217;s possible to update each
+component of a nested object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">self</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 </dd></dl>
 
 </div>
@@ -325,7 +855,7 @@ initializes the parameters and mcmc chain.</li>
 <span id="the-sgd-module"></span><h2>The SGD module<a class="headerlink" href="#module-fastFM.sgd" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="fastFM.sgd.FMClassification">
-<em class="property">class </em><code class="descclassname">fastFM.sgd.</code><code class="descname">FMClassification</code><span class="sig-paren">(</span><em>n_iter=100</em>, <em>init_stdev=0.1</em>, <em>rank=8</em>, <em>random_state=123</em>, <em>l2_reg_w=0</em>, <em>l2_reg_V=0</em>, <em>l2_reg=0</em>, <em>step_size=0.1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fastFM/sgd.html#FMClassification"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fastFM.sgd.FMClassification" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">fastFM.sgd.</code><code class="descname">FMClassification</code><span class="sig-paren">(</span><em>n_iter=100</em>, <em>init_stdev=0.1</em>, <em>rank=8</em>, <em>random_state=123</em>, <em>l2_reg_w=0</em>, <em>l2_reg_V=0</em>, <em>l2_reg=None</em>, <em>step_size=0.1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fastFM/sgd.html#FMClassification"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fastFM.sgd.FMClassification" title="Permalink to this definition">¶</a></dt>
 <dd><p>Factorization Machine Classification trained with a stochastic gradient
 descent solver.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -353,6 +883,58 @@ might require a tunning of the number of iterations <cite>n_iter</cite>.</li>
 </tr>
 </tbody>
 </table>
+<dl class="attribute">
+<dt id="fastFM.sgd.FMClassification.__delattr__">
+<code class="descname">__delattr__</code><a class="headerlink" href="#fastFM.sgd.FMClassification.__delattr__" title="Permalink to this definition">¶</a></dt>
+<dd><p>x.__delattr__(&#8216;name&#8217;) &lt;==&gt; del x.name</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fastFM.sgd.FMClassification.__format__">
+<code class="descname">__format__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.sgd.FMClassification.__format__" title="Permalink to this definition">¶</a></dt>
+<dd><p>default object formatter</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fastFM.sgd.FMClassification.__getattribute__">
+<code class="descname">__getattribute__</code><a class="headerlink" href="#fastFM.sgd.FMClassification.__getattribute__" title="Permalink to this definition">¶</a></dt>
+<dd><p>x.__getattribute__(&#8216;name&#8217;) &lt;==&gt; x.name</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fastFM.sgd.FMClassification.__hash__">
+<code class="descname">__hash__</code><a class="headerlink" href="#fastFM.sgd.FMClassification.__hash__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="fastFM.sgd.FMClassification.__reduce__">
+<code class="descname">__reduce__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.sgd.FMClassification.__reduce__" title="Permalink to this definition">¶</a></dt>
+<dd><p>helper for pickle</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fastFM.sgd.FMClassification.__reduce_ex__">
+<code class="descname">__reduce_ex__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.sgd.FMClassification.__reduce_ex__" title="Permalink to this definition">¶</a></dt>
+<dd><p>helper for pickle</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fastFM.sgd.FMClassification.__setattr__">
+<code class="descname">__setattr__</code><a class="headerlink" href="#fastFM.sgd.FMClassification.__setattr__" title="Permalink to this definition">¶</a></dt>
+<dd><p>x.__setattr__(&#8216;name&#8217;, value) &lt;==&gt; x.name = value</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fastFM.sgd.FMClassification.__sizeof__">
+<code class="descname">__sizeof__</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; int<a class="headerlink" href="#fastFM.sgd.FMClassification.__sizeof__" title="Permalink to this definition">¶</a></dt>
+<dd><p>size of object in memory, in bytes</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fastFM.sgd.FMClassification.__str__">
+<code class="descname">__str__</code><a class="headerlink" href="#fastFM.sgd.FMClassification.__str__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="method">
 <dt id="fastFM.sgd.FMClassification.fit">
 <code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fastFM/sgd.html#FMClassification.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fastFM.sgd.FMClassification.fit" title="Permalink to this definition">¶</a></dt>
@@ -366,6 +948,115 @@ might require a tunning of the number of iterations <cite>n_iter</cite>.</li>
 <li><strong>y</strong> (<em>float | ndarray, shape = (n_samples, )</em>) &#8211; the targets have to be encodes as {-1, 1}.</li>
 </ul>
 </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="fastFM.sgd.FMClassification.get_params">
+<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.sgd.FMClassification.get_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get parameters for this estimator.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>deep</strong> (<em>boolean, optional</em>) &#8211; If True, will return the parameters for this estimator and
+contained subobjects that are estimators.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>params</strong> &#8211;
+Parameter names mapped to their values.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">mapping of string to any</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="fastFM.sgd.FMClassification.predict">
+<code class="descname">predict</code><span class="sig-paren">(</span><em>X_test</em><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.sgd.FMClassification.predict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return predictions</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>X</strong> (<em>scipy.sparse.csc_matrix, (n_samples, n_features)</em>) &#8211; </li>
+<li><strong>Returns</strong> &#8211; </li>
+<li><strong>------</strong> &#8211; </li>
+<li><strong>y</strong> (<em>array, shape (n_samples)</em>) &#8211; Class labels</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="fastFM.sgd.FMClassification.predict_proba">
+<code class="descname">predict_proba</code><span class="sig-paren">(</span><em>X_test</em><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.sgd.FMClassification.predict_proba" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return probabilities</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>X</strong> (<em>scipy.sparse.csc_matrix, (n_samples, n_features)</em>) &#8211; </li>
+<li><strong>Returns</strong> &#8211; </li>
+<li><strong>------</strong> &#8211; </li>
+<li><strong>y</strong> (<em>array, shape (n_samples)</em>) &#8211; Class Probability for the class with smaller label.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="fastFM.sgd.FMClassification.score">
+<code class="descname">score</code><span class="sig-paren">(</span><em>X</em>, <em>y</em>, <em>sample_weight=None</em><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.sgd.FMClassification.score" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the mean accuracy on the given test data and labels.</p>
+<p>In multi-label classification, this is the subset accuracy
+which is a harsh metric since you require for each sample that
+each label set be correctly predicted.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>X</strong> (<em>array-like, shape = (n_samples, n_features)</em>) &#8211; Test samples.</li>
+<li><strong>y</strong> (<em>array-like, shape = (n_samples) or (n_samples, n_outputs)</em>) &#8211; True labels for X.</li>
+<li><strong>sample_weight</strong> (<em>array-like, shape = [n_samples], optional</em>) &#8211; Sample weights.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>score</strong> &#8211;
+Mean accuracy of self.predict(X) wrt. y.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="fastFM.sgd.FMClassification.set_params">
+<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.sgd.FMClassification.set_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the parameters of this estimator.</p>
+<p>The method works on simple estimators as well as on nested objects
+(such as pipelines). The former have parameters of the form
+<code class="docutils literal"><span class="pre">&lt;component&gt;__&lt;parameter&gt;</span></code> so that it&#8217;s possible to update each
+component of a nested object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">self</td>
 </tr>
 </tbody>
 </table>
@@ -403,6 +1094,58 @@ might require a tunning of the number of iterations <cite>n_iter</cite>.</li>
 </tr>
 </tbody>
 </table>
+<dl class="attribute">
+<dt id="fastFM.sgd.FMRegression.__delattr__">
+<code class="descname">__delattr__</code><a class="headerlink" href="#fastFM.sgd.FMRegression.__delattr__" title="Permalink to this definition">¶</a></dt>
+<dd><p>x.__delattr__(&#8216;name&#8217;) &lt;==&gt; del x.name</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fastFM.sgd.FMRegression.__format__">
+<code class="descname">__format__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.sgd.FMRegression.__format__" title="Permalink to this definition">¶</a></dt>
+<dd><p>default object formatter</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fastFM.sgd.FMRegression.__getattribute__">
+<code class="descname">__getattribute__</code><a class="headerlink" href="#fastFM.sgd.FMRegression.__getattribute__" title="Permalink to this definition">¶</a></dt>
+<dd><p>x.__getattribute__(&#8216;name&#8217;) &lt;==&gt; x.name</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fastFM.sgd.FMRegression.__hash__">
+<code class="descname">__hash__</code><a class="headerlink" href="#fastFM.sgd.FMRegression.__hash__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="fastFM.sgd.FMRegression.__reduce__">
+<code class="descname">__reduce__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.sgd.FMRegression.__reduce__" title="Permalink to this definition">¶</a></dt>
+<dd><p>helper for pickle</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fastFM.sgd.FMRegression.__reduce_ex__">
+<code class="descname">__reduce_ex__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.sgd.FMRegression.__reduce_ex__" title="Permalink to this definition">¶</a></dt>
+<dd><p>helper for pickle</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fastFM.sgd.FMRegression.__setattr__">
+<code class="descname">__setattr__</code><a class="headerlink" href="#fastFM.sgd.FMRegression.__setattr__" title="Permalink to this definition">¶</a></dt>
+<dd><p>x.__setattr__(&#8216;name&#8217;, value) &lt;==&gt; x.name = value</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fastFM.sgd.FMRegression.__sizeof__">
+<code class="descname">__sizeof__</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; int<a class="headerlink" href="#fastFM.sgd.FMRegression.__sizeof__" title="Permalink to this definition">¶</a></dt>
+<dd><p>size of object in memory, in bytes</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fastFM.sgd.FMRegression.__str__">
+<code class="descname">__str__</code><a class="headerlink" href="#fastFM.sgd.FMRegression.__str__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="method">
 <dt id="fastFM.sgd.FMRegression.fit">
 <code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fastFM/sgd.html#FMRegression.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fastFM.sgd.FMRegression.fit" title="Permalink to this definition">¶</a></dt>
@@ -416,6 +1159,99 @@ might require a tunning of the number of iterations <cite>n_iter</cite>.</li>
 <li><strong>y</strong> (<em>float | ndarray, shape = (n_samples, )</em>) &#8211; </li>
 </ul>
 </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="fastFM.sgd.FMRegression.get_params">
+<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.sgd.FMRegression.get_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get parameters for this estimator.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>deep</strong> (<em>boolean, optional</em>) &#8211; If True, will return the parameters for this estimator and
+contained subobjects that are estimators.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>params</strong> &#8211;
+Parameter names mapped to their values.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">mapping of string to any</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="fastFM.sgd.FMRegression.predict">
+<code class="descname">predict</code><span class="sig-paren">(</span><em>X_test</em><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.sgd.FMRegression.predict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return predictions</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>X</strong> (<em>scipy.sparse.csc_matrix, (n_samples, n_features)</em>) &#8211; </li>
+<li><strong>Returns</strong> &#8211; </li>
+<li><strong>------</strong> &#8211; </li>
+<li><strong>T</strong> (<em>array, shape (n_samples)</em>) &#8211; The labels are returned for classification.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="fastFM.sgd.FMRegression.score">
+<code class="descname">score</code><span class="sig-paren">(</span><em>X</em>, <em>y</em>, <em>sample_weight=None</em><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.sgd.FMRegression.score" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the coefficient of determination R^2 of the prediction.</p>
+<p>The coefficient R^2 is defined as (1 - u/v), where u is the regression
+sum of squares ((y_true - y_pred) ** 2).sum() and v is the residual
+sum of squares ((y_true - y_true.mean()) ** 2).sum().
+Best possible score is 1.0 and it can be negative (because the
+model can be arbitrarily worse). A constant model that always
+predicts the expected value of y, disregarding the input features,
+would get a R^2 score of 0.0.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>X</strong> (<em>array-like, shape = (n_samples, n_features)</em>) &#8211; Test samples.</li>
+<li><strong>y</strong> (<em>array-like, shape = (n_samples) or (n_samples, n_outputs)</em>) &#8211; True values for X.</li>
+<li><strong>sample_weight</strong> (<em>array-like, shape = [n_samples], optional</em>) &#8211; Sample weights.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>score</strong> &#8211;
+R^2 of self.predict(X) wrt. y.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="fastFM.sgd.FMRegression.set_params">
+<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.sgd.FMRegression.set_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the parameters of this estimator.</p>
+<p>The method works on simple estimators as well as on nested objects
+(such as pipelines). The former have parameters of the form
+<code class="docutils literal"><span class="pre">&lt;component&gt;__&lt;parameter&gt;</span></code> so that it&#8217;s possible to update each
+component of a nested object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">self</td>
 </tr>
 </tbody>
 </table>
@@ -455,6 +1291,58 @@ might require a tunning of the number of iterations <cite>n_iter</cite>.</li>
 </tr>
 </tbody>
 </table>
+<dl class="attribute">
+<dt id="fastFM.bpr.FMRecommender.__delattr__">
+<code class="descname">__delattr__</code><a class="headerlink" href="#fastFM.bpr.FMRecommender.__delattr__" title="Permalink to this definition">¶</a></dt>
+<dd><p>x.__delattr__(&#8216;name&#8217;) &lt;==&gt; del x.name</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fastFM.bpr.FMRecommender.__format__">
+<code class="descname">__format__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.bpr.FMRecommender.__format__" title="Permalink to this definition">¶</a></dt>
+<dd><p>default object formatter</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fastFM.bpr.FMRecommender.__getattribute__">
+<code class="descname">__getattribute__</code><a class="headerlink" href="#fastFM.bpr.FMRecommender.__getattribute__" title="Permalink to this definition">¶</a></dt>
+<dd><p>x.__getattribute__(&#8216;name&#8217;) &lt;==&gt; x.name</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fastFM.bpr.FMRecommender.__hash__">
+<code class="descname">__hash__</code><a class="headerlink" href="#fastFM.bpr.FMRecommender.__hash__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="fastFM.bpr.FMRecommender.__reduce__">
+<code class="descname">__reduce__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.bpr.FMRecommender.__reduce__" title="Permalink to this definition">¶</a></dt>
+<dd><p>helper for pickle</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fastFM.bpr.FMRecommender.__reduce_ex__">
+<code class="descname">__reduce_ex__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.bpr.FMRecommender.__reduce_ex__" title="Permalink to this definition">¶</a></dt>
+<dd><p>helper for pickle</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fastFM.bpr.FMRecommender.__setattr__">
+<code class="descname">__setattr__</code><a class="headerlink" href="#fastFM.bpr.FMRecommender.__setattr__" title="Permalink to this definition">¶</a></dt>
+<dd><p>x.__setattr__(&#8216;name&#8217;, value) &lt;==&gt; x.name = value</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="fastFM.bpr.FMRecommender.__sizeof__">
+<code class="descname">__sizeof__</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; int<a class="headerlink" href="#fastFM.bpr.FMRecommender.__sizeof__" title="Permalink to this definition">¶</a></dt>
+<dd><p>size of object in memory, in bytes</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="fastFM.bpr.FMRecommender.__str__">
+<code class="descname">__str__</code><a class="headerlink" href="#fastFM.bpr.FMRecommender.__str__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="method">
 <dt id="fastFM.bpr.FMRecommender.fit">
 <code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>pairs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fastFM/bpr.html#FMRecommender.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fastFM.bpr.FMRecommender.fit" title="Permalink to this definition">¶</a></dt>
@@ -470,6 +1358,66 @@ the first returns a high value then the second
 FM(X[i,0]) &gt; FM(X[i, 1]).</li>
 </ul>
 </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="fastFM.bpr.FMRecommender.get_params">
+<code class="descname">get_params</code><span class="sig-paren">(</span><em>deep=True</em><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.bpr.FMRecommender.get_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get parameters for this estimator.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>deep</strong> (<em>boolean, optional</em>) &#8211; If True, will return the parameters for this estimator and
+contained subobjects that are estimators.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>params</strong> &#8211;
+Parameter names mapped to their values.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">mapping of string to any</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="fastFM.bpr.FMRecommender.predict">
+<code class="descname">predict</code><span class="sig-paren">(</span><em>X_test</em><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.bpr.FMRecommender.predict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return predictions</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>X</strong> (<em>scipy.sparse.csc_matrix, (n_samples, n_features)</em>) &#8211; </li>
+<li><strong>Returns</strong> &#8211; </li>
+<li><strong>------</strong> &#8211; </li>
+<li><strong>T</strong> (<em>array, shape (n_samples)</em>) &#8211; The labels are returned for classification.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="fastFM.bpr.FMRecommender.set_params">
+<code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.bpr.FMRecommender.set_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the parameters of this estimator.</p>
+<p>The method works on simple estimators as well as on nested objects
+(such as pipelines). The former have parameters of the form
+<code class="docutils literal"><span class="pre">&lt;component&gt;__&lt;parameter&gt;</span></code> so that it&#8217;s possible to update each
+component of a nested object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">self</td>
 </tr>
 </tbody>
 </table>
