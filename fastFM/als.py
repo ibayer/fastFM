@@ -6,7 +6,7 @@ import numpy as np
 from sklearn.base import RegressorMixin
 from .validation import check_consistent_length, check_array
 from .base import (FactorizationMachine, BaseFMClassifier,
-                  _validate_class_labels, _check_warm_start)
+                   _validate_class_labels, _check_warm_start)
 
 
 class FMRegression(FactorizationMachine, RegressorMixin):
@@ -145,12 +145,12 @@ class FMClassification(BaseFMClassifier):
         Coefficients of second order factor matrix.
     """
     def __init__(self, n_iter=100, init_stdev=0.1, rank=8, random_state=123,
-                 l2_reg_w=0.1, l2_reg_V=0.1, l2_reg=0):
+                 l2_reg_w=0.1, l2_reg_V=0.1, l2_reg=None):
         super(FMClassification, self).__init__(n_iter=n_iter,
                                                init_stdev=init_stdev,
                                                rank=rank,
                                                random_state=random_state)
-        if (l2_reg != 0):
+        if (l2_reg is not None):
             self.l2_reg_V = l2_reg
             self.l2_reg_w = l2_reg
         else:
