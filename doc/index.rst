@@ -10,6 +10,12 @@ This is the documentation for fastFM's python interface.
 **Source code** and **install instructions** can be found on https://github.com/ibayer/fastFM.
 A short paper describing the library is available on arXiv http://arxiv.org/abs/1505.00641
 
+
+Supported Operating Systems
+---------------------------
+fastFM has a continous integration / testing servers (Travis) for **Linux (Ubuntu 14.04 LTS)**
+and **OS X Mavericks**. Other OS are not actively supported.
+
 .. toctree::
    :maxdepth: 3
 

@@ -22,6 +22,11 @@ All performence critical code as been written in C and wrapped with Cython. fast
 stochastic gradient descent (SGD) and coordinate descent (CD) optimization routines as well as Markov Chain Monte Carlo (MCMC) for Bayesian inference.
 The solvers can be used for regression, classification and ranking problems. Detailed usage instructions can be found in the `online documentation  <http://ibayer.github.io/fastFM>`_ and on `arXiv <http://arxiv.org/abs/1505.00641>`_.
 
+Supported Operating Systems
+---------------------------
+fastFM has a continous integration / testing servers (Travis) for **Linux (Ubuntu 14.04 LTS)**
+and **OS X Mavericks**. Other OS are not actively supported.
+
 Usage
 -----
 .. code-block:: python
