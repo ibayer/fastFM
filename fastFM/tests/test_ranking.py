@@ -24,6 +24,7 @@ def get_test_problem(task='regression'):
         y = y_labels
     return w0, w, V, y, X
 
+
 def test_fm_sgr_ranking():
     w0, w, V, y, X = get_test_problem()
     X_test = X.copy()
@@ -43,8 +44,8 @@ def test_fm_sgr_ranking():
 
     print(compares)
     fm = bpr.FMRecommender(n_iter=2000,
-            init_stdev=0.01, l2_reg_w=.5, l2_reg_V=.5, rank=2,
-            step_size=.002, random_state=11)
+                           init_stdev=0.01, l2_reg_w=.5, l2_reg_V=.5, rank=2,
+                           step_size=.002, random_state=11)
     fm.fit(X_train, compares)
     y_pred = fm.predict(X_test)
     y_pred = np.argsort(y_pred)
@@ -52,4 +53,3 @@ def test_fm_sgr_ranking():
     print(y_pred)
     print(np.argsort(y))
     assert utils.kendall_tau(np.argsort(y), y_pred) == 1
-
