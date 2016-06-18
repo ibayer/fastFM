@@ -3,7 +3,6 @@
 
 import numpy as np
 import scipy.sparse as sp
-from sklearn.metrics import mean_squared_error, r2_score
 from numpy.testing import assert_almost_equal, assert_equal
 import ffm
 

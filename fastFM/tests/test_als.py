@@ -5,7 +5,6 @@ import numpy as np
 import scipy.sparse as sp
 from sklearn import metrics
 from fastFM import als
-from numpy.testing import assert_almost_equal
 from fastFM.datasets import make_user_item_regression
 from sklearn.metrics import mean_squared_error
 from sklearn.utils.testing import assert_almost_equal
