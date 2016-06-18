@@ -49,7 +49,7 @@ def test_fm_classification():
     fpr, tpr, thresholds = metrics.roc_curve(y_labels, y_pred)
     auc = metrics.auc(fpr, tpr)
     assert auc > 0.95
-    y_pred = fm.predict(X[:2,])
+    y_pred = fm.predict(X[:2, ])
 
 
 def test_linear_fm_classification():
@@ -64,7 +64,7 @@ def test_linear_fm_classification():
     fpr, tpr, thresholds = metrics.roc_curve(y_labels, y_pred)
     auc = metrics.auc(fpr, tpr)
     assert auc > 0.95
-    y_pred = fm.predict(X[:2,])
+    y_pred = fm.predict(X[:2, ])
 
 
 def test_fm_classification_proba():
@@ -114,12 +114,15 @@ def test_find_init_stdev():
 
     fm = mcmc.FMRegression(n_iter=10, rank=5)
     best_init_stdev, mse = mcmc.find_init_stdev(fm, X_train, y_train,
-            stdev_range=[0.2, 0.5, 1.0])
+                                                stdev_range=[0.2, 0.5, 1.0])
     best_init_stdev_bad, _ = mcmc.find_init_stdev(fm, X_train, y_train,
-        stdev_range=[5.])
+                                                  stdev_range=[5.])
     print('--' * 30)
-    best_init_stdev_vali, mse_vali = mcmc.find_init_stdev(fm, X_train, y_train, X_test,
-            y_test, stdev_range=[0.2, 0.5, 1.0])
+    best_init_stdev_vali, mse_vali = mcmc.find_init_stdev(fm,
+                                                          X_train, y_train,
+                                                          X_test, y_test,
+                                                          stdev_range=[
+                                                              0.2, 0.5, 1.0])
     assert best_init_stdev < best_init_stdev_bad
     assert best_init_stdev_vali == best_init_stdev
     assert mse_vali > mse

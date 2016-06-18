@@ -3,9 +3,9 @@
 
 import numpy as np
 import scipy.sparse as sp
-from sklearn.metrics import mean_squared_error, r2_score
 from numpy.testing import assert_almost_equal, assert_equal
 import ffm
+
 
 def get_test_problem():
     X = sp.csc_matrix(np.array([[6, 1],
@@ -20,9 +20,11 @@ def get_test_problem():
     w0 = 2
     return w0, w, V, y, X
 
+
 def test_cxsparse_integration():
-    X = sp.csc_matrix(np.arange(60, dtype=np.float64).reshape(6,10))
+    X = sp.csc_matrix(np.arange(60, dtype=np.float64).reshape(6, 10))
     assert_almost_equal(ffm.cs_norm(X), X.sum(axis=0).max())
+
 
 def test_ffm_predict():
     w0, w, V, y, X = get_test_problem()

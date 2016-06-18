@@ -29,7 +29,7 @@ def test_fm_classification_predict_proba():
     w0, w, V, y, X = get_test_problem(task='classification')
 
     fm = als.FMClassification(n_iter=1000,
-            init_stdev=0.1, l2_reg_w=0, l2_reg_V=0, rank=2)
+                              init_stdev=0.1, l2_reg_w=0, l2_reg_V=0, rank=2)
     fm.fit(X, y)
     y_pred = fm.predict(X)
     y_pred = fm.predict_proba(X)

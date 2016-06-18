@@ -5,7 +5,6 @@ import numpy as np
 import scipy.sparse as sp
 from sklearn import metrics
 from fastFM import als
-from numpy.testing import assert_almost_equal
 from fastFM.datasets import make_user_item_regression
 from sklearn.metrics import mean_squared_error
 from sklearn.utils.testing import assert_almost_equal
@@ -76,22 +75,22 @@ def test_fm_regression():
     assert_almost_equal(y_pred, y, 3)
     # check different size
     fm = als.FMRegression(n_iter=1000, l2_reg_w=0, l2_reg_V=0, rank=5)
-    X_big = sp.hstack([X,X])
+    X_big = sp.hstack([X, X])
     fm.fit(X_big, y)
-    y_pred = fm.predict(X_big[:2,])
+    y_pred = fm.predict(X_big[:2, ])
 
 
 def test_fm_classification():
     w0, w, V, y, X = get_test_problem(task='classification')
 
     fm = als.FMClassification(n_iter=1000,
-            init_stdev=0.1, l2_reg_w=0, l2_reg_V=0, rank=2)
+                              init_stdev=0.1, l2_reg_w=0, l2_reg_V=0, rank=2)
     fm.fit(X, y)
     y_pred = fm.predict(X)
     print(y_pred)
     assert metrics.accuracy_score(y, y_pred) > 0.95
     # check different size
-    fm.fit(X[:2,], y[:2])
+    fm.fit(X[:2, ], y[:2])
 
 
 def test_als_warm_start():
@@ -140,7 +139,7 @@ def test_warm_start_path():
     l2_reg_V = 0
 
     fm = als.FMRegression(n_iter=0, l2_reg_w=l2_reg_w,
-            l2_reg_V=l2_reg_V, rank=rank, random_state=seed)
+                          l2_reg_V=l2_reg_V, rank=rank, random_state=seed)
     # initalize coefs
     fm.fit(X_train, y_train)
 
@@ -148,8 +147,10 @@ def test_warm_start_path():
     rmse_test = []
     for i in range(1, n_iter):
         fm.fit(X_train, y_train, n_more_iter=step_size)
-        rmse_train.append(np.sqrt(mean_squared_error(fm.predict(X_train), y_train)))
-        rmse_test.append(np.sqrt(mean_squared_error(fm.predict(X_test), y_test)))
+        rmse_train.append(np.sqrt(mean_squared_error(
+            fm.predict(X_train), y_train)))
+        rmse_test.append(np.sqrt(mean_squared_error(
+            fm.predict(X_test), y_test)))
 
     print('------- restart ----------')
     values = np.arange(1, n_iter)
@@ -157,15 +158,17 @@ def test_warm_start_path():
     rmse_train_re = []
     for i in values:
         fm = als.FMRegression(n_iter=i, l2_reg_w=l2_reg_w,
-                l2_reg_V=l2_reg_V, rank=rank, random_state=seed)
+                              l2_reg_V=l2_reg_V, rank=rank, random_state=seed)
         fm.fit(X_train, y_train)
-        rmse_test_re.append(np.sqrt(mean_squared_error(fm.predict(X_test), y_test)))
-        rmse_train_re.append(np.sqrt(mean_squared_error(fm.predict(X_train), y_train)))
+        rmse_test_re.append(np.sqrt(mean_squared_error(
+            fm.predict(X_test), y_test)))
+        rmse_train_re.append(np.sqrt(mean_squared_error(
+            fm.predict(X_train), y_train)))
 
     assert_almost_equal(rmse_train, rmse_train_re)
     assert_almost_equal(rmse_test, rmse_test_re)
 
 
 if __name__ == '__main__':
-    #test_fm_regression_only_w0()
+    # test_fm_regression_only_w0()
     test_fm_linear_regression()

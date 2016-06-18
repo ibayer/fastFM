@@ -2,7 +2,7 @@
 # License: BSD 3 clause
 
 cimport cffm
-from  cffm cimport cs_di, ffm_param
+from cffm cimport cs_di, ffm_param
 # Import some functionality from Python and the C stdlib
 from cpython.pycapsule cimport *
 
@@ -10,10 +10,13 @@ from libc.stdlib cimport malloc, free
 from scipy.sparse import csc_matrix
 cimport numpy as np
 import numpy as np
+
+
 # Destructor for cleaning up CsMatrix objects
 cdef del_CsMatrix(object obj):
-    pt = <cffm.cs_di *> PyCapsule_GetPointer(obj,"CsMatrix")
+    pt = <cffm.cs_di *> PyCapsule_GetPointer(obj, "CsMatrix")
     free(<void *> pt)
+
 
 # Create a CsMatrix object and return as a capsule
 def CsMatrix(X not None):
@@ -35,13 +38,16 @@ def CsMatrix(X not None):
     p.p = &indptr[0]
     p.i = &indices[0]
     p.x = &data[0]
-    p.nz = -1 # to indicate CSC format
-    return PyCapsule_New(<void *>p,"CsMatrix",<PyCapsule_Destructor>del_CsMatrix)
+    p.nz = -1  # to indicate CSC format
+    return PyCapsule_New(<void *>p, "CsMatrix",
+                         <PyCapsule_Destructor>del_CsMatrix)
+
 
 # Destructor for cleaning up FFMParam objects
 cdef del_FFMParam(object obj):
-    pt = <cffm.ffm_param *> PyCapsule_GetPointer(obj,"FFMParam")
+    pt = <cffm.ffm_param *> PyCapsule_GetPointer(obj, "FFMParam")
     free(<void *> pt)
+
 
 # Create a FFMParam object and return as a capsule
 def FFMParam(fm):
@@ -65,27 +71,30 @@ def FFMParam(fm):
     p.ignore_w_0 = 1 if fm.ignore_w_0 else 0
     p.ignore_w = 1 if fm.ignore_w else 0
     p.warm_start = 1 if fm.warm_start else 0
-    return PyCapsule_New(<void *>p,"FFMParam",<PyCapsule_Destructor>del_FFMParam)
+    return PyCapsule_New(<void *>p, "FFMParam",
+                         <PyCapsule_Destructor>del_FFMParam)
+
 
 def ffm_predict(double w_0, double[:] w,
-        np.ndarray[np.float64_t, ndim = 2] V, X):
+                np.ndarray[np.float64_t, ndim = 2] V, X):
     assert X.shape[1] == len(w)
     assert X.shape[1] == V.shape[1]
     X_ = CsMatrix(X)
     k = V.shape[0]
-    pt_X = <cffm.cs_di *> PyCapsule_GetPointer(X_,"CsMatrix")
+    pt_X = <cffm.cs_di *> PyCapsule_GetPointer(X_, "CsMatrix")
     cdef np.ndarray[np.float64_t, ndim=1, mode='c'] y =\
          np.zeros(X.shape[0], dtype=np.float64)
     cffm.ffm_predict(&w_0, &w[0], <double *> V.data, pt_X, &y[0], k)
     return y
 
+
 def ffm_als_fit(fm, X, double[:] y):
     assert X.shape[0] == len(y) # test shapes
     n_features = X.shape[1]
     X_ = CsMatrix(X)
-    pt_X = <cffm.cs_di *> PyCapsule_GetPointer(X_,"CsMatrix")
+    pt_X = <cffm.cs_di *> PyCapsule_GetPointer(X_, "CsMatrix")
     param = FFMParam(fm)
-    pt_param = <cffm.ffm_param *> PyCapsule_GetPointer(param,"FFMParam")
+    pt_param = <cffm.ffm_param *> PyCapsule_GetPointer(param, "FFMParam")
     cdef double w_0
     cdef np.ndarray[np.float64_t, ndim=1, mode='c'] w
     cdef np.ndarray[np.float64_t, ndim=2, mode='c'] V
@@ -100,8 +109,8 @@ def ffm_als_fit(fm, X, double[:] y):
         w = np.zeros(n_features, dtype=np.float64)
         V = np.zeros((fm.rank, n_features), dtype=np.float64)
 
-    cffm.ffm_als_fit(&w_0, <double *> w.data, <double *> V.data, pt_X, &y[0],
-            pt_param)
+    cffm.ffm_als_fit(&w_0, <double *> w.data, <double *> V.data,
+                     pt_X, &y[0], pt_param)
     return w_0, w, V
 
 
@@ -109,9 +118,9 @@ def ffm_sgd_fit(fm, X, double[:] y):
     assert X.shape[1] == len(y) # test shapes
     n_features = X.shape[0]
     X_ = CsMatrix(X)
-    pt_X = <cffm.cs_di *> PyCapsule_GetPointer(X_,"CsMatrix")
+    pt_X = <cffm.cs_di *> PyCapsule_GetPointer(X_, "CsMatrix")
     param = FFMParam(fm)
-    pt_param = <cffm.ffm_param *> PyCapsule_GetPointer(param,"FFMParam")
+    pt_param = <cffm.ffm_param *> PyCapsule_GetPointer(param, "FFMParam")
     #allocate the coefs
     cdef double w_0 = 0
     cdef np.ndarray[np.float64_t, ndim=1, mode='c'] w =\
@@ -119,17 +128,17 @@ def ffm_sgd_fit(fm, X, double[:] y):
     cdef np.ndarray[np.float64_t, ndim=2, mode='c'] V =\
          np.zeros((fm.rank, n_features), dtype=np.float64)
 
-    cffm.ffm_sgd_fit(&w_0, <double *> w.data, <double *> V.data, pt_X, &y[0],
-            pt_param)
+    cffm.ffm_sgd_fit(&w_0, <double *> w.data, <double *> V.data,
+                     pt_X, &y[0], pt_param)
     return w_0, w, V
 
 
 def ffm_fit_sgd_bpr(fm, X, np.ndarray[np.float64_t, ndim=2, mode='c'] pairs):
     n_features = X.shape[0]
     X_ = CsMatrix(X)
-    pt_X = <cffm.cs_di *> PyCapsule_GetPointer(X_,"CsMatrix")
+    pt_X = <cffm.cs_di *> PyCapsule_GetPointer(X_, "CsMatrix")
     param = FFMParam(fm)
-    pt_param = <cffm.ffm_param *> PyCapsule_GetPointer(param,"FFMParam")
+    pt_param = <cffm.ffm_param *> PyCapsule_GetPointer(param, "FFMParam")
 
     #allocate the coefs
     cdef double w_0 = 0
@@ -138,20 +147,21 @@ def ffm_fit_sgd_bpr(fm, X, np.ndarray[np.float64_t, ndim=2, mode='c'] pairs):
     cdef np.ndarray[np.float64_t, ndim=2, mode='c'] V =\
          np.zeros((fm.rank, n_features), dtype=np.float64)
 
-    cffm.ffm_sgd_bpr_fit(&w_0, <double *> w.data, <double *> V.data, pt_X,
-            <double *>  pairs.data, pairs.shape[0], pt_param)
+    cffm.ffm_sgd_bpr_fit(&w_0, <double *> w.data, <double *> V.data,
+                         pt_X, <double *> pairs.data, pairs.shape[0], pt_param)
     return w_0, w, V
+
 
 def ffm_mcmc_fit_predict(fm, X_train, X_test, double[:] y):
     assert X_train.shape[0] == len(y)
     assert X_train.shape[1] == X_test.shape[1]
     n_features = X_train.shape[1]
     param = FFMParam(fm)
-    pt_param = <cffm.ffm_param *> PyCapsule_GetPointer(param,"FFMParam")
+    pt_param = <cffm.ffm_param *> PyCapsule_GetPointer(param, "FFMParam")
     X_train_ = CsMatrix(X_train)
-    pt_X_train = <cffm.cs_di *> PyCapsule_GetPointer(X_train_,"CsMatrix")
+    pt_X_train = <cffm.cs_di *> PyCapsule_GetPointer(X_train_, "CsMatrix")
     X_test_ = CsMatrix(X_test)
-    pt_X_test = <cffm.cs_di *> PyCapsule_GetPointer(X_test_,"CsMatrix")
+    pt_X_test = <cffm.cs_di *> PyCapsule_GetPointer(X_test_, "CsMatrix")
 
     cdef double w_0
     cdef np.ndarray[np.float64_t, ndim=1, mode='c'] w
@@ -188,12 +198,14 @@ def ffm_mcmc_fit_predict(fm, X_train, X_test, double[:] y):
     pt_param.hyper_param = <double *> hyper_param.data
 
     cffm.ffm_mcmc_fit_predict(&w_0, <double *> w.data, <double *> V.data,
-            pt_X_train, pt_X_test, &y[0], <double *> y_pred.data, pt_param)
+                              pt_X_train, pt_X_test,
+                              &y[0], <double *> y_pred.data,
+                              pt_param)
     fm.hyper_param_ = hyper_param
     return (w_0, w, V), y_pred
 
 
 def cs_norm(X):
     X = CsMatrix(X)
-    pt = <cffm.cs_di *> PyCapsule_GetPointer(X,"CsMatrix")
+    pt = <cffm.cs_di *> PyCapsule_GetPointer(X, "CsMatrix")
     return cffm.cs_di_norm(pt)
