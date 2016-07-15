@@ -83,7 +83,10 @@ class FMRegression(FactorizationMachine, RegressorMixin):
 
         check_consistent_length(X, y)
         y = check_array(y, ensure_2d=False, dtype=np.float64)
-        X = X.T
+
+        # The sgd solver expects a transposed design matrix in column major
+        # order (csc_matrix).
+        X = X.T  # creates a copy
         X = check_array(X, accept_sparse="csc", dtype=np.float64)
 
         self.w0_, self.w_, self.V_ = ffm.ffm_sgd_fit(self, X, y)
@@ -176,7 +179,10 @@ class FMClassification(BaseFMClassifier):
 
         check_consistent_length(X, y)
         y = y.astype(np.float64)
-        X = X.T
+
+        # The sgd solver expects a transposed design matrix in column major
+        # order (csc_matrix).
+        X = X.T  # creates a copy
         X = check_array(X, accept_sparse="csc", dtype=np.float64)
 
         self.w0_, self.w_, self.V_ = ffm.ffm_sgd_fit(self, X, y)
