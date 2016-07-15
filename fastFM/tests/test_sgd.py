@@ -63,18 +63,17 @@ def test_second_order_sgd_vs_als_regression():
     X, y = make_regression(n_samples=100, n_features=50, random_state=123)
     X = sp.csc_matrix(X)
 
-    fm_sgd = sgd.FMRegression(n_iter=900, init_stdev=0.01, l2_reg_w=0.0,
-                              l2_reg_V=50.5, rank=2, step_size=0.01)
+    fm_sgd = sgd.FMRegression(n_iter=50000, init_stdev=0.00, l2_reg_w=0.0,
+                              l2_reg_V=50.5, rank=2, step_size=0.0002)
     fm_als = als.FMRegression(n_iter=10, l2_reg_w=0, l2_reg_V=0, rank=2)
 
     y_pred_als = fm_als.fit(X, y).predict(X)
     y_pred_sgd = fm_sgd.fit(X, y).predict(X)
-    print(y_pred_sgd)
 
     score_als = metrics.r2_score(y_pred_als, y)
     score_sgd = metrics.r2_score(y_pred_sgd, y)
 
-    assert_almost_equal(score_als, score_sgd, decimal=2)
+    assert_almost_equal(score_sgd, score_als, decimal=2)
 
 
 def test_sgd_classification_small_example():
