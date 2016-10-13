@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>fastFM.bpr &mdash; fastFM 0.2.5 documentation</title>
+    <title>fastFM.bpr &mdash; fastFM 0.2.6 documentation</title>
     
     <link rel="stylesheet" href="../../_static/haiku.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.2.5',
+        VERSION:     '0.2.6',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -24,12 +24,12 @@
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="fastFM 0.2.5 documentation" href="../../index.html" />
+    <link rel="top" title="fastFM 0.2.6 documentation" href="../../index.html" />
     <link rel="up" title="Module code" href="../index.html" /> 
   </head>
   <body role="document">
       <div class="header" role="banner"><h1 class="heading"><a href="../../index.html">
-          <span>fastFM 0.2.5 documentation</span></a></h1>
+          <span>fastFM 0.2.6 documentation</span></a></h1>
         <h2 class="heading"><span>fastFM.bpr</span></h2>
       </div>
       <div class="topnav" role="navigation" aria-label="top navigation">
@@ -124,11 +124,14 @@
 <span class="sd">                the first returns a high value then the second</span>
 <span class="sd">                FM(X[i,0]) &gt; FM(X[i, 1]).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">T</span>
+        <span class="c"># The sgd solver expects a transposed design matrix in column major</span>
+        <span class="c"># order (csc_matrix).</span>
+        <span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">T</span>  <span class="c"># creates a copy</span>
         <span class="n">X</span> <span class="o">=</span> <span class="n">check_array</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">accept_sparse</span><span class="o">=</span><span class="s">&quot;csc&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
         <span class="n">assert_all_finite</span><span class="p">(</span><span class="n">pairs</span><span class="p">)</span>
 
         <span class="n">pairs</span> <span class="o">=</span> <span class="n">pairs</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+
         <span class="c"># check that pairs contain no real values</span>
         <span class="n">assert_array_equal</span><span class="p">(</span><span class="n">pairs</span><span class="p">,</span> <span class="n">pairs</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">))</span>
         <span class="k">assert</span> <span class="n">pairs</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
