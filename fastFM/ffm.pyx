@@ -128,11 +128,20 @@ def ffm_sgd_fit(fm, X, double[:] y):
     pt_param = <cffm.ffm_param *> PyCapsule_GetPointer(param, "FFMParam")
 
     # allocate the coefs
-    cdef double w_0 = 0
-    cdef np.ndarray[np.float64_t, ndim=1, mode='c'] w =\
-         np.zeros(n_features, dtype=np.float64)
-    cdef np.ndarray[np.float64_t, ndim=2, mode='c'] V =\
-         np.zeros((fm.rank, n_features), dtype=np.float64)
+    # allocate the coefs
+    cdef double w_0
+    cdef np.ndarray[np.float64_t, ndim=1, mode='c'] w
+    cdef np.ndarray[np.float64_t, ndim=2, mode='c'] V
+
+    if fm.warm_start:
+        w_0 = 0 if fm.ignore_w_0 else fm.w0_
+        w = np.zeros(n_features, dtype=np.float64) if fm.ignore_w else fm.w_
+        V = np.zeros((fm.rank, n_features), dtype=np.float64)\
+                if fm.rank == 0 else fm.V_
+    else:
+        w_0 = 0
+        w = np.zeros(n_features, dtype=np.float64)
+        V = np.zeros((fm.rank, n_features), dtype=np.float64)
 
     cffm.ffm_sgd_fit(&w_0, <double *> w.data, <double *> V.data,
                      pt_X, &y[0], pt_param)
@@ -147,11 +156,20 @@ def ffm_fit_sgd_bpr(fm, X, np.ndarray[np.float64_t, ndim=2, mode='c'] pairs):
     pt_param = <cffm.ffm_param *> PyCapsule_GetPointer(param, "FFMParam")
 
     #allocate the coefs
-    cdef double w_0 = 0
-    cdef np.ndarray[np.float64_t, ndim=1, mode='c'] w =\
-         np.zeros(n_features, dtype=np.float64)
-    cdef np.ndarray[np.float64_t, ndim=2, mode='c'] V =\
-         np.zeros((fm.rank, n_features), dtype=np.float64)
+    # allocate the coefs
+    cdef double w_0
+    cdef np.ndarray[np.float64_t, ndim=1, mode='c'] w
+    cdef np.ndarray[np.float64_t, ndim=2, mode='c'] V
+
+    if fm.warm_start:
+        w_0 = 0 if fm.ignore_w_0 else fm.w0_
+        w = np.zeros(n_features, dtype=np.float64) if fm.ignore_w else fm.w_
+        V = np.zeros((fm.rank, n_features), dtype=np.float64)\
+                if fm.rank == 0 else fm.V_
+    else:
+        w_0 = 0
+        w = np.zeros(n_features, dtype=np.float64)
+        V = np.zeros((fm.rank, n_features), dtype=np.float64)
 
     cffm.ffm_sgd_bpr_fit(&w_0, <double *> w.data, <double *> V.data,
                          pt_X, <double *> pairs.data, pairs.shape[0], pt_param)
