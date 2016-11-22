@@ -1,7 +1,10 @@
-If you use this project please give credit by citing:
+Citing fastFM
+=============
 
-    Immanuel Bayer (2015): fastFM: A Library for Factorization Machines http://arxiv.org/abs/1505.00641
+The library fastFM is an academic project. The time and resources spent developing fastFM are therefore justifyed
+by the number of citations of the software. If you publish scienctific articles using fastFM, pleease cite the following article (bibtex entry `citation.bib <http://jmlr.org/papers/v17/15-355.bib>`_).
 
+    Bayer, I. "fastFM: A Library for Factorization Machines" Journal of Machine Learning Research 17, pp. 1-5 (2016)
 
 
 fastFM: A Library for Factorization Machines
