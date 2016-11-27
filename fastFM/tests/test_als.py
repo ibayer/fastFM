@@ -169,6 +169,18 @@ def test_warm_start_path():
     assert_almost_equal(rmse_test, rmse_test_re)
 
 
+def test_clone():
+    from sklearn.base import clone
+
+    a = als.FMRegression()
+    b = clone(a)
+    assert a.get_params() == b.get_params()
+
+    a = als.FMClassification()
+    b = clone(a)
+    assert a.get_params() == b.get_params()
+
+
 if __name__ == '__main__':
     # test_fm_regression_only_w0()
     test_fm_linear_regression()

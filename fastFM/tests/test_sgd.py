@@ -90,6 +90,18 @@ def test_sgd_classification_small_example():
     assert metrics.accuracy_score(y, y_pred) > 0.95
 
 
+def test_clone():
+    from sklearn.base import clone
+
+    a = sgd.FMRegression()
+    b = clone(a)
+    assert a.get_params() == b.get_params()
+
+    a = sgd.FMClassification()
+    b = clone(a)
+    assert a.get_params() == b.get_params()
+
+
 if __name__ == '__main__':
     test_sgd_regression_small_example()
     test_first_order_sgd_vs_als_regression()

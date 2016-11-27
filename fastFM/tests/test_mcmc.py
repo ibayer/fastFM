@@ -128,5 +128,17 @@ def test_find_init_stdev():
     assert mse_vali > mse
 
 
+def test_clone():
+    from sklearn.base import clone
+
+    a = mcmc.FMRegression()
+    b = clone(a)
+    assert a.get_params() == b.get_params()
+
+    a = mcmc.FMClassification()
+    b = clone(a)
+    assert a.get_params() == b.get_params()
+
+
 if __name__ == "__main__":
     test_linear_fm_classification()
