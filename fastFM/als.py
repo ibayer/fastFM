@@ -62,6 +62,7 @@ class FMRegression(FactorizationMachine, RegressorMixin):
         else:
             self.l2_reg_w = l2_reg_w
             self.l2_reg_V = l2_reg_V
+        self.l2_reg = l2_reg
         self.task = "regression"
 
     def fit(self, X_train, y_train, n_more_iter=0):
@@ -156,6 +157,7 @@ class FMClassification(BaseFMClassifier):
         else:
             self.l2_reg_w = l2_reg_w
             self.l2_reg_V = l2_reg_V
+        self.l2_reg = l2_reg
         self.task = "classification"
 
     def fit(self, X_train, y_train):
