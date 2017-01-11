@@ -56,7 +56,7 @@ efficiently. Please note that we can replace them with any metric we want.
     import numpy as np
 
     X, y, coef = make_user_item_regression(label_stdev=.4)
-    from sklearn.cross_validation import train_test_split
+    from sklearn.model_selection import train_test_split
     X_train, X_test, y_train, y_test = train_test_split(
         X, y, test_size=0.33, random_state=42)
 
@@ -114,7 +114,7 @@ model parameter efficiently using the `warm_start` option.
 
     import numpy as np
     from sklearn.metrics import mean_squared_error
-    from sklearn.cross_validation import train_test_split
+    from sklearn.model_selection import train_test_split
 
     from fastFM.datasets import make_user_item_regression
     from fastFM import mcmc
