@@ -31,10 +31,10 @@ class FMRegression(FactorizationMachine, RegressorMixin):
         The rank of the factorization used for the second order interactions.
 
     l2_reg_w : float
-        L2 penalty weight for pairwise coefficients.
+        L2 penalty weight for linear coefficients.
 
     l2_reg_V : float
-        L2 penalty weight for linear coefficients.
+        L2 penalty weight for pairwise coefficients.
 
     l2_reg : float
         L2 penalty weight for all coefficients (default=0).
@@ -67,6 +67,7 @@ class FMRegression(FactorizationMachine, RegressorMixin):
         else:
             self.l2_reg_w = l2_reg_w
             self.l2_reg_V = l2_reg_V
+        self.l2_reg = l2_reg
         self.step_size = step_size
         self.task = "regression"
 
@@ -83,7 +84,10 @@ class FMRegression(FactorizationMachine, RegressorMixin):
 
         check_consistent_length(X, y)
         y = check_array(y, ensure_2d=False, dtype=np.float64)
-        X = X.T
+
+        # The sgd solver expects a transposed design matrix in column major
+        # order (csc_matrix).
+        X = X.T  # creates a copy
         X = check_array(X, accept_sparse="csc", dtype=np.float64)
 
         self.w0_, self.w_, self.V_ = ffm.ffm_sgd_fit(self, X, y)
@@ -111,10 +115,10 @@ class FMClassification(BaseFMClassifier):
         The rank of the factorization used for the second order interactions.
 
     l2_reg_w : float
-        L2 penalty weight for pairwise coefficients.
+        L2 penalty weight for linear coefficients.
 
     l2_reg_V : float
-        L2 penalty weight for linear coefficients.
+        L2 penalty weight for pairwise coefficients.
 
     l2_reg : float
         L2 penalty weight for all coefficients (default=0).
@@ -147,6 +151,7 @@ class FMClassification(BaseFMClassifier):
         else:
             self.l2_reg_w = l2_reg_w
             self.l2_reg_V = l2_reg_V
+        self.l2_reg = l2_reg
         self.step_size = step_size
         self.task = "classification"
 
@@ -176,7 +181,10 @@ class FMClassification(BaseFMClassifier):
 
         check_consistent_length(X, y)
         y = y.astype(np.float64)
-        X = X.T
+
+        # The sgd solver expects a transposed design matrix in column major
+        # order (csc_matrix).
+        X = X.T  # creates a copy
         X = check_array(X, accept_sparse="csc", dtype=np.float64)
 
         self.w0_, self.w_, self.V_ = ffm.ffm_sgd_fit(self, X, y)

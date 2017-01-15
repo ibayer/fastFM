@@ -1,7 +1,10 @@
-If you use this project please give credit by citing:
+Citing fastFM
+=============
 
-    Immanuel Bayer (2015): fastFM: A Library for Factorization Machines http://arxiv.org/abs/1505.00641
+The library fastFM is an academic project. The time and resources spent developing fastFM are therefore justifyed
+by the number of citations of the software. If you publish scienctific articles using fastFM, pleease cite the following article (bibtex entry `citation.bib <http://jmlr.org/papers/v17/15-355.bib>`_).
 
+    Bayer, I. "fastFM: A Library for Factorization Machines" Journal of Machine Learning Research 17, pp. 1-5 (2016)
 
 
 fastFM: A Library for Factorization Machines
@@ -21,6 +24,11 @@ This repository allows you to use Factorization Machines in **Python** (2.7 & 3.
 All performence critical code as been written in C and wrapped with Cython. fastFM provides
 stochastic gradient descent (SGD) and coordinate descent (CD) optimization routines as well as Markov Chain Monte Carlo (MCMC) for Bayesian inference.
 The solvers can be used for regression, classification and ranking problems. Detailed usage instructions can be found in the `online documentation  <http://ibayer.github.io/fastFM>`_ and on `arXiv <http://arxiv.org/abs/1505.00641>`_.
+
+Supported Operating Systems
+---------------------------
+fastFM has a continous integration / testing servers (Travis) for **Linux (Ubuntu 14.04 LTS)**
+and **OS X Mavericks**. Other OS are not actively supported.
 
 Usage
 -----
@@ -61,7 +69,8 @@ Installation
 .. code-block:: bash
 
     # Install cblas and python-dev header (Linux only).
-    $ sudo apt-get install python-dev libatlas-base-dev
+    # - cblas can be installed with libatlas-base-dev or libopenblas-dev (Ubuntu)
+    $ sudo apt-get install python-dev libopenblas-dev
 
     # Clone the repro including submodules (or clone + `git submodule update --init --recursive`)
     $ git clone --recursive https://github.com/ibayer/fastFM.git

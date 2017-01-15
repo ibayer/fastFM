@@ -31,10 +31,10 @@ class FMRegression(FactorizationMachine, RegressorMixin):
         The rank of the factorization used for the second order interactions.
 
     l2_reg_w : float
-        L2 penalty weight for pairwise coefficients.
+        L2 penalty weight for linear coefficients.
 
     l2_reg_V : float
-        L2 penalty weight for linear coefficients.
+        L2 penalty weight for pairwise coefficients.
 
     l2_reg : float
         L2 penalty weight for all coefficients (default=0).
@@ -62,6 +62,7 @@ class FMRegression(FactorizationMachine, RegressorMixin):
         else:
             self.l2_reg_w = l2_reg_w
             self.l2_reg_V = l2_reg_V
+        self.l2_reg = l2_reg
         self.task = "regression"
 
     def fit(self, X_train, y_train, n_more_iter=0):
@@ -124,10 +125,10 @@ class FMClassification(BaseFMClassifier):
         The rank of the factorization used for the second order interactions.
 
     l2_reg_w : float
-        L2 penalty weight for pairwise coefficients.
+        L2 penalty weight for linear coefficients.
 
     l2_reg_V : float
-        L2 penalty weight for linear coefficients.
+        L2 penalty weight for pairwise coefficients.
 
     l2_reg : float
         L2 penalty weight for all coefficients (default=0).
@@ -156,6 +157,7 @@ class FMClassification(BaseFMClassifier):
         else:
             self.l2_reg_w = l2_reg_w
             self.l2_reg_V = l2_reg_V
+        self.l2_reg = l2_reg
         self.task = "classification"
 
     def fit(self, X_train, y_train):

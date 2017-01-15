@@ -28,10 +28,10 @@ class FMRecommender(FactorizationMachine):
         The rank of the factorization used for the second order interactions.
 
     l2_reg_w : float
-        L2 penalty weight for pairwise coefficients.
+        L2 penalty weight for linear coefficients.
 
     l2_reg_V : float
-        L2 penalty weight for linear coefficients.
+        L2 penalty weight for pairwise coefficients.
 
     l2_reg : float
         L2 penalty weight for all coefficients (default=0).
@@ -79,11 +79,14 @@ class FMRecommender(FactorizationMachine):
                 the first returns a high value then the second
                 FM(X[i,0]) > FM(X[i, 1]).
         """
-        X = X.T
+        # The sgd solver expects a transposed design matrix in column major
+        # order (csc_matrix).
+        X = X.T  # creates a copy
         X = check_array(X, accept_sparse="csc", dtype=np.float64)
         assert_all_finite(pairs)
 
         pairs = pairs.astype(np.float64)
+
         # check that pairs contain no real values
         assert_array_equal(pairs, pairs.astype(np.int32))
         assert pairs.max() <= X.shape[1]
