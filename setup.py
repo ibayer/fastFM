@@ -17,7 +17,9 @@ setup(
     cmdclass={'build_ext': build_ext},
     ext_modules=ext_modules,
 
-    packages=['fastFM'],
+    # packages=['fastFM'],
+
+    package_data={'fastFM': ['fastFM/*.pxd']},
 
     version='0.2.6',
     url='http://ibayer.github.io/fastFM',
