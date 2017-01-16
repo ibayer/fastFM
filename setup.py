@@ -19,6 +19,8 @@ setup(
 
     packages=['fastFM'],
 
+    package_data={'fastFM': ['fastFM/*.pxd']},
+
     version='0.2.6',
     url='http://ibayer.github.io/fastFM',
     author='Immanuel Bayer',
