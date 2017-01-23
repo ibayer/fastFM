@@ -210,8 +210,3 @@ def ffm_mcmc_fit_predict(fm, X_train, X_test, double[:] y):
     fm.hyper_param_ = hyper_param
     return (w_0, w, V), y_pred
 
-
-def cs_norm(X):
-    X = CsMatrix(X)
-    pt = <cffm.cs_di *> PyCapsule_GetPointer(X, "CsMatrix")
-    return cffm.cs_di_norm(pt)
