@@ -5,7 +5,7 @@ import numpy
 
 ext_modules = [
     Extension('ffm', ['fastFM/ffm.pyx'],
-              libraries=['m', 'fastfm'],
+              libraries=['fastfm'],
               library_dirs=['fastFM-core/bin'],
               include_dirs=['fastFM', 'fastFM-core/include',
               numpy.get_include()])]
