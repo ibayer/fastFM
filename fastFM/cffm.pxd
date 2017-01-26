@@ -11,8 +11,6 @@ cdef extern from "../fastFM-core/externals/CXSparse/Include/cs.h":
         double *x      # numerical values, size nzmax */
         int nz         # # of entries in triplet matrix, -1 for compressed-col */
 
-    double cs_di_norm(const cs_di *X) # max colsum
-
 cdef extern from "../fastFM-core/include/ffm.h":
 
     ctypedef struct ffm_param:
