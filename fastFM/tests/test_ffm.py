@@ -21,11 +21,6 @@ def get_test_problem():
     return w0, w, V, y, X
 
 
-def test_cxsparse_integration():
-    X = sp.csc_matrix(np.arange(60, dtype=np.float64).reshape(6, 10))
-    assert_almost_equal(ffm.cs_norm(X), X.sum(axis=0).max())
-
-
 def test_ffm_predict():
     w0, w, V, y, X = get_test_problem()
     y_pred = ffm.ffm_predict(w0, w, V, X)
