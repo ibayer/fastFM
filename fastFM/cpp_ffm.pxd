@@ -15,10 +15,7 @@ cdef extern from "../fastFM2/fastFM/fastfm.h" namespace "fastfm":
                            int n_features, const int order)
         void add_parameter(double* data, int n_features)
         void add_parameter(double* intercept)
-        #cppclass Impl:
-        #    Impl()
-        #    int a
-            #fm_coef* coef_
+
 
     cdef cppclass Data:
         Data()
@@ -27,11 +24,6 @@ cdef extern from "../fastFM2/fastFM/fastfm.h" namespace "fastfm":
 
         void add_target(const int n_samples, double *data)
         void add_prediction(const int n_samples, double* data)
-        #cppclass Impl:
-            #Impl()
-            #Eigen.Map[Vector] y_train
-            #Eigen.Map[Vector] y_pred
-            #Eigen.Map[SpMat] x_train
 
     #cdef void fit(const Settings& s, Model* m, Data* d )
 
