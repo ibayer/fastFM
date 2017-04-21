@@ -4,7 +4,7 @@
 
 from libcpp.string cimport string
 
-cdef extern from "../../fastFM2/fastFM/fastfm.h" namespace "fastfm":
+cdef extern from "../fastFM2/fastFM/fastfm.h" namespace "fastfm":
 
     cdef cppclass Settings:
         Settings() except +
