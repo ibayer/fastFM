@@ -3,6 +3,17 @@ from distutils.extension import Extension
 from Cython.Distutils import build_ext
 import numpy
 
+ffm2_build = '_builds/'#MUSL
+#ffm2_build = '_regular/' 
+ffm2_dir = 'fastFM2/' + ffm2_build + 'fastFM/'
+ffm2_lib = ffm2_dir + 'libfastFMd.a'
+
+
+hunter_pdir = '75730c8/' #MUSL
+#hunter_pdir = 'f5ecda5/' #NOMUSL
+
+hunter_dir = '/root/.hunter/_Base/033a6ff/14d0f80/'+ hunter_pdir +'Install/lib/'
+
 ext_modules = [
     Extension('ffm', ['fastFM/ffm.pyx'],
               libraries=['m', 'fastfm', 'openblas'],
@@ -14,15 +25,12 @@ ext_modules = [
                             numpy.get_include()]),
     Extension('ffm2', ['fastFM/ffm2.pyx'],
               libraries=['fastFMd', 'pthread', 'glog'],
-              library_dirs=['fastFM2/fpic/fastFM',
-                            '/home/ben/.hunter/_Base/033a6ff/1a47c45/e1266bb/Install/lib/'],              
+              library_dirs=[ffm2_dir, hunter_dir],
               include_dirs=['fastFM2/fastFM/',
-                            '/home/ben/.hunter/_Base/033a6ff/1a47c45/e1266bb/Install/include/eigen3/',
+                            '/root/.hunter/_Base/033a6ff/14d0f80/' + hunter_pdir + 'Install/include/eigen3/Eigen',
                             numpy.get_include()],
-              #extra_objects=['fastFM2/fpic/fastFM/libfastFMd.a'],
-                             #'/home/ben/.hunter/_Base/033a6ff/14d0f80/e1266bb/#Install/lib/libglog.a'],
-              extra_compile_args=['-std=c++11'],
-              extra_link_args=['-std=c++11'],
+              extra_compile_args=['-std=c++11', '-Wall', '-pedantic'],
+              extra_link_args=['-std=c++11', '-mstackrealign'],
               language="c++")]
 
 
