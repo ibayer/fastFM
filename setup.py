@@ -5,11 +5,26 @@ import numpy
 
 ext_modules = [
     Extension('ffm', ['fastFM/ffm.pyx'],
-              libraries=['m', 'fastfm'],
-              library_dirs=['fastFM/', 'fastFM-core/bin/'],
+              libraries=['m', 'fastfm', 'openblas'],
+              library_dirs=['fastFM/', 'fastFM-core/bin/',
+                            'fastFM-core/externals/OpenBLAS/',],
               include_dirs=['fastFM/', 'fastFM-core/include/',
                             'fastFM-core/externals/CXSparse/Include/',
-              numpy.get_include()])]
+                            'fastFM-core/externals/OpenBLAS/',
+                            numpy.get_include()]),
+    Extension('ffm2', ['fastFM/ffm2.pyx'],
+              libraries=['fastFMd', 'pthread', 'glog'],
+              library_dirs=['fastFM2/fpic/fastFM',
+                            '/home/ben/.hunter/_Base/033a6ff/1a47c45/e1266bb/Install/lib/'],              
+              include_dirs=['fastFM2/fastFM/',
+                            '/home/ben/.hunter/_Base/033a6ff/1a47c45/e1266bb/Install/include/eigen3/',
+                            numpy.get_include()],
+              #extra_objects=['fastFM2/fpic/fastFM/libfastFMd.a'],
+                             #'/home/ben/.hunter/_Base/033a6ff/14d0f80/e1266bb/#Install/lib/libglog.a'],
+              extra_compile_args=['-std=c++11'],
+              extra_link_args=['-std=c++11'],
+              language="c++")]
+
 
 setup(
     name='fastFM',

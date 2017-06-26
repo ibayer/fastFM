@@ -9,3 +9,4 @@ clean:
 	rm -f *.so
 	rm -rf build/
 	rm -f fastFM/ffm.c
+	rm -f fastFM/ffm2.cpp
