@@ -185,7 +185,7 @@ class FMClassification(BaseFMClassifier):
         y_train = y_train.copy()
         i_class1 = (y_train == self.classes_[0])
         y_train[i_class1] = -1
-        y_train[-i_class1] = 1
+        y_train[~i_class1] = 1
 
         self.w0_, self.w_, self.V_ = ffm.ffm_als_fit(self, X_train, y_train)
         return self

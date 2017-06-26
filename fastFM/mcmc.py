@@ -222,7 +222,7 @@ class FMClassification(FactorizationMachine):
         y_train = y_train.copy()
         i_class1 = (y_train == self.classes_[0])
         y_train[i_class1] = -1
-        y_train[-i_class1] = 1
+        y_train[~i_class1] = 1
 
         X_train, y_train, X_test = _validate_mcmc_fit_input(X_train, y_train,
                                                             X_test)
