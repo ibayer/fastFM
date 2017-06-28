@@ -177,7 +177,7 @@ class FMClassification(BaseFMClassifier):
         y_train = y.copy()
         i_class1 = (y_train == self.classes_[0])
         y_train[i_class1] = -1
-        y_train[-i_class1] = 1
+        y_train[~i_class1] = 1
 
         check_consistent_length(X, y)
         y = y.astype(np.float64)
