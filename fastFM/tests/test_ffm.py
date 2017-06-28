@@ -33,10 +33,10 @@ def test_ffm2_predict():
 
 def test_ffm2_predict_w0():
     w0, w, V, y, X = get_test_problem()
-    w = 0
-    V = 0
+    w[:] = 0
+    V[:, :] = 0
     y_pred = ffm2.ffm_predict(w0, w, V, X)
     assert_equal(y_pred, w0)
 
 if __name__ == '__main__':
-    pass
+    test_ffm2_predict()

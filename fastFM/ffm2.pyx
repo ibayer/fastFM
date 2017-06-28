@@ -8,17 +8,18 @@ from libcpp.memory cimport nullptr
 cimport numpy as np
 import numpy as np
 
-def ffm2_predict(double w_0, double[:] w,
+def ffm_predict(double w_0, double[:] w,
                 np.ndarray[np.float64_t, ndim = 2] V, X):
-    #assert X.shape[1] == len(w)
-    #assert X.shape[1] == V.shape[1]
+    assert X.shape[1] == len(w)
+    assert X.shape[1] == V.shape[1]
 
     # get attributes from csc scipy
     n_features = X.shape[1]
     n_samples = X.shape[0]
     nnz = X.count_nonzero()
-    cdef np.ndarray[int, ndim=1, mode='c'] outer = X.indices
-    cdef np.ndarray[int, ndim=1, mode='c'] inner = X.indptr
+
+    cdef np.ndarray[int, ndim=1, mode='c'] inner = X.indices
+    cdef np.ndarray[int, ndim=1, mode='c'] outer = X.indptr
     cdef np.ndarray[np.float64_t, ndim=1, mode='c'] data = X.data
 
     assert n_features == w.shape[0]
