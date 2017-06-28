@@ -1,7 +1,7 @@
 Citing fastFM
 =============
 
-The library fastFM is an academic project. The time and resources spent developing fastFM are therefore justifyed
+The library fastFM is an academic project. The time and resources spent developing fastFM are therefore justified
 by the number of citations of the software. If you publish scienctific articles using fastFM, please cite the following article (bibtex entry `citation.bib <http://jmlr.org/papers/v17/15-355.bib>`_).
 
     Bayer, I. "fastFM: A Library for Factorization Machines" Journal of Machine Learning Research 17, pp. 1-5 (2016)
