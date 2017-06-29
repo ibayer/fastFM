@@ -5,20 +5,19 @@ from Cython.Distutils import build_ext
 import numpy
 
 
-use_musl_build = True
+"""
+Set this paths if you want to build fastFM-core2 from source.
+export LC_ALL=C
+export FFM_INCLUDE_DIR=~/fastFM2/$                                               
+export FFM_LIBRARY_DIR=~/fastFM2/_builds/fastFM$                                 
+                                                             /f5ecda5/ <- without musl
+export HUNTER_LIBRARY_DIR=/root/.hunter/_Base/033a6ff/14d0f80/75730c8/Install/lib/$
+"""
 
-if use_musl_build:
-    ffm2_build = '_builds/'
-    hunter_pdir = '75730c8/'
-else:
-    ffm2_build = '_regular/' 
-    hunter_pdir = 'f5ecda5/'
 
-ffm2_include_dir = os.getenv("FFM_INCLUDE_DIR", 'fastFM2/fastFM/')
-ffm2_library_dir = os.getenv("FFM_LIBRARY_DIR", 'fastFM2/' + ffm2_build + 'fastFM/')
-hunter_library_dir = os.getenv("HUNTER_LIBRARY_DIR",
-                               '/root/.hunter/_Base/033a6ff/14d0f80/' + hunter_pdir +
-                               'Install/lib/')
+ffm2_include_dir = os.getenv("FFM_INCLUDE_DIR", 'fastFM-core2-binaries')
+ffm2_library_dir = os.getenv("FFM_LIBRARY_DIR", 'fastFM-core2-binaries')
+hunter_library_dir = os.getenv("HUNTER_LIBRARY_DIR", 'fastFM-core2-binaries')
 
 ext_modules = [
     Extension('ffm', ['fastFM/ffm.pyx'],
@@ -30,7 +29,7 @@ ext_modules = [
                             'fastFM-core/externals/OpenBLAS/',
                             numpy.get_include()]),
     Extension('ffm2', ['fastFM/ffm2.pyx'],
-              libraries=['fastFMd', 'glog'],
+              libraries=['fastFM', 'glog'],
               library_dirs=[ffm2_library_dir, hunter_library_dir],
               include_dirs=[ffm2_include_dir,
                             numpy.get_include()],
