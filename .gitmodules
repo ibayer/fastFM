@@ -1,3 +1,6 @@
 [submodule "fastFM-core"]
 	path = fastFM-core
 	url = https://github.com/ibayer/fastFM-core.git
+[submodule "fastFM-core2-binaries"]
+	path = fastFM-core2-binaries
+	url = https://github.com/ibayer/fastFM-core2-binaries.git
