@@ -1,18 +1,24 @@
 from setuptools import setup
+import os
 from distutils.extension import Extension
 from Cython.Distutils import build_ext
 import numpy
 
-ffm2_build = '_builds/'#MUSL
-#ffm2_build = '_regular/' 
-ffm2_dir = 'fastFM2/' + ffm2_build + 'fastFM/'
-ffm2_lib = ffm2_dir + 'libfastFMd.a'
 
+use_musl_build = True
 
-hunter_pdir = '75730c8/' #MUSL
-#hunter_pdir = 'f5ecda5/' #NOMUSL
+if use_musl_build:
+    ffm2_build = '_builds/'
+    hunter_pdir = '75730c8/'
+else:
+    ffm2_build = '_regular/' 
+    hunter_pdir = 'f5ecda5/'
 
-hunter_dir = '/root/.hunter/_Base/033a6ff/14d0f80/'+ hunter_pdir +'Install/lib/'
+ffm2_include_dir = os.getenv("FFM_INCLUDE_DIR", 'fastFM2/fastFM/')
+ffm2_library_dir = os.getenv("FFM_LIBRARY_DIR", 'fastFM2/' + ffm2_build + 'fastFM/')
+hunter_library_dir = os.getenv("HUNTER_LIBRARY_DIR",
+                               '/root/.hunter/_Base/033a6ff/14d0f80/' + hunter_pdir +
+                               'Install/lib/')
 
 ext_modules = [
     Extension('ffm', ['fastFM/ffm.pyx'],
@@ -25,8 +31,8 @@ ext_modules = [
                             numpy.get_include()]),
     Extension('ffm2', ['fastFM/ffm2.pyx'],
               libraries=['fastFMd', 'glog'],
-              library_dirs=[ffm2_dir, hunter_dir],
-              include_dirs=['fastFM2/fastFM/',
+              library_dirs=[ffm2_library_dir, hunter_library_dir],
+              include_dirs=[ffm2_include_dir,
                             numpy.get_include()],
               extra_compile_args=['-std=c++11', '-Wall', '-pedantic'],
               extra_link_args=['-std=c++11', '-mstackrealign'],
