@@ -29,10 +29,10 @@ def ffm_predict(double w_0, double[:] w,
 
     cdef np.ndarray[np.float64_t, ndim=1, mode='c'] y =\
          np.zeros(X.shape[0], dtype=np.float64)
-    
+
     cdef Model *m = new Model()
     cdef Data *d = new Data()
-    
+
     m.add_parameter(&w_0)
     m.add_parameter(&w[0], n_features)
     m.add_parameter(<double *> V.data, rank, n_features, 2)
