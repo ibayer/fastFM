@@ -37,12 +37,12 @@
         - htop
 
 - name: setup fastFM
+  hosts: dev
   environment:
     LC_ALL: C # needed to fix pip
     FFM_INCLUDE_DIR: "{{ fastfm_dir }}/fastFM-core2"
     FFM_LIBRARY_DIR: "{{ fastfm_dir }}/fastFM-core2/_builds/fastFM"
     HUNTER_LIBRARY_DIR: "{{ hunter_install_dir }}/Install/lib/"
-  hosts: musl
   tasks:
     - name: clone fastFM
       git:
@@ -50,12 +50,14 @@
          repo: git@github.com:ibayer/fastFM.git
          dest: "{{ fastfm_dir }}"
          version: cython-wrapper # checkout branch
-         force: no # override any local changes
-         extra_args: --recursive
+         force: yes # override any local changes
+         recursive: yes
 
     - name: build fastFM-core
       make:
           chdir: "{{ fastfm_dir }}/fastFM-core"
+
+    - include: "{{ fastfm_dir }}/fastFM-core2/playbooks/"
 
     - name: pip install
       pip:
