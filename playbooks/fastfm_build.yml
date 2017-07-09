@@ -1,0 +1,62 @@
+- name: build and install
+  hosts: dev
+  become: true
+  gather_facts: false
+  pre_tasks:
+
+  - name: Install python2 for Ansible
+    raw: bash -c "test -e /usr/bin/python || (apt -qqy update && apt install -qqy python-minimal)"
+    register: output
+    changed_when:
+    - output.stdout != ""
+    - output.stdout != "\r\n"
+  - name: Gathering Facts
+    setup:
+
+  tasks:
+    - name: set facts
+      set_fact:
+        core2_dir: ~/fastFM-core2/
+        musl_dir: ~/musl-cross-make
+        fastfm_dir: ~/fastFM/
+        # TODO this will break as soon as the path changes,
+        # need better solution for .hunter path
+        hunter_install_dir: /root/.hunter/_Base/033a6ff/14d0f80/e1266bb
+#        hunter_install_dir: /root/.hunter/_Base/033a6ff/14d0f80/75730c8/
+        musl_build: false
+
+    - name: Install list of packages
+      apt: name={{item}} state=installed
+      with_items:
+        - build-essential
+        - cmake
+        - make
+        - git
+        - python
+        - python-pip
+        - htop
+
+- name: setup fastFM
+  environment:
+    LC_ALL: C # needed to fix pip
+    FFM_INCLUDE_DIR: "{{ fastfm_dir }}/fastFM-core2"
+    FFM_LIBRARY_DIR: "{{ fastfm_dir }}/fastFM-core2/_builds/fastFM"
+    HUNTER_LIBRARY_DIR: "{{ hunter_install_dir }}/Install/lib/"
+  hosts: musl
+  tasks:
+    - name: clone fastFM
+      git:
+         accept_hostkey: yes
+         repo: git@github.com:ibayer/fastFM.git
+         dest: "{{ fastfm_dir }}"
+         version: cython-wrapper # checkout branch
+         force: no # override any local changes
+         extra_args: --recursive
+
+    - name: build fastFM-core
+      make:
+          chdir: "{{ fastfm_dir }}/fastFM-core"
+
+    - name: pip install
+      pip:
+         requirements: "{{ fastfm_dir }}/requirements.txt"
