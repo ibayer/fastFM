@@ -5,19 +5,8 @@ from Cython.Distutils import build_ext
 import numpy
 
 
-"""
-Set this paths if you want to build fastFM-core2 from source.
-export LC_ALL=C
-export FFM_INCLUDE_DIR=~/fastFM2/$                                               
-export FFM_LIBRARY_DIR=~/fastFM2/_builds/fastFM$                                 
-                                                             /f5ecda5/ <- without musl
-export HUNTER_LIBRARY_DIR=/root/.hunter/_Base/033a6ff/14d0f80/75730c8/Install/lib/$
-"""
-
-
 ffm2_include_dir = os.getenv("FFM_INCLUDE_DIR", 'fastFM-core2/fastFM/')
-ffm2_library_dir = os.getenv("FFM_LIBRARY_DIR", 'fastFM-core2/_builds/fastFM/')
-hunter_library_dir = os.getenv("HUNTER_LIBRARY_DIR", 'fastFM-core2-binaries')
+ffm2_library_dir = os.getenv("FFM_LIBRARY_DIR", 'fastFM-core2/cmake-build-debug/fastFM/')
 
 
 ext_modules = [
@@ -30,8 +19,8 @@ ext_modules = [
                             'fastFM-core/externals/OpenBLAS/',
                             numpy.get_include()]),
     Extension('ffm2', ['fastFM/ffm2.pyx'],
-              libraries=['fastFM', 'glog'],
-              library_dirs=[ffm2_library_dir, hunter_library_dir],
+              libraries=['fastFMd'],
+              library_dirs=[ffm2_library_dir],
               include_dirs=[ffm2_include_dir,
                             numpy.get_include()],
               extra_compile_args=['-std=c++11', '-Wall', '-pedantic'],
