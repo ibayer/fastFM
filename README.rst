@@ -113,12 +113,13 @@ Most information you need to setup your **development environment** can be learn
 
 **Contributors**
 
-* altimin
-* bdaskalov
-* chezou
-* macks22
-* takuti
-* ibayer
+* [aaossa](https://github.com/aaossa/)
+* [altimin](https://github.com/altimin)
+* [bdaskalov](https://github.com/bdaskalov)
+* [chezou](https://github.com/chezou)
+* [macks22](https://github.com/macks22)
+* [takuti](https://github.com/takuti)
+* [ibayer](https://github.com/ibayer)
 
 License: BSD
 ------------
