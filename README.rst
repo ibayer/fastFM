@@ -82,7 +82,8 @@ Installation
     $ pip install -r ./requirements.txt
 
     # Compile the C extension.
-    $ make
+    $ make                      # build with default python version (python)
+    $ PYTHON=python3 make       # build with custom python version (python3)
 
     # Install fastFM
     $ pip install .
