@@ -160,7 +160,7 @@ class FMClassification(BaseFMClassifier):
         self.l2_reg = l2_reg
         self.task = "classification"
 
-    def fit(self, X_train, y_train):
+    def fit(self, X_train, y_train, n_more_iter=0):
         """ Fit model with specified loss.
 
         Parameters
@@ -169,6 +169,9 @@ class FMClassification(BaseFMClassifier):
 
         y : float | ndarray, shape = (n_samples, )
                 the targets have to be encodes as {-1, 1}.
+        
+        n_more_iter : int
+                Number of iterations to continue from the current Coefficients.
         """
         check_consistent_length(X_train, y_train)
         X_train = check_array(X_train, accept_sparse="csc", dtype=np.float64,
@@ -187,5 +190,19 @@ class FMClassification(BaseFMClassifier):
         y_train[i_class1] = -1
         y_train[~i_class1] = 1
 
+        self.n_iter = self.n_iter + n_more_iter
+
+        if n_more_iter > 0:
+            _check_warm_start(self, X_train)
+            self.warm_start = True
+
         self.w0_, self.w_, self.V_ = ffm.ffm_als_fit(self, X_train, y_train)
+
+        if self.iter_count != 0:
+            self.iter_count = self.iter_count + n_more_iter
+        else:
+            self.iter_count = self.n_iter
+
+        # reset to default setting
+        self.warm_start = False
         return self
