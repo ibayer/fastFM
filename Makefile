@@ -1,6 +1,8 @@
+PYTHON ?= python
+
 all:
 	( cd fastFM-core ; $(MAKE) lib )
-	python setup.py build_ext --inplace
+	$(PYTHON) setup.py build_ext --inplace
 
 .PHONY : clean
 clean:
