@@ -49,7 +49,7 @@ before_install:
 install:
     - git submodule update --init --recursive
     - cd fastFM-core2
-    - cmake -H. -B_builds -DCMAKE_BUILD_TYPE=Debug -DFASTFM_MINIMAL=ON
+    - cmake -H. -Bcmake-build-debug -DCMAKE_BUILD_TYPE=Debug -DFASTFM_MINIMAL=ON
     - cmake --build cmake-build-debug
     - cd ..
     - make
