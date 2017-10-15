@@ -1,6 +1,7 @@
 language: c
 
 env:
+  global:
     - TRAVIS_PYTHON_VERSION="2.7"
     - TRAVIS_PYTHON_VERSION="3.4"
     - TRAVIS_PYTHON_VERSION="3.5"
@@ -11,7 +12,11 @@ os:
 
 dist: trusty
 
+git:
+    submodules: false
+
 before_install:
+
       # fastFM-core depends on cblas
     - if [ "$TRAVIS_OS_NAME" = "linux" ]; then sudo apt-get update -qq; sudo apt-get install -y libopenblas-dev; fi
     - if [[ "$TRAVIS_PYTHON_VERSION" =~ "^2" ]]; then
@@ -37,8 +42,16 @@ before_install:
     - conda create -q -n test-environment python=$TRAVIS_PYTHON_VERSION cython numpy pandas scipy scikit-learn nose
     - source activate test-environment
 
+    # use credentials
+    - sed -i -e "s|git@github.com:|https://$CI_USER:$CI_PASS@github.com/|" .gitmodules
+
+
 install:
     - git submodule update --init --recursive
+    - cd fastFM-core2
+    - cmake -H. -B_builds -DCMAKE_BUILD_TYPE=Debug -DFASTFM_MINIMAL=ON
+    - cmake --build cmake-build-debug
+    - cd ..
     - make
     - python setup.py bdist_wheel
     - pip install dist/*.whl
