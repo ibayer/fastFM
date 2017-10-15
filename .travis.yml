@@ -2,7 +2,6 @@ language: c
 
 env:
     - TRAVIS_PYTHON_VERSION="2.7"
-    - TRAVIS_PYTHON_VERSION="3.4"
     - TRAVIS_PYTHON_VERSION="3.5"
     - TRAVIS_PYTHON_VERSION="3.6"
 
