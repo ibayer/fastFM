@@ -43,7 +43,7 @@ before_install:
     - source activate test-environment
 
     # use credentials
-    - sed -i -e "s|git@github.com:|https://$CI_USER:$CI_PASS@github.com/|" .gitmodules
+    - sed -i -e "s|git@github.com:|https://$CI_USER_NAME:$CI_USER_PASSWORD@github.com/|" .gitmodules
 
 
 install:
