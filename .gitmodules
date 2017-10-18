@@ -3,5 +3,5 @@
 	url = https://github.com/ibayer/fastFM-core.git
 [submodule "fastFM-core2"]
 	path = fastFM-core2
-	url = git@github.com:AlexJoz/fastFM-core2.git
+	url = git@github.com:ibayer/fastFM-core2.git
     branch = api
