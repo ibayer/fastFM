@@ -46,8 +46,8 @@ before_install:
 install:
     - git submodule update --init --recursive
     - cd fastFM-core2
-    - cmake -H. -Bcmake-build-debug -DFASTFM_MINIMAL=ON
-    - cmake --build cmake-build-debug
+    - cmake -H. -B_lib -DFASTFM_MINIMAL=ON
+    - cmake --build _lib
     - cd ..
     - make
     - python setup.py bdist_wheel
