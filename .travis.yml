@@ -47,9 +47,9 @@ install:
     - git submodule update --init --recursive
     - cd fastFM-core2
     - if [ "$TRAVIS_OS_NAME" = "linux" ]; then
-        cmake -H. -B_lib -DFASTFM_MINIMAL=ON
+        cmake -H. -B_lib -DFASTFM_MINIMAL=ON;
       else
-        cmake -H. -B_lib -DFASTFM_MINIMAL=ON -GXcode 
+        cmake -H. -B_lib -DFASTFM_MINIMAL=ON -GXcode; 
       fi
     - cmake --build _lib
     - cd ..
