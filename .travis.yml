@@ -54,6 +54,7 @@ install:
         cmake -H. -B_lib -DFASTFM_MINIMAL=ON -GXcode
         cmake --build _lib --config Debug
       fi 
+    - ls _lib/fastFM  
     - cd ..
     - make
     - python setup.py bdist_wheel
