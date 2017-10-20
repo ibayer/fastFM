@@ -19,7 +19,7 @@ ext_modules = [
                             'fastFM-core/externals/OpenBLAS/',
                             numpy.get_include()]),
     Extension('ffm2', ['fastFM/ffm2.pyx'],
-              libraries=['fastFM'],
+              libraries=['fastFMd'],
               library_dirs=[ffm2_library_dir],
               include_dirs=[ffm2_include_dir,
                             numpy.get_include()],

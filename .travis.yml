@@ -46,12 +46,14 @@ before_install:
 install:
     - git submodule update --init --recursive
     - cd fastFM-core2
-    - if [ "$TRAVIS_OS_NAME" = "linux" ]; then
-        cmake -H. -B_lib -DFASTFM_MINIMAL=ON;
-      else
-        cmake -H. -B_lib -DFASTFM_MINIMAL=ON -GXcode; 
-      fi
-    - cmake --build _lib
+    - |
+      if [ "$TRAVIS_OS_NAME" = "linux" ]; then
+        cmake -H. -B_lib -DCMAKE_BUILD_TYPE=Debug -DFASTFM_MINIMAL=ON
+        cmake --build _lib
+      else 
+        cmake -H. -B_lib -DFASTFM_MINIMAL=ON -GXcode
+        cmake --build _lib --config Debug
+      fi 
     - cd ..
     - make
     - python setup.py bdist_wheel
