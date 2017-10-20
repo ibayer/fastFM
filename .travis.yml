@@ -53,6 +53,7 @@ install:
       else 
         cmake -H. -B_lib -DFASTFM_MINIMAL=ON -GXcode
         cmake --build _lib --config Debug
+        mv _lib/fastFM/Debug/libfastFMd.a  _lib/fastFM/
       fi 
     - ls _lib/fastFM  
     - cd ..
