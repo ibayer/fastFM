@@ -5,11 +5,12 @@ env:
     - TRAVIS_PYTHON_VERSION="3.4"
     - TRAVIS_PYTHON_VERSION="3.5"
 
-os:
-    - linux
-    - osx
-
-dist: trusty
+matrix:
+  include:
+    - os: linux
+      dist: trusty
+    - os: osx
+      osx_image: xcode8.3
 
 git:
     submodules: false
