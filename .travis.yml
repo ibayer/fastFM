@@ -9,8 +9,8 @@ matrix:
   include:
     - os: linux
       dist: trusty
-    - os: osx
-      osx_image: xcode8.3
+    # - os: osx
+    #   osx_image: xcode8.3
 
 git:
     submodules: false
