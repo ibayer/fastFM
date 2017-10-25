@@ -5,11 +5,15 @@ env:
     - TRAVIS_PYTHON_VERSION="3.4"
     - TRAVIS_PYTHON_VERSION="3.5"
 
-os:
-    - linux
-    - osx
+matrix:
+  include:
+    - os: linux
+      dist: trusty
+    # - os: osx
+    #   osx_image: xcode8.3
 
-dist: trusty
+git:
+    submodules: false
 
 before_install:
       # fastFM-core depends on cblas
@@ -37,8 +41,23 @@ before_install:
     - conda create -q -n test-environment python=$TRAVIS_PYTHON_VERSION cython numpy pandas scipy scikit-learn nose
     - source activate test-environment
 
+    # use credentials
+    - sed -i -e "s|git@github.com:|https://$CI_TOKEN@github.com/|" .gitmodules
+
 install:
     - git submodule update --init --recursive
+    - cd fastFM-core2
+    - |
+      if [ "$TRAVIS_OS_NAME" = "linux" ]; then
+        cmake -H. -B_lib -DCMAKE_BUILD_TYPE=Debug -DFASTFM_MINIMAL=ON
+        cmake --build _lib
+      else 
+        cmake -H. -B_lib -DFASTFM_MINIMAL=ON -GXcode
+        cmake --build _lib --config Debug
+        mv _lib/fastFM/Debug/libfastFMd.a  _lib/fastFM/
+      fi 
+    - ls _lib/fastFM  
+    - cd ..
     - make
     - python setup.py bdist_wheel
     - pip install dist/*.whl
