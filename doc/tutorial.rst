@@ -17,7 +17,7 @@ refere to [SIGIR2011] for background information on the implemented ALS solver.
 .. testcode::
 
     from fastFM.datasets import make_user_item_regression
-    from sklearn.cross_validation import train_test_split
+    from sklearn.model_selection import train_test_split
 
     # This sets up a small test dataset.
     X, y, _ = make_user_item_regression(label_stdev=.4)

@@ -95,7 +95,7 @@ def test_fm_classification():
 
 def test_als_warm_start():
     X, y, coef = make_user_item_regression(label_stdev=0)
-    from sklearn.cross_validation import train_test_split
+    from sklearn.model_selection import train_test_split
     X_train, X_test, y_train, y_test = train_test_split(
         X, y, test_size=0.33, random_state=42)
     X_train = sp.csc_matrix(X_train)
@@ -125,7 +125,7 @@ def test_als_warm_start():
 def test_warm_start_path():
 
     X, y, coef = make_user_item_regression(label_stdev=.4)
-    from sklearn.cross_validation import train_test_split
+    from sklearn.model_selection import train_test_split
     X_train, X_test, y_train, y_test = train_test_split(
         X, y, test_size=0.33, random_state=42)
     X_train = sp.csc_matrix(X_train)
