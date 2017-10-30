@@ -20,7 +20,7 @@ setup(
 
     package_data={'fastFM': ['fastFM/*.pxd']},
 
-    version='0.2.9',
+    version='0.2.10',
     url='http://ibayer.github.io/fastFM',
     author='Immanuel Bayer',
     author_email='immanuel.bayer@uni-konstanz.de',
