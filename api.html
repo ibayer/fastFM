@@ -1,35 +1,34 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>The fastFM API reference &mdash; fastFM 0.2.6 documentation</title>
-    
+    <title>The fastFM API reference &#8212; fastFM 0.2.10 documentation</title>
     <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.2.6',
+        VERSION:     '0.2.10',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="fastFM 0.2.6 documentation" href="index.html" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
     <link rel="prev" title="Guide" href="guide.html" /> 
   </head>
-  <body role="document">
+  <body>
       <div class="header" role="banner"><h1 class="heading"><a href="index.html">
-          <span>fastFM 0.2.6 documentation</span></a></h1>
+          <span>fastFM 0.2.10 documentation</span></a></h1>
         <h2 class="heading"><span>The fastFM API reference</span></h2>
       </div>
       <div class="topnav" role="navigation" aria-label="top navigation">
@@ -57,12 +56,12 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>n_iter</strong> (<em>int, optional</em>) &#8211; The number of samples for the MCMC sampler, number or iterations over
+<li><strong>n_iter</strong> (<em>int</em><em>, </em><em>optional</em>) – The number of samples for the MCMC sampler, number or iterations over
 the training set for ALS and number of steps for SGD.</li>
-<li><strong>init_stdev</strong> (<em>float, optional</em>) &#8211; Sets the stdev  for the initialization of the parameter</li>
-<li><strong>random_state</strong> (<em>int, optional</em>) &#8211; The seed of the pseudo random number generator that
+<li><strong>init_stdev</strong> (<em>float</em><em>, </em><em>optional</em>) – Sets the stdev  for the initialization of the parameter</li>
+<li><strong>random_state</strong> (<em>int</em><em>, </em><em>optional</em>) – The seed of the pseudo random number generator that
 initializes the parameters and mcmc chain.</li>
-<li><strong>rank</strong> (<em>int</em>) &#8211; The rank of the factorization used for the second order interactions.</li>
+<li><strong>rank</strong> (<em>int</em>) – The rank of the factorization used for the second order interactions.</li>
 </ul>
 </td>
 </tr>
@@ -71,75 +70,20 @@ initializes the parameters and mcmc chain.</li>
 <dl class="attribute">
 <dt id="fastFM.mcmc.FMClassification.w0_">
 <code class="descname">w0_</code><a class="headerlink" href="#fastFM.mcmc.FMClassification.w0_" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em></p>
-<p>bias term</p>
+<dd><p><em>float</em> – bias term</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="fastFM.mcmc.FMClassification.w_">
 <code class="descname">w_</code><a class="headerlink" href="#fastFM.mcmc.FMClassification.w_" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float | array, shape = (n_features)</em></p>
-<p>Coefficients for linear combination.</p>
+<dd><p><em>float | array, shape = (n_features)</em> – Coefficients for linear combination.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="fastFM.mcmc.FMClassification.V_">
 <code class="descname">V_</code><a class="headerlink" href="#fastFM.mcmc.FMClassification.V_" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float | array, shape = (rank_pair, n_features)</em></p>
-<p>Coefficients of second order factor matrix.</p>
+<dd><p><em>float | array, shape = (rank_pair, n_features)</em> – Coefficients of second order factor matrix.</p>
 </dd></dl>
-
-<dl class="attribute">
-<dt id="fastFM.mcmc.FMClassification.__delattr__">
-<code class="descname">__delattr__</code><a class="headerlink" href="#fastFM.mcmc.FMClassification.__delattr__" title="Permalink to this definition">¶</a></dt>
-<dd><p>x.__delattr__(&#8216;name&#8217;) &lt;==&gt; del x.name</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="fastFM.mcmc.FMClassification.__format__">
-<code class="descname">__format__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.mcmc.FMClassification.__format__" title="Permalink to this definition">¶</a></dt>
-<dd><p>default object formatter</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="fastFM.mcmc.FMClassification.__getattribute__">
-<code class="descname">__getattribute__</code><a class="headerlink" href="#fastFM.mcmc.FMClassification.__getattribute__" title="Permalink to this definition">¶</a></dt>
-<dd><p>x.__getattribute__(&#8216;name&#8217;) &lt;==&gt; x.name</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="fastFM.mcmc.FMClassification.__hash__">
-<code class="descname">__hash__</code><a class="headerlink" href="#fastFM.mcmc.FMClassification.__hash__" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="fastFM.mcmc.FMClassification.__reduce__">
-<code class="descname">__reduce__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.mcmc.FMClassification.__reduce__" title="Permalink to this definition">¶</a></dt>
-<dd><p>helper for pickle</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="fastFM.mcmc.FMClassification.__reduce_ex__">
-<code class="descname">__reduce_ex__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.mcmc.FMClassification.__reduce_ex__" title="Permalink to this definition">¶</a></dt>
-<dd><p>helper for pickle</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="fastFM.mcmc.FMClassification.__setattr__">
-<code class="descname">__setattr__</code><a class="headerlink" href="#fastFM.mcmc.FMClassification.__setattr__" title="Permalink to this definition">¶</a></dt>
-<dd><p>x.__setattr__(&#8216;name&#8217;, value) &lt;==&gt; x.name = value</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="fastFM.mcmc.FMClassification.__sizeof__">
-<code class="descname">__sizeof__</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; int<a class="headerlink" href="#fastFM.mcmc.FMClassification.__sizeof__" title="Permalink to this definition">¶</a></dt>
-<dd><p>size of object in memory, in bytes</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="fastFM.mcmc.FMClassification.__str__">
-<code class="descname">__str__</code><a class="headerlink" href="#fastFM.mcmc.FMClassification.__str__" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
 
 <dl class="method">
 <dt id="fastFM.mcmc.FMClassification.fit_predict">
@@ -152,14 +96,13 @@ Use only with MCMC!</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>X_train</strong> (<em>scipy.sparse.csc_matrix, (n_samples, n_features)</em>) &#8211; </li>
-<li><strong>y_train</strong> (<em>array, shape (n_samples)</em>) &#8211; the targets have to be encodes as {-1, 1}.</li>
-<li><strong>X_test</strong> (<em>scipy.sparse.csc_matrix, (n_test_samples, n_features)</em>) &#8211; </li>
+<li><strong>X_train</strong> (<em>scipy.sparse.csc_matrix</em><em>, </em><em>(</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – </li>
+<li><strong>y_train</strong> (<em>array</em><em>, </em><em>shape</em><em> (</em><em>n_samples</em><em>)</em>) – the targets have to be encodes as {-1, 1}.</li>
+<li><strong>X_test</strong> (<em>scipy.sparse.csc_matrix</em><em>, </em><em>(</em><em>n_test_samples</em><em>, </em><em>n_features</em><em>)</em>) – </li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>y_pred</strong> &#8211;
-Returns predicted class labels.</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>y_pred</strong> – Returns predicted class labels.</p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">array, shape (n_test_samples)</p>
@@ -180,14 +123,13 @@ Use only with MCMC!</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>X_train</strong> (<em>scipy.sparse.csc_matrix, (n_samples, n_features)</em>) &#8211; </li>
-<li><strong>y_train</strong> (<em>array, shape (n_samples)</em>) &#8211; the targets have to be encodes as {-1, 1}.</li>
-<li><strong>X_test</strong> (<em>scipy.sparse.csc_matrix, (n_test_samples, n_features)</em>) &#8211; </li>
+<li><strong>X_train</strong> (<em>scipy.sparse.csc_matrix</em><em>, </em><em>(</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – </li>
+<li><strong>y_train</strong> (<em>array</em><em>, </em><em>shape</em><em> (</em><em>n_samples</em><em>)</em>) – the targets have to be encodes as {-1, 1}.</li>
+<li><strong>X_test</strong> (<em>scipy.sparse.csc_matrix</em><em>, </em><em>(</em><em>n_test_samples</em><em>, </em><em>n_features</em><em>)</em>) – </li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>y_pred</strong> &#8211;
-Returns probability estimates for the class with lowest
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>y_pred</strong> – Returns probability estimates for the class with lowest
 classification label.</p>
 </td>
 </tr>
@@ -206,11 +148,10 @@ classification label.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>deep</strong> (<em>boolean, optional</em>) &#8211; If True, will return the parameters for this estimator and
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>deep</strong> (<em>boolean</em><em>, </em><em>optional</em>) – If True, will return the parameters for this estimator and
 contained subobjects that are estimators.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>params</strong> &#8211;
-Parameter names mapped to their values.</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>params</strong> – Parameter names mapped to their values.</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">mapping of string to any</td>
 </tr>
@@ -226,13 +167,11 @@ Parameter names mapped to their values.</td>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>X</strong> (<em>scipy.sparse.csc_matrix, (n_samples, n_features)</em>) &#8211; </li>
-<li><strong>Returns</strong> &#8211; </li>
-<li><strong>------</strong> &#8211; </li>
-<li><strong>T</strong> (<em>array, shape (n_samples)</em>) &#8211; The labels are returned for classification.</li>
-</ul>
-</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>X</strong> (<em>scipy.sparse.csc_matrix</em><em>, </em><em>(</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>T</strong> – The labels are returned for classification.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">array, shape (n_samples)</td>
 </tr>
 </tbody>
 </table>
@@ -243,8 +182,8 @@ Parameter names mapped to their values.</td>
 <code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.mcmc.FMClassification.set_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the parameters of this estimator.</p>
 <p>The method works on simple estimators as well as on nested objects
-(such as pipelines). The former have parameters of the form
-<code class="docutils literal"><span class="pre">&lt;component&gt;__&lt;parameter&gt;</span></code> so that it&#8217;s possible to update each
+(such as pipelines). The latter have parameters of the form
+<code class="docutils literal"><span class="pre">&lt;component&gt;__&lt;parameter&gt;</span></code> so that it’s possible to update each
 component of a nested object.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -269,12 +208,12 @@ component of a nested object.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>n_iter</strong> (<em>int, optional</em>) &#8211; The number of samples for the MCMC sampler, number or iterations over
+<li><strong>n_iter</strong> (<em>int</em><em>, </em><em>optional</em>) – The number of samples for the MCMC sampler, number or iterations over
 the training set for ALS and number of steps for SGD.</li>
-<li><strong>init_stdev</strong> (<em>float, optional</em>) &#8211; Sets the stdev  for the initialization of the parameter</li>
-<li><strong>random_state</strong> (<em>int, optional</em>) &#8211; The seed of the pseudo random number generator that
+<li><strong>init_stdev</strong> (<em>float</em><em>, </em><em>optional</em>) – Sets the stdev  for the initialization of the parameter</li>
+<li><strong>random_state</strong> (<em>int</em><em>, </em><em>optional</em>) – The seed of the pseudo random number generator that
 initializes the parameters and mcmc chain.</li>
-<li><strong>rank</strong> (<em>int</em>) &#8211; The rank of the factorization used for the second order interactions.</li>
+<li><strong>rank</strong> (<em>int</em>) – The rank of the factorization used for the second order interactions.</li>
 </ul>
 </td>
 </tr>
@@ -283,75 +222,20 @@ initializes the parameters and mcmc chain.</li>
 <dl class="attribute">
 <dt id="fastFM.mcmc.FMRegression.w0_">
 <code class="descname">w0_</code><a class="headerlink" href="#fastFM.mcmc.FMRegression.w0_" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em></p>
-<p>bias term</p>
+<dd><p><em>float</em> – bias term</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="fastFM.mcmc.FMRegression.w_">
 <code class="descname">w_</code><a class="headerlink" href="#fastFM.mcmc.FMRegression.w_" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float | array, shape = (n_features)</em></p>
-<p>Coefficients for linear combination.</p>
+<dd><p><em>float | array, shape = (n_features)</em> – Coefficients for linear combination.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="fastFM.mcmc.FMRegression.V_">
 <code class="descname">V_</code><a class="headerlink" href="#fastFM.mcmc.FMRegression.V_" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float | array, shape = (rank_pair, n_features)</em></p>
-<p>Coefficients of second order factor matrix.</p>
+<dd><p><em>float | array, shape = (rank_pair, n_features)</em> – Coefficients of second order factor matrix.</p>
 </dd></dl>
-
-<dl class="attribute">
-<dt id="fastFM.mcmc.FMRegression.__delattr__">
-<code class="descname">__delattr__</code><a class="headerlink" href="#fastFM.mcmc.FMRegression.__delattr__" title="Permalink to this definition">¶</a></dt>
-<dd><p>x.__delattr__(&#8216;name&#8217;) &lt;==&gt; del x.name</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="fastFM.mcmc.FMRegression.__format__">
-<code class="descname">__format__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.mcmc.FMRegression.__format__" title="Permalink to this definition">¶</a></dt>
-<dd><p>default object formatter</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="fastFM.mcmc.FMRegression.__getattribute__">
-<code class="descname">__getattribute__</code><a class="headerlink" href="#fastFM.mcmc.FMRegression.__getattribute__" title="Permalink to this definition">¶</a></dt>
-<dd><p>x.__getattribute__(&#8216;name&#8217;) &lt;==&gt; x.name</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="fastFM.mcmc.FMRegression.__hash__">
-<code class="descname">__hash__</code><a class="headerlink" href="#fastFM.mcmc.FMRegression.__hash__" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="fastFM.mcmc.FMRegression.__reduce__">
-<code class="descname">__reduce__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.mcmc.FMRegression.__reduce__" title="Permalink to this definition">¶</a></dt>
-<dd><p>helper for pickle</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="fastFM.mcmc.FMRegression.__reduce_ex__">
-<code class="descname">__reduce_ex__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.mcmc.FMRegression.__reduce_ex__" title="Permalink to this definition">¶</a></dt>
-<dd><p>helper for pickle</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="fastFM.mcmc.FMRegression.__setattr__">
-<code class="descname">__setattr__</code><a class="headerlink" href="#fastFM.mcmc.FMRegression.__setattr__" title="Permalink to this definition">¶</a></dt>
-<dd><p>x.__setattr__(&#8216;name&#8217;, value) &lt;==&gt; x.name = value</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="fastFM.mcmc.FMRegression.__sizeof__">
-<code class="descname">__sizeof__</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; int<a class="headerlink" href="#fastFM.mcmc.FMRegression.__sizeof__" title="Permalink to this definition">¶</a></dt>
-<dd><p>size of object in memory, in bytes</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="fastFM.mcmc.FMRegression.__str__">
-<code class="descname">__str__</code><a class="headerlink" href="#fastFM.mcmc.FMRegression.__str__" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
 
 <dl class="method">
 <dt id="fastFM.mcmc.FMRegression.fit_predict">
@@ -362,10 +246,10 @@ initializes the parameters and mcmc chain.</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>X_train</strong> (<em>scipy.sparse.csc_matrix, (n_samples, n_features)</em>) &#8211; </li>
-<li><strong>y_train</strong> (<em>array, shape (n_samples)</em>) &#8211; </li>
-<li><strong>X_test</strong> (<em>scipy.sparse.csc_matrix, (n_test_samples, n_features)</em>) &#8211; </li>
-<li><strong>n_more_iter</strong> (<em>int</em>) &#8211; Number of iterations to continue from the current Coefficients.</li>
+<li><strong>X_train</strong> (<em>scipy.sparse.csc_matrix</em><em>, </em><em>(</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – </li>
+<li><strong>y_train</strong> (<em>array</em><em>, </em><em>shape</em><em> (</em><em>n_samples</em><em>)</em>) – </li>
+<li><strong>X_test</strong> (<em>scipy.sparse.csc_matrix</em><em>, </em><em>(</em><em>n_test_samples</em><em>, </em><em>n_features</em><em>)</em>) – </li>
+<li><strong>n_more_iter</strong> (<em>int</em>) – Number of iterations to continue from the current Coefficients.</li>
 </ul>
 </td>
 </tr>
@@ -387,11 +271,10 @@ initializes the parameters and mcmc chain.</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>deep</strong> (<em>boolean, optional</em>) &#8211; If True, will return the parameters for this estimator and
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>deep</strong> (<em>boolean</em><em>, </em><em>optional</em>) – If True, will return the parameters for this estimator and
 contained subobjects that are estimators.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>params</strong> &#8211;
-Parameter names mapped to their values.</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>params</strong> – Parameter names mapped to their values.</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">mapping of string to any</td>
 </tr>
@@ -407,13 +290,11 @@ Parameter names mapped to their values.</td>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>X</strong> (<em>scipy.sparse.csc_matrix, (n_samples, n_features)</em>) &#8211; </li>
-<li><strong>Returns</strong> &#8211; </li>
-<li><strong>------</strong> &#8211; </li>
-<li><strong>T</strong> (<em>array, shape (n_samples)</em>) &#8211; The labels are returned for classification.</li>
-</ul>
-</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>X</strong> (<em>scipy.sparse.csc_matrix</em><em>, </em><em>(</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>T</strong> – The labels are returned for classification.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">array, shape (n_samples)</td>
 </tr>
 </tbody>
 </table>
@@ -424,8 +305,8 @@ Parameter names mapped to their values.</td>
 <code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.mcmc.FMRegression.set_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the parameters of this estimator.</p>
 <p>The method works on simple estimators as well as on nested objects
-(such as pipelines). The former have parameters of the form
-<code class="docutils literal"><span class="pre">&lt;component&gt;__&lt;parameter&gt;</span></code> so that it&#8217;s possible to update each
+(such as pipelines). The latter have parameters of the form
+<code class="docutils literal"><span class="pre">&lt;component&gt;__&lt;parameter&gt;</span></code> so that it’s possible to update each
 component of a nested object.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -455,88 +336,50 @@ solver.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>n_iter</strong> (<em>int, optional</em>) &#8211; The number of samples for the MCMC sampler, number or iterations over
+<li><strong>n_iter</strong> (<em>int</em><em>, </em><em>optional</em>) – The number of samples for the MCMC sampler, number or iterations over
 the training set for ALS and number of steps for SGD.</li>
-<li><strong>init_stdev</strong> (<em>float, optional</em>) &#8211; Sets the stdev  for the initialization of the parameter</li>
-<li><strong>random_state</strong> (<em>int, optional</em>) &#8211; The seed of the pseudo random number generator that
+<li><strong>init_stdev</strong> (<em>float</em><em>, </em><em>optional</em>) – Sets the stdev  for the initialization of the parameter</li>
+<li><strong>random_state</strong> (<em>int</em><em>, </em><em>optional</em>) – The seed of the pseudo random number generator that
 initializes the parameters and mcmc chain.</li>
-<li><strong>rank</strong> (<em>int</em>) &#8211; The rank of the factorization used for the second order interactions.</li>
-<li><strong>l2_reg_w</strong> (<em>float</em>) &#8211; L2 penalty weight for pairwise coefficients.</li>
-<li><strong>l2_reg_V</strong> (<em>float</em>) &#8211; L2 penalty weight for linear coefficients.</li>
-<li><strong>l2_reg</strong> (<em>float</em>) &#8211; L2 penalty weight for all coefficients (default=0).</li>
-<li><strong>Attributes</strong> &#8211; </li>
-<li><strong>---------</strong> &#8211; </li>
-<li><strong>w0</strong> (<em>float</em>) &#8211; bias term</li>
-<li><strong>w</strong> (<em>float | array, shape = (n_features)</em>) &#8211; Coefficients for linear combination.</li>
-<li><strong>V</strong> (<em>float | array, shape = (rank_pair, n_features)</em>) &#8211; Coefficients of second order factor matrix.</li>
+<li><strong>rank</strong> (<em>int</em>) – The rank of the factorization used for the second order interactions.</li>
+<li><strong>l2_reg_w</strong> (<em>float</em>) – L2 penalty weight for linear coefficients.</li>
+<li><strong>l2_reg_V</strong> (<em>float</em>) – L2 penalty weight for pairwise coefficients.</li>
+<li><strong>l2_reg</strong> (<em>float</em>) – L2 penalty weight for all coefficients (default=0).</li>
 </ul>
 </td>
 </tr>
 </tbody>
 </table>
 <dl class="attribute">
-<dt id="fastFM.als.FMClassification.__delattr__">
-<code class="descname">__delattr__</code><a class="headerlink" href="#fastFM.als.FMClassification.__delattr__" title="Permalink to this definition">¶</a></dt>
-<dd><p>x.__delattr__(&#8216;name&#8217;) &lt;==&gt; del x.name</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="fastFM.als.FMClassification.__format__">
-<code class="descname">__format__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.als.FMClassification.__format__" title="Permalink to this definition">¶</a></dt>
-<dd><p>default object formatter</p>
+<dt id="fastFM.als.FMClassification.w0_">
+<code class="descname">w0_</code><a class="headerlink" href="#fastFM.als.FMClassification.w0_" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em> – bias term</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="fastFM.als.FMClassification.__getattribute__">
-<code class="descname">__getattribute__</code><a class="headerlink" href="#fastFM.als.FMClassification.__getattribute__" title="Permalink to this definition">¶</a></dt>
-<dd><p>x.__getattribute__(&#8216;name&#8217;) &lt;==&gt; x.name</p>
+<dt id="fastFM.als.FMClassification.w_">
+<code class="descname">w_</code><a class="headerlink" href="#fastFM.als.FMClassification.w_" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float | array, shape = (n_features)</em> – Coefficients for linear combination.</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="fastFM.als.FMClassification.__hash__">
-<code class="descname">__hash__</code><a class="headerlink" href="#fastFM.als.FMClassification.__hash__" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="fastFM.als.FMClassification.__reduce__">
-<code class="descname">__reduce__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.als.FMClassification.__reduce__" title="Permalink to this definition">¶</a></dt>
-<dd><p>helper for pickle</p>
+<dt id="fastFM.als.FMClassification.V_">
+<code class="descname">V_</code><a class="headerlink" href="#fastFM.als.FMClassification.V_" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float | array, shape = (rank_pair, n_features)</em> – Coefficients of second order factor matrix.</p>
 </dd></dl>
-
-<dl class="method">
-<dt id="fastFM.als.FMClassification.__reduce_ex__">
-<code class="descname">__reduce_ex__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.als.FMClassification.__reduce_ex__" title="Permalink to this definition">¶</a></dt>
-<dd><p>helper for pickle</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="fastFM.als.FMClassification.__setattr__">
-<code class="descname">__setattr__</code><a class="headerlink" href="#fastFM.als.FMClassification.__setattr__" title="Permalink to this definition">¶</a></dt>
-<dd><p>x.__setattr__(&#8216;name&#8217;, value) &lt;==&gt; x.name = value</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="fastFM.als.FMClassification.__sizeof__">
-<code class="descname">__sizeof__</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; int<a class="headerlink" href="#fastFM.als.FMClassification.__sizeof__" title="Permalink to this definition">¶</a></dt>
-<dd><p>size of object in memory, in bytes</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="fastFM.als.FMClassification.__str__">
-<code class="descname">__str__</code><a class="headerlink" href="#fastFM.als.FMClassification.__str__" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
 
 <dl class="method">
 <dt id="fastFM.als.FMClassification.fit">
-<code class="descname">fit</code><span class="sig-paren">(</span><em>X_train</em>, <em>y_train</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fastFM/als.html#FMClassification.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fastFM.als.FMClassification.fit" title="Permalink to this definition">¶</a></dt>
+<code class="descname">fit</code><span class="sig-paren">(</span><em>X_train</em>, <em>y_train</em>, <em>n_more_iter=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fastFM/als.html#FMClassification.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fastFM.als.FMClassification.fit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fit model with specified loss.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>X</strong> (<em>scipy.sparse.csc_matrix, (n_samples, n_features)</em>) &#8211; </li>
-<li><strong>y</strong> (<em>float | ndarray, shape = (n_samples, )</em>) &#8211; the targets have to be encodes as {-1, 1}.</li>
+<li><strong>X</strong> (<em>scipy.sparse.csc_matrix</em><em>, </em><em>(</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – </li>
+<li><strong>y</strong> (<em>float | ndarray</em><em>, </em><em>shape =</em><em> (</em><em>n_samples</em><em>, </em><em>)</em>) – the targets have to be encodes as {-1, 1}.</li>
+<li><strong>n_more_iter</strong> (<em>int</em>) – Number of iterations to continue from the current Coefficients.</li>
 </ul>
 </td>
 </tr>
@@ -552,11 +395,10 @@ initializes the parameters and mcmc chain.</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>deep</strong> (<em>boolean, optional</em>) &#8211; If True, will return the parameters for this estimator and
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>deep</strong> (<em>boolean</em><em>, </em><em>optional</em>) – If True, will return the parameters for this estimator and
 contained subobjects that are estimators.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>params</strong> &#8211;
-Parameter names mapped to their values.</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>params</strong> – Parameter names mapped to their values.</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">mapping of string to any</td>
 </tr>
@@ -572,13 +414,11 @@ Parameter names mapped to their values.</td>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>X</strong> (<em>scipy.sparse.csc_matrix, (n_samples, n_features)</em>) &#8211; </li>
-<li><strong>Returns</strong> &#8211; </li>
-<li><strong>------</strong> &#8211; </li>
-<li><strong>y</strong> (<em>array, shape (n_samples)</em>) &#8211; Class labels</li>
-</ul>
-</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>X</strong> (<em>scipy.sparse.csc_matrix</em><em>, </em><em>(</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>y</strong> – Class labels</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">array, shape (n_samples)</td>
 </tr>
 </tbody>
 </table>
@@ -592,13 +432,11 @@ Parameter names mapped to their values.</td>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>X</strong> (<em>scipy.sparse.csc_matrix, (n_samples, n_features)</em>) &#8211; </li>
-<li><strong>Returns</strong> &#8211; </li>
-<li><strong>------</strong> &#8211; </li>
-<li><strong>y</strong> (<em>array, shape (n_samples)</em>) &#8211; Class Probability for the class with smaller label.</li>
-</ul>
-</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>X</strong> (<em>scipy.sparse.csc_matrix</em><em>, </em><em>(</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>y</strong> – Class Probability for the class with smaller label.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">array, shape (n_samples)</td>
 </tr>
 </tbody>
 </table>
@@ -616,14 +454,13 @@ each label set be correctly predicted.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>X</strong> (<em>array-like, shape = (n_samples, n_features)</em>) &#8211; Test samples.</li>
-<li><strong>y</strong> (<em>array-like, shape = (n_samples) or (n_samples, n_outputs)</em>) &#8211; True labels for X.</li>
-<li><strong>sample_weight</strong> (<em>array-like, shape = [n_samples], optional</em>) &#8211; Sample weights.</li>
+<li><strong>X</strong> (<em>array-like</em><em>, </em><em>shape =</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – Test samples.</li>
+<li><strong>y</strong> (<em>array-like</em><em>, </em><em>shape =</em><em> (</em><em>n_samples</em><em>) or </em><em>(</em><em>n_samples</em><em>, </em><em>n_outputs</em><em>)</em>) – True labels for X.</li>
+<li><strong>sample_weight</strong> (<em>array-like</em><em>, </em><em>shape =</em><em> [</em><em>n_samples</em><em>]</em><em>, </em><em>optional</em>) – Sample weights.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>score</strong> &#8211;
-Mean accuracy of self.predict(X) wrt. y.</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>score</strong> – Mean accuracy of self.predict(X) wrt. y.</p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float</p>
@@ -638,8 +475,8 @@ Mean accuracy of self.predict(X) wrt. y.</p>
 <code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.als.FMClassification.set_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the parameters of this estimator.</p>
 <p>The method works on simple estimators as well as on nested objects
-(such as pipelines). The former have parameters of the form
-<code class="docutils literal"><span class="pre">&lt;component&gt;__&lt;parameter&gt;</span></code> so that it&#8217;s possible to update each
+(such as pipelines). The latter have parameters of the form
+<code class="docutils literal"><span class="pre">&lt;component&gt;__&lt;parameter&gt;</span></code> so that it’s possible to update each
 component of a nested object.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -665,76 +502,37 @@ solver.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>n_iter</strong> (<em>int, optional</em>) &#8211; The number of samples for the MCMC sampler, number or iterations over
+<li><strong>n_iter</strong> (<em>int</em><em>, </em><em>optional</em>) – The number of samples for the MCMC sampler, number or iterations over
 the training set for ALS and number of steps for SGD.</li>
-<li><strong>init_stdev</strong> (<em>float, optional</em>) &#8211; Sets the stdev for the initialization of the parameter</li>
-<li><strong>random_state</strong> (<em>int, optional</em>) &#8211; The seed of the pseudo random number generator that
+<li><strong>init_stdev</strong> (<em>float</em><em>, </em><em>optional</em>) – Sets the stdev for the initialization of the parameter</li>
+<li><strong>random_state</strong> (<em>int</em><em>, </em><em>optional</em>) – The seed of the pseudo random number generator that
 initializes the parameters and mcmc chain.</li>
-<li><strong>rank</strong> (<em>int</em>) &#8211; The rank of the factorization used for the second order interactions.</li>
-<li><strong>l2_reg_w</strong> (<em>float</em>) &#8211; L2 penalty weight for pairwise coefficients.</li>
-<li><strong>l2_reg_V</strong> (<em>float</em>) &#8211; L2 penalty weight for linear coefficients.</li>
-<li><strong>l2_reg</strong> (<em>float</em>) &#8211; L2 penalty weight for all coefficients (default=0).</li>
-<li><strong>Attributes</strong> &#8211; </li>
-<li><strong>---------</strong> &#8211; </li>
-<li><strong>w0</strong> (<em>float</em>) &#8211; bias term</li>
-<li><strong>w</strong> (<em>float | array, shape = (n_features)</em>) &#8211; Coefficients for linear combination.</li>
-<li><strong>V</strong> (<em>float | array, shape = (rank_pair, n_features)</em>) &#8211; Coefficients of second order factor matrix.</li>
+<li><strong>rank</strong> (<em>int</em>) – The rank of the factorization used for the second order interactions.</li>
+<li><strong>l2_reg_w</strong> (<em>float</em>) – L2 penalty weight for linear coefficients.</li>
+<li><strong>l2_reg_V</strong> (<em>float</em>) – L2 penalty weight for pairwise coefficients.</li>
+<li><strong>l2_reg</strong> (<em>float</em>) – L2 penalty weight for all coefficients (default=0).</li>
 </ul>
 </td>
 </tr>
 </tbody>
 </table>
 <dl class="attribute">
-<dt id="fastFM.als.FMRegression.__delattr__">
-<code class="descname">__delattr__</code><a class="headerlink" href="#fastFM.als.FMRegression.__delattr__" title="Permalink to this definition">¶</a></dt>
-<dd><p>x.__delattr__(&#8216;name&#8217;) &lt;==&gt; del x.name</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="fastFM.als.FMRegression.__format__">
-<code class="descname">__format__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.als.FMRegression.__format__" title="Permalink to this definition">¶</a></dt>
-<dd><p>default object formatter</p>
+<dt id="fastFM.als.FMRegression.w0_">
+<code class="descname">w0_</code><a class="headerlink" href="#fastFM.als.FMRegression.w0_" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em> – bias term</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="fastFM.als.FMRegression.__getattribute__">
-<code class="descname">__getattribute__</code><a class="headerlink" href="#fastFM.als.FMRegression.__getattribute__" title="Permalink to this definition">¶</a></dt>
-<dd><p>x.__getattribute__(&#8216;name&#8217;) &lt;==&gt; x.name</p>
+<dt id="fastFM.als.FMRegression.w_">
+<code class="descname">w_</code><a class="headerlink" href="#fastFM.als.FMRegression.w_" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float | array, shape = (n_features)</em> – Coefficients for linear combination.</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="fastFM.als.FMRegression.__hash__">
-<code class="descname">__hash__</code><a class="headerlink" href="#fastFM.als.FMRegression.__hash__" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="fastFM.als.FMRegression.__reduce__">
-<code class="descname">__reduce__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.als.FMRegression.__reduce__" title="Permalink to this definition">¶</a></dt>
-<dd><p>helper for pickle</p>
+<dt id="fastFM.als.FMRegression.V_">
+<code class="descname">V_</code><a class="headerlink" href="#fastFM.als.FMRegression.V_" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float | array, shape = (rank_pair, n_features)</em> – Coefficients of second order factor matrix.</p>
 </dd></dl>
-
-<dl class="method">
-<dt id="fastFM.als.FMRegression.__reduce_ex__">
-<code class="descname">__reduce_ex__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.als.FMRegression.__reduce_ex__" title="Permalink to this definition">¶</a></dt>
-<dd><p>helper for pickle</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="fastFM.als.FMRegression.__setattr__">
-<code class="descname">__setattr__</code><a class="headerlink" href="#fastFM.als.FMRegression.__setattr__" title="Permalink to this definition">¶</a></dt>
-<dd><p>x.__setattr__(&#8216;name&#8217;, value) &lt;==&gt; x.name = value</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="fastFM.als.FMRegression.__sizeof__">
-<code class="descname">__sizeof__</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; int<a class="headerlink" href="#fastFM.als.FMRegression.__sizeof__" title="Permalink to this definition">¶</a></dt>
-<dd><p>size of object in memory, in bytes</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="fastFM.als.FMRegression.__str__">
-<code class="descname">__str__</code><a class="headerlink" href="#fastFM.als.FMRegression.__str__" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
 
 <dl class="method">
 <dt id="fastFM.als.FMRegression.fit">
@@ -745,9 +543,9 @@ initializes the parameters and mcmc chain.</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>X</strong> (<em>scipy.sparse.csc_matrix, (n_samples, n_features)</em>) &#8211; </li>
-<li><strong>y</strong> (<em>float | ndarray, shape = (n_samples, )</em>) &#8211; </li>
-<li><strong>n_more_iter</strong> (<em>int</em>) &#8211; Number of iterations to continue from the current Coefficients.</li>
+<li><strong>X</strong> (<em>scipy.sparse.csc_matrix</em><em>, </em><em>(</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – </li>
+<li><strong>y</strong> (<em>float | ndarray</em><em>, </em><em>shape =</em><em> (</em><em>n_samples</em><em>, </em><em>)</em>) – </li>
+<li><strong>n_more_iter</strong> (<em>int</em>) – Number of iterations to continue from the current Coefficients.</li>
 </ul>
 </td>
 </tr>
@@ -763,11 +561,10 @@ initializes the parameters and mcmc chain.</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>deep</strong> (<em>boolean, optional</em>) &#8211; If True, will return the parameters for this estimator and
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>deep</strong> (<em>boolean</em><em>, </em><em>optional</em>) – If True, will return the parameters for this estimator and
 contained subobjects that are estimators.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>params</strong> &#8211;
-Parameter names mapped to their values.</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>params</strong> – Parameter names mapped to their values.</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">mapping of string to any</td>
 </tr>
@@ -783,13 +580,11 @@ Parameter names mapped to their values.</td>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>X</strong> (<em>scipy.sparse.csc_matrix, (n_samples, n_features)</em>) &#8211; </li>
-<li><strong>Returns</strong> &#8211; </li>
-<li><strong>------</strong> &#8211; </li>
-<li><strong>T</strong> (<em>array, shape (n_samples)</em>) &#8211; The labels are returned for classification.</li>
-</ul>
-</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>X</strong> (<em>scipy.sparse.csc_matrix</em><em>, </em><em>(</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>T</strong> – The labels are returned for classification.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">array, shape (n_samples)</td>
 </tr>
 </tbody>
 </table>
@@ -799,10 +594,10 @@ Parameter names mapped to their values.</td>
 <dt id="fastFM.als.FMRegression.score">
 <code class="descname">score</code><span class="sig-paren">(</span><em>X</em>, <em>y</em>, <em>sample_weight=None</em><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.als.FMRegression.score" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the coefficient of determination R^2 of the prediction.</p>
-<p>The coefficient R^2 is defined as (1 - u/v), where u is the regression
-sum of squares ((y_true - y_pred) ** 2).sum() and v is the residual
+<p>The coefficient R^2 is defined as (1 - u/v), where u is the residual
+sum of squares ((y_true - y_pred) ** 2).sum() and v is the total
 sum of squares ((y_true - y_true.mean()) ** 2).sum().
-Best possible score is 1.0 and it can be negative (because the
+The best possible score is 1.0 and it can be negative (because the
 model can be arbitrarily worse). A constant model that always
 predicts the expected value of y, disregarding the input features,
 would get a R^2 score of 0.0.</p>
@@ -811,14 +606,13 @@ would get a R^2 score of 0.0.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>X</strong> (<em>array-like, shape = (n_samples, n_features)</em>) &#8211; Test samples.</li>
-<li><strong>y</strong> (<em>array-like, shape = (n_samples) or (n_samples, n_outputs)</em>) &#8211; True values for X.</li>
-<li><strong>sample_weight</strong> (<em>array-like, shape = [n_samples], optional</em>) &#8211; Sample weights.</li>
+<li><strong>X</strong> (<em>array-like</em><em>, </em><em>shape =</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – Test samples.</li>
+<li><strong>y</strong> (<em>array-like</em><em>, </em><em>shape =</em><em> (</em><em>n_samples</em><em>) or </em><em>(</em><em>n_samples</em><em>, </em><em>n_outputs</em><em>)</em>) – True values for X.</li>
+<li><strong>sample_weight</strong> (<em>array-like</em><em>, </em><em>shape =</em><em> [</em><em>n_samples</em><em>]</em><em>, </em><em>optional</em>) – Sample weights.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>score</strong> &#8211;
-R^2 of self.predict(X) wrt. y.</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>score</strong> – R^2 of self.predict(X) wrt. y.</p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float</p>
@@ -833,8 +627,8 @@ R^2 of self.predict(X) wrt. y.</p>
 <code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.als.FMRegression.set_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the parameters of this estimator.</p>
 <p>The method works on simple estimators as well as on nested objects
-(such as pipelines). The former have parameters of the form
-<code class="docutils literal"><span class="pre">&lt;component&gt;__&lt;parameter&gt;</span></code> so that it&#8217;s possible to update each
+(such as pipelines). The latter have parameters of the form
+<code class="docutils literal"><span class="pre">&lt;component&gt;__&lt;parameter&gt;</span></code> so that it’s possible to update each
 component of a nested object.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -863,77 +657,38 @@ descent solver.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>n_iter</strong> (<em>int, optional</em>) &#8211; The number of interations of individual samples .</li>
-<li><strong>init_std</strong> (<em>float, optional</em>) &#8211; Sets the stdev for the initialization of the parameter</li>
-<li><strong>random_state</strong> (<em>int, optional</em>) &#8211; The seed of the pseudo random number generator that
+<li><strong>n_iter</strong> (<em>int</em><em>, </em><em>optional</em>) – The number of interations of individual samples .</li>
+<li><strong>init_std</strong> (<em>float</em><em>, </em><em>optional</em>) – Sets the stdev for the initialization of the parameter</li>
+<li><strong>random_state</strong> (<em>int</em><em>, </em><em>optional</em>) – The seed of the pseudo random number generator that
 initializes the parameters and mcmc chain.</li>
-<li><strong>rank</strong> (<em>int</em>) &#8211; The rank of the factorization used for the second order interactions.</li>
-<li><strong>l2_reg_w</strong> (<em>float</em>) &#8211; L2 penalty weight for pairwise coefficients.</li>
-<li><strong>l2_reg_V</strong> (<em>float</em>) &#8211; L2 penalty weight for linear coefficients.</li>
-<li><strong>l2_reg</strong> (<em>float</em>) &#8211; L2 penalty weight for all coefficients (default=0).</li>
-<li><strong>step_size</strong> (<em>float</em>) &#8211; Stepsize for the SGD solver, the solver uses a fixed step size and
+<li><strong>rank</strong> (<em>int</em>) – The rank of the factorization used for the second order interactions.</li>
+<li><strong>l2_reg_w</strong> (<em>float</em>) – L2 penalty weight for linear coefficients.</li>
+<li><strong>l2_reg_V</strong> (<em>float</em>) – L2 penalty weight for pairwise coefficients.</li>
+<li><strong>l2_reg</strong> (<em>float</em>) – L2 penalty weight for all coefficients (default=0).</li>
+<li><strong>step_size</strong> (<em>float</em>) – Stepsize for the SGD solver, the solver uses a fixed step size and
 might require a tunning of the number of iterations <cite>n_iter</cite>.</li>
-<li><strong>Attributes</strong> &#8211; </li>
-<li><strong>---------</strong> &#8211; </li>
-<li><strong>w0</strong> (<em>float</em>) &#8211; bias term</li>
-<li><strong>w</strong> (<em>float | array, shape = (n_features)</em>) &#8211; Coefficients for linear combination.</li>
-<li><strong>V</strong> (<em>float | array, shape = (rank_pair, n_features)</em>) &#8211; Coefficients of second order factor matrix.</li>
 </ul>
 </td>
 </tr>
 </tbody>
 </table>
 <dl class="attribute">
-<dt id="fastFM.sgd.FMClassification.__delattr__">
-<code class="descname">__delattr__</code><a class="headerlink" href="#fastFM.sgd.FMClassification.__delattr__" title="Permalink to this definition">¶</a></dt>
-<dd><p>x.__delattr__(&#8216;name&#8217;) &lt;==&gt; del x.name</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="fastFM.sgd.FMClassification.__format__">
-<code class="descname">__format__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.sgd.FMClassification.__format__" title="Permalink to this definition">¶</a></dt>
-<dd><p>default object formatter</p>
+<dt id="fastFM.sgd.FMClassification.w0_">
+<code class="descname">w0_</code><a class="headerlink" href="#fastFM.sgd.FMClassification.w0_" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em> – bias term</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="fastFM.sgd.FMClassification.__getattribute__">
-<code class="descname">__getattribute__</code><a class="headerlink" href="#fastFM.sgd.FMClassification.__getattribute__" title="Permalink to this definition">¶</a></dt>
-<dd><p>x.__getattribute__(&#8216;name&#8217;) &lt;==&gt; x.name</p>
+<dt id="fastFM.sgd.FMClassification.w_">
+<code class="descname">w_</code><a class="headerlink" href="#fastFM.sgd.FMClassification.w_" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float | array, shape = (n_features)</em> – Coefficients for linear combination.</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="fastFM.sgd.FMClassification.__hash__">
-<code class="descname">__hash__</code><a class="headerlink" href="#fastFM.sgd.FMClassification.__hash__" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="fastFM.sgd.FMClassification.__reduce__">
-<code class="descname">__reduce__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.sgd.FMClassification.__reduce__" title="Permalink to this definition">¶</a></dt>
-<dd><p>helper for pickle</p>
+<dt id="fastFM.sgd.FMClassification.V_">
+<code class="descname">V_</code><a class="headerlink" href="#fastFM.sgd.FMClassification.V_" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float | array, shape = (rank_pair, n_features)</em> – Coefficients of second order factor matrix.</p>
 </dd></dl>
-
-<dl class="method">
-<dt id="fastFM.sgd.FMClassification.__reduce_ex__">
-<code class="descname">__reduce_ex__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.sgd.FMClassification.__reduce_ex__" title="Permalink to this definition">¶</a></dt>
-<dd><p>helper for pickle</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="fastFM.sgd.FMClassification.__setattr__">
-<code class="descname">__setattr__</code><a class="headerlink" href="#fastFM.sgd.FMClassification.__setattr__" title="Permalink to this definition">¶</a></dt>
-<dd><p>x.__setattr__(&#8216;name&#8217;, value) &lt;==&gt; x.name = value</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="fastFM.sgd.FMClassification.__sizeof__">
-<code class="descname">__sizeof__</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; int<a class="headerlink" href="#fastFM.sgd.FMClassification.__sizeof__" title="Permalink to this definition">¶</a></dt>
-<dd><p>size of object in memory, in bytes</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="fastFM.sgd.FMClassification.__str__">
-<code class="descname">__str__</code><a class="headerlink" href="#fastFM.sgd.FMClassification.__str__" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
 
 <dl class="method">
 <dt id="fastFM.sgd.FMClassification.fit">
@@ -944,8 +699,8 @@ might require a tunning of the number of iterations <cite>n_iter</cite>.</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>X</strong> (<em>scipy.sparse.csc_matrix, (n_samples, n_features)</em>) &#8211; </li>
-<li><strong>y</strong> (<em>float | ndarray, shape = (n_samples, )</em>) &#8211; the targets have to be encodes as {-1, 1}.</li>
+<li><strong>X</strong> (<em>scipy.sparse.csc_matrix</em><em>, </em><em>(</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – </li>
+<li><strong>y</strong> (<em>float | ndarray</em><em>, </em><em>shape =</em><em> (</em><em>n_samples</em><em>, </em><em>)</em>) – the targets have to be encodes as {-1, 1}.</li>
 </ul>
 </td>
 </tr>
@@ -961,11 +716,10 @@ might require a tunning of the number of iterations <cite>n_iter</cite>.</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>deep</strong> (<em>boolean, optional</em>) &#8211; If True, will return the parameters for this estimator and
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>deep</strong> (<em>boolean</em><em>, </em><em>optional</em>) – If True, will return the parameters for this estimator and
 contained subobjects that are estimators.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>params</strong> &#8211;
-Parameter names mapped to their values.</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>params</strong> – Parameter names mapped to their values.</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">mapping of string to any</td>
 </tr>
@@ -981,13 +735,11 @@ Parameter names mapped to their values.</td>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>X</strong> (<em>scipy.sparse.csc_matrix, (n_samples, n_features)</em>) &#8211; </li>
-<li><strong>Returns</strong> &#8211; </li>
-<li><strong>------</strong> &#8211; </li>
-<li><strong>y</strong> (<em>array, shape (n_samples)</em>) &#8211; Class labels</li>
-</ul>
-</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>X</strong> (<em>scipy.sparse.csc_matrix</em><em>, </em><em>(</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>y</strong> – Class labels</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">array, shape (n_samples)</td>
 </tr>
 </tbody>
 </table>
@@ -1001,13 +753,11 @@ Parameter names mapped to their values.</td>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>X</strong> (<em>scipy.sparse.csc_matrix, (n_samples, n_features)</em>) &#8211; </li>
-<li><strong>Returns</strong> &#8211; </li>
-<li><strong>------</strong> &#8211; </li>
-<li><strong>y</strong> (<em>array, shape (n_samples)</em>) &#8211; Class Probability for the class with smaller label.</li>
-</ul>
-</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>X</strong> (<em>scipy.sparse.csc_matrix</em><em>, </em><em>(</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>y</strong> – Class Probability for the class with smaller label.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">array, shape (n_samples)</td>
 </tr>
 </tbody>
 </table>
@@ -1025,14 +775,13 @@ each label set be correctly predicted.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>X</strong> (<em>array-like, shape = (n_samples, n_features)</em>) &#8211; Test samples.</li>
-<li><strong>y</strong> (<em>array-like, shape = (n_samples) or (n_samples, n_outputs)</em>) &#8211; True labels for X.</li>
-<li><strong>sample_weight</strong> (<em>array-like, shape = [n_samples], optional</em>) &#8211; Sample weights.</li>
+<li><strong>X</strong> (<em>array-like</em><em>, </em><em>shape =</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – Test samples.</li>
+<li><strong>y</strong> (<em>array-like</em><em>, </em><em>shape =</em><em> (</em><em>n_samples</em><em>) or </em><em>(</em><em>n_samples</em><em>, </em><em>n_outputs</em><em>)</em>) – True labels for X.</li>
+<li><strong>sample_weight</strong> (<em>array-like</em><em>, </em><em>shape =</em><em> [</em><em>n_samples</em><em>]</em><em>, </em><em>optional</em>) – Sample weights.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>score</strong> &#8211;
-Mean accuracy of self.predict(X) wrt. y.</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>score</strong> – Mean accuracy of self.predict(X) wrt. y.</p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float</p>
@@ -1047,8 +796,8 @@ Mean accuracy of self.predict(X) wrt. y.</p>
 <code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.sgd.FMClassification.set_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the parameters of this estimator.</p>
 <p>The method works on simple estimators as well as on nested objects
-(such as pipelines). The former have parameters of the form
-<code class="docutils literal"><span class="pre">&lt;component&gt;__&lt;parameter&gt;</span></code> so that it&#8217;s possible to update each
+(such as pipelines). The latter have parameters of the form
+<code class="docutils literal"><span class="pre">&lt;component&gt;__&lt;parameter&gt;</span></code> so that it’s possible to update each
 component of a nested object.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1074,77 +823,38 @@ descent solver.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>n_iter</strong> (<em>int, optional</em>) &#8211; The number of interations of individual samples .</li>
-<li><strong>init_stdev</strong> (<em>float, optional</em>) &#8211; Sets the stdev for the initialization of the parameter</li>
-<li><strong>random_state</strong> (<em>int, optional</em>) &#8211; The seed of the pseudo random number generator that
+<li><strong>n_iter</strong> (<em>int</em><em>, </em><em>optional</em>) – The number of interations of individual samples .</li>
+<li><strong>init_stdev</strong> (<em>float</em><em>, </em><em>optional</em>) – Sets the stdev for the initialization of the parameter</li>
+<li><strong>random_state</strong> (<em>int</em><em>, </em><em>optional</em>) – The seed of the pseudo random number generator that
 initializes the parameters and mcmc chain.</li>
-<li><strong>rank</strong> (<em>int</em>) &#8211; The rank of the factorization used for the second order interactions.</li>
-<li><strong>l2_reg_w</strong> (<em>float</em>) &#8211; L2 penalty weight for pairwise coefficients.</li>
-<li><strong>l2_reg_V</strong> (<em>float</em>) &#8211; L2 penalty weight for linear coefficients.</li>
-<li><strong>l2_reg</strong> (<em>float</em>) &#8211; L2 penalty weight for all coefficients (default=0).</li>
-<li><strong>step_size</strong> (<em>float</em>) &#8211; Stepsize for the SGD solver, the solver uses a fixed step size and
+<li><strong>rank</strong> (<em>int</em>) – The rank of the factorization used for the second order interactions.</li>
+<li><strong>l2_reg_w</strong> (<em>float</em>) – L2 penalty weight for linear coefficients.</li>
+<li><strong>l2_reg_V</strong> (<em>float</em>) – L2 penalty weight for pairwise coefficients.</li>
+<li><strong>l2_reg</strong> (<em>float</em>) – L2 penalty weight for all coefficients (default=0).</li>
+<li><strong>step_size</strong> (<em>float</em>) – Stepsize for the SGD solver, the solver uses a fixed step size and
 might require a tunning of the number of iterations <cite>n_iter</cite>.</li>
-<li><strong>Attributes</strong> &#8211; </li>
-<li><strong>---------</strong> &#8211; </li>
-<li><strong>w0</strong> (<em>float</em>) &#8211; bias term</li>
-<li><strong>w</strong> (<em>float | array, shape = (n_features)</em>) &#8211; Coefficients for linear combination.</li>
-<li><strong>V</strong> (<em>float | array, shape = (rank_pair, n_features)</em>) &#8211; Coefficients of second order factor matrix.</li>
 </ul>
 </td>
 </tr>
 </tbody>
 </table>
 <dl class="attribute">
-<dt id="fastFM.sgd.FMRegression.__delattr__">
-<code class="descname">__delattr__</code><a class="headerlink" href="#fastFM.sgd.FMRegression.__delattr__" title="Permalink to this definition">¶</a></dt>
-<dd><p>x.__delattr__(&#8216;name&#8217;) &lt;==&gt; del x.name</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="fastFM.sgd.FMRegression.__format__">
-<code class="descname">__format__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.sgd.FMRegression.__format__" title="Permalink to this definition">¶</a></dt>
-<dd><p>default object formatter</p>
+<dt id="fastFM.sgd.FMRegression.w0_">
+<code class="descname">w0_</code><a class="headerlink" href="#fastFM.sgd.FMRegression.w0_" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em> – bias term</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="fastFM.sgd.FMRegression.__getattribute__">
-<code class="descname">__getattribute__</code><a class="headerlink" href="#fastFM.sgd.FMRegression.__getattribute__" title="Permalink to this definition">¶</a></dt>
-<dd><p>x.__getattribute__(&#8216;name&#8217;) &lt;==&gt; x.name</p>
+<dt id="fastFM.sgd.FMRegression.w_">
+<code class="descname">w_</code><a class="headerlink" href="#fastFM.sgd.FMRegression.w_" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float | array, shape = (n_features)</em> – Coefficients for linear combination.</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="fastFM.sgd.FMRegression.__hash__">
-<code class="descname">__hash__</code><a class="headerlink" href="#fastFM.sgd.FMRegression.__hash__" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="fastFM.sgd.FMRegression.__reduce__">
-<code class="descname">__reduce__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.sgd.FMRegression.__reduce__" title="Permalink to this definition">¶</a></dt>
-<dd><p>helper for pickle</p>
+<dt id="fastFM.sgd.FMRegression.V_">
+<code class="descname">V_</code><a class="headerlink" href="#fastFM.sgd.FMRegression.V_" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float | array, shape = (rank_pair, n_features)</em> – Coefficients of second order factor matrix.</p>
 </dd></dl>
-
-<dl class="method">
-<dt id="fastFM.sgd.FMRegression.__reduce_ex__">
-<code class="descname">__reduce_ex__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.sgd.FMRegression.__reduce_ex__" title="Permalink to this definition">¶</a></dt>
-<dd><p>helper for pickle</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="fastFM.sgd.FMRegression.__setattr__">
-<code class="descname">__setattr__</code><a class="headerlink" href="#fastFM.sgd.FMRegression.__setattr__" title="Permalink to this definition">¶</a></dt>
-<dd><p>x.__setattr__(&#8216;name&#8217;, value) &lt;==&gt; x.name = value</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="fastFM.sgd.FMRegression.__sizeof__">
-<code class="descname">__sizeof__</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; int<a class="headerlink" href="#fastFM.sgd.FMRegression.__sizeof__" title="Permalink to this definition">¶</a></dt>
-<dd><p>size of object in memory, in bytes</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="fastFM.sgd.FMRegression.__str__">
-<code class="descname">__str__</code><a class="headerlink" href="#fastFM.sgd.FMRegression.__str__" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
 
 <dl class="method">
 <dt id="fastFM.sgd.FMRegression.fit">
@@ -1155,8 +865,8 @@ might require a tunning of the number of iterations <cite>n_iter</cite>.</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>X</strong> (<em>scipy.sparse.csc_matrix, (n_samples, n_features)</em>) &#8211; </li>
-<li><strong>y</strong> (<em>float | ndarray, shape = (n_samples, )</em>) &#8211; </li>
+<li><strong>X</strong> (<em>scipy.sparse.csc_matrix</em><em>, </em><em>(</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – </li>
+<li><strong>y</strong> (<em>float | ndarray</em><em>, </em><em>shape =</em><em> (</em><em>n_samples</em><em>, </em><em>)</em>) – </li>
 </ul>
 </td>
 </tr>
@@ -1172,11 +882,10 @@ might require a tunning of the number of iterations <cite>n_iter</cite>.</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>deep</strong> (<em>boolean, optional</em>) &#8211; If True, will return the parameters for this estimator and
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>deep</strong> (<em>boolean</em><em>, </em><em>optional</em>) – If True, will return the parameters for this estimator and
 contained subobjects that are estimators.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>params</strong> &#8211;
-Parameter names mapped to their values.</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>params</strong> – Parameter names mapped to their values.</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">mapping of string to any</td>
 </tr>
@@ -1192,13 +901,11 @@ Parameter names mapped to their values.</td>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>X</strong> (<em>scipy.sparse.csc_matrix, (n_samples, n_features)</em>) &#8211; </li>
-<li><strong>Returns</strong> &#8211; </li>
-<li><strong>------</strong> &#8211; </li>
-<li><strong>T</strong> (<em>array, shape (n_samples)</em>) &#8211; The labels are returned for classification.</li>
-</ul>
-</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>X</strong> (<em>scipy.sparse.csc_matrix</em><em>, </em><em>(</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>T</strong> – The labels are returned for classification.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">array, shape (n_samples)</td>
 </tr>
 </tbody>
 </table>
@@ -1208,10 +915,10 @@ Parameter names mapped to their values.</td>
 <dt id="fastFM.sgd.FMRegression.score">
 <code class="descname">score</code><span class="sig-paren">(</span><em>X</em>, <em>y</em>, <em>sample_weight=None</em><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.sgd.FMRegression.score" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the coefficient of determination R^2 of the prediction.</p>
-<p>The coefficient R^2 is defined as (1 - u/v), where u is the regression
-sum of squares ((y_true - y_pred) ** 2).sum() and v is the residual
+<p>The coefficient R^2 is defined as (1 - u/v), where u is the residual
+sum of squares ((y_true - y_pred) ** 2).sum() and v is the total
 sum of squares ((y_true - y_true.mean()) ** 2).sum().
-Best possible score is 1.0 and it can be negative (because the
+The best possible score is 1.0 and it can be negative (because the
 model can be arbitrarily worse). A constant model that always
 predicts the expected value of y, disregarding the input features,
 would get a R^2 score of 0.0.</p>
@@ -1220,14 +927,13 @@ would get a R^2 score of 0.0.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>X</strong> (<em>array-like, shape = (n_samples, n_features)</em>) &#8211; Test samples.</li>
-<li><strong>y</strong> (<em>array-like, shape = (n_samples) or (n_samples, n_outputs)</em>) &#8211; True values for X.</li>
-<li><strong>sample_weight</strong> (<em>array-like, shape = [n_samples], optional</em>) &#8211; Sample weights.</li>
+<li><strong>X</strong> (<em>array-like</em><em>, </em><em>shape =</em><em> (</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – Test samples.</li>
+<li><strong>y</strong> (<em>array-like</em><em>, </em><em>shape =</em><em> (</em><em>n_samples</em><em>) or </em><em>(</em><em>n_samples</em><em>, </em><em>n_outputs</em><em>)</em>) – True values for X.</li>
+<li><strong>sample_weight</strong> (<em>array-like</em><em>, </em><em>shape =</em><em> [</em><em>n_samples</em><em>]</em><em>, </em><em>optional</em>) – Sample weights.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>score</strong> &#8211;
-R^2 of self.predict(X) wrt. y.</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>score</strong> – R^2 of self.predict(X) wrt. y.</p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">float</p>
@@ -1242,8 +948,8 @@ R^2 of self.predict(X) wrt. y.</p>
 <code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.sgd.FMRegression.set_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the parameters of this estimator.</p>
 <p>The method works on simple estimators as well as on nested objects
-(such as pipelines). The former have parameters of the form
-<code class="docutils literal"><span class="pre">&lt;component&gt;__&lt;parameter&gt;</span></code> so that it&#8217;s possible to update each
+(such as pipelines). The latter have parameters of the form
+<code class="docutils literal"><span class="pre">&lt;component&gt;__&lt;parameter&gt;</span></code> so that it’s possible to update each
 component of a nested object.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1271,77 +977,38 @@ component of a nested object.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>n_iter</strong> (<em>int, optional</em>) &#8211; The number of interations of individual samples .</li>
-<li><strong>init_stdev</strong> (<em>float, optional</em>) &#8211; Sets the stdev for the initialization of the parameter</li>
-<li><strong>random_state</strong> (<em>int, optional</em>) &#8211; The seed of the pseudo random number generator that
+<li><strong>n_iter</strong> (<em>int</em><em>, </em><em>optional</em>) – The number of interations of individual samples .</li>
+<li><strong>init_stdev</strong> (<em>float</em><em>, </em><em>optional</em>) – Sets the stdev for the initialization of the parameter</li>
+<li><strong>random_state</strong> (<em>int</em><em>, </em><em>optional</em>) – The seed of the pseudo random number generator that
 initializes the parameters and mcmc chain.</li>
-<li><strong>rank</strong> (<em>int</em>) &#8211; The rank of the factorization used for the second order interactions.</li>
-<li><strong>l2_reg_w</strong> (<em>float</em>) &#8211; L2 penalty weight for pairwise coefficients.</li>
-<li><strong>l2_reg_V</strong> (<em>float</em>) &#8211; L2 penalty weight for linear coefficients.</li>
-<li><strong>l2_reg</strong> (<em>float</em>) &#8211; L2 penalty weight for all coefficients (default=0).</li>
-<li><strong>step_size</strong> (<em>float</em>) &#8211; Stepsize for the SGD solver, the solver uses a fixed step size and
+<li><strong>rank</strong> (<em>int</em>) – The rank of the factorization used for the second order interactions.</li>
+<li><strong>l2_reg_w</strong> (<em>float</em>) – L2 penalty weight for linear coefficients.</li>
+<li><strong>l2_reg_V</strong> (<em>float</em>) – L2 penalty weight for pairwise coefficients.</li>
+<li><strong>l2_reg</strong> (<em>float</em>) – L2 penalty weight for all coefficients (default=0).</li>
+<li><strong>step_size</strong> (<em>float</em>) – Stepsize for the SGD solver, the solver uses a fixed step size and
 might require a tunning of the number of iterations <cite>n_iter</cite>.</li>
-<li><strong>Attributes</strong> &#8211; </li>
-<li><strong>---------</strong> &#8211; </li>
-<li><strong>w0</strong> (<em>float</em>) &#8211; bias term</li>
-<li><strong>w</strong> (<em>float | array, shape = (n_features)</em>) &#8211; Coefficients for linear combination.</li>
-<li><strong>V</strong> (<em>float | array, shape = (rank_pair, n_features)</em>) &#8211; Coefficients of second order factor matrix.</li>
 </ul>
 </td>
 </tr>
 </tbody>
 </table>
 <dl class="attribute">
-<dt id="fastFM.bpr.FMRecommender.__delattr__">
-<code class="descname">__delattr__</code><a class="headerlink" href="#fastFM.bpr.FMRecommender.__delattr__" title="Permalink to this definition">¶</a></dt>
-<dd><p>x.__delattr__(&#8216;name&#8217;) &lt;==&gt; del x.name</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="fastFM.bpr.FMRecommender.__format__">
-<code class="descname">__format__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.bpr.FMRecommender.__format__" title="Permalink to this definition">¶</a></dt>
-<dd><p>default object formatter</p>
+<dt id="fastFM.bpr.FMRecommender.w0_">
+<code class="descname">w0_</code><a class="headerlink" href="#fastFM.bpr.FMRecommender.w0_" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em> – bias term</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="fastFM.bpr.FMRecommender.__getattribute__">
-<code class="descname">__getattribute__</code><a class="headerlink" href="#fastFM.bpr.FMRecommender.__getattribute__" title="Permalink to this definition">¶</a></dt>
-<dd><p>x.__getattribute__(&#8216;name&#8217;) &lt;==&gt; x.name</p>
+<dt id="fastFM.bpr.FMRecommender.w_">
+<code class="descname">w_</code><a class="headerlink" href="#fastFM.bpr.FMRecommender.w_" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float | array, shape = (n_features)</em> – Coefficients for linear combination.</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="fastFM.bpr.FMRecommender.__hash__">
-<code class="descname">__hash__</code><a class="headerlink" href="#fastFM.bpr.FMRecommender.__hash__" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="fastFM.bpr.FMRecommender.__reduce__">
-<code class="descname">__reduce__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.bpr.FMRecommender.__reduce__" title="Permalink to this definition">¶</a></dt>
-<dd><p>helper for pickle</p>
+<dt id="fastFM.bpr.FMRecommender.V_">
+<code class="descname">V_</code><a class="headerlink" href="#fastFM.bpr.FMRecommender.V_" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float | array, shape = (rank_pair, n_features)</em> – Coefficients of second order factor matrix.</p>
 </dd></dl>
-
-<dl class="method">
-<dt id="fastFM.bpr.FMRecommender.__reduce_ex__">
-<code class="descname">__reduce_ex__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.bpr.FMRecommender.__reduce_ex__" title="Permalink to this definition">¶</a></dt>
-<dd><p>helper for pickle</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="fastFM.bpr.FMRecommender.__setattr__">
-<code class="descname">__setattr__</code><a class="headerlink" href="#fastFM.bpr.FMRecommender.__setattr__" title="Permalink to this definition">¶</a></dt>
-<dd><p>x.__setattr__(&#8216;name&#8217;, value) &lt;==&gt; x.name = value</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="fastFM.bpr.FMRecommender.__sizeof__">
-<code class="descname">__sizeof__</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; int<a class="headerlink" href="#fastFM.bpr.FMRecommender.__sizeof__" title="Permalink to this definition">¶</a></dt>
-<dd><p>size of object in memory, in bytes</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="fastFM.bpr.FMRecommender.__str__">
-<code class="descname">__str__</code><a class="headerlink" href="#fastFM.bpr.FMRecommender.__str__" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
 
 <dl class="method">
 <dt id="fastFM.bpr.FMRecommender.fit">
@@ -1352,8 +1019,8 @@ might require a tunning of the number of iterations <cite>n_iter</cite>.</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>X</strong> (<em>scipy.sparse.csc_matrix, (n_samples, n_features)</em>) &#8211; </li>
-<li><strong>y</strong> (<em>float | ndarray, shape = (n_compares, 2)</em>) &#8211; Each row <cite>i</cite> defines a pair of samples such that
+<li><strong>X</strong> (<em>scipy.sparse.csc_matrix</em><em>, </em><em>(</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – </li>
+<li><strong>y</strong> (<em>float | ndarray</em><em>, </em><em>shape =</em><em> (</em><em>n_compares</em><em>, </em><em>2</em><em>)</em>) – Each row <cite>i</cite> defines a pair of samples such that
 the first returns a high value then the second
 FM(X[i,0]) &gt; FM(X[i, 1]).</li>
 </ul>
@@ -1371,11 +1038,10 @@ FM(X[i,0]) &gt; FM(X[i, 1]).</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>deep</strong> (<em>boolean, optional</em>) &#8211; If True, will return the parameters for this estimator and
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>deep</strong> (<em>boolean</em><em>, </em><em>optional</em>) – If True, will return the parameters for this estimator and
 contained subobjects that are estimators.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>params</strong> &#8211;
-Parameter names mapped to their values.</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>params</strong> – Parameter names mapped to their values.</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">mapping of string to any</td>
 </tr>
@@ -1391,13 +1057,11 @@ Parameter names mapped to their values.</td>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>X</strong> (<em>scipy.sparse.csc_matrix, (n_samples, n_features)</em>) &#8211; </li>
-<li><strong>Returns</strong> &#8211; </li>
-<li><strong>------</strong> &#8211; </li>
-<li><strong>T</strong> (<em>array, shape (n_samples)</em>) &#8211; The labels are returned for classification.</li>
-</ul>
-</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>X</strong> (<em>scipy.sparse.csc_matrix</em><em>, </em><em>(</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><strong>T</strong> – The labels are returned for classification.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">array, shape (n_samples)</td>
 </tr>
 </tbody>
 </table>
@@ -1408,8 +1072,8 @@ Parameter names mapped to their values.</td>
 <code class="descname">set_params</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="headerlink" href="#fastFM.bpr.FMRecommender.set_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the parameters of this estimator.</p>
 <p>The method works on simple estimators as well as on nested objects
-(such as pipelines). The former have parameters of the form
-<code class="docutils literal"><span class="pre">&lt;component&gt;__&lt;parameter&gt;</span></code> so that it&#8217;s possible to update each
+(such as pipelines). The latter have parameters of the form
+<code class="docutils literal"><span class="pre">&lt;component&gt;__&lt;parameter&gt;</span></code> so that it’s possible to update each
 component of a nested object.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1441,8 +1105,8 @@ component of a nested object.</p>
       </div>
 
     <div class="footer" role="contentinfo">
-        &copy; Copyright 2016, Immanuel Bayer.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+        &#169; Copyright 2016, Immanuel Bayer.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
     </div>
   </body>
 </html>

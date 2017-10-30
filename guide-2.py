@@ -1,6 +1,6 @@
 import numpy as np
 from sklearn.metrics import mean_squared_error
-from sklearn.cross_validation import train_test_split
+from sklearn.model_selection import train_test_split
 
 from fastFM.datasets import make_user_item_regression
 from fastFM import mcmc

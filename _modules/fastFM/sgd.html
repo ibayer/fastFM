@@ -1,35 +1,33 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>fastFM.sgd &mdash; fastFM 0.2.6 documentation</title>
-    
+    <title>fastFM.sgd &#8212; fastFM 0.2.10 documentation</title>
     <link rel="stylesheet" href="../../_static/haiku.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.2.6',
+        VERSION:     '0.2.10',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="fastFM 0.2.6 documentation" href="../../index.html" />
-    <link rel="up" title="Module code" href="../index.html" /> 
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
   </head>
-  <body role="document">
+  <body>
       <div class="header" role="banner"><h1 class="heading"><a href="../../index.html">
-          <span>fastFM 0.2.6 documentation</span></a></h1>
+          <span>fastFM 0.2.10 documentation</span></a></h1>
         <h2 class="heading"><span>fastFM.sgd</span></h2>
       </div>
       <div class="topnav" role="navigation" aria-label="top navigation">
@@ -43,15 +41,15 @@
         
         
   <h1>Source code for fastFM.sgd</h1><div class="highlight"><pre>
-<span class="c"># Author: Immanuel Bayer</span>
-<span class="c"># License: BSD 3 clause</span>
+<span></span><span class="c1"># Author: Immanuel Bayer</span>
+<span class="c1"># License: BSD 3 clause</span>
 
 
 <span class="kn">import</span> <span class="nn">ffm</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">sklearn.base</span> <span class="kn">import</span> <span class="n">RegressorMixin</span>
-<span class="kn">from</span> <span class="nn">.validation</span> <span class="kn">import</span> <span class="n">check_array</span><span class="p">,</span> <span class="n">check_consistent_length</span>
-<span class="kn">from</span> <span class="nn">.base</span> <span class="kn">import</span> <span class="p">(</span><span class="n">FactorizationMachine</span><span class="p">,</span> <span class="n">BaseFMClassifier</span><span class="p">,</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn.base</span> <span class="k">import</span> <span class="n">RegressorMixin</span>
+<span class="kn">from</span> <span class="nn">.validation</span> <span class="k">import</span> <span class="n">check_array</span><span class="p">,</span> <span class="n">check_consistent_length</span>
+<span class="kn">from</span> <span class="nn">.base</span> <span class="k">import</span> <span class="p">(</span><span class="n">FactorizationMachine</span><span class="p">,</span> <span class="n">BaseFMClassifier</span><span class="p">,</span>
                    <span class="n">_validate_class_labels</span><span class="p">)</span>
 
 
@@ -76,10 +74,10 @@
 <span class="sd">        The rank of the factorization used for the second order interactions.</span>
 
 <span class="sd">    l2_reg_w : float</span>
-<span class="sd">        L2 penalty weight for pairwise coefficients.</span>
+<span class="sd">        L2 penalty weight for linear coefficients.</span>
 
 <span class="sd">    l2_reg_V : float</span>
-<span class="sd">        L2 penalty weight for linear coefficients.</span>
+<span class="sd">        L2 penalty weight for pairwise coefficients.</span>
 
 <span class="sd">    l2_reg : float</span>
 <span class="sd">        L2 penalty weight for all coefficients (default=0).</span>
@@ -104,7 +102,7 @@
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">init_stdev</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">rank</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">123</span><span class="p">,</span>
                  <span class="n">l2_reg_w</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">l2_reg_V</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">l2_reg</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">step_size</span><span class="o">=</span><span class="mf">0.1</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">FMRegression</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span>\
-            <span class="n">__init__</span><span class="p">(</span><span class="n">n_iter</span><span class="o">=</span><span class="n">n_iter</span><span class="p">,</span> <span class="n">init_stdev</span><span class="o">=</span><span class="n">init_stdev</span><span class="p">,</span> <span class="n">rank</span><span class="o">=</span><span class="n">rank</span><span class="p">,</span>
+            <span class="fm">__init__</span><span class="p">(</span><span class="n">n_iter</span><span class="o">=</span><span class="n">n_iter</span><span class="p">,</span> <span class="n">init_stdev</span><span class="o">=</span><span class="n">init_stdev</span><span class="p">,</span> <span class="n">rank</span><span class="o">=</span><span class="n">rank</span><span class="p">,</span>
                      <span class="n">random_state</span><span class="o">=</span><span class="n">random_state</span><span class="p">)</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">l2_reg</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">l2_reg_V</span> <span class="o">=</span> <span class="n">l2_reg</span>
@@ -112,8 +110,9 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">l2_reg_w</span> <span class="o">=</span> <span class="n">l2_reg_w</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">l2_reg_V</span> <span class="o">=</span> <span class="n">l2_reg_V</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">l2_reg</span> <span class="o">=</span> <span class="n">l2_reg</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">step_size</span> <span class="o">=</span> <span class="n">step_size</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">task</span> <span class="o">=</span> <span class="s">&quot;regression&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">task</span> <span class="o">=</span> <span class="s2">&quot;regression&quot;</span>
 
 <div class="viewcode-block" id="FMRegression.fit"><a class="viewcode-back" href="../../api.html#fastFM.sgd.FMRegression.fit">[docs]</a>    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Fit model with specified loss.</span>
@@ -127,17 +126,17 @@
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">check_consistent_length</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-        <span class="n">y</span> <span class="o">=</span> <span class="n">check_array</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">ensure_2d</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">check_array</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">ensure_2d</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
 
-        <span class="c"># The sgd solver expects a transposed design matrix in column major</span>
-        <span class="c"># order (csc_matrix).</span>
-        <span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">T</span>  <span class="c"># creates a copy</span>
-        <span class="n">X</span> <span class="o">=</span> <span class="n">check_array</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">accept_sparse</span><span class="o">=</span><span class="s">&quot;csc&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="c1"># The sgd solver expects a transposed design matrix in column major</span>
+        <span class="c1"># order (csc_matrix).</span>
+        <span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">T</span>  <span class="c1"># creates a copy</span>
+        <span class="n">X</span> <span class="o">=</span> <span class="n">check_array</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">accept_sparse</span><span class="o">=</span><span class="s2">&quot;csc&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">w0_</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">w_</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">V_</span> <span class="o">=</span> <span class="n">ffm</span><span class="o">.</span><span class="n">ffm_sgd_fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span>
+        <span class="k">return</span> <span class="bp">self</span></div></div>
 
-</div></div>
+
 <div class="viewcode-block" id="FMClassification"><a class="viewcode-back" href="../../api.html#fastFM.sgd.FMClassification">[docs]</a><span class="k">class</span> <span class="nc">FMClassification</span><span class="p">(</span><span class="n">BaseFMClassifier</span><span class="p">):</span>
 
     <span class="sd">&quot;&quot;&quot; Factorization Machine Classification trained with a stochastic gradient</span>
@@ -159,10 +158,10 @@
 <span class="sd">        The rank of the factorization used for the second order interactions.</span>
 
 <span class="sd">    l2_reg_w : float</span>
-<span class="sd">        L2 penalty weight for pairwise coefficients.</span>
+<span class="sd">        L2 penalty weight for linear coefficients.</span>
 
 <span class="sd">    l2_reg_V : float</span>
-<span class="sd">        L2 penalty weight for linear coefficients.</span>
+<span class="sd">        L2 penalty weight for pairwise coefficients.</span>
 
 <span class="sd">    l2_reg : float</span>
 <span class="sd">        L2 penalty weight for all coefficients (default=0).</span>
@@ -185,18 +184,19 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">init_stdev</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">rank</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">123</span><span class="p">,</span>
-                 <span class="n">l2_reg_w</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">l2_reg_V</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">l2_reg</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">step_size</span><span class="o">=</span><span class="mf">0.1</span><span class="p">):</span>
+                 <span class="n">l2_reg_w</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">l2_reg_V</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">l2_reg</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">step_size</span><span class="o">=</span><span class="mf">0.1</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">FMClassification</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span>\
-            <span class="n">__init__</span><span class="p">(</span><span class="n">n_iter</span><span class="o">=</span><span class="n">n_iter</span><span class="p">,</span> <span class="n">init_stdev</span><span class="o">=</span><span class="n">init_stdev</span><span class="p">,</span> <span class="n">rank</span><span class="o">=</span><span class="n">rank</span><span class="p">,</span>
+            <span class="fm">__init__</span><span class="p">(</span><span class="n">n_iter</span><span class="o">=</span><span class="n">n_iter</span><span class="p">,</span> <span class="n">init_stdev</span><span class="o">=</span><span class="n">init_stdev</span><span class="p">,</span> <span class="n">rank</span><span class="o">=</span><span class="n">rank</span><span class="p">,</span>
                      <span class="n">random_state</span><span class="o">=</span><span class="n">random_state</span><span class="p">)</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">l2_reg</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">l2_reg</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">l2_reg_V</span> <span class="o">=</span> <span class="n">l2_reg</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">l2_reg_w</span> <span class="o">=</span> <span class="n">l2_reg</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">l2_reg_w</span> <span class="o">=</span> <span class="n">l2_reg_w</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">l2_reg_V</span> <span class="o">=</span> <span class="n">l2_reg_V</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">l2_reg</span> <span class="o">=</span> <span class="n">l2_reg</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">step_size</span> <span class="o">=</span> <span class="n">step_size</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">task</span> <span class="o">=</span> <span class="s">&quot;classification&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">task</span> <span class="o">=</span> <span class="s2">&quot;classification&quot;</span>
 
 <div class="viewcode-block" id="FMClassification.fit"><a class="viewcode-back" href="../../api.html#fastFM.sgd.FMClassification.fit">[docs]</a>    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Fit model with specified loss.</span>
@@ -212,23 +212,23 @@
         <span class="n">y</span> <span class="o">=</span> <span class="n">_validate_class_labels</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">classes_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">classes_</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;This solver only supports binary classification&quot;</span>
-                             <span class="s">&quot; but the data contains&quot;</span>
-                             <span class="s">&quot; class: </span><span class="si">%r</span><span class="s">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">classes_</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;This solver only supports binary classification&quot;</span>
+                             <span class="s2">&quot; but the data contains&quot;</span>
+                             <span class="s2">&quot; class: </span><span class="si">%r</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">classes_</span><span class="p">)</span>
 
-        <span class="c"># fastFM-core expects labels to be in {-1,1}</span>
+        <span class="c1"># fastFM-core expects labels to be in {-1,1}</span>
         <span class="n">y_train</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
         <span class="n">i_class1</span> <span class="o">=</span> <span class="p">(</span><span class="n">y_train</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">classes_</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
         <span class="n">y_train</span><span class="p">[</span><span class="n">i_class1</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
-        <span class="n">y_train</span><span class="p">[</span><span class="o">-</span><span class="n">i_class1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">y_train</span><span class="p">[</span><span class="o">~</span><span class="n">i_class1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
 
         <span class="n">check_consistent_length</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
         <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
 
-        <span class="c"># The sgd solver expects a transposed design matrix in column major</span>
-        <span class="c"># order (csc_matrix).</span>
-        <span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">T</span>  <span class="c"># creates a copy</span>
-        <span class="n">X</span> <span class="o">=</span> <span class="n">check_array</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">accept_sparse</span><span class="o">=</span><span class="s">&quot;csc&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="c1"># The sgd solver expects a transposed design matrix in column major</span>
+        <span class="c1"># order (csc_matrix).</span>
+        <span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">T</span>  <span class="c1"># creates a copy</span>
+        <span class="n">X</span> <span class="o">=</span> <span class="n">check_array</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">accept_sparse</span><span class="o">=</span><span class="s2">&quot;csc&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">w0_</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">w_</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">V_</span> <span class="o">=</span> <span class="n">ffm</span><span class="o">.</span><span class="n">ffm_sgd_fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span></div></div>
@@ -244,8 +244,8 @@
       </div>
 
     <div class="footer" role="contentinfo">
-        &copy; Copyright 2016, Immanuel Bayer.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+        &#169; Copyright 2016, Immanuel Bayer.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
     </div>
   </body>
 </html>

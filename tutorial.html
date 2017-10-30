@@ -1,42 +1,41 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Tutorials &mdash; fastFM 0.2.6 documentation</title>
-    
+    <title>Tutorials &#8212; fastFM 0.2.10 documentation</title>
     <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.2.6',
+        VERSION:     '0.2.10',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="fastFM 0.2.6 documentation" href="index.html" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Guide" href="guide.html" />
     <link rel="prev" title="Welcome to fastFM’s documentation!" href="index.html" /> 
   </head>
-  <body role="document">
+  <body>
       <div class="header" role="banner"><h1 class="heading"><a href="index.html">
-          <span>fastFM 0.2.6 documentation</span></a></h1>
+          <span>fastFM 0.2.10 documentation</span></a></h1>
         <h2 class="heading"><span>Tutorials</span></h2>
       </div>
       <div class="topnav" role="navigation" aria-label="top navigation">
       
         <p>
-        «&#160;&#160;<a href="index.html">Welcome to fastFM&#8217;s documentation!</a>
+        «&#160;&#160;<a href="index.html">Welcome to fastFM’s documentation!</a>
         &#160;&#160;::&#160;&#160;
         <a class="uplink" href="index.html">Contents</a>
         &#160;&#160;::&#160;&#160;
@@ -52,16 +51,16 @@
 <p>The following sections show how to use different features of the fastFM
 library. This is mostly a demonstration on of the library and no background
 on the Factorization Machine (FM) model is given.
-I recommend to read [TIST2012]. This paper contains many examples on how FM&#8217;s
+I recommend to read [TIST2012]. This paper contains many examples on how FM’s
 can emulate and extend matrix factorization models through feature engineering.</p>
 <div class="section" id="regression-with-als-solver">
 <h2>Regression with ALS Solver<a class="headerlink" href="#regression-with-als-solver" title="Permalink to this headline">¶</a></h2>
 <p>We first set up a small toy dataset for a regression problem. Please
 refere to [SIGIR2011] for background information on the implemented ALS solver.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">fastFM.datasets</span> <span class="kn">import</span> <span class="n">make_user_item_regression</span>
-<span class="kn">from</span> <span class="nn">sklearn.cross_validation</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">fastFM.datasets</span> <span class="k">import</span> <span class="n">make_user_item_regression</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">train_test_split</span>
 
-<span class="c"># This sets up a small test dataset.</span>
+<span class="c1"># This sets up a small test dataset.</span>
 <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">make_user_item_regression</span><span class="p">(</span><span class="n">label_stdev</span><span class="o">=.</span><span class="mi">4</span><span class="p">)</span>
 <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 </pre></div>
@@ -71,15 +70,15 @@ initialize the model parameter and the number of hidden variables <cite>rank</ci
 This are the parameters that have to be specified for every solver and task. The ALS
 solver requires in addition the regularization values for the first <cite>l2_reg_w</cite>
 and second order <cite>l2_reg_V</cite> interactions.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">fastFM</span> <span class="kn">import</span> <span class="n">als</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">fastFM</span> <span class="k">import</span> <span class="n">als</span>
 <span class="n">fm</span> <span class="o">=</span> <span class="n">als</span><span class="o">.</span><span class="n">FMRegression</span><span class="p">(</span><span class="n">n_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">init_stdev</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">rank</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">l2_reg_w</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">l2_reg_V</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
 <span class="n">fm</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 <span class="n">y_pred</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>We can easily evaluate our model using the scikit-learn library.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span>
-<span class="s">&#39;mse:&#39;</span><span class="p">,</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="k">import</span> <span class="n">mean_squared_error</span>
+<span class="s1">&#39;mse:&#39;</span><span class="p">,</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -88,8 +87,8 @@ and second order <cite>l2_reg_V</cite> interactions.</p>
 <p>We first have to convert the target of our toy dataset to -1/1 values
 in order to work with the classification implementation. Currently only
 binary classification is supported.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="c"># Convert dataset to binary classification task.</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="c1"># Convert dataset to binary classification task.</span>
 <span class="n">y_labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
 <span class="n">y_labels</span><span class="p">[</span><span class="n">y</span> <span class="o">&lt;</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y</span><span class="p">)]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
 <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y_labels</span><span class="p">)</span>
@@ -99,7 +98,7 @@ binary classification is supported.</p>
 we will use the SGD module instead. In addition to the
 hyper parameter needed for the ALS module we need to specify
 the SGD specific <cite>step_size</cite> parameter.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">fastFM</span> <span class="kn">import</span> <span class="n">sgd</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">fastFM</span> <span class="k">import</span> <span class="n">sgd</span>
 <span class="n">fm</span> <span class="o">=</span> <span class="n">sgd</span><span class="o">.</span><span class="n">FMClassification</span><span class="p">(</span><span class="n">n_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">init_stdev</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">l2_reg_w</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
                           <span class="n">l2_reg_V</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">rank</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">step_size</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
 <span class="n">fm</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
@@ -108,14 +107,14 @@ the SGD specific <cite>step_size</cite> parameter.</p>
 </div>
 <p>All classifier implementations can not only return the most likely labels
 but also class probabilities via the <cite>predict_proba</cite>.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">y_pred_proba</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">y_pred_proba</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>This is important for classification metrics such as the AUC score that require the class probabilities
 as input.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">roc_auc_score</span>
-<span class="s">&#39;acc:&#39;</span><span class="p">,</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
-<span class="s">&#39;auc:&#39;</span><span class="p">,</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_proba</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="k">import</span> <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">roc_auc_score</span>
+<span class="s1">&#39;acc:&#39;</span><span class="p">,</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="s1">&#39;auc:&#39;</span><span class="p">,</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_proba</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -127,12 +126,12 @@ from selecting them manually. Please see [Freuden2011] for the detail on the imp
 Gibbs sampler.
 The major drawback of the MCMC solver is that it forces us to calculate predictions
 during fitting time using the <cite>fit_predict</cite> function.
-It&#8217;s however possible to select a subset of parameter draws to speed up prediction [RecSys2013].
-It&#8217;s also possible to just call <cite>predict</cite> on a trained MCMC model but this returns predictions
+It’s however possible to select a subset of parameter draws to speed up prediction [RecSys2013].
+It’s also possible to just call <cite>predict</cite> on a trained MCMC model but this returns predictions
 that are solely based on the last parameters draw.
 These predictions can be used for diagnostic purposes but
 are usually not as good as averaged predictions returned by <cite>fit_predict</cite>.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">fastFM</span> <span class="kn">import</span> <span class="n">mcmc</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">fastFM</span> <span class="k">import</span> <span class="n">mcmc</span>
 <span class="n">fm</span> <span class="o">=</span> <span class="n">mcmc</span><span class="o">.</span><span class="n">FMClassification</span><span class="p">(</span><span class="n">n_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">rank</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">init_stdev</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -141,37 +140,37 @@ Probit regression uses the Cumulative Distribution Function (CDF) of the standar
 as link function. Mainly because the CDF leads to an easier Gibbs solver then the
 sigmoid function used in the SGD classifier implementation. The results
 are in practice usually very similar.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">y_pred</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">y_pred</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">)</span>
 <span class="n">y_pred_proba</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">fit_predict_proba</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">roc_auc_score</span>
-<span class="s">&#39;acc:&#39;</span><span class="p">,</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
-<span class="s">&#39;auc:&#39;</span><span class="p">,</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_proba</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="k">import</span> <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">roc_auc_score</span>
+<span class="s1">&#39;acc:&#39;</span><span class="p">,</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="s1">&#39;auc:&#39;</span><span class="p">,</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_proba</span><span class="p">)</span>
 </pre></div>
 </div>
 <table class="docutils citation" frame="void" id="tist2012" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[TIST2012]</td><td>Rendle, Steffen. &#8220;Factorization machines with libfm.&#8221; ACM Transactions on Intelligent Systems and Technology (TIST) 3.3 (2012): 57.</td></tr>
+<tr><td class="label">[TIST2012]</td><td>Rendle, Steffen. “Factorization machines with libfm.” ACM Transactions on Intelligent Systems and Technology (TIST) 3.3 (2012): 57.</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="sigir2011" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[SIGIR2011]</td><td>Rendle, Steffen, et al. &#8220;Fast context-aware recommendations with factorization machines.&#8221; Proceedings of the 34th international ACM SIGIR conference on Research and development in Information Retrieval. ACM, 2011.</td></tr>
+<tr><td class="label">[SIGIR2011]</td><td>Rendle, Steffen, et al. “Fast context-aware recommendations with factorization machines.” Proceedings of the 34th international ACM SIGIR conference on Research and development in Information Retrieval. ACM, 2011.</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="freuden2011" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[Freuden2011]</td><td>C Freudenthaler, L Schmidt-Thieme, S Rendle &#8220;Bayesian factorization machines&#8221; - 2011 - Citeseer</td></tr>
+<tr><td class="label">[Freuden2011]</td><td>C Freudenthaler, L Schmidt-Thieme, S Rendle “Bayesian factorization machines” - 2011 - Citeseer</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="recsys2013" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[RecSys2013]</td><td>Silbermann, Bayer, and Rendle &#8220;Sample selection for MCMC-based recommender systems&#8221; Proceedings of the 7th ACM conference on Recommender systems 2013</td></tr>
+<tr><td class="label">[RecSys2013]</td><td>Silbermann, Bayer, and Rendle “Sample selection for MCMC-based recommender systems” Proceedings of the 7th ACM conference on Recommender systems 2013</td></tr>
 </tbody>
 </table>
 </div>
@@ -182,7 +181,7 @@ are in practice usually very similar.</p>
       <div class="bottomnav" role="navigation" aria-label="bottom navigation">
       
         <p>
-        «&#160;&#160;<a href="index.html">Welcome to fastFM&#8217;s documentation!</a>
+        «&#160;&#160;<a href="index.html">Welcome to fastFM’s documentation!</a>
         &#160;&#160;::&#160;&#160;
         <a class="uplink" href="index.html">Contents</a>
         &#160;&#160;::&#160;&#160;
@@ -192,8 +191,8 @@ are in practice usually very similar.</p>
       </div>
 
     <div class="footer" role="contentinfo">
-        &copy; Copyright 2016, Immanuel Bayer.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+        &#169; Copyright 2016, Immanuel Bayer.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.5.
     </div>
   </body>
 </html>
