@@ -3,7 +3,7 @@
 
 import numpy as np
 import scipy.sparse as sp
-from numpy.testing import assert_almost_equal, assert_equal
+from numpy.testing import assert_equal
 import ffm
 import ffm2
 
@@ -48,5 +48,9 @@ def test_ffm_fit():
 
     assert_equal(np.round(y_pred), y)
 
-if __name__ == '__main__':
-    test_ffm2_predict()
+def test_ffm2_fit():
+    *_, y, X = get_test_problem()
+    fm = als.FMRegression(n_iter=1000, init_stdev=0.1, rank=2, l2_reg_w=0.1, l2_reg_V=0.5)
+    w0, w, V = ffm2.ffm_als_fit(fm, X, y)
+    y_pred = ffm2.ffm_predict(w0, w, V, X)
+    # assert_equal(np.round(y_pred), y)
