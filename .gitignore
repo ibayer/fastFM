@@ -15,3 +15,6 @@
 *.pyc
 fastFM/ffm.c
 fastFM.egg-info/
+fastFM/ffm2.cpp
+.idea/
+/build
