@@ -49,7 +49,7 @@ install:
     - cd fastFM-core2
     - |
       if [ "$TRAVIS_OS_NAME" = "linux" ]; then
-        cmake -H. -B_lib -DCMAKE_BUILD_TYPE=Debug -DFASTFM_MINIMAL=ON
+        cmake -H. -B_lib -DCMAKE_BUILD_TYPE=Debug -DFASTFM_MINIMAL=ON -DCMAKE_DEBUG_POSTFIX=d
         cmake --build _lib
       else 
         cmake -H. -B_lib -DFASTFM_MINIMAL=ON -GXcode
