@@ -9,7 +9,6 @@ from sklearn.metrics import mean_squared_error
 
 import ffm
 import ffm2
-# from fastFM import als
 
 def get_test_problem():
     X = sp.csc_matrix(np.array([[6, 1],
@@ -53,16 +52,11 @@ def test_ffm2_predict_w0():
     y_pred = ffm2.ffm_predict(w0, w, V, X)
     assert_equal(y_pred, w0)
 
-# def test_ffm_fit():
-#     *_, y, X = get_test_problem()
-#     fm = als.FMRegression(n_iter=1000, init_stdev=0.1, rank=2, l2_reg_w=0.1, l2_reg_V=0.5)
-#     w0, w, V = ffm.ffm_als_fit(fm, X, y)
-#     y_pred = ffm.ffm_predict(w0, w, V, X)
-#
-#     assert_equal(np.round(y_pred), y)
-
 def test_ffm2_fit():
     w0, w, V, y, X = get_another_test_problem()
+    w0_init = w0
+    w_init = np.copy(w)
+    V_init = np.copy(V)
     rank = 2
 
     y_pred = ffm2.ffm_predict(w0, w, V, X)
@@ -73,4 +67,7 @@ def test_ffm2_fit():
     y_pred = ffm2.ffm_predict(w0, w, V, X)
     msqr_after = mean_squared_error(y, y_pred)
 
+    assert_true(w0 != w0_init)
+    assert_true(np.any(np.not_equal(w, w_init)))
+    assert_true(np.any(np.not_equal(V, V_init)))
     assert_true(msqr_before > msqr_after)
