@@ -7,7 +7,7 @@ from numpy.testing import assert_equal
 import ffm
 import ffm2
 
-from fastFM import als
+# from fastFM import als
 
 def get_test_problem():
     X = sp.csc_matrix(np.array([[6, 1],
@@ -22,6 +22,18 @@ def get_test_problem():
     w0 = 2
     return w0, w, V, y, X
 
+def get_another_test_problem():
+    X = sp.csc_matrix(np.array([[6, 1],
+                                [2, 3],
+                                [3, 0],
+                                [6, 1],
+                                [4, 5]]), dtype=np.float64)
+    y = np.array([298, 266, 29, 298, 848], dtype=np.float64)
+    V = np.array([[0.5, 0.5],
+                  [1, 1]], dtype=np.float64)
+    w = np.array([0.5, 0.5], dtype=np.float64)
+    w0 = 0
+    return w0, w, V, y, X
 
 def test_ffm_predict():
     w0, w, V, y, X = get_test_problem()
@@ -40,17 +52,17 @@ def test_ffm2_predict_w0():
     y_pred = ffm2.ffm_predict(w0, w, V, X)
     assert_equal(y_pred, w0)
 
-def test_ffm_fit():
-    *_, y, X = get_test_problem()
-    fm = als.FMRegression(n_iter=1000, init_stdev=0.1, rank=2, l2_reg_w=0.1, l2_reg_V=0.5)
-    w0, w, V = ffm.ffm_als_fit(fm, X, y)
-    y_pred = ffm.ffm_predict(w0, w, V, X)
-
-    assert_equal(np.round(y_pred), y)
+# def test_ffm_fit():
+#     *_, y, X = get_test_problem()
+#     fm = als.FMRegression(n_iter=1000, init_stdev=0.1, rank=2, l2_reg_w=0.1, l2_reg_V=0.5)
+#     w0, w, V = ffm.ffm_als_fit(fm, X, y)
+#     y_pred = ffm.ffm_predict(w0, w, V, X)
+#
+#     assert_equal(np.round(y_pred), y)
 
 def test_ffm2_fit():
-    *_, y, X = get_test_problem()
-    fm = als.FMRegression(n_iter=1000, init_stdev=0.1, rank=2, l2_reg_w=0.1, l2_reg_V=0.5)
-    w0, w, V = ffm2.ffm_als_fit(fm, X, y)
+    w0, w, V, y, X = get_another_test_problem()
+    rank = 2
+    w0, w, V = ffm2.ffm_als_fit(w0, w, V, X, y, rank)
     y_pred = ffm2.ffm_predict(w0, w, V, X)
-    # assert_equal(np.round(y_pred), y)
+    assert_equal(np.round(y_pred), y)

@@ -1,8 +1,7 @@
 # Author: Immanuel Bayer
 # License: BSD 3 clause
-#distutils: language=c++ 
+#distutils: language=c++
 
-from libcpp.string cimport string
 
 cdef extern from "../fastFM-core2/fastFM/fastfm.h" namespace "fastfm":
 
