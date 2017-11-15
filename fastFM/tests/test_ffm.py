@@ -60,6 +60,6 @@ def test_ffm2_fit():
 
     assert(w0 != w0_init)
     # FIXME: use np.all instead np.any after we can set solver params from python
-    assert(np.any(np.not_equal(w, w_init)))
-    assert(np.any(np.not_equal(V, V_init)))
+    assert (np.any(w != w_init))
+    assert (np.any(V != V_init))
     assert(msqr_before > msqr_after)
