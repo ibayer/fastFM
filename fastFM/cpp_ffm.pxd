@@ -1,8 +1,7 @@
 # Author: Immanuel Bayer
 # License: BSD 3 clause
-#distutils: language=c++ 
+#distutils: language=c++
 
-from libcpp.string cimport string
 
 cdef extern from "../fastFM-core2/fastFM/fastfm.h" namespace "fastfm":
 
@@ -25,6 +24,6 @@ cdef extern from "../fastFM-core2/fastFM/fastfm.h" namespace "fastfm":
         void add_target(const int n_samples, double *data)
         void add_prediction(const int n_samples, double* data)
 
-    #cdef void fit(const Settings& s, Model* m, Data* d )
+    cdef void fit(Settings* s, Model* m, Data* d)
 
     cdef void predict(Model* m, Data* d)

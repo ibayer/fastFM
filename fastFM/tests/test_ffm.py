@@ -3,7 +3,9 @@
 
 import numpy as np
 import scipy.sparse as sp
-from numpy.testing import assert_almost_equal, assert_equal
+from numpy.testing import assert_equal
+from sklearn.metrics import mean_squared_error
+
 import ffm
 import ffm2
 
@@ -19,7 +21,6 @@ def get_test_problem():
     w = np.array([9, 2], dtype=np.float64)
     w0 = 2
     return w0, w, V, y, X
-
 
 def test_ffm_predict():
     w0, w, V, y, X = get_test_problem()
@@ -38,5 +39,27 @@ def test_ffm2_predict_w0():
     y_pred = ffm2.ffm_predict(w0, w, V, X)
     assert_equal(y_pred, w0)
 
-if __name__ == '__main__':
-    test_ffm2_predict()
+def test_ffm2_fit():
+    w0, w, V, y, X = get_test_problem()
+    w0 = 0
+    w[:] = 0
+    V = np.random.normal(loc=0.0, scale=1.0, size=(2, 2))
+
+    w0_init = w0
+    w_init = np.copy(w)
+    V_init = np.copy(V)
+    rank = 2
+
+    y_pred = ffm2.ffm_predict(w0, w, V, X)
+    msqr_before = mean_squared_error(y, y_pred)
+
+    w0, w, V = ffm2.ffm_als_fit(w0, w, V, X, y, rank)
+
+    y_pred = ffm2.ffm_predict(w0, w, V, X)
+    msqr_after = mean_squared_error(y, y_pred)
+
+    assert(w0 != w0_init)
+    # FIXME: use np.all instead np.any after we can set solver params from python
+    assert (np.any(w != w_init))
+    assert (np.any(V != V_init))
+    assert(msqr_before > msqr_after)
