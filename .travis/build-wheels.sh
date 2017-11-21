@@ -15,7 +15,7 @@ rm -rf /opt/python/cp33-cp33m
 
 #Make fastFM-core
 cd /io/fastFM-core
-make clean && make
+make
 cd /
 
 #Compile wheels
