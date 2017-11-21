@@ -28,14 +28,6 @@ matrix:
       env:
         - DEPLOY_TARGET="manylinux1"
         - DEPLOYABLE="true"
-        - DOCKER_IMAGE="quay.io/pypa/manylinux1_x86_64"
-    - services: docker
-      sudo: required
-      env:
-        - DEPLOY_TARGET="manylinux1"
-        - DEPLOYABLE="true"
-        - DOCKER_IMAGE="quay.io/pypa/manylinux1_i686"
-        - PRE_CMD=linux32
 
 dist: trusty
 
@@ -85,7 +77,10 @@ install:
 script:
     - |
       if [ "$DEPLOY_TARGET" = "manylinux1" ]; then
-        docker run --rm -v `pwd`:/io $DOCKER_IMAGE $PRE_CMD /io/.travis/build-wheels.sh
+        #build for 64-bit
+        docker run --rm -v `pwd`:/io quay.io/pypa/manylinux1_x86_64 /io/.travis/build-wheels.sh
+        #build for 32-bit
+        docker run --rm -v `pwd`:/io quay.io/pypa/manylinux1_i686 linux32 /io/.travis/build-wheels.sh
       else
         nosetests
       fi
