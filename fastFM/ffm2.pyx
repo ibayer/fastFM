@@ -4,9 +4,11 @@
 cimport cpp_ffm
 from cpp_ffm cimport Settings, Data, Model, predict, fit
 from libcpp.memory cimport nullptr
+from libcpp.string cimport string
 
 cimport numpy as np
 import numpy as np
+
 
 def ffm_predict(double w_0, double[:] w,
                 np.ndarray[np.float64_t, ndim = 2] V, X):
@@ -50,8 +52,9 @@ def ffm_predict(double w_0, double[:] w,
     return y
 
 def ffm_als_fit(double w_0, double[:] w, np.ndarray[np.float64_t, ndim = 2] V,
-                X, double[:] y, int rank):
+                X, double[:] y, int rank, settings):
     assert X.shape[0] == len(y) # test shapes
+
     n_features = X.shape[1]
     n_samples = X.shape[0]
     nnz = X.count_nonzero()
@@ -71,7 +74,7 @@ def ffm_als_fit(double w_0, double[:] w, np.ndarray[np.float64_t, ndim = 2] V,
     m.add_parameter(&w[0], n_features)
     m.add_parameter(<double *> V.data, rank, n_features, 2)
 
-    cdef Settings* s = new Settings()
+    cdef Settings* s = new Settings(settings)
 
     cpp_ffm.fit(s, m, d)
 

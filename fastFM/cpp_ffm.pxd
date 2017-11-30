@@ -2,11 +2,13 @@
 # License: BSD 3 clause
 #distutils: language=c++
 
+from libcpp.string cimport string
 
 cdef extern from "../fastFM-core2/fastFM/fastfm.h" namespace "fastfm":
 
     cdef cppclass Settings:
         Settings()
+        Settings(string settings)
 
     cdef cppclass Model:
         Model()
