@@ -2,8 +2,7 @@ language: c
 
 env:
     - TRAVIS_PYTHON_VERSION="2.7"
-    - TRAVIS_PYTHON_VERSION="3.4"
-    - TRAVIS_PYTHON_VERSION="3.5"
+    - TRAVIS_PYTHON_VERSION="3.6"
 
 git:
     submodules: false
@@ -12,7 +11,7 @@ install:
     # use credentials
     - sed -i -e "s|git@github.com:|https://$CI_TOKEN@github.com/|" .gitmodules
     - git submodule update --init --recursive
-    - docker build -t fastfm-test
+    - docker build -t fastfm-test .
 
 script:
     - docker run --rm -i -v $(pwd):/fastfm/ fastfm-test /bin/bash -s < docker_run_tests.sh
