@@ -5,75 +5,15 @@ env:
     - TRAVIS_PYTHON_VERSION="3.4"
     - TRAVIS_PYTHON_VERSION="3.5"
 
-matrix:
-  include:
-    - os: linux
-      dist: trusty
-    # - os: osx
-    #   osx_image: xcode8.3
-
 git:
     submodules: false
 
-before_install:
-      # fastFM-core depends on cblas
-    - if [ "$TRAVIS_OS_NAME" = "linux" ]; then sudo apt-get update -qq; sudo apt-get install -y libopenblas-dev; fi
-    - if [[ "$TRAVIS_PYTHON_VERSION" =~ "^2" ]]; then
-        if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
-          wget https://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh -O miniconda.sh;
-        else
-          wget https://repo.continuum.io/miniconda/Miniconda-latest-MacOSX-x86_64.sh -O miniconda.sh;
-        fi
-      else
-        if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
-          wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh;
-        else
-          wget https://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh -O miniconda.sh;
-        fi
-      fi
-    - bash miniconda.sh -b -p $HOME/miniconda
-    - export PATH="$HOME/miniconda/bin:$PATH"
-    - hash -r
-    - conda config --set always_yes yes --set changeps1 no
-    - conda update -q conda
-    # Useful for debugging any issues with conda
-    - conda info -a
-    - conda create -q -n test-environment python=$TRAVIS_PYTHON_VERSION cython numpy pandas scipy scikit-learn nose
-    - source activate test-environment
-
+install:
     # use credentials
     - sed -i -e "s|git@github.com:|https://$CI_TOKEN@github.com/|" .gitmodules
-
-install:
     - git submodule update --init --recursive
-    - cd fastFM-core2
-    - |
-      if [ "$TRAVIS_OS_NAME" = "linux" ]; then
-        cmake -H. -B_lib -DCMAKE_BUILD_TYPE=Debug -DFASTFM_MINIMAL=ON -DCMAKE_DEBUG_POSTFIX=d
-        cmake --build _lib
-      else 
-        cmake -H. -B_lib -DFASTFM_MINIMAL=ON -GXcode
-        cmake --build _lib --config Debug
-        mv _lib/fastFM/Debug/libfastFMd.a  _lib/fastFM/
-      fi 
-    - ls _lib/fastFM  
-    - cd ..
-    - make
-    - python setup.py bdist_wheel
-    - pip install dist/*.whl
+    - docker build -t fastfm-test
 
 script:
-    - nosetests
+    - docker run --rm -i -v $(pwd):/fastfm/ fastfm-test /bin/bash -s < docker_run_tests.sh
 
-before_deploy:
-    - export RELEASE_PKG_FILE=$(ls dist/*.whl)
-    - echo "deploying $RELEASE_PKG_FILE to GitHub releases"
-
-deploy:
-  provider: releases
-  api_key:
-    secure: AJcZoe2+OiMJ4VlSkASAeMc/ii0ZRnj2PFaaL7zlSbx1THMpY/49U5BSyqX1PQioPSlTV3ZsIXI3u7KyqoXIQSXWzAuaBzpLTLS85fGSuTvUuexmaJtKU92OC143tuVVLCPnjC992+1uyctjrxMSqgoaUolfYkEftt5RGrMIKl2duGfDXrPXIueHSl8FQGXkmlY6NqkRx2v5kxsAjFcurvwTNU8ptJ84jVKjrE6t1IB61vp2eUcqVR/z6Lwau6mdvIybglnbH4lCMXP98zEIibLA8vbn3XxrC+0uU7Kjz37K6/CsJEPNL5tujJDMRKAupnrkgPsAGTpsAn6O6uLUz0ISgcen8R6KJ7cBli+cq08OZ3JLLoJpqkni62YVSQV+uYkQk9b5Pu09vUTOozJMnOqLSj9hVIswyxGiFPcTFskMgqMdx15M59gd0YpXH633YqwBgRmWNsctp4BKnTaE3iGW6aZc8lrXxpL7qcVAosjmpjLp3jiPXVSRdYf0yHl6pDUj5ZVyu27kAn1/I9JL0nH19zjXF2tUlEjuT9ydHwnhmsgBN/V+JhZxi7ZeEbOZfY1MfekKM/NwSRehVEp/J0XWqWg+kIXRU/rqY1/w0vLVNFeQirpEjUp39eCBydXeS3Bik8uANW2UTxojJo3LBfLLoAT8ZWFb3YrIBAYkzjc=
-  file: "${RELEASE_PKG_FILE}"
-  skip_cleanup: true
-  on:
-    tags: true
