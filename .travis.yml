@@ -11,9 +11,11 @@ env:
 git:
     submodules: false
 
-install:
+before_install:
     # use credentials
     - sed -i -e "s|git@github.com:|https://$CI_TOKEN@github.com/|" .gitmodules
+
+install:
     - git submodule update --init --recursive
     - docker build -t fastfm-test .
 
