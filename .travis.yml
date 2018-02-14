@@ -2,7 +2,7 @@ language: c
 
 cache:
  directories:
-   - fastFM-core/externals
+   - fastFM-core/externals/OpenBLAS
 
 env:
     - TRAVIS_PYTHON_VERSION="2.7"
