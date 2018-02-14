@@ -60,6 +60,7 @@ def _test_raise_when_input_is_dense():
 
 
 def test_fm_linear_regression():
+    assert False
     X, y = get_small_data()
 
     fm = als.FMRegression(n_iter=1, l2_reg_w=1, l2_reg_V=1, rank=0)
