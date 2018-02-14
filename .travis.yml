@@ -1,5 +1,9 @@
 language: c
 
+cache:
+ directories:
+   - fastFM-core/externals
+
 env:
     - TRAVIS_PYTHON_VERSION="2.7"
     - TRAVIS_PYTHON_VERSION="3.6"
