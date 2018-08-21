@@ -54,7 +54,11 @@ def test_ffm2_fit():
     y_pred = ffm2.ffm_predict(w0, w, V, X)
     msqr_before = mean_squared_error(y, y_pred)
 
-    jsn = json.dumps({'n_iter': 1000, 'l2_reg_w': 0.1, 'l2_reg_V': 0.2}).encode()
+    jsn = json.dumps({'solver': 'cd',
+                      'loss': 'squared',
+                      'n_iter': 1000,
+                      'l2_reg_w': 0.1,
+                      'l2_reg_V': 0.2}).encode()
 
     w0, w, V = ffm2.ffm_als_fit(w0, w, V, X, y, rank, jsn)
 
