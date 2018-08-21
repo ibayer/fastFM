@@ -6,7 +6,7 @@ import numpy
 
 
 ffm2_include_dir = os.getenv("FFM_INCLUDE_DIR", 'fastFM-core2/fastFM/')
-ffm2_library_dir = os.getenv("FFM_LIBRARY_DIR", 'fastFM-core2/cmake-build-debug/fastFM/')
+ffm2_library_dir = os.getenv("FFM_LIBRARY_DIR", 'fastFM-core2/_lib/fastFM/')
 
 
 ext_modules = [
