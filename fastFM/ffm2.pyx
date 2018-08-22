@@ -1,10 +1,14 @@
 # Author: Immanuel Bayer
 # License: BSD 3 clause
 
+import json
+
 cimport cpp_ffm
 from cpp_ffm cimport Settings, Data, Model, predict, fit
 from libcpp.memory cimport nullptr
 from libcpp.string cimport string
+
+import scipy.sparse as sp
 
 cimport numpy as np
 import numpy as np
@@ -29,13 +33,21 @@ cdef Data* _data_factory(X, double[:] y_pred):
     n_samples = X.shape[0]
     nnz = X.count_nonzero()
 
+    is_col_major = None
+    if sp.isspmatrix_csc(X):
+        is_col_major = True
+    elif sp.isspmatrix_csr(X):
+        is_col_major = False
+    else:
+        raise "matrix format is not supported"
+
     cdef np.ndarray[int, ndim=1, mode='c'] inner = X.indices
     cdef np.ndarray[int, ndim=1, mode='c'] outer = X.indptr
     cdef np.ndarray[np.float64_t, ndim=1, mode='c'] data = X.data
 
     cdef Data *d = new Data()
     d.add_design_matrix(n_samples, n_features, nnz, &outer[0], &inner[0],
-                        &data[0])
+                        &data[0], is_col_major)
     d.add_prediction(n_samples, &y_pred[0])
     return d
 
@@ -66,11 +78,13 @@ def ffm_predict(double w_0, double[:] w,
 
     return y
 
-def ffm_als_fit(double w_0, double[:] w, np.ndarray[np.float64_t, ndim = 2] V,
-                X, double[:] y, int rank, settings):
+def ffm_fit(double w_0, double[:] w, np.ndarray[np.float64_t, ndim = 2] V,
+                X, double[:] y, int rank, dict settings):
+    if not isinstance(settings, dict):
+        raise "settings must be of type dict"
     assert X.shape[0] == len(y) # test shapes
 
-    cdef Settings* s = new Settings(settings)
+    cdef Settings* s = new Settings(json.dumps(settings).encode())
     m = _model_factory(&w_0, w, V)
 
     # allocate memory for prediction

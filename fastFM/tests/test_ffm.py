@@ -1,6 +1,5 @@
 # Author: Immanuel Bayer
 # License: BSD 3 clause
-import json
 
 import numpy as np
 import scipy.sparse as sp
@@ -56,13 +55,13 @@ def test_ffm2_fit():
     y_pred = ffm2.ffm_predict(w0, w, V, X)
     msqr_before = mean_squared_error(y, y_pred)
 
-    jsn = json.dumps({'solver': 'cd',
-                      'loss': 'squared',
-                      'iter': 5,
-                      'l2_reg_w': 0.01,
-                      'l2_reg_V': 0.02}).encode()
+    settings = {'solver': 'cd',
+                'loss': 'squared',
+                'iter': 5,
+                'l2_reg_w': 0.01,
+                'l2_reg_V': 0.02}
 
-    w0, w, V = ffm2.ffm_als_fit(w0, w, V, X, y, rank, jsn)
+    w0, w, V = ffm2.ffm_fit(w0, w, V, X, y, rank, settings)
 
     y_pred = ffm2.ffm_predict(w0, w, V, X)
     msqr_after = mean_squared_error(y, y_pred)

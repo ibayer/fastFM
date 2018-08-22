@@ -3,6 +3,7 @@
 #distutils: language=c++
 
 from libcpp.string cimport string
+from libcpp cimport bool
 
 cdef extern from "../fastFM-core2/fastFM/fastfm.h" namespace "fastfm":
 
@@ -21,7 +22,8 @@ cdef extern from "../fastFM-core2/fastFM/fastfm.h" namespace "fastfm":
     cdef cppclass Data:
         Data()
         void add_design_matrix(int n_samples, int n_features, int nnz,
-                               int* outer_ptr, int* inter_ptr, double* data)
+                               int* outer_ptr, int* inter_ptr, double* data,
+                               bool is_col_major)
 
         void add_target(const int n_samples, double *data)
         void add_prediction(const int n_samples, double* data)
