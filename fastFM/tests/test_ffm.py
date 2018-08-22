@@ -44,7 +44,9 @@ def test_ffm2_fit():
     w0, w, V, y, X = get_test_problem()
     w0 = 0
     w[:] = 0
-    V = np.random.normal(loc=0.0, scale=1.0, size=(2, 2))
+    np.random.seed(123)
+    V = np.random.normal(loc=0.0, scale=1.0,
+                         size=(2, 2))
 
     w0_init = w0
     w_init = np.copy(w)
@@ -56,13 +58,14 @@ def test_ffm2_fit():
 
     jsn = json.dumps({'solver': 'cd',
                       'loss': 'squared',
-                      'n_iter': 1000,
-                      'l2_reg_w': 0.1,
-                      'l2_reg_V': 0.2}).encode()
+                      'iter': 5,
+                      'l2_reg_w': 0.01,
+                      'l2_reg_V': 0.02}).encode()
 
     w0, w, V = ffm2.ffm_als_fit(w0, w, V, X, y, rank, jsn)
 
     y_pred = ffm2.ffm_predict(w0, w, V, X)
     msqr_after = mean_squared_error(y, y_pred)
 
+    assert w0 != 0
     assert(msqr_before > msqr_after)
