@@ -33,12 +33,7 @@ cdef Data* _data_factory(X, double[:] y_pred):
     n_samples = X.shape[0]
     nnz = X.count_nonzero()
 
-    is_col_major = None
-    if sp.isspmatrix_csc(X):
-        is_col_major = True
-    elif sp.isspmatrix_csr(X):
-        is_col_major = False
-    else:
+    if not (sp.isspmatrix_csc(X) or sp.isspmatrix_csr(X)):
         raise "matrix format is not supported"
 
     cdef np.ndarray[int, ndim=1, mode='c'] inner = X.indices
@@ -47,7 +42,7 @@ cdef Data* _data_factory(X, double[:] y_pred):
 
     cdef Data *d = new Data()
     d.add_design_matrix(n_samples, n_features, nnz, &outer[0], &inner[0],
-                        &data[0], is_col_major)
+                        &data[0], sp.isspmatrix_csc(X))
     d.add_prediction(n_samples, &y_pred[0])
     return d
 
