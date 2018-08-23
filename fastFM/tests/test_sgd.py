@@ -6,6 +6,7 @@ import scipy.sparse as sp
 from sklearn import metrics
 from sklearn.datasets import make_regression
 from sklearn.utils.testing import assert_almost_equal
+from numpy.testing import assert_equal
 from fastFM import sgd
 from fastFM import als
 
@@ -26,6 +27,20 @@ def get_test_problem(task='regression'):
         y_labels[y < np.median(y)] = -1
         y = y_labels
     return w0, w, V, y, X
+
+
+def test_sgd_predict():
+    w0, w, V, y, X = get_test_problem()
+    X_train = sp.csc_matrix(X)
+
+    fm = sgd.FMRegression(rank=V.shape[0])
+
+    # set model parameter
+    fm.w0_ = w0
+    fm.w_ = w
+    fm.V_ = V
+    y_pred = fm.predict(X_train)
+    assert_equal(y_pred, y)
 
 
 def test_sgd_regression_small_example():

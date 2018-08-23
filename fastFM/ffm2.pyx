@@ -27,6 +27,28 @@ cdef Model* _model_factory(double* w_0, double[:] w,
     return m
 
 
+cdef Model* _model_factory_self(fm):
+
+    n_features = fm.w_.shape[0]
+    cdef double w_0
+    cdef np.ndarray[np.float64_t, ndim=1, mode='c'] w
+    cdef np.ndarray[np.float64_t, ndim=2, mode='c'] V
+
+    w_0 = 0 if fm.ignore_w_0 else fm.w0_
+    w = np.zeros(n_features, dtype=np.float64) if fm.ignore_w else fm.w_
+    V = np.zeros((fm.rank, n_features), dtype=np.float64)\
+            if fm.rank == 0 else fm.V_
+
+    cdef Model *m = new Model()
+    rank = V.shape[0]
+    n_features = V.shape[1]
+    m.add_parameter(&w_0)
+    m.add_parameter(&w[0], n_features)
+    m.add_parameter(<double *> V.data, rank, n_features, 2)
+
+    return m
+
+
 cdef Data* _data_factory(X, double[:] y_pred):
     # get attributes from csc scipy
     n_features = X.shape[1]
@@ -73,10 +95,26 @@ def ffm_predict(double w_0, double[:] w,
 
     return y
 
+
+def ffm_predict_self(fm, X):
+    # allocate memory for predictions
+    cdef np.ndarray[np.float64_t, ndim=1, mode='c'] y =\
+         np.zeros(X.shape[0], dtype=np.float64)
+
+    m = _model_factory_self(fm)
+    d = _data_factory(X, y)
+
+    cpp_ffm.predict(m, d)
+
+    del m
+    del d
+
+    return y
+
+
 def ffm_fit(double w_0, double[:] w, np.ndarray[np.float64_t, ndim = 2] V,
                 X, double[:] y, int rank, dict settings):
-    if not isinstance(settings, dict):
-        raise "settings must be of type dict"
+    assert isinstance(settings, dict)
     assert X.shape[0] == len(y) # test shapes
 
     cdef Settings* s = new Settings(json.dumps(settings).encode())
@@ -89,6 +127,7 @@ def ffm_fit(double w_0, double[:] w, np.ndarray[np.float64_t, ndim = 2] V,
     d = _data_factory_fit(X, y, y_pred)
 
     cpp_ffm.fit(s, m, d)
+
 
     del d
     del m
