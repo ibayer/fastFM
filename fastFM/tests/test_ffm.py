@@ -1,6 +1,5 @@
 # Author: Immanuel Bayer
 # License: BSD 3 clause
-import json
 
 import numpy as np
 import scipy.sparse as sp
@@ -20,7 +19,7 @@ def get_test_problem():
     V = np.array([[6, 0],
                   [5, 8]], dtype=np.float64)
     w = np.array([9, 2], dtype=np.float64)
-    w0 = 2
+    w0 = np.array([2], dtype=np.float64)
     return w0, w, V, y, X
 
 def test_ffm_predict():
@@ -38,31 +37,63 @@ def test_ffm2_predict_w0():
     w[:] = 0
     V[:, :] = 0
     y_pred = ffm2.ffm_predict(w0, w, V, X)
-    assert_equal(y_pred, w0)
+    assert_equal(y_pred[0], w0)
 
-def test_ffm2_fit():
+def test_ffm2_fit_als():
     w0, w, V, y, X = get_test_problem()
-    w0 = 0
+    w0[:] = 0
     w[:] = 0
-    V = np.random.normal(loc=0.0, scale=1.0, size=(2, 2))
-
-    w0_init = w0
-    w_init = np.copy(w)
-    V_init = np.copy(V)
+    np.random.seed(123)
+    V = np.random.normal(loc=0.0, scale=1.0,
+                         size=(2, 2))
     rank = 2
 
     y_pred = ffm2.ffm_predict(w0, w, V, X)
     msqr_before = mean_squared_error(y, y_pred)
 
-    jsn = json.dumps({'solver': 'cd',
-                      'loss': 'squared',
-                      'n_iter': 1000,
-                      'l2_reg_w': 0.1,
-                      'l2_reg_V': 0.2}).encode()
+    settings = {'solver': 'cd',
+                'loss': 'squared',
+                'iter': 500,
+                'l2_reg_w': 0.01,
+                'l2_reg_V': 0.02}
 
-    w0, w, V = ffm2.ffm_als_fit(w0, w, V, X, y, rank, jsn)
+    ffm2.ffm_fit(w0, w, V, X, y, rank, settings)
 
     y_pred = ffm2.ffm_predict(w0, w, V, X)
     msqr_after = mean_squared_error(y, y_pred)
 
+    assert w0 != 0
     assert(msqr_before > msqr_after)
+
+def test_ffm2_fit_sgd():
+    w0, w, V, y, X = get_test_problem()
+    w0[:] = 0
+    w[:] = 0
+    np.random.seed(123)
+    V = np.random.normal(loc=0.0, scale=0.01,
+                         size=(2, 2))
+
+    rank = 2
+
+    y_pred = ffm2.ffm_predict(w0, w, V, X)
+    msqr_before = mean_squared_error(y, y_pred)
+
+    settings = {'solver': 'sgd',
+                'loss': 'squared',
+                'step_size': 0.0001,
+                'n_epoch': 5,
+                'l2_reg_w': 0.01,
+                'l2_reg_V': 0.02}
+
+    w0, w, V = ffm2.ffm_fit(w0, w, V, sp.csr_matrix(X), y, rank, settings)
+
+    y_pred = ffm2.ffm_predict(w0, w, V, X)
+    msqr_after = mean_squared_error(y, y_pred)
+
+    assert w0 != 0
+    assert(msqr_before > msqr_after)
+
+
+if __name__ == "__main__":
+    # test_ffm2_fit_sgd()
+    test_ffm2_fit_als()

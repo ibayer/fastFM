@@ -6,8 +6,8 @@ import scipy.sparse as sp
 from scipy.stats import norm
 from sklearn.base import BaseEstimator, ClassifierMixin
 
+import ffm2
 from .validation import check_array
-import ffm
 
 
 def _validate_class_labels(y):
@@ -99,7 +99,7 @@ class FactorizationMachine(BaseEstimator):
                              order="F")
         assert sp.isspmatrix_csc(X_test)
         assert X_test.shape[1] == len(self.w_)
-        return ffm.ffm_predict(self.w0_, self.w_, self.V_, X_test)
+        return ffm2.ffm_predict(self.w0_, self.w_, self.V_, X_test)
 
 
 class BaseFMClassifier(FactorizationMachine, ClassifierMixin):

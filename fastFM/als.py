@@ -91,6 +91,7 @@ class FMRegression(FactorizationMachine, RegressorMixin):
             self.warm_start = True
 
         self.w0_, self.w_, self.V_ = ffm.ffm_als_fit(self, X_train, y_train)
+        self.w0_ = np.array([self.w0_], dtype=np.float64)
 
         if self.iter_count != 0:
             self.iter_count = self.iter_count + n_more_iter
@@ -188,4 +189,5 @@ class FMClassification(BaseFMClassifier):
         y_train[~i_class1] = 1
 
         self.w0_, self.w_, self.V_ = ffm.ffm_als_fit(self, X_train, y_train)
+        self.w0_ = np.array([self.w0_], dtype=np.float64)
         return self
