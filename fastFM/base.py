@@ -99,7 +99,7 @@ class FactorizationMachine(BaseEstimator):
                              order="F")
         assert sp.isspmatrix_csc(X_test)
         assert X_test.shape[1] == len(self.w_)
-        return ffm2.ffm_predict_self(self, X_test)
+        return ffm2.ffm_predict(self.w0_, self.w_, self.V_, X_test)
 
 
 class BaseFMClassifier(FactorizationMachine, ClassifierMixin):

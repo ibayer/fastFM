@@ -45,25 +45,28 @@ def test_sgd_predict():
 
 def test_sgd_regression_small_example():
     w0, w, V, y, X = get_test_problem()
-    X_test = X.copy()
-    X_train = sp.csc_matrix(X)
+    X_test = sp.csr_matrix(X)
+    X_train = sp.csr_matrix(X)
 
-    fm = sgd.FMRegression(n_iter=10000,
-                          init_stdev=0.01, l2_reg_w=0.5, l2_reg_V=50.5, rank=2,
-                          step_size=0.0001)
+    fm = sgd.FMRegression(n_epoch=31,
+                          init_stdev=0.01, l2_reg_w=0.01,
+                          l2_reg_V=0.002, rank=2,
+                          step_size=0.0001, random_state=123)
+
+    X_train.shape[0] == y.shape[0]
 
     fm.fit(X_train, y)
     y_pred = fm.predict(X_test)
-    assert metrics.r2_score(y_pred, y) > 0.99
+    assert metrics.r2_score(y_pred, y) > 0.95
 
 
 def test_first_order_sgd_vs_als_regression():
     X, y = make_regression(n_samples=100, n_features=50, random_state=123)
     X = sp.csc_matrix(X)
 
-    fm_sgd = sgd.FMRegression(n_iter=900, init_stdev=0.01, l2_reg_w=0.0,
-                              l2_reg_V=50.5, rank=0, step_size=0.01)
-    fm_als = als.FMRegression(n_iter=10, l2_reg_w=0, l2_reg_V=0, rank=0)
+    fm_sgd = sgd.FMRegression(n_epoch=20, init_stdev=0.01, l2_reg_w=0.01,
+                              l2_reg_V=0.02, rank=0, step_size=0.01)
+    fm_als = als.FMRegression(n_iter=10, l2_reg_w=0.01, l2_reg_V=0.02, rank=0)
 
     y_pred_sgd = fm_sgd.fit(X, y).predict(X)
     y_pred_als = fm_als.fit(X, y).predict(X)
@@ -78,11 +81,12 @@ def test_second_order_sgd_vs_als_regression():
     X, y = make_regression(n_samples=100, n_features=50, random_state=123)
     X = sp.csc_matrix(X)
 
-    fm_sgd = sgd.FMRegression(n_iter=50000, init_stdev=0.00, l2_reg_w=0.0,
-                              l2_reg_V=50.5, rank=2, step_size=0.0002)
-    fm_als = als.FMRegression(n_iter=10, l2_reg_w=0, l2_reg_V=0, rank=2)
+    fm_sgd = sgd.FMRegression(n_epoch=300, init_stdev=0.1, l2_reg_w=0.01,
+                              l2_reg_V=0.05, rank=2, step_size=0.00001)
+    fm_als = als.FMRegression(n_iter=10, l2_reg_w=0.01, l2_reg_V=0.05,
+                              rank=2)
 
-    y_pred_als = fm_als.fit(X, y).predict(X)
+    y_pred_als = fm_als.fit(sp.csr_matrix(X), y).predict(X)
     y_pred_sgd = fm_sgd.fit(X, y).predict(X)
 
     score_als = metrics.r2_score(y_pred_als, y)
@@ -93,15 +97,17 @@ def test_second_order_sgd_vs_als_regression():
 
 def test_sgd_classification_small_example():
     w0, w, V, y, X = get_test_problem(task='classification')
-    X_test = X.copy()
-    X_train = sp.csc_matrix(X)
+    X_test = sp.csr_matrix(X)
+    X_train = sp.csr_matrix(X)
 
-    fm = sgd.FMClassification(n_iter=1000,
-                              init_stdev=0.1, l2_reg_w=0, l2_reg_V=0, rank=2,
-                              step_size=0.1)
+    fm = sgd.FMClassification(n_epoch=100,
+                              init_stdev=0.01, l2_reg_w=0.02, l2_reg_V=0.02,
+                              rank=2, step_size=0.01)
     fm.fit(X_train, y)
+    y_pred = fm.predict_proba(X_test)
+    assert metrics.roc_auc_score(y, y_pred) > 0.95
+
     y_pred = fm.predict(X_test)
-    print(y_pred)
     assert metrics.accuracy_score(y, y_pred) > 0.95
 
 
@@ -118,6 +124,9 @@ def test_clone():
 
 
 if __name__ == '__main__':
+    # test_sgd_fit_small_example()
+    # test_sgd_fit_small_example()
     test_sgd_regression_small_example()
-    test_first_order_sgd_vs_als_regression()
-    test_second_order_sgd_vs_als_regression()
+
+    # test_first_order_sgd_vs_als_regression()
+    # test_second_order_sgd_vs_als_regression()
