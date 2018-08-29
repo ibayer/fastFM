@@ -19,7 +19,7 @@ def get_test_problem():
     V = np.array([[6, 0],
                   [5, 8]], dtype=np.float64)
     w = np.array([9, 2], dtype=np.float64)
-    w0 = 2
+    w0 = np.array([2], dtype=np.float64)
     return w0, w, V, y, X
 
 def test_ffm_predict():
@@ -37,11 +37,11 @@ def test_ffm2_predict_w0():
     w[:] = 0
     V[:, :] = 0
     y_pred = ffm2.ffm_predict(w0, w, V, X)
-    assert_equal(y_pred, w0)
+    assert_equal(y_pred[0], w0)
 
 def test_ffm2_fit_als():
     w0, w, V, y, X = get_test_problem()
-    w0 = 0
+    w0[:] = 0
     w[:] = 0
     np.random.seed(123)
     V = np.random.normal(loc=0.0, scale=1.0,
@@ -68,7 +68,7 @@ def test_ffm2_fit_als():
 
 def test_ffm2_fit_sgd():
     w0, w, V, y, X = get_test_problem()
-    w0 = 0
+    w0[:] = 0
     w[:] = 0
     np.random.seed(123)
     V = np.random.normal(loc=0.0, scale=1.0,

@@ -21,7 +21,7 @@ def get_test_problem(task='regression'):
     V = np.array([[6, 0],
                   [5, 8]], dtype=np.float64)
     w = np.array([9, 2], dtype=np.float64)
-    w0 = 2
+    w0 = np.array([2], dtype=np.float64)
     if task == 'classification':
         y_labels = np.ones_like(y)
         y_labels[y < np.median(y)] = -1

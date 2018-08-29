@@ -91,6 +91,7 @@ class FMRegression(FactorizationMachine, RegressorMixin):
         X = check_array(X, accept_sparse="csc", dtype=np.float64)
 
         self.w0_, self.w_, self.V_ = ffm.ffm_sgd_fit(self, X, y)
+        self.w0_ = np.array([self.w0_], dtype=np.float64)
         return self
 
 
@@ -188,4 +189,5 @@ class FMClassification(BaseFMClassifier):
         X = check_array(X, accept_sparse="csc", dtype=np.float64)
 
         self.w0_, self.w_, self.V_ = ffm.ffm_sgd_fit(self, X, y)
+        self.w0_ = np.array([self.w0_], dtype=np.float64)
         return self
