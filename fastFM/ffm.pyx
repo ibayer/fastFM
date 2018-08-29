@@ -114,31 +114,6 @@ def ffm_als_fit(fm, X, double[:] y):
     return w_0, w, V
 
 
-def ffm_sgd_fit(fm, X, double[:] y):
-    """
-    The sgd solver expects a transposed design matrix in column major order
-    (csc_matrix) Samples are stored in columns, this allows fast sample by
-    sample access.
-    """
-    assert X.shape[1] == len(y) # test shapes
-    n_features = X.shape[0]
-    X_ = CsMatrix(X)
-    pt_X = <cffm.cs_di *> PyCapsule_GetPointer(X_, "CsMatrix")
-    param = FFMParam(fm)
-    pt_param = <cffm.ffm_param *> PyCapsule_GetPointer(param, "FFMParam")
-
-    # allocate the coefs
-    cdef double w_0 = 0
-    cdef np.ndarray[np.float64_t, ndim=1, mode='c'] w =\
-         np.zeros(n_features, dtype=np.float64)
-    cdef np.ndarray[np.float64_t, ndim=2, mode='c'] V =\
-         np.zeros((fm.rank, n_features), dtype=np.float64)
-
-    cffm.ffm_sgd_fit(&w_0, <double *> w.data, <double *> V.data,
-                     pt_X, &y[0], pt_param)
-    return w_0, w, V
-
-
 def ffm_fit_sgd_bpr(fm, X, np.ndarray[np.float64_t, ndim=2, mode='c'] pairs):
     n_features = X.shape[0]
     X_ = CsMatrix(X)
