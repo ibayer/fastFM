@@ -4,6 +4,7 @@
 import numpy as np
 import scipy.sparse as sp
 from scipy.stats import norm
+from scipy.special import expit as sigmoid
 from sklearn.base import BaseEstimator, ClassifierMixin
 from sklearn.utils import check_random_state
 
@@ -104,6 +105,7 @@ class FactorizationMachine(BaseEstimator):
         self.step_size = 0
         self.copy_X = copy_X
 
+
     def predict(self, X_test):
         """ Return predictions
 
@@ -126,7 +128,7 @@ class FactorizationMachine(BaseEstimator):
 
 class BaseFMClassifier(FactorizationMachine, ClassifierMixin):
 
-    def predict(self, X_test):
+    def predict(self, X_test, threshold=0.5):
         """ Return predictions
 
         Parameters
@@ -139,6 +141,13 @@ class BaseFMClassifier(FactorizationMachine, ClassifierMixin):
         y : array, shape (n_samples)
             Class labels
         """
+
+        if self.loss == "logistic":
+            y_proba = self.predict_proba(X_test)
+            y_binary = np.ones_like(y_proba, dtype=np.float64)
+            y_binary[y_proba < threshold] = -1
+            return y_binary
+
         y_proba = norm.cdf(super(BaseFMClassifier, self).predict(X_test))
         # convert probs to labels
         y_pred = np.zeros_like(y_proba, dtype=np.float64) + self.classes_[0]
@@ -158,5 +167,10 @@ class BaseFMClassifier(FactorizationMachine, ClassifierMixin):
         y : array, shape (n_samples)
             Class Probability for the class with smaller label.
         """
+
+        if self.loss == "logistic":
+            pred = ffm2.ffm_predict(self.w0_, self.w_, self.V_, X_test)
+            return sigmoid(pred)
+
         pred = super(BaseFMClassifier, self).predict(X_test)
         return norm.cdf(pred)

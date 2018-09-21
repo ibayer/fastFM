@@ -191,38 +191,3 @@ class FMClassification(BaseFMClassifier):
         ffm2.ffm_fit(self.w0_, self.w_, self.V_, X, y, self.rank,
                      settings_dict)
         return self
-
-    def predict_proba(self, X_test):
-        """ Return probabilities
-
-        Parameters
-        ----------
-        X : scipy.sparse.csr_matrix, (n_samples, n_features)
-
-        Returns
-        ------
-
-        y : array, shape (n_samples)
-            Class Probability for the class with smaller label.
-        """
-
-        pred = ffm2.ffm_predict(self.w0_, self.w_, self.V_, X_test)
-        return sigmoid(pred)
-
-    def predict(self, X_test, threshold=0.5):
-        """ Return predictions
-
-        Parameters
-        ----------
-        X : scipy.sparse.csr_matrix, (n_samples, n_features)
-
-        Returns
-        ------
-
-        y : array, shape (n_samples)
-            Class labels
-        """
-        y_proba = self.predict_proba(X_test)
-        y_binary = np.ones_like(y_proba, dtype=np.float64)
-        y_binary[y_proba < threshold] = -1
-        return y_binary
