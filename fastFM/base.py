@@ -5,16 +5,38 @@ import numpy as np
 import scipy.sparse as sp
 from scipy.stats import norm
 from sklearn.base import BaseEstimator, ClassifierMixin
+from sklearn.utils import check_random_state
 
 import ffm2
 from .validation import check_array
 
 
+def _init_parameter(fm, n_features):
+    generator = check_random_state(fm.random_state)
+    w0 = np.zeros(1, dtype=np.float64)
+    w = np.zeros(n_features, dtype=np.float64)
+    V = generator.normal(loc=0.0, scale=fm.init_stdev,
+                         size=(fm.rank, n_features))
+    return w0, w, V
+
+
+def _settings_factory(fm):
+    settings_dict = fm.get_params()
+    settings_dict['loss'] = fm.loss
+    settings_dict['solver'] = fm.solver
+
+    # TODO align naming
+    settings_dict['iter'] = int(settings_dict['n_iter'])
+    del settings_dict['n_iter']
+
+    return settings_dict
+
+
 def _validate_class_labels(y):
-        assert len(set(y)) == 2
-        assert y.min() == -1
-        assert y.max() == 1
-        return check_array(y, ensure_2d=False, dtype=np.float64)
+    assert len(set(y)) == 2
+    assert y.min() == -1
+    assert y.max() == 1
+    return check_array(y, ensure_2d=False, dtype=np.float64)
 
 
 def _check_warm_start(fm, X):
