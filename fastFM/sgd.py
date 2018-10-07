@@ -9,27 +9,8 @@ from sklearn.base import RegressorMixin
 from sklearn.utils import check_random_state
 from .validation import check_array, check_consistent_length
 from .base import (FactorizationMachine, BaseFMClassifier,
-                   _validate_class_labels)
-
-def _init_parameter(fm, n_features):
-    generator = check_random_state(fm.random_state)
-    w0 = np.zeros(1, dtype=np.float64)
-    w = np.zeros(n_features, dtype=np.float64)
-    V = generator.normal(loc=0.0, scale=fm.init_stdev,
-                         size=(fm.rank, n_features))
-    return w0, w, V
-
-
-def _settings_factory(fm):
-    settings_dict = fm.get_params()
-    settings_dict['loss'] = fm.loss
-    settings_dict['solver'] = fm.solver
-
-    # TODO align naming
-    settings_dict['iter'] = settings_dict['n_iter']
-    del settings_dict['n_iter']
-
-    return settings_dict
+                   _validate_class_labels,
+                   _init_parameter, _settings_factory)
 
 
 class FMRegression(FactorizationMachine, RegressorMixin):
@@ -210,38 +191,3 @@ class FMClassification(BaseFMClassifier):
         ffm2.ffm_fit(self.w0_, self.w_, self.V_, X, y, self.rank,
                      settings_dict)
         return self
-
-    def predict_proba(self, X_test):
-        """ Return probabilities
-
-        Parameters
-        ----------
-        X : scipy.sparse.csr_matrix, (n_samples, n_features)
-
-        Returns
-        ------
-
-        y : array, shape (n_samples)
-            Class Probability for the class with smaller label.
-        """
-
-        pred = ffm2.ffm_predict(self.w0_, self.w_, self.V_, X_test)
-        return sigmoid(pred)
-
-    def predict(self, X_test, threshold=0.5):
-        """ Return predictions
-
-        Parameters
-        ----------
-        X : scipy.sparse.csr_matrix, (n_samples, n_features)
-
-        Returns
-        ------
-
-        y : array, shape (n_samples)
-            Class labels
-        """
-        y_proba = self.predict_proba(X_test)
-        y_binary = np.ones_like(y_proba, dtype=np.float64)
-        y_binary[y_proba < threshold] = -1
-        return y_binary

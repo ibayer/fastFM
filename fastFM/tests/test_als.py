@@ -124,47 +124,35 @@ def test_als_warm_start():
 
 def test_warm_start_path():
     X, y, coef = make_user_item_regression(label_stdev=.4)
-    X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=0.33, random_state=42)
-    X_train = sp.csc_matrix(X_train)
-    X_test = sp.csc_matrix(X_test)
-    n_iter = 10
+    X = sp.csc_matrix(X)
 
     rank = 4
     seed = 333
     step_size = 1
+    n_iter = 10
     l2_reg_w = 0
     l2_reg_V = 0
 
     fm = als.FMRegression(n_iter=0, l2_reg_w=l2_reg_w,
                           l2_reg_V=l2_reg_V, rank=rank, random_state=seed)
-    # initalize coefs
-    fm.fit(X_train, y_train)
 
-    rmse_train = []
-    rmse_test = []
-    for i in range(1, n_iter):
-        fm.fit(X_train, y_train, n_more_iter=step_size)
-        rmse_train.append(np.sqrt(mean_squared_error(
-            fm.predict(X_train), y_train)))
-        rmse_test.append(np.sqrt(mean_squared_error(
-            fm.predict(X_test), y_test)))
+    rmse = []
+    for _ in range(1, n_iter):
+        fm.fit(X, y, n_more_iter=step_size)
+        rmse.append(np.sqrt(mean_squared_error(
+            fm.predict(X), y)))
 
     print('------- restart ----------')
-    values = np.arange(1, n_iter)
-    rmse_test_re = []
-    rmse_train_re = []
-    for i in values:
+    rmse_re = []
+    for i in range(1, n_iter):
         fm = als.FMRegression(n_iter=i, l2_reg_w=l2_reg_w,
                               l2_reg_V=l2_reg_V, rank=rank, random_state=seed)
-        fm.fit(X_train, y_train)
-        rmse_test_re.append(np.sqrt(mean_squared_error(
-            fm.predict(X_test), y_test)))
-        rmse_train_re.append(np.sqrt(mean_squared_error(
-            fm.predict(X_train), y_train)))
+        fm.fit(X, y)
+        rmse_re.append(np.sqrt(mean_squared_error(
+            fm.predict(X), y)))
 
-    assert_almost_equal(rmse_train, rmse_train_re)
-    assert_almost_equal(rmse_test, rmse_test_re)
+    assert len(rmse) == len(rmse_re)
+    assert_almost_equal(rmse, rmse_re)
 
 
 def test_clone():
@@ -181,4 +169,5 @@ def test_clone():
 
 if __name__ == '__main__':
     # test_fm_regression_only_w0()
-    test_fm_linear_regression()
+    # test_fm_linear_regression()
+    test_warm_start_path()

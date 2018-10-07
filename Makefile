@@ -2,7 +2,7 @@ PYTHON ?= python
 
 all:
 	( cd fastFM-core2 ; \
-	  cmake -H. -B_lib -DCMAKE_BUILD_TYPE=Debug -DFASTFM_MINIMAL=ON -DCMAKE_DEBUG_POSTFIX=d; \
+	  cmake -H. -B_lib -DCMAKE_BUILD_TYPE=Debug -DCMAKE_DEBUG_POSTFIX=d; \
 	  cmake --build _lib; )
 	( cd fastFM-core ; $(MAKE) lib )
 	$(PYTHON) setup.py build_ext --inplace
