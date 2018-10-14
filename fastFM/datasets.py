@@ -43,7 +43,7 @@ def make_user_item_regression(random_state=123, n_user=20, n_item=20,
 if __name__ == '__main__':
     X, y, coef = make_user_item_regression(n_user=5, n_item=5, rank=2,
                                            label_stdev=2)
-    from sklearn.cross_validation import train_test_split
+    from sklearn.model_selection import train_test_split
     X_train, X_test, y_train, y_test = train_test_split(
         X, y, test_size=0.33, random_state=42)
 

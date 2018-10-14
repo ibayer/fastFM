@@ -92,4 +92,5 @@ class FMRecommender(FactorizationMachine):
         assert pairs.max() <= X.shape[1]
         assert pairs.min() >= 0
         self.w0_, self.w_, self.V_ = ffm.ffm_fit_sgd_bpr(self, X, pairs)
+        self.w0_ = np.array([self.w0_], dtype=np.float64)
         return self

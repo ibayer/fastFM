@@ -2,12 +2,15 @@
 # License: BSD 3 clause
 
 
-import ffm
+import ffm2
 import numpy as np
+from scipy.special import expit as sigmoid
 from sklearn.base import RegressorMixin
+from sklearn.utils import check_random_state
 from .validation import check_array, check_consistent_length
 from .base import (FactorizationMachine, BaseFMClassifier,
-                   _validate_class_labels)
+                   _validate_class_labels,
+                   _init_parameter, _settings_factory)
 
 
 class FMRegression(FactorizationMachine, RegressorMixin):
@@ -56,7 +59,7 @@ class FMRegression(FactorizationMachine, RegressorMixin):
         Coefficients of second order factor matrix.
     """
 
-    def __init__(self, n_iter=100, init_stdev=0.1, rank=8, random_state=123,
+    def __init__(self, n_iter=0, n_epoch=10, init_stdev=0.1, rank=8, random_state=123,
                  l2_reg_w=0.1, l2_reg_V=0.1, l2_reg=0, step_size=0.1):
         super(FMRegression, self).\
             __init__(n_iter=n_iter, init_stdev=init_stdev, rank=rank,
@@ -69,7 +72,9 @@ class FMRegression(FactorizationMachine, RegressorMixin):
             self.l2_reg_V = l2_reg_V
         self.l2_reg = l2_reg
         self.step_size = step_size
-        self.task = "regression"
+        self.loss = 'squared'
+        self.solver = 'sgd'
+        self.n_epoch = n_epoch
 
     def fit(self, X, y):
         """ Fit model with specified loss.
@@ -85,12 +90,12 @@ class FMRegression(FactorizationMachine, RegressorMixin):
         check_consistent_length(X, y)
         y = check_array(y, ensure_2d=False, dtype=np.float64)
 
-        # The sgd solver expects a transposed design matrix in column major
-        # order (csc_matrix).
-        X = X.T  # creates a copy
-        X = check_array(X, accept_sparse="csc", dtype=np.float64)
-
-        self.w0_, self.w_, self.V_ = ffm.ffm_sgd_fit(self, X, y)
+        X = check_array(X, accept_sparse="csr", dtype=np.float64)
+        n_features = X.shape[1]
+        settings_dict = _settings_factory(self)
+        self.w0_, self.w_, self.V_ = _init_parameter(self, n_features)
+        ffm2.ffm_fit(self.w0_, self.w_, self.V_, X, y, self.rank,
+                     settings_dict)
         return self
 
 
@@ -140,7 +145,8 @@ class FMClassification(BaseFMClassifier):
         Coefficients of second order factor matrix.
     """
 
-    def __init__(self, n_iter=100, init_stdev=0.1, rank=8, random_state=123,
+    def __init__(self, n_iter=100, n_epoch=10, init_stdev=0.1, rank=8,
+                 random_state=123,
                  l2_reg_w=0, l2_reg_V=0, l2_reg=None, step_size=0.1):
         super(FMClassification, self).\
             __init__(n_iter=n_iter, init_stdev=init_stdev, rank=rank,
@@ -153,7 +159,9 @@ class FMClassification(BaseFMClassifier):
             self.l2_reg_V = l2_reg_V
         self.l2_reg = l2_reg
         self.step_size = step_size
-        self.task = "classification"
+        self.loss = 'logistic'
+        self.solver = 'sgd'
+        self.n_epoch = n_epoch
 
     def fit(self, X, y):
         """ Fit model with specified loss.
@@ -173,19 +181,13 @@ class FMClassification(BaseFMClassifier):
                              " but the data contains"
                              " class: %r" % self.classes_)
 
-        # fastFM-core expects labels to be in {-1,1}
-        y_train = y.copy()
-        i_class1 = (y_train == self.classes_[0])
-        y_train[i_class1] = -1
-        y_train[~i_class1] = 1
-
         check_consistent_length(X, y)
         y = y.astype(np.float64)
 
-        # The sgd solver expects a transposed design matrix in column major
-        # order (csc_matrix).
-        X = X.T  # creates a copy
-        X = check_array(X, accept_sparse="csc", dtype=np.float64)
-
-        self.w0_, self.w_, self.V_ = ffm.ffm_sgd_fit(self, X, y)
+        X = check_array(X, accept_sparse="csr", dtype=np.float64)
+        n_features = X.shape[1]
+        settings_dict = _settings_factory(self)
+        self.w0_, self.w_, self.V_ = _init_parameter(self, n_features)
+        ffm2.ffm_fit(self.w0_, self.w_, self.V_, X, y, self.rank,
+                     settings_dict)
         return self

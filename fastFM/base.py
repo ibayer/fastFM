@@ -4,17 +4,40 @@
 import numpy as np
 import scipy.sparse as sp
 from scipy.stats import norm
+from scipy.special import expit as sigmoid
 from sklearn.base import BaseEstimator, ClassifierMixin
+from sklearn.utils import check_random_state
 
+import ffm2
 from .validation import check_array
-import ffm
+
+
+def _init_parameter(fm, n_features):
+    generator = check_random_state(fm.random_state)
+    w0 = np.zeros(1, dtype=np.float64)
+    w = np.zeros(n_features, dtype=np.float64)
+    V = generator.normal(loc=0.0, scale=fm.init_stdev,
+                         size=(fm.rank, n_features))
+    return w0, w, V
+
+
+def _settings_factory(fm):
+    settings_dict = fm.get_params()
+    settings_dict['loss'] = fm.loss
+    settings_dict['solver'] = fm.solver
+
+    # TODO align naming
+    settings_dict['iter'] = int(settings_dict['n_iter'])
+    del settings_dict['n_iter']
+
+    return settings_dict
 
 
 def _validate_class_labels(y):
-        assert len(set(y)) == 2
-        assert y.min() == -1
-        assert y.max() == 1
-        return check_array(y, ensure_2d=False, dtype=np.float64)
+    assert len(set(y)) == 2
+    assert y.min() == -1
+    assert y.max() == 1
+    return check_array(y, ensure_2d=False, dtype=np.float64)
 
 
 def _check_warm_start(fm, X):
@@ -82,6 +105,7 @@ class FactorizationMachine(BaseEstimator):
         self.step_size = 0
         self.copy_X = copy_X
 
+
     def predict(self, X_test):
         """ Return predictions
 
@@ -99,12 +123,12 @@ class FactorizationMachine(BaseEstimator):
                              order="F")
         assert sp.isspmatrix_csc(X_test)
         assert X_test.shape[1] == len(self.w_)
-        return ffm.ffm_predict(self.w0_, self.w_, self.V_, X_test)
+        return ffm2.ffm_predict(self.w0_, self.w_, self.V_, X_test)
 
 
 class BaseFMClassifier(FactorizationMachine, ClassifierMixin):
 
-    def predict(self, X_test):
+    def predict(self, X_test, threshold=0.5):
         """ Return predictions
 
         Parameters
@@ -117,6 +141,13 @@ class BaseFMClassifier(FactorizationMachine, ClassifierMixin):
         y : array, shape (n_samples)
             Class labels
         """
+
+        if self.loss == "logistic":
+            y_proba = self.predict_proba(X_test)
+            y_binary = np.ones_like(y_proba, dtype=np.float64)
+            y_binary[y_proba < threshold] = -1
+            return y_binary
+
         y_proba = norm.cdf(super(BaseFMClassifier, self).predict(X_test))
         # convert probs to labels
         y_pred = np.zeros_like(y_proba, dtype=np.float64) + self.classes_[0]
@@ -136,5 +167,10 @@ class BaseFMClassifier(FactorizationMachine, ClassifierMixin):
         y : array, shape (n_samples)
             Class Probability for the class with smaller label.
         """
+
+        if self.loss == "logistic":
+            pred = ffm2.ffm_predict(self.w0_, self.w_, self.V_, X_test)
+            return sigmoid(pred)
+
         pred = super(BaseFMClassifier, self).predict(X_test)
         return norm.cdf(pred)

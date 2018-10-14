@@ -2,11 +2,13 @@
 # License: BSD 3 clause
 
 import ffm
+import ffm2
 import numpy as np
 from sklearn.base import RegressorMixin
 from .validation import check_consistent_length, check_array
 from .base import (FactorizationMachine, BaseFMClassifier,
-                   _validate_class_labels, _check_warm_start)
+                   _validate_class_labels, _check_warm_start,
+                   _init_parameter, _settings_factory)
 
 
 class FMRegression(FactorizationMachine, RegressorMixin):
@@ -63,9 +65,11 @@ class FMRegression(FactorizationMachine, RegressorMixin):
             self.l2_reg_w = l2_reg_w
             self.l2_reg_V = l2_reg_V
         self.l2_reg = l2_reg
-        self.task = "regression"
+        self.loss = "squared"
+        self.solver = "cd"
+        self.iter_count = 0
 
-    def fit(self, X_train, y_train, n_more_iter=0):
+    def fit(self, X, y, n_more_iter=0):
         """ Fit model with specified loss.
 
         Parameters
@@ -78,27 +82,24 @@ class FMRegression(FactorizationMachine, RegressorMixin):
                 Number of iterations to continue from the current Coefficients.
 
         """
+        check_consistent_length(X, y)
+        y = check_array(y, ensure_2d=False, dtype=np.float64)
 
-        check_consistent_length(X_train, y_train)
-        y_train = check_array(y_train, ensure_2d=False, dtype=np.float64)
+        X = check_array(X, accept_sparse="csc", dtype=np.float64)
+        n_features = X.shape[1]
 
-        X_train = check_array(X_train, accept_sparse="csc", dtype=np.float64,
-                              order="F")
-        self.n_iter = self.n_iter + n_more_iter
+        if self.iter_count == 0:
+            self.w0_, self.w_, self.V_ = _init_parameter(self, n_features)
 
-        if n_more_iter > 0:
-            _check_warm_start(self, X_train)
-            self.warm_start = True
+        if n_more_iter != 0:
+            _check_warm_start(self, X)
+            self.n_iter = n_more_iter
 
-        self.w0_, self.w_, self.V_ = ffm.ffm_als_fit(self, X_train, y_train)
+        settings_dict = _settings_factory(self)
+        ffm2.ffm_fit(self.w0_, self.w_, self.V_, X, y, self.rank,
+                     settings_dict)
 
-        if self.iter_count != 0:
-            self.iter_count = self.iter_count + n_more_iter
-        else:
-            self.iter_count = self.n_iter
-
-        # reset to default setting
-        self.warm_start = False
+        self.iter_count += self.n_iter
         return self
 
 
@@ -158,9 +159,11 @@ class FMClassification(BaseFMClassifier):
             self.l2_reg_w = l2_reg_w
             self.l2_reg_V = l2_reg_V
         self.l2_reg = l2_reg
-        self.task = "classification"
+        self.loss = "squared"
+        self.solver = "cd"
+        self.iter_count = 0
 
-    def fit(self, X_train, y_train):
+    def fit(self, X, y):
         """ Fit model with specified loss.
 
         Parameters
@@ -168,24 +171,25 @@ class FMClassification(BaseFMClassifier):
         X : scipy.sparse.csc_matrix, (n_samples, n_features)
 
         y : float | ndarray, shape = (n_samples, )
-                the targets have to be encodes as {-1, 1}.
+                the targets have to be encodes as {0, 1}.
         """
-        check_consistent_length(X_train, y_train)
-        X_train = check_array(X_train, accept_sparse="csc", dtype=np.float64,
-                              order="F")
-        y_train = _validate_class_labels(y_train)
+        check_consistent_length(X, y)
 
-        self.classes_ = np.unique(y_train)
+        X = check_array(X, accept_sparse="csc", dtype=np.float64,
+                        order="F")
+        y = _validate_class_labels(y)
+
+        self.classes_ = np.unique(y)
+
         if len(self.classes_) != 2:
             raise ValueError("This solver only supports binary classification"
                              " but the data contains"
                              " class: %r" % self.classes_)
 
-        # fastFM-core expects labels to be in {-1,1}
-        y_train = y_train.copy()
-        i_class1 = (y_train == self.classes_[0])
-        y_train[i_class1] = -1
-        y_train[~i_class1] = 1
+        self.w0_, self.w_, self.V_ = _init_parameter(self, X.shape[1])
 
-        self.w0_, self.w_, self.V_ = ffm.ffm_als_fit(self, X_train, y_train)
+        settings_dict = _settings_factory(self)
+        ffm2.ffm_fit(self.w0_, self.w_, self.V_, X, y, self.rank,
+                     settings_dict)
+
         return self

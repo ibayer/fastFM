@@ -122,6 +122,7 @@ class FMRegression(FactorizationMachine):
         coef, y_pred = ffm.ffm_mcmc_fit_predict(self, X_train,
                                                 X_test, y_train)
         self.w0_, self.w_, self.V_ = coef
+        self.w0_ = np.array([self.w0_], dtype=np.float64)
         self.prediction_ = y_pred
         self.warm_start = False
 
@@ -231,4 +232,5 @@ class FMClassification(FactorizationMachine):
         coef, y_pred = ffm.ffm_mcmc_fit_predict(self, X_train,
                                                 X_test, y_train)
         self.w0_, self.w_, self.V_ = coef
+        self.w0_ = np.array([self.w0_], dtype=np.float64)
         return y_pred
