@@ -7,7 +7,7 @@ from sklearn import metrics
 from fastFM import mcmc
 from fastFM.datasets import make_user_item_regression
 from sklearn.metrics import mean_squared_error
-from sklearn.cross_validation import train_test_split
+from sklearn.model_selection import train_test_split
 from sklearn.utils.testing import assert_almost_equal, assert_array_equal
 
 
