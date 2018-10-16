@@ -82,7 +82,10 @@ def ffm_predict(np.ndarray[np.float64_t, ndim = 1] w_0,
 # Convert the python function from a pointer back into a python object and invoke
 # with other parameters. (For now just one, `current_iter`)
 cdef void fit_callback_wrapper(int current_iter, void* python_function):
-    (<object>python_function)(current_iter)
+    f = (<object>python_function)
+
+    if f is not None:
+        f(current_iter)
 
 from typing import Callable, NoReturn
 
