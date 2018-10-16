@@ -30,4 +30,10 @@ cdef extern from "../fastFM-core2/fastFM/fastfm.h" namespace "fastfm":
 
     cdef void fit(Settings* s, Model* m, Data* d)
 
+    # NEW CALLBACK DEVELOPMENTS #########################################
+    ctypedef void (*fit_callback_t)(int iter, void* python_func)
+    cdef void fit_with_callback(Settings* s, Model* m, Data*,
+                                fit_callback_t callback, void* python_callback_func)
+
+    ######################################################################
     cdef void predict(Model* m, Data* d)

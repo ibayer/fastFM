@@ -77,11 +77,22 @@ def ffm_predict(np.ndarray[np.float64_t, ndim = 1] w_0,
 
     return y
 
+# The main piece of the glue between Python, Cython and C++
+# In essence it wraps the python function so it can be used in C++ space.
+# Convert the python function from a pointer back into a python object and invoke
+# with other parameters. (For now just one, `current_iter`)
+cdef void fit_callback_wrapper(int current_iter, void* python_function):
+    (<object>python_function)(current_iter)
+
+from typing import Callable, NoReturn
 
 def ffm_fit(np.ndarray[np.float64_t, ndim = 1] w_0,
         np.ndarray[np.float64_t, ndim = 1] w,
         np.ndarray[np.float64_t, ndim = 2] V,
-                X, np.ndarray[np.float64_t, ndim = 1] y, int rank, dict settings):
+                X, np.ndarray[np.float64_t, ndim = 1] y,
+                int rank, dict settings,
+                # callback is a python object
+                callback : Callable[int, NoReturn]):
     assert isinstance(settings, dict)
     assert X.shape[0] == len(y) # test shapes
 
@@ -95,6 +106,10 @@ def ffm_fit(np.ndarray[np.float64_t, ndim = 1] w_0,
     d = _data_factory_fit(X, y, y_pred)
 
     cpp_ffm.fit(s, m, d)
+
+    # Proof of concept `dummy fit` with a callback.
+    # we must cast the python object into void* so it can be passed to C++
+    cpp_ffm.fit_with_callback(s, m, d, fit_callback_wrapper, (<void*> callback))
 
     del d
     del m
