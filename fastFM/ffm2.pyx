@@ -7,6 +7,7 @@ cimport cpp_ffm
 from cpp_ffm cimport Settings, Data, Model, predict, fit
 from libcpp.memory cimport nullptr
 from libcpp.string cimport string
+from libcpp cimport bool
 
 import scipy.sparse as sp
 
@@ -81,21 +82,31 @@ def ffm_predict(np.ndarray[np.float64_t, ndim = 1] w_0,
 # In essence it wraps the python function so it can be used in C++ space.
 # Convert the python function from a pointer back into a python object and invoke
 # with other parameters. (For now just one, `current_iter`)
-cdef void fit_callback_wrapper(int current_iter, void* python_function):
+# TODO: Handle exceptions in a better manner
+cdef bool fit_callback_wrapper(string json_str, void* python_function):
     f = (<object>python_function)
 
-    if f is not None:
-        f(current_iter)
+    try:
+        kwargs = json.loads(json_str.c_str())
 
-from typing import Callable, NoReturn
+        print("Arguments from C++: " + str(kwargs))
+    except json.JSONDecodeError as e: # should never happen but just in case
+        print(str(e))
+
+    if f is not None:
+        try:
+            return f(**kwargs)
+        except Exception as e:
+            print(str(e))
+
+    return False
 
 def ffm_fit(np.ndarray[np.float64_t, ndim = 1] w_0,
         np.ndarray[np.float64_t, ndim = 1] w,
         np.ndarray[np.float64_t, ndim = 2] V,
                 X, np.ndarray[np.float64_t, ndim = 1] y,
                 int rank, dict settings,
-                # callback is a python object
-                callback : Callable[int, NoReturn]):
+                callback):
     assert isinstance(settings, dict)
     assert X.shape[0] == len(y) # test shapes
 
@@ -108,11 +119,7 @@ def ffm_fit(np.ndarray[np.float64_t, ndim = 1] w_0,
 
     d = _data_factory_fit(X, y, y_pred)
 
-    cpp_ffm.fit(s, m, d)
-
-    # Proof of concept `dummy fit` with a callback.
-    # we must cast the python object into void* so it can be passed to C++
-    cpp_ffm.fit_with_callback(s, m, d, fit_callback_wrapper, (<void*> callback))
+    cpp_ffm.fit(s, m, d, fit_callback_wrapper, (<void*> callback))
 
     del d
     del m
