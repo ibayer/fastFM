@@ -7,6 +7,7 @@ cimport cpp_ffm
 from cpp_ffm cimport Settings, Data, Model, predict, fit
 from libcpp.memory cimport nullptr
 from libcpp.string cimport string
+from libcpp cimport bool
 
 import scipy.sparse as sp
 
@@ -77,11 +78,35 @@ def ffm_predict(np.ndarray[np.float64_t, ndim = 1] w_0,
 
     return y
 
+# The main piece of the glue between Python, Cython and C++
+# In essence it wraps the python function so it can be used in C++ space.
+# Convert the python function from a pointer back into a python object and invoke
+# with other parameters. (For now just one, `current_iter`)
+# TODO: Handle exceptions in a better manner
+cdef bool fit_callback_wrapper(string json_str, void* python_function):
+    f = (<object>python_function)
+
+    try:
+        kwargs = json.loads(json_str.c_str())
+
+        print("Arguments from C++: " + str(kwargs))
+    except json.JSONDecodeError as e: # should never happen but just in case
+        print(str(e))
+
+    if f is not None:
+        try:
+            return f(**kwargs)
+        except Exception as e:
+            print(str(e))
+
+    return False
 
 def ffm_fit(np.ndarray[np.float64_t, ndim = 1] w_0,
         np.ndarray[np.float64_t, ndim = 1] w,
         np.ndarray[np.float64_t, ndim = 2] V,
-                X, np.ndarray[np.float64_t, ndim = 1] y, int rank, dict settings):
+                X, np.ndarray[np.float64_t, ndim = 1] y,
+                int rank, dict settings,
+                callback):
     assert isinstance(settings, dict)
     assert X.shape[0] == len(y) # test shapes
 
@@ -94,7 +119,7 @@ def ffm_fit(np.ndarray[np.float64_t, ndim = 1] w_0,
 
     d = _data_factory_fit(X, y, y_pred)
 
-    cpp_ffm.fit(s, m, d)
+    cpp_ffm.fit(s, m, d, fit_callback_wrapper, (<void*> callback))
 
     del d
     del m

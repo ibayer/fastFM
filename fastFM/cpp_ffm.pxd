@@ -28,6 +28,9 @@ cdef extern from "../fastFM-core2/fastFM/fastfm.h" namespace "fastfm":
         void add_target(const int n_samples, double *data)
         void add_prediction(const int n_samples, double* data)
 
-    cdef void fit(Settings* s, Model* m, Data* d)
+    ctypedef bool (*fit_callback_t)(string json_str, void* python_func)
+
+    cdef void fit(Settings* s, Model* m, Data* d,
+                  fit_callback_t callback, void* python_callback_func)
 
     cdef void predict(Model* m, Data* d)

@@ -69,7 +69,7 @@ class FMRegression(FactorizationMachine, RegressorMixin):
         self.solver = "cd"
         self.iter_count = 0
 
-    def fit(self, X, y, n_more_iter=0):
+    def fit(self, X, y, n_more_iter=0, callback = None):
         """ Fit model with specified loss.
 
         Parameters
@@ -97,7 +97,7 @@ class FMRegression(FactorizationMachine, RegressorMixin):
 
         settings_dict = _settings_factory(self)
         ffm2.ffm_fit(self.w0_, self.w_, self.V_, X, y, self.rank,
-                     settings_dict)
+                     settings_dict, callback)
 
         self.iter_count += self.n_iter
         return self
