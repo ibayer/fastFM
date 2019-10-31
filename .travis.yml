@@ -23,11 +23,11 @@ matrix:
     - os: linux
       env:
         - TRAVIS_PYTHON_VERSION="3.6"
-    - services: docker
-      sudo: required
-      env:
-        - DEPLOY_TARGET="manylinux1"
-        - DEPLOYABLE="true"
+    #- services: docker
+    #  sudo: required
+    #  env:
+    #    - DEPLOY_TARGET="manylinux1"
+    #    - DEPLOYABLE="true"
 
 dist: trusty
 
@@ -78,7 +78,7 @@ script:
     - |
       if [ "$DEPLOY_TARGET" = "manylinux1" ]; then
         #build for 64-bit
-        #docker run --rm -v `pwd`:/io quay.io/pypa/manylinux1_x86_64 /io/.travis/build-wheels.sh
+        docker run --rm -v `pwd`:/io quay.io/pypa/manylinux1_x86_64 /io/.travis/build-wheels.sh
       else
         nosetests
       fi
