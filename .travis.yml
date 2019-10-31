@@ -78,7 +78,7 @@ script:
     - |
       if [ "$DEPLOY_TARGET" = "manylinux1" ]; then
         #build for 64-bit
-        docker run --rm -v `pwd`:/io quay.io/pypa/manylinux1_x86_64 /io/.travis/build-wheels.sh
+        #docker run --rm -v `pwd`:/io quay.io/pypa/manylinux1_x86_64 /io/.travis/build-wheels.sh
       else
         nosetests
       fi
