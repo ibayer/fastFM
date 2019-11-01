@@ -169,7 +169,7 @@ class FMClassification(BaseFMClassifier):
 
         y : float | ndarray, shape = (n_samples, )
                 the targets have to be encodes as {-1, 1}.
-        
+
         n_more_iter : int
                 Number of iterations to continue from the current Coefficients.
         """
