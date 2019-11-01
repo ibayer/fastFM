@@ -5,7 +5,7 @@ ghp-import doc/_build/html/ -p -n
 
 for new releases:
 
-- update version & relese in `conf.py`
+- update version & release in `conf.py`
 - make sure doc is still correct `make doctest`
 
 run test server
