@@ -12,11 +12,11 @@ fastFM: A Library for Factorization Machines
 
 .. image:: https://travis-ci.org/ibayer/fastFM.svg?branch=master
    :target: https://travis-ci.org/ibayer/fastFM
-   
-   
+
+
 .. image:: https://img.shields.io/badge/platform-OSX|Linux-lightgrey.svg
   :target: https://travis-ci.org/ibayer/fastFM
-  
+
 .. image:: https://img.shields.io/pypi/l/Django.svg   
    :target: https://travis-ci.org/ibayer/fastFM
 
