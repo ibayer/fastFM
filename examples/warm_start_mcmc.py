@@ -11,7 +11,6 @@ if __name__ == "__main__":
     offset = '../../fastFM-notes/benchmarks/'
     train_path = offset + "data/ml-100k/u1.base.libfm"
     test_path = offset + "data/ml-100k/u1.test.libfm"
-    #test_path = train_path
 
     from sklearn.datasets import load_svmlight_file
     X_train, y_train = load_svmlight_file(train_path)
