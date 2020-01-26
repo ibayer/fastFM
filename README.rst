@@ -105,7 +105,7 @@ Contribution
 * Fix errors in the documentation: small changes matter
 * Contribute code
 
-**Contributions are very welcome!** Since this project lives on GitHub we reommend 
+**Contributions are very welcome!** Since this project lives on GitHub we recommend 
 to open a pull request (PR) for code contributions as early as possible. This is the 
 fastest way to get feedback and allows `Travis CI <https://travis-ci.org/ibayer/fastFM>`_ to run checks on your changes.
 
