@@ -21,14 +21,14 @@ fastFM: A Library for Factorization Machines
    :target: https://travis-ci.org/ibayer/fastFM
 
 This repository allows you to use Factorization Machines in **Python** (2.7 & 3.x) with the well known **scikit-learn API**.
-All performance critical code as been written in C and wrapped with Cython. fastFM provides 
+All performance critical code has been written in C and wrapped with Cython. fastFM provides 
 stochastic gradient descent (SGD) and coordinate descent (CD) optimization routines as well as Markov Chain Monte Carlo (MCMC) for Bayesian inference.
 The solvers can be used for regression, classification and ranking problems. Detailed usage instructions can be found in the `online documentation  <http://ibayer.github.io/fastFM>`_ and on `arXiv <http://arxiv.org/abs/1505.00641>`_.
 
 Supported Operating Systems
 ---------------------------
 fastFM has a continuous integration / testing servers (Travis) for **Linux (Ubuntu 14.04 LTS)**
-and **OS X Mavericks**. Other OS are not actively supported.
+and **OS X Mavericks**. Other OSs are not actively supported.
 
 Usage
 -----
@@ -42,7 +42,7 @@ Usage
 
 Tutorials and other information are available `here <http://arxiv.org/abs/1505.00641>`_.
 The C code is available as `subrepository <https://github.com/ibayer/fastFM-core>`_ and provides 
-a stand alone command line interface. If you have still **questions** after reading the documentation please open a issue at GitHub.
+a stand alone command line interface. If you still have **questions** after reading the documentation please open an issue at GitHub.
 
 +----------------+------------------+-----------------------------+
 | Task           | Solver           | Loss                        |
@@ -101,7 +101,7 @@ Contribution
 ------------
 
 * Star this repository: keeps contributors motivated
-* Open a issue: report bugs or suggest improvements
+* Open an issue: report bugs or suggest improvements
 * Fix errors in the documentation: small changes matter
 * Contribute code
 
