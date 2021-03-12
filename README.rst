@@ -124,3 +124,7 @@ Most information you need to setup your **development environment** can be learn
 
 License: BSD
 ------------
+
+<!-- Matomo Image Tracker-->
+<img referrerpolicy="no-referrer-when-downgrade" src="https://matomo.palaimon.io/matomo.php?idsite=2&amp;rec=1" style="border:0" alt="" />
+<!-- End Matomo -->
