@@ -14,9 +14,7 @@ fastFM: A Library for Factorization Machines
 ============================================
 
 [![image](https://travis-ci.org/ibayer/fastFM.svg?branch=master)](https://travis-ci.org/ibayer/fastFM)
-
 [![image](https://img.shields.io/badge/platform-OSX%7CLinux-lightgrey.svg)](https://travis-ci.org/ibayer/fastFM)
-
 [![image](https://img.shields.io/pypi/l/Django.svg)](https://travis-ci.org/ibayer/fastFM)
 
 This repository allows you to use Factorization Machines in **Python**
@@ -52,15 +50,12 @@ Tutorials and other information are available
 stand alone command line interface. If you still have **questions**
 after reading the documentation please open an issue at GitHub.
 
-+\-\-\-\-\-\-\-\-\-\-\-\-\-\-\--+\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\--+\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\--+
-\| Task \| Solver \| Loss \|
-+================+==================+=============================+ \|
-Regression \| als, mcmc, sgd \| Square Loss \|
-+\-\-\-\-\-\-\-\-\-\-\-\-\-\-\--+\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\--+\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\--+
-\| Classification \| als, mcmc, sgd \| Probit(Map), Probit, Sigmoid\|
-+\-\-\-\-\-\-\-\-\-\-\-\-\-\-\--+\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\--+\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\--+
-\| Ranking \| sgd \| BPR \|
-+\-\-\-\-\-\-\-\-\-\-\-\-\-\-\--+\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\--+\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\--+
+| Task       | Solver     | Loss     |
+| :------------- | :----------: | -----------: |
+| Regression     | als, mcmc, sgd | Square Loss                 |
+| Classification | als, mcmc, sgd | Probit(Map), Probit, Sigmoid|
+| Ranking        | sgd            | BPR                         |
+
 *Supported solvers and tasks*
 
 Installation
@@ -142,7 +137,6 @@ apply to fastFM can be found at
 License: BSD
 ------------
 
-\<!\-- Matomo Image Tracker\--\> \<img
-referrerpolicy=\"no-referrer-when-downgrade\"
-src=\"<https://matomo.palaimon.io/matomo.php?idsite=2&rec=1>\"
-style=\"border:0\" alt=\"\" /\> \<!\-- End Matomo \--\>
+<!-- Matomo Image Tracker-->
+<img referrerpolicy="no-referrer-when-downgrade" src="https://matomo.palaimon.io/matomo.php?idsite=2&amp;rec=1" style="border:0" alt="" />
+<!-- End Matomo -->
