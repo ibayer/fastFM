@@ -7,7 +7,7 @@ from sklearn import metrics
 from fastFM import als
 from fastFM.datasets import make_user_item_regression
 from sklearn.metrics import mean_squared_error
-from sklearn.utils.testing import assert_almost_equal
+from sklearn.utils._testing import assert_almost_equal
 
 
 def get_test_problem(task='regression'):

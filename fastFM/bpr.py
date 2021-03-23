@@ -4,7 +4,7 @@
 import ffm
 import numpy as np
 from .base import FactorizationMachine
-from sklearn.utils.testing import assert_array_equal
+from sklearn.utils._testing import assert_array_equal
 from .validation import check_array, assert_all_finite
 
 
