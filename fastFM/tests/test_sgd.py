@@ -5,7 +5,7 @@ import numpy as np
 import scipy.sparse as sp
 from sklearn import metrics
 from sklearn.datasets import make_regression
-from sklearn.utils.testing import assert_almost_equal
+from numpy.testing import assert_almost_equal
 from fastFM import sgd
 from fastFM import als
 
