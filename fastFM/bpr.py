@@ -15,7 +15,7 @@ class FMRecommender(FactorizationMachine):
     Parameters
     ----------
     n_iter : int, optional
-        The number of interations of individual samples .
+        The number of iterations of individual samples .
 
     init_stdev: float, optional
         Sets the stdev for the initialization of the parameter
