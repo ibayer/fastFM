@@ -4,84 +4,72 @@ matrix:
   include:
     - os: osx
       env:
-        - TRAVIS_PYTHON_VERSION="2.7"
+        - TRAVIS_PYTHON_VERSION="3.6"
         - DEPLOYABLE="true"
     - os: osx
       env:
-        - TRAVIS_PYTHON_VERSION="3.5"
+        - TRAVIS_PYTHON_VERSION="3.7"
         - DEPLOYABLE="true"
     - os: osx
       env:
-        - TRAVIS_PYTHON_VERSION="3.6"
+        - TRAVIS_PYTHON_VERSION="3.8"
+        - DEPLOYABLE="true"
+    - os: osx
+      env:
+        - TRAVIS_PYTHON_VERSION="3.9"
+        - DEPLOYABLE="true"
+    - os: osx
+      env:
+        - TRAVIS_PYTHON_VERSION="3.10"
         - DEPLOYABLE="true"
     - os: linux
       env:
-        - TRAVIS_PYTHON_VERSION="2.7"
-    - os: linux
-      env:
-        - TRAVIS_PYTHON_VERSION="3.5"
-    - os: linux
-      env:
         - TRAVIS_PYTHON_VERSION="3.6"
-    #- services: docker
-    #  sudo: required
-    #  env:
-    #    - DEPLOY_TARGET="manylinux1"
-    #    - DEPLOYABLE="true"
+    - os: linux
+      env:
+        - TRAVIS_PYTHON_VERSION="3.7"
+    - os: linux
+      env:
+        - TRAVIS_PYTHON_VERSION="3.8"
+    - os: linux
+      env:
+        - TRAVIS_PYTHON_VERSION="3.9"
+    - os: linux
+      env:
+        - TRAVIS_PYTHON_VERSION="3.10"
 
 dist: trusty
 
 before_install:
     - |
       # Skip if manylinux1
-      if [ "$DEPLOY_TARGET" = "manylinux1" ]; then
-        echo "Skip before_install step..."
+      # fastFM-core depends on cblas
+      if [ "$TRAVIS_OS_NAME" = "linux" ]; then sudo apt-get update -qq; sudo apt-get install -y libopenblas-dev; fi
+      if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+        wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh;
       else
-        # fastFM-core depends on cblas
-        if [ "$TRAVIS_OS_NAME" = "linux" ]; then sudo apt-get update -qq; sudo apt-get install -y libopenblas-dev; fi
-        if [[ "$TRAVIS_PYTHON_VERSION" =~ "^2" ]]; then
-          if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
-            wget https://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh -O miniconda.sh;
-          else
-            wget https://repo.continuum.io/miniconda/Miniconda-latest-MacOSX-x86_64.sh -O miniconda.sh;
-          fi
-        else
-          if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
-            wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh;
-          else
-            wget https://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh -O miniconda.sh;
-          fi
-        fi
-        bash miniconda.sh -b -p $HOME/miniconda
-        export PATH="$HOME/miniconda/bin:$PATH"
-        hash -r
-        conda config --set always_yes yes --set changeps1 no
-        conda update -q conda
-        # Useful for debugging any issues with conda
-        conda info -a
-        conda create -q -n test-environment python=$TRAVIS_PYTHON_VERSION cython numpy pandas scipy scikit-learn nose
-        source activate test-environment
+        wget https://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh -O miniconda.sh;
       fi
+      bash miniconda.sh -b -p $HOME/miniconda
+      export PATH="$HOME/miniconda/bin:$PATH"
+      hash -r
+      conda config --set always_yes yes --set changeps1 no
+      conda update -q conda
+      # Useful for debugging any issues with conda
+      conda info -a
+      conda create -q -n test-environment python=$TRAVIS_PYTHON_VERSION cython numpy pandas scipy scikit-learn nose
+      source activate test-environment
 
 install:
     - |
       git submodule update --init --recursive
-      if [ "$DEPLOY_TARGET" = "manylinux1" ]; then
-        :
-      else
-        make
-        python setup.py bdist_wheel
-        pip install dist/*.whl
-      fi
+      make
+      python setup.py bdist_wheel
+      pip install dist/*.whl
 
 script:
     - |
-      if [ "$DEPLOY_TARGET" = "manylinux1" ]; then
-        #build for 64-bit
-        docker run --rm -v `pwd`:/io quay.io/pypa/manylinux1_x86_64 /io/.travis/build-wheels.sh
-      else
-        nosetests
-      fi
+      nosetests
 
 deploy:
   provider: releases
