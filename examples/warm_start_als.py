@@ -37,7 +37,7 @@ if __name__ == "__main__":
 
     fm = als.FMRegression(n_iter=0, l2_reg_w=l2_reg_w,
             l2_reg_V=l2_reg_V, rank=rank, random_state=seed)
-    # initalize coefs
+    # initialize coefs
     fm.fit(X_train, y_train)
 
     rmse_train = []

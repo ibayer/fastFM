@@ -217,7 +217,7 @@ def check_random_state(seed):
 
 
 def _shape_repr(shape):
-    """Return a platform independent reprensentation of an array shape
+    """Return a platform independent representation of an array shape
     Under Python 2, the `long` type introduces an 'L' suffix when using the
     default %r format for tuples of integers (typically used to store the shape
     of an array).

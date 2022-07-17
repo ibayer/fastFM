@@ -38,7 +38,7 @@ class FMRecommender(FactorizationMachine):
 
     step_size : float
         Stepsize for the SGD solver, the solver uses a fixed step size and
-        might require a tunning of the number of iterations `n_iter`.
+        might require a tuning of the number of iterations `n_iter`.
 
     Attributes
     ---------
