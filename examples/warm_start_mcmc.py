@@ -48,7 +48,7 @@ if __name__ == "__main__":
     """
 
     fm = mcmc.FMRegression(n_iter=0, rank=rank, random_state=seed)
-    # initalize coefs
+    # initialize coefs
     fm.fit_predict(X_train, y_train, X_test)
 
     rmse_test = []

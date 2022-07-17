@@ -13,7 +13,7 @@ A short paper describing the library is available on arXiv http://arxiv.org/abs/
 
 Supported Operating Systems
 ---------------------------
-fastFM has a continous integration / testing servers (Travis) for **Linux (Ubuntu 14.04 LTS)**
+fastFM has a continuous integration / testing servers (Travis) for **Linux (Ubuntu 14.04 LTS)**
 and **OS X Mavericks**. Other OS are not actively supported.
 
 .. toctree::

@@ -12,7 +12,7 @@ Regression with ALS Solver
 --------------------------
 
 We first set up a small toy dataset for a regression problem. Please
-refere to [SIGIR2011] for background information on the implemented ALS solver.
+refer to [SIGIR2011] for background information on the implemented ALS solver.
 
 .. testcode::
 
